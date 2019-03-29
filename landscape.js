@@ -67,15 +67,15 @@ let times = [
 
   /* Draw Sky */
   var skyFill = ctx.createLinearGradient(0, 0, 0, height);
-  my_gradient.addColorStop(0, skyColour);
-  my_gradient.addColorStop(1, skyFadedColour);
+  skyFill.addColorStop(0, skyColour);
+  skyFill.addColorStop(1, skyFadedColour);
   ctx.fillStyle = skyFill;
   ctx.fillRect(0, 0, width, height -(height * horizon));
 
   /* Draw Land */
   var landFill = ctx.createLinearGradient( 0, height, 0, 0);
-  my_gradient.addColorStop(0, landColour);
-  my_gradient.addColorStop(1, landFadedColour);
+  landFill.addColorStop(0, landColour);
+  landFill.addColorStop(1, landFadedColour);
   ctx.fillStyle = landFill;
   ctx.fillRect(0, height -(height * horizon), width, height * horizon);
 
