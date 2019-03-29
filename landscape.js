@@ -12,6 +12,17 @@ let times = [
   var windowHeight = window.innerHeight;
   let width = windowWidth;
   let height = windowHeight;
+  var canvas = document.createElement('canvas');
+  var ctx = canvas.getContext("2d");
+  var body = document.getElementsByTagName("body")[0];
+  canvas.id = "CursorLayer";
+  canvas.width = width;
+  canvas.height = height;
+  canvas.style.zIndex = 8;
+  canvas.style.position = "absolute";
+  canvas.style.left = (windowWidth / 2) - (width / 2) + 'px';
+  canvas.style.top = (windowHeight / 2) - (height / 2) + 'px';
+  body.appendChild(canvas);
 
   /* Generate Variables */
   let time = generateTime();
@@ -61,20 +72,7 @@ let times = [
   var fogFill = ctx.createLinearGradient(0, 0, 0, height);
   fogFill.addColorStop(0, 'rgba(255,255,255,0)');
   fogFill.addColorStop((1 - horizon), fogColour);
-  fogFill.addColorStop(1, 'rgba(255,255,255,0)');
-  
-  /* Create canvas and add to body */
-  var canvas = document.createElement('canvas');
-  var ctx = canvas.getContext("2d");
-  var body = document.getElementsByTagName("body")[0];
-  canvas.id = "CursorLayer";
-  canvas.width = width;
-  canvas.height = height;
-  canvas.style.zIndex = 8;
-  canvas.style.position = "absolute";
-  canvas.style.left = (windowWidth / 2) - (width / 2) + 'px';
-  canvas.style.top = (windowHeight / 2) - (height / 2) + 'px';
-  body.appendChild(canvas);
+  fogFill.addColorStop(1, 'rgba(255,255,255,0)');  
 
   /* Draw Stuff */
 
