@@ -8,10 +8,10 @@ let times = [
 
 (function() {
   /* Set up environment */
-  let width = 1000;
-  let height = 800;
   var windowWidth = window.innerWidth;
   var windowHeight = window.innerHeight;
+  let width = windowWidth;
+  let height = windowHeight;
 
   /* Generate Variables */
   let time = generateTime();
