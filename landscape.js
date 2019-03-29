@@ -20,12 +20,24 @@ let times = [
 
   /* Generate Colours */
   let skyColour = randomColor({
-    luminosity: 'light',
+    luminosity: 'bright',
     hue: 'blue'
   });
-  let landColour = randomColor({
+  let skyFadedColour = randomColor({
     luminosity: 'light',
+    hue: skyColour
+  });
+  let landColour = randomColor({
+    luminosity: 'bright',
     hue: 'green'
+  });
+  let landFadedColour = randomColor({
+    luminosity: 'light',
+    hue: landColour
+  });
+  let fogColour = randomColor({
+    luminosity: 'light',
+    hue: 'blue'
   });
   
   /* Create canvas and add to body */
@@ -45,11 +57,17 @@ let times = [
   /* Draw Stuff */
 
   /* Draw Sky */
-  ctx.fillStyle = skyColour;
+  var skyFill = ctx.createLinearGradient(0, 0, width, height);
+  my_gradient.addColorStop(0, skyColour);
+  my_gradient.addColorStop(1, skyFadedColour);
+  ctx.fillStyle = skyFill;
   ctx.fillRect(0, 0, width, height -(height * horizon));
 
   /* Draw Land */
-  ctx.fillStyle = landColour;
+  var skyFill = ctx.createLinearGradient(0, 0, width, height);
+  my_gradient.addColorStop(0, landFadedColour);
+  my_gradient.addColorStop(1, landColour);
+  ctx.fillStyle = landFill;
   ctx.fillRect(0, height -(height * horizon), width, height * horizon);
 
   /* Draw River */
@@ -80,7 +98,7 @@ function generateRiver() {
   let river = {};
   river.vanishingPoint = randDecimal();
   river.leftEdge = randDecimal();
-  river.rightEdge = randDecimal(river.leftEdge);
+  river.rightEdge = randDecimal(river.leftEdge + 0.1);
   console.log('Left Edge: ' + river.leftEdge);
   console.log('Right Edge: ' + river.rightEdge);
   return river;
