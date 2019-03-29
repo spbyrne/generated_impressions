@@ -17,6 +17,7 @@ let times = [
   let time = generateTime();
   let horizon = generateRatio();
   let river = generateRiver();
+  let fogDensity = randDecimal();
 
   /* Generate Colours */
   let skyColour = randomColor({
@@ -46,9 +47,13 @@ let times = [
   let fogColour = randomColor({
     luminosity: 'light',
     format: 'rgba',
-    alpha: 1,
+    alpha: fogDensity,
     hue: 'blue'
   });
+  var fogFill = ctx.createLinearGradient(0, 0, 0, height);
+  fogFill.addColorStop(0, rgba(255,255,255,0));
+  fogFill.addColorStop((1 - horizon), fogColour);
+  fogFill.addColorStop(1, rgba(255,255,255,0));
   
   /* Create canvas and add to body */
   var canvas = document.createElement('canvas');
@@ -81,6 +86,9 @@ let times = [
 
   /* Draw River */
   drawRiver(ctx,river,skyColour,horizon,width,height);
+
+  ctx.fillStyle = fogFill;
+  ctx.fillRect(0, 0, width, height);
 })();
 
 function generateTree() {
