@@ -81,23 +81,24 @@ function generateRiver() {
   river.vanishingPoint = randDecimal();
   river.leftEdge = randDecimal();
   river.rightEdge = randDecimal(river.leftEdge);
+  console.log('Left Edge: ' + river.leftEdge);
+  console.log('Right Edge: ' + river.rightEdge);
   return river;
 };
 
 function drawRiver(ctx,river,riverColor,horizon,width,height) {
-  let horizonX = height -(height * horizon);
+  let horizonY = height - (height * horizon);
   let sideOneLength = height * horizon;
   let sideTwoLength = sideOneLength + width;
   let sideThreeLength = sideTwoLength + sideOneLength;
 
   ctx.fillStyle = riverColor;
   ctx.beginPath();
-  ctx.moveTo(horizonX, width * river.vanishingPoint);
+  ctx.moveTo(width * river.vanishingPoint, horizonY);
 
   if (river.leftEdge * sideThreeLength < sideOneLength) {
-    ctx.lineTo(0, horizonX + sideOneLength * river.leftEdge);
+    ctx.lineTo(0, horizonY + sideThreeLength * river.leftEdge);
   } else {
-    ctx.lineTo(0, height);
     if (river.leftEdge * sideThreeLength < sideTwoLength) {
       let sideOneEdgeDecimal = sideOneLength / sideThreeLength;
       let relativePosition = river.leftEdge - sideOneEdgeDecimal;
@@ -105,12 +106,31 @@ function drawRiver(ctx,river,riverColor,horizon,width,height) {
     } else {
       let sideTwoEdgeDecimal = sideTwoLength / sideThreeLength;
       let relativePosition = river.leftEdge - sideTwoEdgeDecimal;
-      ctx.lineTo(width, height);
       ctx.lineTo(width, height - (sideOneLength * relativePosition));
     }
   }
 
-  ctx.lineTo(horizonX, width * river.vanishingPoint);
+  if (river.rightEdge * sideThreeLength < sideOneLength) {
+    ctx.lineTo(0, horizonY + sideThreeLength * river.rightEdge);
+  } else {
+    if (river.leftEdge * sideThreeLength < sideOneLength) {
+      ctx.lineTo(0, height);
+    }
+    if (river.rightEdge * sideThreeLength < sideTwoLength) {
+      let sideOneEdgeDecimal = sideOneLength / sideThreeLength;
+      let relativePosition = river.rightEdge - sideOneEdgeDecimal;
+      ctx.lineTo(relativePosition * width, height);
+    } else {
+      if (river.leftEdge * sideThreeLength < sideTwoLength) {
+        ctx.lineTo(width, height);
+      }
+      let sideTwoEdgeDecimal = sideTwoLength / sideThreeLength;
+      let relativePosition = river.rightEdge - sideTwoEdgeDecimal;
+      ctx.lineTo(width, height - (sideOneLength * relativePosition));
+    }
+  }
+
+  ctx.lineTo(width * river.vanishingPoint, horizonY);
   ctx.closePath();
   ctx.fill();
 };
@@ -126,8 +146,9 @@ function randInt(min, max) {
 function randDecimal(min) {
   let random;
   random = Math.random();
+  console.log("Seed: " + random);
   if (min) {
-    random = (1 - min) * random;
+    random = min + ((1 - min) * random);
   }
   return random;
 };
