@@ -21,22 +21,32 @@ let times = [
   /* Generate Colours */
   let skyColour = randomColor({
     luminosity: 'bright',
+    format: 'rgba',
+    alpha: 1,
     hue: 'blue'
   });
   let skyFadedColour = randomColor({
     luminosity: 'light',
+    format: 'rgba',
+    alpha: 1,
     hue: skyColour
   });
   let landColour = randomColor({
     luminosity: 'bright',
+    format: 'rgba',
+    alpha: 1,
     hue: 'green'
   });
   let landFadedColour = randomColor({
     luminosity: 'light',
+    format: 'rgba',
+    alpha: 1,
     hue: landColour
   });
   let fogColour = randomColor({
     luminosity: 'light',
+    format: 'rgba',
+    alpha: 1,
     hue: 'blue'
   });
   
@@ -49,7 +59,6 @@ let times = [
   canvas.height = height;
   canvas.style.zIndex = 8;
   canvas.style.position = "absolute";
-  canvas.style.border = "1px solid black";
   canvas.style.left = (windowWidth / 2) - (width / 2) + 'px';
   canvas.style.top = (windowHeight / 2) - (height / 2) + 'px';
   body.appendChild(canvas);
