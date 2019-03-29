@@ -32,6 +32,10 @@ let times = [
     alpha: 1,
     hue: skyColour
   });
+  var skyFill = ctx.createLinearGradient(0, 0, 0, height);
+  skyFill.addColorStop(0, skyColour);
+  skyFill.addColorStop(1, skyFadedColour);
+
   let landColour = randomColor({
     luminosity: 'bright',
     format: 'rgba',
@@ -44,6 +48,10 @@ let times = [
     alpha: 1,
     hue: landColour
   });
+  var landFill = ctx.createLinearGradient( 0, height, 0, 0);
+  landFill.addColorStop(0, landColour);
+  landFill.addColorStop(1, landFadedColour);
+
   let fogColour = randomColor({
     luminosity: 'light',
     format: 'rgba',
@@ -51,9 +59,9 @@ let times = [
     hue: 'blue'
   });
   var fogFill = ctx.createLinearGradient(0, 0, 0, height);
-  fogFill.addColorStop(0, rgba(255,255,255,0));
+  fogFill.addColorStop(0, 'rgba(255,255,255,0)');
   fogFill.addColorStop((1 - horizon), fogColour);
-  fogFill.addColorStop(1, rgba(255,255,255,0));
+  fogFill.addColorStop(1, 'rgba(255,255,255,0)');
   
   /* Create canvas and add to body */
   var canvas = document.createElement('canvas');
@@ -71,16 +79,10 @@ let times = [
   /* Draw Stuff */
 
   /* Draw Sky */
-  var skyFill = ctx.createLinearGradient(0, 0, 0, height);
-  skyFill.addColorStop(0, skyColour);
-  skyFill.addColorStop(1, skyFadedColour);
   ctx.fillStyle = skyFill;
   ctx.fillRect(0, 0, width, height -(height * horizon));
 
   /* Draw Land */
-  var landFill = ctx.createLinearGradient( 0, height, 0, 0);
-  landFill.addColorStop(0, landColour);
-  landFill.addColorStop(1, landFadedColour);
   ctx.fillStyle = landFill;
   ctx.fillRect(0, height -(height * horizon), width, height * horizon);
 
