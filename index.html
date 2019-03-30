@@ -5,13 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Generated Impressions</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, 
+BlinkMacSystemFont, “Segoe UI”, 
+Roboto, Oxygen-Sans, Ubuntu, Cantarell, 
+“Helvetica Neue”, Arial, sans-serif; 
+      font-size: 19px;
+    }
+    a {
+      color: inherit;
+    }
+    .container {
+      width: 90%;
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+  </style>
 </head>
 <body>
-  <ul>
-    <li><a href="tree.html">Tree</a></li>
-    <li><a href="landscape.html">Landscape</a></li>
-  </ul>
+  <main class="container">
+    <h1>Generated Impressions</h1>
+    <ul>
+      <li><a href="anna-abraham.html">Anna Abraham</a></li>
+    </ul>
+  </main>
   <script src="randomColor.js"></script><!-- https://github.com/davidmerfield/randomColor -->
-  <script src="index.js"></script>
+  <script>
+    (function() {
+      var body = document.getElementsByTagName("body")[0];
+      let backgroundTop = randomColor({
+        luminosity: 'dark',
+        format: 'hex',
+        hue: 'blue'
+      });
+      let backgroundBottom = randomColor({
+        luminosity: 'dark',
+        format: 'hex'
+      });
+      let foreground = randomColor({
+        luminosity: 'light',
+        format: 'hex',
+        hue: 'yellow'
+      });
+      body.style.color = foreground;
+
+      var windowWidth = window.innerWidth;
+      var windowHeight = window.innerHeight;
+      let width = windowWidth;
+      let height = windowHeight;
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext("2d");
+      canvas.id = "CursorLayer";
+      canvas.width = width;
+      canvas.height = height;
+      body.appendChild(canvas);
+
+      var backgroundFill = ctx.createLinearGradient(0, 0, 0, height);
+      backgroundFill.addColorStop(0, backgroundTop);
+      backgroundFill.addColorStop(1, backgroundBottom);
+      ctx.fillStyle = backgroundFill;
+      ctx.fillRect(0, 0, width, height);
+    })();
+  </script>
 </body>
 </html>
