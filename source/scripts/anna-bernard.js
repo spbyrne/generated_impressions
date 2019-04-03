@@ -1,7 +1,7 @@
 let Sentencer = require('sentencer');
 let seedrandom = require('seedrandom');
 let ColorScheme = require('color-scheme');
-let fakerator = require("fakerator/dist/locales/fr-FR")();
+let fakerator = require("fakerator/dist/locales/en-CA")();
 
 Sentencer.configure({
   actions: {
@@ -23,28 +23,26 @@ Sentencer.configure({
 
   /* Generate World Constants */
   let time = getTime();
-  console.log(time);
-
   let aspectRatio = getAspectRatio();
-  console.log(aspectRatio);
+  let isLandscape = randBool(true);
 
   /* Set Up Environment */
   let body = document.getElementsByTagName("body")[0];
   let width = window.innerWidth;
   let height = window.innerHeight;
-  let landscape = randBool(true);
-  let ctx = generateCanvas(body,landscape,width,height);
+  let ctx = generateCanvas(body,aspectRatio,isLandscape,width,height);
 })();
 
-function generateCanvas(container,landscape,width,height) {
+function generateCanvas(container,aspectRatio,isLandscape,width,height) {
   let canvas = document.createElement('canvas');
   let ctx = canvas.getContext("2d");
-  canvas.width = width;
-  canvas.height = height;
-  canvas.style.zIndex = 8;
-  canvas.style.position = "absolute";
-  canvas.style.left = (width / 2) - (width / 2) + 'px';
-  canvas.style.top = (height / 2) - (height / 2) + 'px';
+  if (isLandscape) {
+    canvas.width = width;
+    canvas.height = height;
+  } else {
+    canvas.width = width;
+    canvas.height = height;
+  };
   container.appendChild(canvas);
   return ctx;
 };
@@ -74,6 +72,7 @@ function getTitleTemplate() {
   let titleTemplates = [
     'The {{ adjective }} {{ noun }}',
     '{{ an_adjective }} {{ noun }}',
+    '{{ adjective }} {{ nouns }}',
     '{{ nouns }} at {{ noun }}',
     'The {{ nouns }} of {{ place }}',
     '{{ adjective }} {{ nouns }} from {{ place }}',
@@ -118,17 +117,48 @@ function randBool(bias) {
 }
 
 function getPlace() {
-  let place = fakerator.address.city();
+  let option = randInt(1,3);
+  let place;
+  switch(option) {
+    case 1:
+      place = fakerator.address.country();
+      break;
+    case 2:
+      place = fakerator.address.city();
+      break;
+    default:
+      place = fakerator.address.streetName();
+  }
   return place;
 }
 
 function getName() {
-  let name = fakerator.names.name();
+  let option = randInt(1,3);
+  let name;
+  switch(option) {
+    case 1:
+      name = fakerator.names.firstName()
+      break;
+    case 2:
+      name = fakerator.names.lastName()
+      break;
+    default:
+      name = fakerator.names.firstName() + ' ' + fakerator.names.lastName();
+  }
   return name;
 }
 
 function titleCase(str) {
+  let blacklist = [
+    'of',
+    'a',
+    'at',
+    'from'
+  ];
   return str.toLowerCase().split(' ').map(function(word) {
+    if(blacklist.indexOf(word) !== -1) {
+      return word;
+    }
     return word.replace(word[0], word[0].toUpperCase());
   }).join(' ');
 }
