@@ -41,10 +41,10 @@ function generateCanvas(container,aspectRatio) {
   let windowAspectRatio = width / height;
   
   if (windowAspectRatio > aspectRatio) {
-    canvas.height = height * 0.66;
+    canvas.height = height * .66;
     canvas.width = canvas.height * aspectRatio;
   } else {
-    canvas.width = width * 0.66;
+    canvas.width = width * .88;
     canvas.height = canvas.width / aspectRatio;
   };
 
