@@ -10,18 +10,6 @@ var source = require("vinyl-source-stream");
 var uglify = require('gulp-uglify');
 var buffer = require('vinyl-buffer');
 
-gulp.task('scripts', function () {
-  return browserify('source/scripts/anna-bernard.js')
-  .transform("babelify", {presets: ["@babel/preset-env"]})
-  .exclude('WNdb')
-  .exclude('lapack')
-  .bundle()
-  .pipe(source('bundle.js'))
-  .pipe(buffer()) 
-  .pipe(rename("anna-bernard.js"))
-  .pipe(gulp.dest('./public/scripts/'));
-});
-
 gulp.task('styles', function () {
   var sassOptions = {
     outputStyle: 'expanded'
@@ -37,8 +25,21 @@ gulp.task('styles', function () {
     .pipe(gulp.dest('public/styles/'));
 });
 
+gulp.task('scripts', function () {
+  return browserify('source/scripts/anna-bernard.js')
+  .transform("babelify", {presets: ["@babel/preset-env"]})
+  .exclude('WNdb')
+  .exclude('lapack')
+  .bundle()
+  .pipe(source('bundle.js'))
+  .pipe(buffer()) 
+  //.pipe(uglify())
+  .pipe(rename("anna-bernard.js"))
+  .pipe(gulp.dest('./public/scripts/'));
+});
+
 gulp.task('watch', function () {
-  gulp.watch('./source/scripts/*-source.js', gulp.series('scripts'));
+  gulp.watch('./source/scripts/*js', gulp.series('scripts'));
   gulp.watch('./source/styles/*.scss', gulp.series('styles'));
 });
 

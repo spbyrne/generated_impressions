@@ -2,6 +2,7 @@ let Sentencer = require('sentencer');
 let seedrandom = require('seedrandom');
 let ColorScheme = require('color-scheme');
 let fakerator = require("fakerator/dist/locales/en-CA")();
+let chroma = require("chroma-js");
 
 Sentencer.configure({
   actions: {
@@ -24,25 +25,29 @@ Sentencer.configure({
   /* Generate World Constants */
   let time = getTime();
   let aspectRatio = getAspectRatio();
-  let isLandscape = randBool(true);
 
   /* Set Up Environment */
-  let body = document.getElementsByTagName("body")[0];
-  let width = window.innerWidth;
-  let height = window.innerHeight;
-  let ctx = generateCanvas(body,aspectRatio,isLandscape,width,height);
+  let container = document.querySelector('.container');
+  let ctx = generateCanvas(container,aspectRatio);
+  let colour = getColour();
+  container.appendChild(getInfoCard(title));
 })();
 
-function generateCanvas(container,aspectRatio,isLandscape,width,height) {
+function generateCanvas(container,aspectRatio) {
+  let width = window.innerWidth;
+  let height = window.innerHeight;
   let canvas = document.createElement('canvas');
   let ctx = canvas.getContext("2d");
-  if (isLandscape) {
-    canvas.width = width;
-    canvas.height = height;
+  let windowAspectRatio = width / height;
+  
+  if (windowAspectRatio > aspectRatio) {
+    canvas.height = height * 0.66;
+    canvas.width = canvas.height * aspectRatio;
   } else {
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width * 0.66;
+    canvas.height = canvas.width / aspectRatio;
   };
+
   container.appendChild(canvas);
   return ctx;
 };
@@ -58,13 +63,19 @@ function getTime() {
 }
 
 function getAspectRatio() {
+  let aspectRatio;
   let aspectRatios = [
     1.2, /* Purdy - 6/5 */
     1.33333333333, /* Old School TV - 4/3 */
     1.4, /* Photo - 7/5 */
     1.77777777778 /* 16/9 */
   ];
-  let aspectRatio = aspectRatios[Math.floor(Math.random() * aspectRatios.length)];;
+  if (randBool(30)) {
+    aspectRatio = aspectRatios[Math.floor(Math.random() * (aspectRatios.length - 1))];
+    aspectRatio = 1 / aspectRatio;
+  } else {
+    aspectRatio = aspectRatios[Math.floor(Math.random() * aspectRatios.length)];
+  }
   return aspectRatio;
 }
 
@@ -84,7 +95,19 @@ function getTitleTemplate() {
   return titleTemplate;
 }
 
-function randInt(min, max, bias) {
+function getColour() {
+  let colour = {};
+  colour.sky = 'blue'
+  return colour;
+};
+
+function randBias(min, max, bias, influence = 1) {
+  var rnd = Math.random() * (max - min) + min,
+      mix = Math.random() * influence;
+  return rnd * (1 - mix) + bias * mix;
+}
+
+function randInt(min, max) {
   let int;
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -102,16 +125,12 @@ function randDecimal(min) {
   return random;
 }
 
-function randBool(bias) {
+function randBool(odds) {
   let bool;
-  if (bias == undefined) {
+  if (odds == undefined) {
     bool = Math.random() >= 0.5;
   } else {
-    if (bias) {
-      bool = Math.random() >= 0.35;
-    } else {
-      bool = Math.random() >= 0.65;
-    }
+    bool = Math.random() <= (odds / 100);
   }
   return bool;
 }
@@ -148,15 +167,25 @@ function getName() {
   return name;
 }
 
+function getInfoCard(title) {
+  let infoCard = document.createElement("div");
+  infoCard.setAttribute('class', 'info-card');
+  infoCard.innerHTML = "<h3 class='info-card__title'>" + title + "</h3>";
+  infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__artist'>Anna Bernard</span>, 2019</p>";
+  infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__medium'>Javascript & HTML Canvas</span></p>";
+  return infoCard;
+}
+
 function titleCase(str) {
   let blacklist = [
     'of',
     'a',
+    'an',
     'at',
     'from'
   ];
-  return str.toLowerCase().split(' ').map(function(word) {
-    if(blacklist.indexOf(word) !== -1) {
+  return str.toLowerCase().split(' ').map(function(word,index) {
+    if ((blacklist.indexOf(word) !== -1) && (index > 0)) {
       return word;
     }
     return word.replace(word[0], word[0].toUpperCase());
