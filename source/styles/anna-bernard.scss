@@ -41,6 +41,12 @@ canvas {
   display: inline-block;
   padding: 1rem;
   box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.05);
+  transform-origin: 50% 50%;
+  transition: all 75ms ease-out;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05,1.05);
+  }
   &__title {
     margin: 0;
     font-size: 16px;

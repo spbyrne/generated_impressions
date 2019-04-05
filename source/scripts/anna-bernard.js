@@ -25,11 +25,20 @@ Sentencer.configure({
 });
 
 (function() {
-  /* Generate Seed/Title */
   let titleTemplate = getTitleTemplate();
   let title = titleCase(Sentencer.make(titleTemplate));
+  generatePainting(title);
+})();
+
+function enterTitle(current) {
+  var title = prompt("Please enter a title.",current);
+  if (title != null) {
+    generatePainting(title);
+  }
+}
+
+function generatePainting(title) {
   seedrandom(title, { global: true });
-  console.log(title);
 
   /* Generate World Constants */
   let time = getTime();
@@ -37,6 +46,7 @@ Sentencer.configure({
 
   /* Set Up Environment */
   let container = document.querySelector('.container');
+  container.innerHTML = "";
   let canvas = generateCanvas(container,aspectRatio);
   let ctx = canvas.getContext("2d");
   let colour = getColour();
@@ -45,7 +55,7 @@ Sentencer.configure({
   /* Draw Sky */
   ctx.fillStyle = colour.sky;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-})();
+};
 
 function generateCanvas(container,aspectRatio) {
   let width = window.innerWidth;
@@ -222,7 +232,7 @@ function getGreeting() {
 }
 
 function getPreposition() {
-  let prepositions = [ "above", "absent", "across", "after", "against", "along", "around", "as", "aside", "astride", "at", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "but", "by", "despite", "down", "during", "failing", "following", "for", "from", "given", "in", "inside", "into", "like", "midst", "near", "of", "off", "on", "onto", "opposite", "out", "outside", "over", "past", "round", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "with", "within", "without" ];
+  let prepositions = [ "above", "absent", "across", "after", "against", "along", "around", "as", "aside", "astride", "at", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "by", "despite", "down", "during", "failing", "following", "for", "from", "given", "in", "inside", "into", "like", "midst", "near", "of", "off", "on", "onto", "opposite", "outside", "over", "past", "round", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "with", "within", "without" ];
   let preposition;
   preposition = prepositions[Math.floor(Math.random() * prepositions.length)];;
   return preposition;
@@ -243,6 +253,9 @@ function getInfoCard(title) {
   infoCard.innerHTML = "<h3 class='info-card__title'>" + title + "</h3>";
   infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__artist'>Anna Bernard</span>, 2019</p>";
   infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__medium'>Javascript & HTML Canvas</span></p>";
+  infoCard.addEventListener("click", function(){
+    enterTitle(title);
+  });
   return infoCard;
 }
 
