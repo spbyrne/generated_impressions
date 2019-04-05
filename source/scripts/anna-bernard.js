@@ -17,6 +17,9 @@ Sentencer.configure({
     },
     preposition: function() {
       return getPreposition();
+    },
+    mod: function() {
+      return getMod();
     }
   }
 });
@@ -155,18 +158,21 @@ function randBool(odds) {
 function getTitleTemplate() {
   let titleTemplates = [
     'The {{ adjective }} {{ noun }}',
+    'The {{ mod }} {{ noun }} of {{ noun }}',
+    'The {{ mod }} {{ nouns }} {{ preposition }} {{ name }}',
+    'The {{ nouns }} of {{ place }}',
+    '{{ greeting }} to {{ place }}',
     '{{ an_adjective }} {{ noun }}',
     '{{ noun }} {{ preposition }} {{ nouns }}',
     '{{ adjective }} {{ nouns }}',
     '{{ nouns }} {{ preposition }} {{ place }}',
     '{{ greeting }} {{ preposition }} {{ place }}',
     '{{ greeting }} {{ preposition }} {{ noun }}',
-    'The {{ nouns }} {{ preposition }} {{ place }}',
     '{{ adjective }} {{ nouns }} {{ preposition }} {{ place }}',
     '{{ adjective }} {{ place }}',
-    '{{ name }} {{ preposition }} {{ place }}',
-    '{{ name }} {{ preposition }} {{ nouns }}',
-    '{{ adjective }} {{ name }}'
+    '{{ mod }} {{ name }} {{ preposition }} {{ place }}',
+    '{{ mod }} {{ name }} {{ preposition }} {{ nouns }}',
+    '{{ adjective }} {{ mod }} {{ name }}'
   ]
   let titleTemplate = titleTemplates[Math.floor(Math.random() * titleTemplates.length)];;
   return titleTemplate;
@@ -207,7 +213,8 @@ function getName() {
 function getGreeting() {
   let greetings = [
     'farewell',
-    'welcome'
+    'welcome',
+    'lament'
   ];
   let greeting;
   greeting = greetings[Math.floor(Math.random() * greetings.length)];;
@@ -215,11 +222,20 @@ function getGreeting() {
 }
 
 function getPreposition() {
-  let prepositions = [ "about", "above", "absent", "across", "after", "against", "along", "around", "as", "aside", "astride", "at", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "but", "by", "despite", "down", "during", "failing", "following", "for", "from", "given", "in", "inside", "into", "like", "midst", "near", "of", "off", "on", "onto", "opposite", "out", "outside", "over", "past", "round", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "with", "within", "without" ];
+  let prepositions = [ "above", "absent", "across", "after", "against", "along", "around", "as", "aside", "astride", "at", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "but", "by", "despite", "down", "during", "failing", "following", "for", "from", "given", "in", "inside", "into", "like", "midst", "near", "of", "off", "on", "onto", "opposite", "out", "outside", "over", "past", "round", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "with", "within", "without" ];
   let preposition;
   preposition = prepositions[Math.floor(Math.random() * prepositions.length)];;
   return preposition;
 }
+
+function getMod() {
+  let mods = ['young','good','old','bad','late','poor','small','big','royal'];
+  let mod = " ";
+  if (randBool()) {
+    mod = mods[Math.floor(Math.random() * mods.length)];
+  }
+  return mod;
+};
 
 function getInfoCard(title) {
   let infoCard = document.createElement("div");
@@ -231,7 +247,8 @@ function getInfoCard(title) {
 }
 
 function titleCase(str) {
-  let blacklist = [ 'of', 'a', 'an', 'at', 'from', 'on', 'to', 'up', 'by', 'in' ];
+  let blacklist = [ 'of', 'a', 'an', 'at', 'from', 'on', 'to', 'up', 'by', 'in', 'so' ];
+  str = str.replace(/\s\s+/g, ' ');
   return str.toLowerCase().split(' ').map(function(word,index) {
     if ((blacklist.indexOf(word) !== -1) && (index > 0)) {
       return word;
