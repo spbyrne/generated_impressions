@@ -82527,7 +82527,7 @@ function getPreposition() {
 }
 
 function getMod() {
-  var mods = ['young', 'good', 'old', 'bad', 'late', 'poor', 'small', 'big', 'royal'];
+  var mods = ['young', 'good', 'old', 'bad', 'late', 'poor', 'small', 'big', 'royal', 'ambitious', 'courageous', 'petulant', 'obtuse'];
   var mod = " ";
 
   if (randBool()) {

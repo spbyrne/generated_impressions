@@ -229,7 +229,7 @@ function getPreposition() {
 }
 
 function getMod() {
-  let mods = ['young','good','old','bad','late','poor','small','big','royal'];
+  let mods = ['young','good','old','bad','late','poor','small','big','royal','ambitious','courageous','petulant','obtuse'];
   let mod = " ";
   if (randBool()) {
     mod = mods[Math.floor(Math.random() * mods.length)];
