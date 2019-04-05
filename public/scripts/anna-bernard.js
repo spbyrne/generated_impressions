@@ -82299,6 +82299,12 @@ Sentencer.configure({
     },
     name: function name() {
       return getName();
+    },
+    greeting: function greeting() {
+      return getGreeting();
+    },
+    preposition: function preposition() {
+      return getPreposition();
     }
   }
 });
@@ -82378,13 +82384,6 @@ function getAspectRatio() {
   return aspectRatio;
 }
 
-function getTitleTemplate() {
-  var titleTemplates = ['The {{ adjective }} {{ noun }}', '{{ an_adjective }} {{ noun }}', '{{ adjective }} {{ nouns }}', '{{ nouns }} at {{ noun }}', 'The {{ nouns }} of {{ place }}', '{{ adjective }} {{ nouns }} from {{ place }}', '{{ adjective }} {{ place }}', '{{ name }} from {{ place }}', '{{ adjective }} {{ name }}'];
-  var titleTemplate = titleTemplates[Math.floor(Math.random() * titleTemplates.length)];
-  ;
-  return titleTemplate;
-}
-
 function getColour() {
   var colour = {};
   colour.sky = getSkyColour();
@@ -82461,6 +82460,13 @@ function randBool(odds) {
   return bool;
 }
 
+function getTitleTemplate() {
+  var titleTemplates = ['The {{ adjective }} {{ noun }}', '{{ an_adjective }} {{ noun }}', '{{ noun }} {{ preposition }} {{ nouns }}', '{{ adjective }} {{ nouns }}', '{{ nouns }} {{ preposition }} {{ place }}', '{{ greeting }} {{ preposition }} {{ place }}', '{{ greeting }} {{ preposition }} {{ noun }}', 'The {{ nouns }} {{ preposition }} {{ place }}', '{{ adjective }} {{ nouns }} {{ preposition }} {{ place }}', '{{ adjective }} {{ place }}', '{{ name }} {{ preposition }} {{ place }}', '{{ name }} {{ preposition }} {{ nouns }}', '{{ adjective }} {{ name }}'];
+  var titleTemplate = titleTemplates[Math.floor(Math.random() * titleTemplates.length)];
+  ;
+  return titleTemplate;
+}
+
 function getPlace() {
   var option = randInt(1, 3);
   var place;
@@ -82501,6 +82507,22 @@ function getName() {
   return name;
 }
 
+function getGreeting() {
+  var greetings = ['farewell', 'welcome'];
+  var greeting;
+  greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  ;
+  return greeting;
+}
+
+function getPreposition() {
+  var prepositions = ["about", "above", "absent", "across", "after", "against", "along", "around", "as", "aside", "astride", "at", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "but", "by", "despite", "down", "during", "failing", "following", "for", "from", "given", "in", "inside", "into", "like", "midst", "near", "of", "off", "on", "onto", "opposite", "out", "outside", "over", "past", "round", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "with", "within", "without"];
+  var preposition;
+  preposition = prepositions[Math.floor(Math.random() * prepositions.length)];
+  ;
+  return preposition;
+}
+
 function getInfoCard(title) {
   var infoCard = document.createElement("div");
   infoCard.setAttribute('class', 'info-card');
@@ -82511,7 +82533,7 @@ function getInfoCard(title) {
 }
 
 function titleCase(str) {
-  var blacklist = ['of', 'a', 'an', 'at', 'from'];
+  var blacklist = ['of', 'a', 'an', 'at', 'from', 'on', 'to', 'up', 'by', 'in'];
   return str.toLowerCase().split(' ').map(function (word, index) {
     if (blacklist.indexOf(word) !== -1 && index > 0) {
       return word;
