@@ -82318,16 +82318,20 @@ Sentencer.configure({
   /* Set Up Environment */
 
   var container = document.querySelector('.container');
-  var ctx = generateCanvas(container, aspectRatio);
+  var canvas = generateCanvas(container, aspectRatio);
+  var ctx = canvas.getContext("2d");
   var colour = getColour();
   container.appendChild(getInfoCard(title));
+  /* Draw Sky */
+
+  ctx.fillStyle = colour.sky;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 })();
 
 function generateCanvas(container, aspectRatio) {
   var width = window.innerWidth;
   var height = window.innerHeight;
   var canvas = document.createElement('canvas');
-  var ctx = canvas.getContext("2d");
   var windowAspectRatio = width / height;
 
   if (windowAspectRatio > aspectRatio) {
@@ -82340,7 +82344,7 @@ function generateCanvas(container, aspectRatio) {
 
   ;
   container.appendChild(canvas);
-  return ctx;
+  return canvas;
 }
 
 ;
@@ -82383,11 +82387,39 @@ function getTitleTemplate() {
 
 function getColour() {
   var colour = {};
-  colour.sky = 'blue';
+  colour.sky = getSkyColour();
   return colour;
 }
 
 ;
+
+function getSkyColour() {
+  var skyH = rotateHue(randBias(0, 240, 60, 1), 180); // Random hue between cyan and yellow, bias towards blue
+
+  var skyS = randBias(0, 100, 60, 1);
+  var skyL = randBias(0, 100, 75, 1);
+  return hsl(skyH, skyS, skyL);
+}
+
+function rotateHue(hue, rotation) {
+  var rotatedHue;
+  rotatedHue = hue - rotation;
+
+  if (rotatedHue < 0) {
+    rotatedHue = 360 + rotatedHue;
+  }
+
+  return rotatedHue;
+}
+
+;
+
+function hsl(h, s, l) {
+  h = typeof h !== 'undefined' ? h : randInt(1, 360);
+  s = typeof s !== 'undefined' ? s : randBias(0, 100, 70, 1);
+  l = typeof l !== 'undefined' ? l : randBias(0, 100, 50, 1);
+  return 'hsl(' + h + ',' + s + '%,' + l + '%)';
+}
 
 function randBias(min, max, bias) {
   var influence = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
