@@ -1,0 +1,6 @@
+**/_vti_cnf/
+*.csv
+*.imp
+Thumbs.db
+*.pdf
+node_modules/
