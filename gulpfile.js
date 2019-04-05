@@ -38,6 +38,19 @@ gulp.task('scripts', function () {
   .pipe(gulp.dest('./public/scripts/'));
 });
 
+gulp.task('scripts-prod', function () {
+  return browserify('source/scripts/anna-bernard.js')
+  .transform("babelify", {presets: ["@babel/preset-env"]})
+  .exclude('WNdb')
+  .exclude('lapack')
+  .bundle()
+  .pipe(source('bundle.js'))
+  .pipe(buffer()) 
+  .pipe(uglify())
+  .pipe(rename("anna-bernard.js"))
+  .pipe(gulp.dest('./public/scripts/'));
+});
+
 gulp.task('watch', function () {
   gulp.watch('./source/scripts/*js', gulp.series('scripts'));
   gulp.watch('./source/styles/*.scss', gulp.series('styles'));
@@ -50,5 +63,5 @@ gulp.task(
 
 gulp.task(
   'build',
-  gulp.series('styles', 'scripts')
+  gulp.series('styles', 'scripts-prod')
 );
