@@ -23,12 +23,17 @@ canvas {
   border: 0.5rem solid white;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
   display: inline-block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%,-50%,0);
+  position: relative;
+  padding: 1.5rem 0;
 }
 
 .info-card {

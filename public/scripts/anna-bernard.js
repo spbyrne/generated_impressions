@@ -82566,13 +82566,16 @@ function getInfoCard(title) {
 
 function titleCase(str) {
   var blacklist = ['of', 'a', 'an', 'at', 'from', 'on', 'to', 'up', 'by', 'in', 'so'];
-  str = str.replace(/\s\s+/g, ' ');
-  return str.toLowerCase().split(' ').map(function (word, index) {
+  var string = str.replace(/ {1,}/g, " ");
+  return string.toLowerCase().split(' ').map(function (word, index) {
     if (blacklist.indexOf(word) !== -1 && index > 0) {
       return word;
+    } else if (typeof word[0] !== 'undefined') {
+      return word.replace(word[0], word[0].toUpperCase());
+    } else {
+      console.log('!' + word);
+      return word;
     }
-
-    return word.replace(word[0], word[0].toUpperCase());
   }).join(' ');
 }
 
