@@ -82332,20 +82332,32 @@ function generatePainting(title) {
   });
   /* Generate World Constants */
 
-  var time = getTime();
-  var aspectRatio = getAspectRatio();
+  var painting = {};
+  painting.time = getTime();
+  painting.aspectRatio = getAspectRatio();
+  painting.colourScheme = getColourScheme(painting.time);
+  painting.horizon = getRatio();
+  console.log(painting.horizon);
+  var colour = getColour(painting);
   /* Set Up Environment */
 
   var container = document.querySelector('.container');
   container.innerHTML = "";
-  var canvas = generateCanvas(container, aspectRatio);
+  var canvas = generateCanvas(container, painting.aspectRatio);
   var ctx = canvas.getContext("2d");
-  var colour = getColour();
   container.appendChild(getInfoCard(title));
   /* Draw Sky */
 
-  ctx.fillStyle = colour.sky;
+  var skyFill = getSkyFill(ctx, (1 - painting.horizon) * canvas.height, colour.sky);
+  ctx.fillStyle = skyFill;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  /* Draw Land */
+
+  var landHeight = canvas.height * painting.horizon;
+  var landY = canvas.height - landHeight;
+  var landFill = getLandFill(ctx, landY, landHeight, colour.land);
+  ctx.fillStyle = landFill;
+  ctx.fillRect(0, landY, canvas.width, landHeight);
 }
 
 ;
@@ -82400,20 +82412,93 @@ function getAspectRatio() {
   return aspectRatio;
 }
 
-function getColour() {
+function getColour(painting) {
   var colour = {};
-  colour.sky = getSkyColour();
+  colour.sky = getSkyColour(painting);
+  colour.land = getLandColour(painting, colour);
   return colour;
 }
 
-;
+function getColourScheme(time) {
+  var colourScheme;
 
-function getSkyColour() {
-  var skyH = rotateHue(randBias(0, 240, 60, 1), 180); // Random hue between cyan and yellow, bias towards blue
+  switch (randInt(1, 2)) {
+    case 1:
+      colourScheme = 'mono';
+      break;
 
-  var skyS = randBias(0, 100, 60, 1);
-  var skyL = randBias(0, 100, 75, 1);
-  return hsl(skyH, skyS, skyL);
+    case 2:
+      colourScheme = 'triad';
+      break;
+
+    default:
+      colourScheme = 'mono';
+  }
+
+  return colourScheme;
+}
+
+function getSkyColour(painting) {
+  var h = rotateHue(randBias(0, 240, 60, 1), 180); // Random hue between cyan and yellow, bias towards blue
+
+  var s = randBias(0, 100, 60, 1);
+  var l;
+
+  if (painting.time == 'night') {
+    l = randBias(0, 100, 25, 1);
+  } else if (painting.time == 'twilight') {
+    l = randBias(0, 100, 35, 1);
+  } else {
+    l = randBias(0, 100, 60, 1);
+  }
+
+  return [h, s, l];
+}
+
+function getSkyFill(ctx, height, skyColour) {
+  var fill = ctx.createLinearGradient(0, 0, 0, height);
+  var horizonH = rotateHue(skyColour[0], randInt(0, 30));
+  var horizonS = skyColour[1];
+  var horizonL = randBias(skyColour[2] - 10, skyColour[2] + 40, skyColour[2] + 10, 1);
+  fill.addColorStop(0, hsl(skyColour));
+  fill.addColorStop(1, hsl([horizonH, horizonS, horizonL]));
+  return fill;
+}
+
+function getLandColour(painting, colour) {
+  var skyH = colour.sky[0];
+  var skyS = colour.sky[1];
+  var skyL = colour.sky[2];
+  var h;
+
+  if (painting.colourScheme == 'mono') {
+    h = randBias(skyH - 30, skyH + 30, skyH, 1);
+  } else if (painting.colourScheme == 'triad') {
+    h = rotateHue(skyH, randBias(105, 135, 120, 1));
+  }
+
+  var s = randBias(skyS - 15, skyS + 15, skyS, 1);
+  var l;
+
+  if (painting.time == 'night') {
+    l = randBias(5, 30, 18, 1);
+  } else if (painting.time == 'twilight') {
+    l = randBias(10, 50, 20, 1);
+  } else {
+    l = randBias(10, 70, 25, 1);
+  }
+
+  return [h, s, l];
+}
+
+function getLandFill(ctx, startX, height, landColour) {
+  var fill = ctx.createLinearGradient(0, startX, 0, startX + height);
+  var horizonH = rotateHue(landColour[0], randInt(0, 30));
+  var horizonS = landColour[1] * .6;
+  var horizonL = randBias(landColour[1] - 5, landColour[1] + 10, landColour[1] + 7, 1);
+  fill.addColorStop(0, hsl([horizonH, horizonS, horizonL]));
+  fill.addColorStop(1, hsl(landColour));
+  return fill;
 }
 
 function rotateHue(hue, rotation) {
@@ -82427,14 +82512,31 @@ function rotateHue(hue, rotation) {
   return rotatedHue;
 }
 
-;
-
-function hsl(h, s, l) {
-  h = typeof h !== 'undefined' ? h : randInt(1, 360);
-  s = typeof s !== 'undefined' ? s : randBias(0, 100, 70, 1);
-  l = typeof l !== 'undefined' ? l : randBias(0, 100, 50, 1);
+function hsl(array) {
+  var h = array[0];
+  var s = array[1];
+  var l = array[2];
   return 'hsl(' + h + ',' + s + '%,' + l + '%)';
 }
+
+function getRatio() {
+  var ratio = 1;
+  var goldenRatio = 1.6180339887498948482045868;
+  var exponent = randBias(1, 4, 2, 1);
+  var inverse = randBool(30);
+
+  for (var i = 0; i < exponent; i++) {
+    ratio = ratio / goldenRatio;
+  }
+
+  if (inverse) {
+    ratio = 1 - ratio;
+  }
+
+  return ratio;
+}
+
+;
 
 function randBias(min, max, bias) {
   var influence = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;

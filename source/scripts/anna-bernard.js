@@ -41,20 +41,32 @@ function generatePainting(title) {
   seedrandom(title, { global: true });
 
   /* Generate World Constants */
-  let time = getTime();
-  let aspectRatio = getAspectRatio();
+  let painting = {};
+  painting.time = getTime();
+  painting.aspectRatio = getAspectRatio();
+  painting.colourScheme = getColourScheme(painting.time);
+  painting.horizon = getRatio();
+  console.log(painting.horizon);
+  let colour = getColour(painting);
 
   /* Set Up Environment */
   let container = document.querySelector('.container');
   container.innerHTML = "";
-  let canvas = generateCanvas(container,aspectRatio);
+  let canvas = generateCanvas(container,painting.aspectRatio);
   let ctx = canvas.getContext("2d");
-  let colour = getColour();
   container.appendChild(getInfoCard(title));
 
   /* Draw Sky */
-  ctx.fillStyle = colour.sky;
+  var skyFill = getSkyFill(ctx,(1 - painting.horizon) * canvas.height,colour.sky);
+  ctx.fillStyle = skyFill;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  /* Draw Land */
+  let landHeight = canvas.height * painting.horizon;
+  let landY = canvas.height - landHeight;
+  var landFill = getLandFill(ctx,landY,landHeight,colour.land);
+  ctx.fillStyle = landFill;
+  ctx.fillRect(0, landY, canvas.width, landHeight);
 };
 
 function generateCanvas(container,aspectRatio) {
@@ -102,17 +114,82 @@ function getAspectRatio() {
   return aspectRatio;
 }
 
-function getColour() {
+function getColour(painting) {
   let colour = {};
-  colour.sky = getSkyColour();
+  colour.sky = getSkyColour(painting);
+  colour.land = getLandColour(painting,colour);
   return colour;
-};
+}
 
-function getSkyColour() {
-  let skyH = rotateHue(randBias(0,240,60,1),180); // Random hue between cyan and yellow, bias towards blue
-  let skyS = randBias(0, 100, 60, 1);
-  let skyL = randBias(0, 100, 75, 1);
-  return hsl(skyH,skyS,skyL);
+function getColourScheme(time) {
+  let colourScheme;
+  switch(randInt(1,2)) {
+    case 1:
+      colourScheme = 'mono';
+      break;
+    case 2:
+      colourScheme = 'triad';
+      break;
+    default:
+      colourScheme = 'mono';
+  }
+  return colourScheme;
+}
+
+function getSkyColour(painting) {
+  let h = rotateHue(randBias(0,240,60,1),180); // Random hue between cyan and yellow, bias towards blue
+  let s = randBias(0, 100, 60, 1);
+  let l;
+  if (painting.time == 'night') {
+    l = randBias(0, 100, 25, 1);
+  } else if (painting.time == 'twilight') {
+    l = randBias(0, 100, 35, 1);
+  } else {
+    l = randBias(0, 100, 60, 1);
+  }
+  return [h,s,l];
+}
+
+function getSkyFill(ctx,height,skyColour) {
+  let fill = ctx.createLinearGradient(0, 0, 0, height);
+  let horizonH = rotateHue(skyColour[0],randInt(0,30));
+  let horizonS = skyColour[1];
+  let horizonL = randBias(skyColour[2] - 10, skyColour[2] + 40, skyColour[2] + 10, 1);
+  fill.addColorStop(0, hsl(skyColour));
+  fill.addColorStop(1, hsl([horizonH,horizonS,horizonL]))
+  return fill;
+}
+
+function getLandColour(painting,colour) {
+  let skyH = colour.sky[0];
+  let skyS = colour.sky[1];
+  let skyL = colour.sky[2];
+  let h;
+  if (painting.colourScheme == 'mono') {
+    h = randBias(skyH  - 30, skyH + 30, skyH,1);
+  } else if ((painting.colourScheme == 'triad')) {
+    h = rotateHue(skyH,randBias(105,135,120,1));
+  }
+  let s = randBias(skyS  - 15, skyS + 15, skyS,1);
+  let l;
+  if (painting.time == 'night') {
+    l = randBias(5, 30, 18,1);
+  } else if (painting.time == 'twilight') {
+    l = randBias(10, 50, 20, 1);
+  } else {
+    l = randBias(10,70,25,1);
+  }
+  return [h,s,l];
+}
+
+function getLandFill(ctx,startX,height,landColour) {
+  let fill = ctx.createLinearGradient(0, startX, 0, startX + height);
+  let horizonH = rotateHue(landColour[0],randInt(0,30));
+  let horizonS = landColour[1] * .6;
+  let horizonL = randBias(landColour[1] - 5,landColour[1] + 10, landColour[1] + 7, 1);
+  fill.addColorStop(0, hsl([horizonH,horizonS,horizonL]))
+  fill.addColorStop(1, hsl(landColour));
+  return fill;
 }
 
 function rotateHue(hue,rotation) {
@@ -122,14 +199,28 @@ function rotateHue(hue,rotation) {
     rotatedHue = 360 + rotatedHue;
   }
   return rotatedHue;
-};
+}
 
-function hsl(h,s,l) {
-  h = typeof h !== 'undefined' ? h : randInt(1, 360);
-  s = typeof s !== 'undefined' ? s : randBias(0, 100, 70, 1);
-  l = typeof l !== 'undefined' ? l : randBias(0, 100, 50, 1);
+function hsl(array) {
+  let h = array[0];
+  let s = array[1];
+  let l = array[2];
   return 'hsl(' + h + ',' + s + '%,' + l + '%)';
 }
+
+function getRatio() {
+  let ratio = 1;
+  let goldenRatio = 1.6180339887498948482045868;
+  let exponent = randBias(1,4,2,1);
+  let inverse = randBool(30);
+  for (let i = 0; i < exponent; i++) {
+    ratio = ratio / goldenRatio;
+  }
+  if (inverse) {
+    ratio = 1 - ratio;
+  }
+  return ratio;
+};
 
 function randBias(min, max, bias, influence = 1) {
   var rnd = Math.random() * (max - min) + min,
