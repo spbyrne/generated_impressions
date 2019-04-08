@@ -82292,6 +82292,8 @@ var fakerator = require("fakerator/dist/locales/en-CA")();
 
 var chroma = require("chroma-js");
 
+var painting = {};
+var colour = {};
 Sentencer.configure({
   actions: {
     place: function place() {
@@ -82332,13 +82334,12 @@ function generatePainting(title) {
   });
   /* Generate World Constants */
 
-  var painting = {};
   painting.time = getTime();
   painting.aspectRatio = getAspectRatio();
   painting.colourScheme = getColourScheme(painting.time);
   painting.horizon = getRatio();
-  console.log(painting.horizon);
-  var colour = getColour(painting);
+  painting.fog = getFog();
+  colour = getColour(painting);
   /* Set Up Environment */
 
   var container = document.querySelector('.container');
@@ -82348,16 +82349,13 @@ function generatePainting(title) {
   container.appendChild(getInfoCard(title));
   /* Draw Sky */
 
-  var skyFill = getSkyFill(ctx, (1 - painting.horizon) * canvas.height, colour.sky);
-  ctx.fillStyle = skyFill;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  drawSky(ctx, canvas);
   /* Draw Land */
 
-  var landHeight = canvas.height * painting.horizon;
-  var landY = canvas.height - landHeight;
-  var landFill = getLandFill(ctx, landY, landHeight, colour.land);
-  ctx.fillStyle = landFill;
-  ctx.fillRect(0, landY, canvas.width, landHeight);
+  drawLand(ctx, canvas);
+  /* Draw Fog */
+
+  drawFog(ctx, canvas);
 }
 
 ;
@@ -82459,10 +82457,17 @@ function getSkyFill(ctx, height, skyColour) {
   var fill = ctx.createLinearGradient(0, 0, 0, height);
   var horizonH = rotateHue(skyColour[0], randInt(0, 30));
   var horizonS = skyColour[1];
-  var horizonL = randBias(skyColour[2] - 10, skyColour[2] + 40, skyColour[2] + 10, 1);
+  var horizonL = randBias(skyColour[2] - 5, skyColour[2] + 40, skyColour[2] + 10, 1);
+  colour.horizon = [horizonH, horizonS, horizonL];
   fill.addColorStop(0, hsl(skyColour));
-  fill.addColorStop(1, hsl([horizonH, horizonS, horizonL]));
+  fill.addColorStop(1, hsl(colour.horizon));
   return fill;
+}
+
+function drawSky(ctx, canvas) {
+  var skyFill = getSkyFill(ctx, (1 - painting.horizon) * canvas.height, colour.sky);
+  ctx.fillStyle = skyFill;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function getLandColour(painting, colour) {
@@ -82496,9 +82501,46 @@ function getLandFill(ctx, startX, height, landColour) {
   var horizonH = rotateHue(landColour[0], randInt(0, 30));
   var horizonS = landColour[1] * .6;
   var horizonL = randBias(landColour[1] - 5, landColour[1] + 10, landColour[1] + 7, 1);
-  fill.addColorStop(0, hsl([horizonH, horizonS, horizonL]));
+  colour.landHorizonColour = [horizonH, horizonS, horizonL];
+
+  if (painting.fog > 0.5) {
+    fill.addColorStop(0, hsl(colour.horizon));
+    fill.addColorStop(0.02, hsl(colour.landHorizonColour));
+  } else {
+    fill.addColorStop(0, hsl(colour.landHorizonColour));
+  }
+
   fill.addColorStop(1, hsl(landColour));
   return fill;
+}
+
+function drawLand(ctx, canvas) {
+  var landHeight = canvas.height * painting.horizon;
+  var landY = canvas.height - landHeight;
+  var landFill = getLandFill(ctx, landY, landHeight, colour.land);
+  ctx.fillStyle = landFill;
+  ctx.fillRect(0, landY, canvas.width, landHeight);
+}
+
+function getFogFill(ctx, canvas) {
+  painting.horizon;
+  var fogFill = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  fogFill.addColorStop(0, hsla(colour.sky, 0));
+  fogFill.addColorStop(1 - painting.horizon, hsla(colour.horizon, painting.fog));
+  fogFill.addColorStop(1, hsla(colour.land, 0));
+  return fogFill;
+}
+
+function drawFog(ctx, canvas) {
+  var fogFill = getFogFill(ctx, canvas);
+  ctx.fillStyle = fogFill;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function getFog() {
+  var fog;
+  fog = 0.7;
+  return fog;
 }
 
 function rotateHue(hue, rotation) {
@@ -82517,6 +82559,13 @@ function hsl(array) {
   var s = array[1];
   var l = array[2];
   return 'hsl(' + h + ',' + s + '%,' + l + '%)';
+}
+
+function hsla(array, alpha) {
+  var h = array[0];
+  var s = array[1];
+  var l = array[2];
+  return 'hsl(' + h + ',' + s + '%,' + l + '%, ' + alpha + ')';
 }
 
 function getRatio() {
@@ -82557,7 +82606,6 @@ function randInt(min, max) {
 function randDecimal(min) {
   var random;
   random = Math.random();
-  console.log("Seed: " + random);
 
   if (min) {
     random = min + (1 - min) * random;
@@ -82675,8 +82723,9 @@ function titleCase(str) {
     } else if (typeof word[0] !== 'undefined') {
       return word.replace(word[0], word[0].toUpperCase());
     } else {
-      console.log('!' + word);
-      return word;
+      if (word != ' ') {
+        return word;
+      }
     }
   }).join(' ');
 }
