@@ -82519,6 +82519,7 @@ function (_Artist) {
     _this.colour.fog = _this.getFogColour();
     _this.colour.fogFill = _this.getFogFill();
     _this.colour.feature = _this.getFeatureColour();
+    _this.colour.featureFill = _this.getFeatureFill();
     return _this;
   }
 
@@ -82535,15 +82536,16 @@ function (_Artist) {
       /* Paint Feature */
 
       this.ctx.fillStyle = this.featureFill;
+      this.ctx.lineWidth = 100;
+      this.ctx.fillStyle = this.colour.featureFill;
+      this.ctx.moveTo(this.feature.x1, this.feature.y1);
+      this.ctx.lineTo(this.feature.x2 - this.feature.width / 2, this.feature.y2);
+      this.ctx.lineTo(this.feature.x2 + this.feature.width / 2, this.feature.y2);
+      this.ctx.fill();
       /* Paint Fog */
 
       this.ctx.fillStyle = this.colour.fogFill;
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.ctx.lineWidth = 100;
-      this.ctx.fillStyle = 'red';
-      this.ctx.moveTo(this.feature.x1, this.feature.y1);
-      this.ctx.lineTo(this.feature.x2, this.feature.y2);
-      this.ctx.stroke();
     }
   }, {
     key: "display",
@@ -82742,28 +82744,45 @@ function (_Artist) {
       feature.y1 = cH * (1 - this.horizon);
       feature.x2 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, -cW * 1.5, cW * 2.5, cW / 2, 1, 'easeOutQuad');
       feature.y2 = cH;
+      feature.width = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, minUnit, cW, cW / 1.6, 1, 'easeInQuad');
       return feature;
     }
   }, {
     key: "getFeatureColour",
     value: function getFeatureColour() {
-      var horizonH = this.colour.horizon[0];
-      var horizonS = this.colour.horizon[1];
-      var horizonL = this.colour.horizon[2];
+      var skyH = this.colour.sky[0];
+      var skyS = this.colour.sky[1];
+      var skyL = this.colour.sky[2];
 
-      var h = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonH - 15, horizonH + 15, horizonH, 1);
+      var h = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, -20), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 20), skyH, 1, 'easeInQuart');
 
-      var s = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonS - 15, horizonS + 15, horizonS, 1);
+      if (_get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this)) {
+        h = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, -160), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 200), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 180), 1, 'easeInQuart');
+      }
 
-      var l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonL - 15, horizonL + 15, horizonL, 1);
+      var s = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyS - 30, 0), skyS + 10, skyS - 15, 1);
+
+      var l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyL - 20, 0), skyL + 15, skyL - 10, 1);
 
       return [h, s, l];
     }
   }, {
     key: "getFeatureFill",
     value: function getFeatureFill() {
-      var featureFill = 'red';
-      return featureFill;
+      var fill = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
+
+      var horizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, this.colour.feature[0], _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
+
+      var horizonS = this.colour.feature[1] * .6;
+
+      var horizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.colour.feature[2] - 5, this.colour.feature[2] + 20, this.colour.feature[2] + 6, 3);
+
+      this.colour.featureHorizonColour = [horizonH, horizonS, horizonL];
+      var fogBlur = ease.easeInQuad(this.fog) / 10;
+      fill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, this.colour.horizon, 0));
+      fill.addColorStop(fogBlur, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, this.colour.featureHorizonColour, 0.8));
+      fill.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.feature));
+      return fill;
     }
   }, {
     key: "getFogColour",

@@ -71,6 +71,7 @@ class Artist {
   }
 
   randBias(min, max, bias, influence = 1, easingOption = 'easeInOutQuad') {
+
     let random, odds;
     do {
     random = Math.random() * (max - min) + min;
@@ -147,6 +148,7 @@ class Painting extends Artist {
     this.colour.fog = this.getFogColour();
     this.colour.fogFill = this.getFogFill();
     this.colour.feature = this.getFeatureColour();
+    this.colour.featureFill = this.getFeatureFill();
   }
 
   paint() {
@@ -161,15 +163,16 @@ class Painting extends Artist {
     /* Paint Feature */
     this.ctx.fillStyle = this.featureFill;
 
+    this.ctx.lineWidth = 100;
+    this.ctx.fillStyle = this.colour.featureFill;
+    this.ctx.moveTo(this.feature.x1,this.feature.y1);
+    this.ctx.lineTo(this.feature.x2 - (this.feature.width / 2),this.feature.y2);
+    this.ctx.lineTo(this.feature.x2 + (this.feature.width / 2),this.feature.y2);
+    this.ctx.fill();
+
     /* Paint Fog */
     this.ctx.fillStyle = this.colour.fogFill;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-    this.ctx.lineWidth = 100;
-    this.ctx.fillStyle = 'red';
-    this.ctx.moveTo(this.feature.x1,this.feature.y1);
-    this.ctx.lineTo(this.feature.x2,this.feature.y2);
-    this.ctx.stroke();
   }
 
   display(container) {
@@ -330,22 +333,34 @@ class Painting extends Artist {
     feature.y1 = cH * (1 - this.horizon);
     feature.x2 = super.randBias(-cW*1.5,cW*2.5,cW/2,1,'easeOutQuad');
     feature.y2 = cH;
+    feature.width = super.randBias(minUnit,cW,cW/1.6,1,'easeInQuad');
     return feature;
   }
 
   getFeatureColour() {
-    let horizonH = this.colour.horizon[0];
-    let horizonS = this.colour.horizon[1];
-    let horizonL = this.colour.horizon[2];
-    let h = super.randBias(horizonH  - 15, horizonH + 15, horizonH,1);
-    let s = super.randBias(horizonS  - 15, horizonS + 15, horizonS,1);
-    let l = super.randBias(horizonL  - 15, horizonL + 15, horizonL,1);
+    let skyH = this.colour.sky[0];
+    let skyS = this.colour.sky[1];
+    let skyL = this.colour.sky[2];
+    let h = super.randBias(super.rotateHue(skyH,-20), super.rotateHue(skyH,20), skyH,1,'easeInQuart');
+    if (super.randBool()) {
+      h = super.randBias(super.rotateHue(skyH,-160), super.rotateHue(skyH,200), super.rotateHue(skyH,180),1,'easeInQuart');
+    }
+    let s = super.randBias(Math.max(skyS  - 30,0), skyS + 10, skyS - 15,1);
+    let l = super.randBias(Math.max(skyL  - 20,0), skyL + 15, skyL - 10,1);
     return [h,s,l];
   }
 
   getFeatureFill() {
-    let featureFill = 'red';
-    return featureFill;
+    let fill = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
+    let horizonH = super.rotateHue(this.colour.feature[0], super.randInt(0,30));
+    let horizonS = this.colour.feature[1] * .6;
+    let horizonL = super.randBias(this.colour.feature[2] - 5,this.colour.feature[2] + 20, this.colour.feature[2] + 6, 3);
+    this.colour.featureHorizonColour = [horizonH,horizonS,horizonL];
+    let fogBlur = ease.easeInQuad(this.fog) / 10;
+    fill.addColorStop(0, super.hsla(this.colour.horizon,0));
+    fill.addColorStop(fogBlur, super.hsla(this.colour.featureHorizonColour,0.8));
+    fill.addColorStop(1, super.hsl(this.colour.feature));
+    return fill;
   }
 
   getFogColour() {
