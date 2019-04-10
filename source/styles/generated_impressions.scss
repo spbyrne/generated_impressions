@@ -37,16 +37,7 @@ canvas {
 }
 
 .info-card {
-  background: linear-gradient(
-    to bottom right,
-    rgba(255,255,255,0.15),
-    rgba(255,255,255,0.25),
-    rgba(255,255,255,0.15)
-  );
-  border-radius: 2px;
   display: inline-block;
-  padding: 1rem;
-  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.05);
   transform-origin: 50% 50%;
   transition: all 75ms ease-out;
   cursor: pointer;
