@@ -16,13 +16,8 @@ class Painting extends Canvas {
     this.fog = this.getFog();
 
     /* Set Up Environment */
-    this.container = document.createElement("div"); 
-    this.container.classList.add('container');
     this.canvas = this.generateCanvas();
-    this.infoCard = this.getInfoCard();
     this.ctx = this.canvas.getContext("2d");
-    this.container.appendChild(this.canvas);
-    this.container.appendChild(this.infoCard);
 
     /* Set Up Scene Objects */
     this.landHeight = this.canvas.height * this.horizon;
@@ -55,11 +50,6 @@ class Painting extends Canvas {
     this.ctx.fillStyle = this.fill.fog;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    return this;
-  }
-
-  display(container) {
-    container.appendChild(this.container);
     return this;
   }
 

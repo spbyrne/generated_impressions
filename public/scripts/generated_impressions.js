@@ -78547,8 +78547,12 @@ function () {
     value: function display(container) {
       for (var paintingCount = 0; paintingCount < this.paintings.length; paintingCount++) {
         var thisPainting = this.paintings[paintingCount];
-        thisPainting.display(container);
-        console.log(thisPainting);
+        var paintingContainer = document.createElement("div");
+        var infoCard = this.getInfoCard(thisPainting);
+        paintingContainer.classList.add('container');
+        paintingContainer.appendChild(thisPainting.canvas);
+        paintingContainer.appendChild(infoCard);
+        container.appendChild(paintingContainer);
       }
     }
   }, {
@@ -78582,6 +78586,16 @@ function () {
           }
         }
       }).join(' ');
+    }
+  }, {
+    key: "getInfoCard",
+    value: function getInfoCard(painting) {
+      var infoCard = document.createElement("div");
+      infoCard.setAttribute('class', 'info-card');
+      infoCard.innerHTML = "<h3 class='info-card__title'>" + painting.title + "</h3>";
+      infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__artist'>" + this.name + "</span>, 2019</p>";
+      infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__medium'>Javascript & HTML Canvas</span></p>";
+      return infoCard;
     }
   }]);
 
@@ -78806,19 +78820,9 @@ function (_Canvas) {
     _this.fog = _this.getFog();
     /* Set Up Environment */
 
-    _this.container = document.createElement("div");
-
-    _this.container.classList.add('container');
-
     _this.canvas = _this.generateCanvas();
-    _this.infoCard = _this.getInfoCard();
     _this.ctx = _this.canvas.getContext("2d");
-
-    _this.container.appendChild(_this.canvas);
-
-    _this.container.appendChild(_this.infoCard);
     /* Set Up Scene Objects */
-
 
     _this.landHeight = _this.canvas.height * _this.horizon;
     _this.landY = _this.canvas.height - _this.landHeight;
@@ -78852,12 +78856,6 @@ function (_Canvas) {
 
       this.ctx.fillStyle = this.fill.fog;
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      return this;
-    }
-  }, {
-    key: "display",
-    value: function display(container) {
-      container.appendChild(this.container);
       return this;
     }
   }, {

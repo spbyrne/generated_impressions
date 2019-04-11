@@ -116,8 +116,12 @@ class Artist {
   display(container) {
     for (let paintingCount = 0; paintingCount < this.paintings.length; paintingCount++) {
       let thisPainting = this.paintings[paintingCount];
-      thisPainting.display(container);
-      console.log(thisPainting);
+      let paintingContainer = document.createElement("div"); 
+      let infoCard = this.getInfoCard(thisPainting);
+      paintingContainer.classList.add('container');
+      paintingContainer.appendChild(thisPainting.canvas);
+      paintingContainer.appendChild(infoCard);
+      container.appendChild(paintingContainer);
     }
   }
 
@@ -164,6 +168,15 @@ class Artist {
         }
       }
     }).join(' ');
+  }
+
+  getInfoCard(painting) {
+    let infoCard = document.createElement("div");
+    infoCard.setAttribute('class', 'info-card');
+    infoCard.innerHTML = "<h3 class='info-card__title'>" + painting.title + "</h3>";
+    infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__artist'>" + this.name + "</span>, 2019</p>";
+    infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__medium'>Javascript & HTML Canvas</span></p>";
+    return infoCard;
   }
 }
 
