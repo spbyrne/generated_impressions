@@ -131,7 +131,7 @@ BayesClassifier.prototype.probabilityOfClass = probabilityOfClass;
 BayesClassifier.restore = restore;
 
 module.exports = BayesClassifier;
-},{"./classifier":2,"util":269}],2:[function(require,module,exports){
+},{"./classifier":2,"util":267}],2:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -381,7 +381,7 @@ LogisticRegressionClassifier.restore = restore;
 
 module.exports = LogisticRegressionClassifier;
 
-},{"./classifier":2,"sylvester":258,"util":269}],4:[function(require,module,exports){
+},{"./classifier":2,"sylvester":256,"util":267}],4:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -501,7 +501,7 @@ KMeans.prototype.cluster = cluster;
 
 module.exports = KMeans;
 
-},{"sylvester":258}],5:[function(require,module,exports){
+},{"sylvester":256}],5:[function(require,module,exports){
 
 exports.BayesClassifier = require('./classifier/bayes_classifier');
 exports.LogisticRegressionClassifier = require('./classifier/logistic_regression_classifier');
@@ -3972,7 +3972,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
   return this._getEncoder(enc).encode(data, reporter);
 };
 
-},{"../asn1":7,"inherits":109,"vm":270}],9:[function(require,module,exports){
+},{"../asn1":7,"inherits":107,"vm":268}],9:[function(require,module,exports){
 var inherits = require('inherits');
 var Reporter = require('../base').Reporter;
 var Buffer = require('buffer').Buffer;
@@ -4090,7 +4090,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
   return out;
 };
 
-},{"../base":10,"buffer":54,"inherits":109}],10:[function(require,module,exports){
+},{"../base":10,"buffer":54,"inherits":107}],10:[function(require,module,exports){
 var base = exports;
 
 base.Reporter = require('./reporter').Reporter;
@@ -4734,7 +4734,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
   return /^[A-Za-z0-9 '\(\)\+,\-\.\/:=\?]*$/.test(str);
 };
 
-},{"../base":10,"minimalistic-assert":115}],12:[function(require,module,exports){
+},{"../base":10,"minimalistic-assert":113}],12:[function(require,module,exports){
 var inherits = require('inherits');
 
 function Reporter(options) {
@@ -4857,7 +4857,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
   return this;
 };
 
-},{"inherits":109}],13:[function(require,module,exports){
+},{"inherits":107}],13:[function(require,module,exports){
 var constants = require('../constants');
 
 exports.tagClass = {
@@ -5248,7 +5248,7 @@ function derDecodeLen(buf, primitive, fail) {
   return len;
 }
 
-},{"../../asn1":7,"inherits":109}],16:[function(require,module,exports){
+},{"../../asn1":7,"inherits":107}],16:[function(require,module,exports){
 var decoders = exports;
 
 decoders.der = require('./der');
@@ -5305,7 +5305,7 @@ PEMDecoder.prototype.decode = function decode(data, options) {
   return DERDecoder.prototype.decode.call(this, input, options);
 };
 
-},{"./der":15,"buffer":54,"inherits":109}],18:[function(require,module,exports){
+},{"./der":15,"buffer":54,"inherits":107}],18:[function(require,module,exports){
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -5602,7 +5602,7 @@ function encodeTag(tag, primitive, cls, reporter) {
   return res;
 }
 
-},{"../../asn1":7,"buffer":54,"inherits":109}],19:[function(require,module,exports){
+},{"../../asn1":7,"buffer":54,"inherits":107}],19:[function(require,module,exports){
 var encoders = exports;
 
 encoders.der = require('./der');
@@ -5631,7 +5631,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
   return out.join('\n');
 };
 
-},{"./der":18,"inherits":109}],21:[function(require,module,exports){
+},{"./der":18,"inherits":107}],21:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -9512,7 +9512,7 @@ AES.prototype.scrub = function () {
 
 module.exports.AES = AES
 
-},{"safe-buffer":236}],26:[function(require,module,exports){
+},{"safe-buffer":234}],26:[function(require,module,exports){
 var aes = require('./aes')
 var Buffer = require('safe-buffer').Buffer
 var Transform = require('cipher-base')
@@ -9631,7 +9631,7 @@ StreamCipher.prototype.setAAD = function setAAD (buf) {
 
 module.exports = StreamCipher
 
-},{"./aes":25,"./ghash":30,"./incr32":31,"buffer-xor":53,"cipher-base":56,"inherits":109,"safe-buffer":236}],27:[function(require,module,exports){
+},{"./aes":25,"./ghash":30,"./incr32":31,"buffer-xor":53,"cipher-base":55,"inherits":107,"safe-buffer":234}],27:[function(require,module,exports){
 var ciphers = require('./encrypter')
 var deciphers = require('./decrypter')
 var modes = require('./modes/list.json')
@@ -9772,7 +9772,7 @@ function createDecipher (suite, password) {
 exports.createDecipher = createDecipher
 exports.createDecipheriv = createDecipheriv
 
-},{"./aes":25,"./authCipher":26,"./modes":38,"./streamCipher":41,"cipher-base":56,"evp_bytestokey":92,"inherits":109,"safe-buffer":236}],29:[function(require,module,exports){
+},{"./aes":25,"./authCipher":26,"./modes":38,"./streamCipher":41,"cipher-base":55,"evp_bytestokey":90,"inherits":107,"safe-buffer":234}],29:[function(require,module,exports){
 var MODES = require('./modes')
 var AuthCipher = require('./authCipher')
 var Buffer = require('safe-buffer').Buffer
@@ -9888,7 +9888,7 @@ function createCipher (suite, password) {
 exports.createCipheriv = createCipheriv
 exports.createCipher = createCipher
 
-},{"./aes":25,"./authCipher":26,"./modes":38,"./streamCipher":41,"cipher-base":56,"evp_bytestokey":92,"inherits":109,"safe-buffer":236}],30:[function(require,module,exports){
+},{"./aes":25,"./authCipher":26,"./modes":38,"./streamCipher":41,"cipher-base":55,"evp_bytestokey":90,"inherits":107,"safe-buffer":234}],30:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var ZEROES = Buffer.alloc(16, 0)
 
@@ -9979,7 +9979,7 @@ GHASH.prototype.final = function (abl, bl) {
 
 module.exports = GHASH
 
-},{"safe-buffer":236}],31:[function(require,module,exports){
+},{"safe-buffer":234}],31:[function(require,module,exports){
 function incr32 (iv) {
   var len = iv.length
   var item
@@ -10050,7 +10050,7 @@ exports.encrypt = function (self, data, decrypt) {
   return out
 }
 
-},{"buffer-xor":53,"safe-buffer":236}],34:[function(require,module,exports){
+},{"buffer-xor":53,"safe-buffer":234}],34:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 
 function encryptByte (self, byteParam, decrypt) {
@@ -10094,7 +10094,7 @@ exports.encrypt = function (self, chunk, decrypt) {
   return out
 }
 
-},{"safe-buffer":236}],35:[function(require,module,exports){
+},{"safe-buffer":234}],35:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 
 function encryptByte (self, byteParam, decrypt) {
@@ -10121,7 +10121,7 @@ exports.encrypt = function (self, chunk, decrypt) {
   return out
 }
 
-},{"safe-buffer":236}],36:[function(require,module,exports){
+},{"safe-buffer":234}],36:[function(require,module,exports){
 var xor = require('buffer-xor')
 var Buffer = require('safe-buffer').Buffer
 var incr32 = require('../incr32')
@@ -10153,7 +10153,7 @@ exports.encrypt = function (self, chunk) {
   return xor(chunk, pad)
 }
 
-},{"../incr32":31,"buffer-xor":53,"safe-buffer":236}],37:[function(require,module,exports){
+},{"../incr32":31,"buffer-xor":53,"safe-buffer":234}],37:[function(require,module,exports){
 exports.encrypt = function (self, block) {
   return self._cipher.encryptBlock(block)
 }
@@ -10424,7 +10424,7 @@ StreamCipher.prototype._final = function () {
 
 module.exports = StreamCipher
 
-},{"./aes":25,"cipher-base":56,"inherits":109,"safe-buffer":236}],42:[function(require,module,exports){
+},{"./aes":25,"cipher-base":55,"inherits":107,"safe-buffer":234}],42:[function(require,module,exports){
 var DES = require('browserify-des')
 var aes = require('browserify-aes/browser')
 var aesModes = require('browserify-aes/modes')
@@ -10493,7 +10493,7 @@ exports.createDecipher = exports.Decipher = createDecipher
 exports.createDecipheriv = exports.Decipheriv = createDecipheriv
 exports.listCiphers = exports.getCiphers = getCiphers
 
-},{"browserify-aes/browser":27,"browserify-aes/modes":38,"browserify-des":43,"browserify-des/modes":44,"evp_bytestokey":92}],43:[function(require,module,exports){
+},{"browserify-aes/browser":27,"browserify-aes/modes":38,"browserify-des":43,"browserify-des/modes":44,"evp_bytestokey":90}],43:[function(require,module,exports){
 var CipherBase = require('cipher-base')
 var des = require('des.js')
 var inherits = require('inherits')
@@ -10545,7 +10545,7 @@ DES.prototype._final = function () {
   return Buffer.from(this._des.final())
 }
 
-},{"cipher-base":56,"des.js":65,"inherits":109,"safe-buffer":236}],44:[function(require,module,exports){
+},{"cipher-base":55,"des.js":63,"inherits":107,"safe-buffer":234}],44:[function(require,module,exports){
 exports['des-ecb'] = {
   key: 8,
   iv: 0
@@ -10615,7 +10615,7 @@ function getr(priv) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bn.js":22,"buffer":54,"randombytes":217}],46:[function(require,module,exports){
+},{"bn.js":22,"buffer":54,"randombytes":215}],46:[function(require,module,exports){
 module.exports = require('./browser/algorithms.json')
 
 },{"./browser/algorithms.json":47}],47:[function(require,module,exports){
@@ -10877,7 +10877,7 @@ module.exports = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./algorithms.json":47,"./sign":50,"./verify":51,"buffer":54,"create-hash":60,"inherits":109,"stream":256}],50:[function(require,module,exports){
+},{"./algorithms.json":47,"./sign":50,"./verify":51,"buffer":54,"create-hash":58,"inherits":107,"stream":254}],50:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var createHmac = require('create-hmac')
@@ -11026,7 +11026,7 @@ module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
 }).call(this,require("buffer").Buffer)
-},{"./curves.json":48,"bn.js":22,"browserify-rsa":45,"buffer":54,"create-hmac":62,"elliptic":75,"parse-asn1":202}],51:[function(require,module,exports){
+},{"./curves.json":48,"bn.js":22,"browserify-rsa":45,"buffer":54,"create-hmac":60,"elliptic":73,"parse-asn1":200}],51:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var BN = require('bn.js')
@@ -11113,7 +11113,7 @@ function checkValue (b, q) {
 module.exports = verify
 
 }).call(this,require("buffer").Buffer)
-},{"./curves.json":48,"bn.js":22,"buffer":54,"elliptic":75,"parse-asn1":202}],52:[function(require,module,exports){
+},{"./curves.json":48,"bn.js":22,"buffer":54,"elliptic":73,"parse-asn1":200}],52:[function(require,module,exports){
 arguments[4][24][0].apply(exports,arguments)
 },{"dup":24}],53:[function(require,module,exports){
 (function (Buffer){
@@ -12910,3201 +12910,7 @@ function numberIsNaN (obj) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"base64-js":21,"buffer":54,"ieee754":108}],55:[function(require,module,exports){
-/**
- * chroma.js - JavaScript library for color conversions
- *
- * Copyright (c) 2011-2018, Gregor Aisch
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this
- * list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
- *
- * 3. The name Gregor Aisch may not be used to endorse or promote products
- * derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL GREGOR AISCH OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * -------------------------------------------------------
- *
- * chroma.js includes colors from colorbrewer2.org, which are released under
- * the following license:
- *
- * Copyright (c) 2002 Cynthia Brewer, Mark Harrower,
- * and The Pennsylvania State University.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
- *
- * ------------------------------------------------------
- *
- * Named colors are taken from X11 Color Names.
- * http://www.w3.org/TR/css3-color/#svg-color
- *
- * @preserve
- */
-
-(function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global.chroma = factory());
-}(this, (function () { 'use strict';
-
-    var limit = function (x, min, max) {
-        if ( min === void 0 ) min=0;
-        if ( max === void 0 ) max=1;
-
-        return x < min ? min : x > max ? max : x;
-    };
-
-    var clip_rgb = function (rgb) {
-        rgb._clipped = false;
-        rgb._unclipped = rgb.slice(0);
-        for (var i=0; i<=3; i++) {
-            if (i < 3) {
-                if (rgb[i] < 0 || rgb[i] > 255) { rgb._clipped = true; }
-                rgb[i] = limit(rgb[i], 0, 255);
-            } else if (i === 3) {
-                rgb[i] = limit(rgb[i], 0, 1);
-            }
-        }
-        return rgb;
-    };
-
-    // ported from jQuery's $.type
-    var classToType = {};
-    for (var i = 0, list = ['Boolean', 'Number', 'String', 'Function', 'Array', 'Date', 'RegExp', 'Undefined', 'Null']; i < list.length; i += 1) {
-        var name = list[i];
-
-        classToType[("[object " + name + "]")] = name.toLowerCase();
-    }
-    var type = function(obj) {
-        return classToType[Object.prototype.toString.call(obj)] || "object";
-    };
-
-    var unpack = function (args, keyOrder) {
-        if ( keyOrder === void 0 ) keyOrder=null;
-
-    	// if called with more than 3 arguments, we return the arguments
-        if (args.length >= 3) { return Array.prototype.slice.call(args); }
-        // with less than 3 args we check if first arg is object
-        // and use the keyOrder string to extract and sort properties
-    	if (type(args[0]) == 'object' && keyOrder) {
-    		return keyOrder.split('')
-    			.filter(function (k) { return args[0][k] !== undefined; })
-    			.map(function (k) { return args[0][k]; });
-    	}
-    	// otherwise we just return the first argument
-    	// (which we suppose is an array of args)
-        return args[0];
-    };
-
-    var last = function (args) {
-        if (args.length < 2) { return null; }
-        var l = args.length-1;
-        if (type(args[l]) == 'string') { return args[l].toLowerCase(); }
-        return null;
-    };
-
-    var PI = Math.PI;
-
-    var utils = {
-    	clip_rgb: clip_rgb,
-    	limit: limit,
-    	type: type,
-    	unpack: unpack,
-    	last: last,
-    	PI: PI,
-    	TWOPI: PI*2,
-    	PITHIRD: PI/3,
-    	DEG2RAD: PI / 180,
-    	RAD2DEG: 180 / PI
-    };
-
-    var input = {
-    	format: {},
-    	autodetect: []
-    };
-
-    var last$1 = utils.last;
-    var clip_rgb$1 = utils.clip_rgb;
-    var type$1 = utils.type;
-
-
-    var Color = function Color() {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var me = this;
-        if (type$1(args[0]) === 'object' &&
-            args[0].constructor &&
-            args[0].constructor === this.constructor) {
-            // the argument is already a Color instance
-            return args[0];
-        }
-
-        // last argument could be the mode
-        var mode = last$1(args);
-        var autodetect = false;
-
-        if (!mode) {
-            autodetect = true;
-            if (!input.sorted) {
-                input.autodetect = input.autodetect.sort(function (a,b) { return b.p - a.p; });
-                input.sorted = true;
-            }
-            // auto-detect format
-            for (var i = 0, list = input.autodetect; i < list.length; i += 1) {
-                var chk = list[i];
-
-                mode = chk.test.apply(chk, args);
-                if (mode) { break; }
-            }
-        }
-
-        if (input.format[mode]) {
-            var rgb = input.format[mode].apply(null, autodetect ? args : args.slice(0,-1));
-            me._rgb = clip_rgb$1(rgb);
-        } else {
-            throw new Error('unknown format: '+args);
-        }
-
-        // add alpha channel
-        if (me._rgb.length === 3) { me._rgb.push(1); }
-    };
-
-    Color.prototype.toString = function toString () {
-        if (type$1(this.hex) == 'function') { return this.hex(); }
-        return ("[" + (this._rgb.join(',')) + "]");
-    };
-
-    var Color_1 = Color;
-
-    var chroma = function () {
-    	var args = [], len = arguments.length;
-    	while ( len-- ) args[ len ] = arguments[ len ];
-
-    	return new (Function.prototype.bind.apply( chroma.Color, [ null ].concat( args) ));
-    };
-
-    chroma.Color = Color_1;
-    chroma.version = '2.0.3';
-
-    var chroma_1 = chroma;
-
-    var unpack$1 = utils.unpack;
-    var max = Math.max;
-
-    var rgb2cmyk = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var ref = unpack$1(args, 'rgb');
-        var r = ref[0];
-        var g = ref[1];
-        var b = ref[2];
-        r = r / 255;
-        g = g / 255;
-        b = b / 255;
-        var k = 1 - max(r,max(g,b));
-        var f = k < 1 ? 1 / (1-k) : 0;
-        var c = (1-r-k) * f;
-        var m = (1-g-k) * f;
-        var y = (1-b-k) * f;
-        return [c,m,y,k];
-    };
-
-    var rgb2cmyk_1 = rgb2cmyk;
-
-    var unpack$2 = utils.unpack;
-
-    var cmyk2rgb = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        args = unpack$2(args, 'cmyk');
-        var c = args[0];
-        var m = args[1];
-        var y = args[2];
-        var k = args[3];
-        var alpha = args.length > 4 ? args[4] : 1;
-        if (k === 1) { return [0,0,0,alpha]; }
-        return [
-            c >= 1 ? 0 : 255 * (1-c) * (1-k), // r
-            m >= 1 ? 0 : 255 * (1-m) * (1-k), // g
-            y >= 1 ? 0 : 255 * (1-y) * (1-k), // b
-            alpha
-        ];
-    };
-
-    var cmyk2rgb_1 = cmyk2rgb;
-
-    var unpack$3 = utils.unpack;
-    var type$2 = utils.type;
-
-
-
-    Color_1.prototype.cmyk = function() {
-        return rgb2cmyk_1(this._rgb);
-    };
-
-    chroma_1.cmyk = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['cmyk']) ));
-    };
-
-    input.format.cmyk = cmyk2rgb_1;
-
-    input.autodetect.push({
-        p: 2,
-        test: function () {
-            var args = [], len = arguments.length;
-            while ( len-- ) args[ len ] = arguments[ len ];
-
-            args = unpack$3(args, 'cmyk');
-            if (type$2(args) === 'array' && args.length === 4) {
-                return 'cmyk';
-            }
-        }
-    });
-
-    var unpack$4 = utils.unpack;
-    var last$2 = utils.last;
-    var rnd = function (a) { return Math.round(a*100)/100; };
-
-    /*
-     * supported arguments:
-     * - hsl2css(h,s,l)
-     * - hsl2css(h,s,l,a)
-     * - hsl2css([h,s,l], mode)
-     * - hsl2css([h,s,l,a], mode)
-     * - hsl2css({h,s,l,a}, mode)
-     */
-    var hsl2css = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var hsla = unpack$4(args, 'hsla');
-        var mode = last$2(args) || 'lsa';
-        hsla[0] = rnd(hsla[0] || 0);
-        hsla[1] = rnd(hsla[1]*100) + '%';
-        hsla[2] = rnd(hsla[2]*100) + '%';
-        if (mode === 'hsla' || (hsla.length > 3 && hsla[3]<1)) {
-            hsla[3] = hsla.length > 3 ? hsla[3] : 1;
-            mode = 'hsla';
-        } else {
-            hsla.length = 3;
-        }
-        return (mode + "(" + (hsla.join(',')) + ")");
-    };
-
-    var hsl2css_1 = hsl2css;
-
-    var unpack$5 = utils.unpack;
-
-    /*
-     * supported arguments:
-     * - rgb2hsl(r,g,b)
-     * - rgb2hsl(r,g,b,a)
-     * - rgb2hsl([r,g,b])
-     * - rgb2hsl([r,g,b,a])
-     * - rgb2hsl({r,g,b,a})
-     */
-    var rgb2hsl = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        args = unpack$5(args, 'rgba');
-        var r = args[0];
-        var g = args[1];
-        var b = args[2];
-
-        r /= 255;
-        g /= 255;
-        b /= 255;
-
-        var min = Math.min(r, g, b);
-        var max = Math.max(r, g, b);
-
-        var l = (max + min) / 2;
-        var s, h;
-
-        if (max === min){
-            s = 0;
-            h = Number.NaN;
-        } else {
-            s = l < 0.5 ? (max - min) / (max + min) : (max - min) / (2 - max - min);
-        }
-
-        if (r == max) { h = (g - b) / (max - min); }
-        else if (g == max) { h = 2 + (b - r) / (max - min); }
-        else if (b == max) { h = 4 + (r - g) / (max - min); }
-
-        h *= 60;
-        if (h < 0) { h += 360; }
-        if (args.length>3 && args[3]!==undefined) { return [h,s,l,args[3]]; }
-        return [h,s,l];
-    };
-
-    var rgb2hsl_1 = rgb2hsl;
-
-    var unpack$6 = utils.unpack;
-    var last$3 = utils.last;
-
-
-    var round = Math.round;
-
-    /*
-     * supported arguments:
-     * - rgb2css(r,g,b)
-     * - rgb2css(r,g,b,a)
-     * - rgb2css([r,g,b], mode)
-     * - rgb2css([r,g,b,a], mode)
-     * - rgb2css({r,g,b,a}, mode)
-     */
-    var rgb2css = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var rgba = unpack$6(args, 'rgba');
-        var mode = last$3(args) || 'rgb';
-        if (mode.substr(0,3) == 'hsl') {
-            return hsl2css_1(rgb2hsl_1(rgba), mode);
-        }
-        rgba[0] = round(rgba[0]);
-        rgba[1] = round(rgba[1]);
-        rgba[2] = round(rgba[2]);
-        if (mode === 'rgba' || (rgba.length > 3 && rgba[3]<1)) {
-            rgba[3] = rgba.length > 3 ? rgba[3] : 1;
-            mode = 'rgba';
-        }
-        return (mode + "(" + (rgba.slice(0,mode==='rgb'?3:4).join(',')) + ")");
-    };
-
-    var rgb2css_1 = rgb2css;
-
-    var RE_HEX = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
-    var RE_HEXA = /^#?([A-Fa-f0-9]{8})$/;
-
-    var hex2rgb = function (hex) {
-        if (hex.match(RE_HEX)) {
-            // remove optional leading #
-            if (hex.length === 4 || hex.length === 7) {
-                hex = hex.substr(1);
-            }
-            // expand short-notation to full six-digit
-            if (hex.length === 3) {
-                hex = hex.split('');
-                hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
-            }
-            var u = parseInt(hex, 16);
-            var r = u >> 16;
-            var g = u >> 8 & 0xFF;
-            var b = u & 0xFF;
-            return [r,g,b,1];
-        }
-
-        // match rgba hex format, eg #FF000077
-        if (hex.match(RE_HEXA)) {
-            if (hex.length === 9) {
-                // remove optional leading #
-                hex = hex.substr(1);
-            }
-            var u$1 = parseInt(hex, 16);
-            var r$1 = u$1 >> 24 & 0xFF;
-            var g$1 = u$1 >> 16 & 0xFF;
-            var b$1 = u$1 >> 8 & 0xFF;
-            var a = Math.round((u$1 & 0xFF) / 0xFF * 100) / 100;
-            return [r$1,g$1,b$1,a];
-        }
-
-        // we used to check for css colors here
-        // if _input.css? and rgb = _input.css hex
-        //     return rgb
-
-        throw new Error(("unknown hex color: " + hex));
-    };
-
-    var hex2rgb_1 = hex2rgb;
-
-    var unpack$7 = utils.unpack;
-    var round$1 = Math.round;
-
-    var hsl2rgb = function () {
-        var assign;
-
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-        args = unpack$7(args, 'hsl');
-        var h = args[0];
-        var s = args[1];
-        var l = args[2];
-        var r,g,b;
-        if (s === 0) {
-            r = g = b = l*255;
-        } else {
-            var t3 = [0,0,0];
-            var c = [0,0,0];
-            var t2 = l < 0.5 ? l * (1+s) : l+s-l*s;
-            var t1 = 2 * l - t2;
-            var h_ = h / 360;
-            t3[0] = h_ + 1/3;
-            t3[1] = h_;
-            t3[2] = h_ - 1/3;
-            for (var i=0; i<3; i++) {
-                if (t3[i] < 0) { t3[i] += 1; }
-                if (t3[i] > 1) { t3[i] -= 1; }
-                if (6 * t3[i] < 1)
-                    { c[i] = t1 + (t2 - t1) * 6 * t3[i]; }
-                else if (2 * t3[i] < 1)
-                    { c[i] = t2; }
-                else if (3 * t3[i] < 2)
-                    { c[i] = t1 + (t2 - t1) * ((2 / 3) - t3[i]) * 6; }
-                else
-                    { c[i] = t1; }
-            }
-            (assign = [round$1(c[0]*255),round$1(c[1]*255),round$1(c[2]*255)], r = assign[0], g = assign[1], b = assign[2]);
-        }
-        if (args.length > 3) {
-            // keep alpha channel
-            return [r,g,b,args[3]];
-        }
-        return [r,g,b,1];
-    };
-
-    var hsl2rgb_1 = hsl2rgb;
-
-    /**
-    	X11 color names
-
-    	http://www.w3.org/TR/css3-color/#svg-color
-    */
-
-    var w3cx11 = {
-        aliceblue: '#f0f8ff',
-        antiquewhite: '#faebd7',
-        aqua: '#00ffff',
-        aquamarine: '#7fffd4',
-        azure: '#f0ffff',
-        beige: '#f5f5dc',
-        bisque: '#ffe4c4',
-        black: '#000000',
-        blanchedalmond: '#ffebcd',
-        blue: '#0000ff',
-        blueviolet: '#8a2be2',
-        brown: '#a52a2a',
-        burlywood: '#deb887',
-        cadetblue: '#5f9ea0',
-        chartreuse: '#7fff00',
-        chocolate: '#d2691e',
-        coral: '#ff7f50',
-        cornflower: '#6495ed',
-        cornflowerblue: '#6495ed',
-        cornsilk: '#fff8dc',
-        crimson: '#dc143c',
-        cyan: '#00ffff',
-        darkblue: '#00008b',
-        darkcyan: '#008b8b',
-        darkgoldenrod: '#b8860b',
-        darkgray: '#a9a9a9',
-        darkgreen: '#006400',
-        darkgrey: '#a9a9a9',
-        darkkhaki: '#bdb76b',
-        darkmagenta: '#8b008b',
-        darkolivegreen: '#556b2f',
-        darkorange: '#ff8c00',
-        darkorchid: '#9932cc',
-        darkred: '#8b0000',
-        darksalmon: '#e9967a',
-        darkseagreen: '#8fbc8f',
-        darkslateblue: '#483d8b',
-        darkslategray: '#2f4f4f',
-        darkslategrey: '#2f4f4f',
-        darkturquoise: '#00ced1',
-        darkviolet: '#9400d3',
-        deeppink: '#ff1493',
-        deepskyblue: '#00bfff',
-        dimgray: '#696969',
-        dimgrey: '#696969',
-        dodgerblue: '#1e90ff',
-        firebrick: '#b22222',
-        floralwhite: '#fffaf0',
-        forestgreen: '#228b22',
-        fuchsia: '#ff00ff',
-        gainsboro: '#dcdcdc',
-        ghostwhite: '#f8f8ff',
-        gold: '#ffd700',
-        goldenrod: '#daa520',
-        gray: '#808080',
-        green: '#008000',
-        greenyellow: '#adff2f',
-        grey: '#808080',
-        honeydew: '#f0fff0',
-        hotpink: '#ff69b4',
-        indianred: '#cd5c5c',
-        indigo: '#4b0082',
-        ivory: '#fffff0',
-        khaki: '#f0e68c',
-        laserlemon: '#ffff54',
-        lavender: '#e6e6fa',
-        lavenderblush: '#fff0f5',
-        lawngreen: '#7cfc00',
-        lemonchiffon: '#fffacd',
-        lightblue: '#add8e6',
-        lightcoral: '#f08080',
-        lightcyan: '#e0ffff',
-        lightgoldenrod: '#fafad2',
-        lightgoldenrodyellow: '#fafad2',
-        lightgray: '#d3d3d3',
-        lightgreen: '#90ee90',
-        lightgrey: '#d3d3d3',
-        lightpink: '#ffb6c1',
-        lightsalmon: '#ffa07a',
-        lightseagreen: '#20b2aa',
-        lightskyblue: '#87cefa',
-        lightslategray: '#778899',
-        lightslategrey: '#778899',
-        lightsteelblue: '#b0c4de',
-        lightyellow: '#ffffe0',
-        lime: '#00ff00',
-        limegreen: '#32cd32',
-        linen: '#faf0e6',
-        magenta: '#ff00ff',
-        maroon: '#800000',
-        maroon2: '#7f0000',
-        maroon3: '#b03060',
-        mediumaquamarine: '#66cdaa',
-        mediumblue: '#0000cd',
-        mediumorchid: '#ba55d3',
-        mediumpurple: '#9370db',
-        mediumseagreen: '#3cb371',
-        mediumslateblue: '#7b68ee',
-        mediumspringgreen: '#00fa9a',
-        mediumturquoise: '#48d1cc',
-        mediumvioletred: '#c71585',
-        midnightblue: '#191970',
-        mintcream: '#f5fffa',
-        mistyrose: '#ffe4e1',
-        moccasin: '#ffe4b5',
-        navajowhite: '#ffdead',
-        navy: '#000080',
-        oldlace: '#fdf5e6',
-        olive: '#808000',
-        olivedrab: '#6b8e23',
-        orange: '#ffa500',
-        orangered: '#ff4500',
-        orchid: '#da70d6',
-        palegoldenrod: '#eee8aa',
-        palegreen: '#98fb98',
-        paleturquoise: '#afeeee',
-        palevioletred: '#db7093',
-        papayawhip: '#ffefd5',
-        peachpuff: '#ffdab9',
-        peru: '#cd853f',
-        pink: '#ffc0cb',
-        plum: '#dda0dd',
-        powderblue: '#b0e0e6',
-        purple: '#800080',
-        purple2: '#7f007f',
-        purple3: '#a020f0',
-        rebeccapurple: '#663399',
-        red: '#ff0000',
-        rosybrown: '#bc8f8f',
-        royalblue: '#4169e1',
-        saddlebrown: '#8b4513',
-        salmon: '#fa8072',
-        sandybrown: '#f4a460',
-        seagreen: '#2e8b57',
-        seashell: '#fff5ee',
-        sienna: '#a0522d',
-        silver: '#c0c0c0',
-        skyblue: '#87ceeb',
-        slateblue: '#6a5acd',
-        slategray: '#708090',
-        slategrey: '#708090',
-        snow: '#fffafa',
-        springgreen: '#00ff7f',
-        steelblue: '#4682b4',
-        tan: '#d2b48c',
-        teal: '#008080',
-        thistle: '#d8bfd8',
-        tomato: '#ff6347',
-        turquoise: '#40e0d0',
-        violet: '#ee82ee',
-        wheat: '#f5deb3',
-        white: '#ffffff',
-        whitesmoke: '#f5f5f5',
-        yellow: '#ffff00',
-        yellowgreen: '#9acd32'
-    };
-
-    var w3cx11_1 = w3cx11;
-
-    var RE_RGB = /^rgb\(\s*(-?\d+),\s*(-?\d+)\s*,\s*(-?\d+)\s*\)$/;
-    var RE_RGBA = /^rgba\(\s*(-?\d+),\s*(-?\d+)\s*,\s*(-?\d+)\s*,\s*([01]|[01]?\.\d+)\)$/;
-    var RE_RGB_PCT = /^rgb\(\s*(-?\d+(?:\.\d+)?)%,\s*(-?\d+(?:\.\d+)?)%\s*,\s*(-?\d+(?:\.\d+)?)%\s*\)$/;
-    var RE_RGBA_PCT = /^rgba\(\s*(-?\d+(?:\.\d+)?)%,\s*(-?\d+(?:\.\d+)?)%\s*,\s*(-?\d+(?:\.\d+)?)%\s*,\s*([01]|[01]?\.\d+)\)$/;
-    var RE_HSL = /^hsl\(\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)%\s*,\s*(-?\d+(?:\.\d+)?)%\s*\)$/;
-    var RE_HSLA = /^hsla\(\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)%\s*,\s*(-?\d+(?:\.\d+)?)%\s*,\s*([01]|[01]?\.\d+)\)$/;
-
-    var round$2 = Math.round;
-
-    var css2rgb = function (css) {
-        css = css.toLowerCase().trim();
-        // named X11 colors
-        if (w3cx11_1[css]) {
-            return hex2rgb_1(w3cx11_1[css]);
-        }
-        var m;
-
-        // rgb(250,20,0)
-        if ((m = css.match(RE_RGB))) {
-            var rgb = m.slice(1,4);
-            for (var i=0; i<3; i++) {
-                rgb[i] = +rgb[i];
-            }
-            rgb[3] = 1;  // default alpha
-            return rgb;
-        }
-
-        // rgba(250,20,0,0.4)
-        if ((m = css.match(RE_RGBA))) {
-            var rgb$1 = m.slice(1,5);
-            for (var i$1=0; i$1<4; i$1++) {
-                rgb$1[i$1] = +rgb$1[i$1];
-            }
-            return rgb$1;
-        }
-
-        // rgb(100%,0%,0%)
-        if ((m = css.match(RE_RGB_PCT))) {
-            var rgb$2 = m.slice(1,4);
-            for (var i$2=0; i$2<3; i$2++) {
-                rgb$2[i$2] = round$2(rgb$2[i$2] * 2.55);
-            }
-            rgb$2[3] = 1;  // default alpha
-            return rgb$2;
-        }
-
-        // rgba(100%,0%,0%,0.4)
-        if ((m = css.match(RE_RGBA_PCT))) {
-            var rgb$3 = m.slice(1,5);
-            for (var i$3=0; i$3<3; i$3++) {
-                rgb$3[i$3] = round$2(rgb$3[i$3] * 2.55);
-            }
-            rgb$3[3] = +rgb$3[3];
-            return rgb$3;
-        }
-
-        // hsl(0,100%,50%)
-        if ((m = css.match(RE_HSL))) {
-            var hsl = m.slice(1,4);
-            hsl[1] *= 0.01;
-            hsl[2] *= 0.01;
-            var rgb$4 = hsl2rgb_1(hsl);
-            rgb$4[3] = 1;
-            return rgb$4;
-        }
-
-        // hsla(0,100%,50%,0.5)
-        if ((m = css.match(RE_HSLA))) {
-            var hsl$1 = m.slice(1,4);
-            hsl$1[1] *= 0.01;
-            hsl$1[2] *= 0.01;
-            var rgb$5 = hsl2rgb_1(hsl$1);
-            rgb$5[3] = +m[4];  // default alpha = 1
-            return rgb$5;
-        }
-    };
-
-    css2rgb.test = function (s) {
-        return RE_RGB.test(s) ||
-            RE_RGBA.test(s) ||
-            RE_RGB_PCT.test(s) ||
-            RE_RGBA_PCT.test(s) ||
-            RE_HSL.test(s) ||
-            RE_HSLA.test(s);
-    };
-
-    var css2rgb_1 = css2rgb;
-
-    var type$3 = utils.type;
-
-
-
-
-    Color_1.prototype.css = function(mode) {
-        return rgb2css_1(this._rgb, mode);
-    };
-
-    chroma_1.css = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['css']) ));
-    };
-
-    input.format.css = css2rgb_1;
-
-    input.autodetect.push({
-        p: 5,
-        test: function (h) {
-            var rest = [], len = arguments.length - 1;
-            while ( len-- > 0 ) rest[ len ] = arguments[ len + 1 ];
-
-            if (!rest.length && type$3(h) === 'string' && css2rgb_1.test(h)) {
-                return 'css';
-            }
-        }
-    });
-
-    var unpack$8 = utils.unpack;
-
-    input.format.gl = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var rgb = unpack$8(args, 'rgba');
-        rgb[0] *= 255;
-        rgb[1] *= 255;
-        rgb[2] *= 255;
-        return rgb;
-    };
-
-    chroma_1.gl = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['gl']) ));
-    };
-
-    Color_1.prototype.gl = function() {
-        var rgb = this._rgb;
-        return [rgb[0]/255, rgb[1]/255, rgb[2]/255, rgb[3]];
-    };
-
-    var unpack$9 = utils.unpack;
-
-    var rgb2hcg = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var ref = unpack$9(args, 'rgb');
-        var r = ref[0];
-        var g = ref[1];
-        var b = ref[2];
-        var min = Math.min(r, g, b);
-        var max = Math.max(r, g, b);
-        var delta = max - min;
-        var c = delta * 100 / 255;
-        var _g = min / (255 - delta) * 100;
-        var h;
-        if (delta === 0) {
-            h = Number.NaN;
-        } else {
-            if (r === max) { h = (g - b) / delta; }
-            if (g === max) { h = 2+(b - r) / delta; }
-            if (b === max) { h = 4+(r - g) / delta; }
-            h *= 60;
-            if (h < 0) { h += 360; }
-        }
-        return [h, c, _g];
-    };
-
-    var rgb2hcg_1 = rgb2hcg;
-
-    var unpack$a = utils.unpack;
-    var floor = Math.floor;
-
-    /*
-     * this is basically just HSV with some minor tweaks
-     *
-     * hue.. [0..360]
-     * chroma .. [0..1]
-     * grayness .. [0..1]
-     */
-
-    var hcg2rgb = function () {
-        var assign, assign$1, assign$2, assign$3, assign$4, assign$5;
-
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-        args = unpack$a(args, 'hcg');
-        var h = args[0];
-        var c = args[1];
-        var _g = args[2];
-        var r,g,b;
-        _g = _g * 255;
-        var _c = c * 255;
-        if (c === 0) {
-            r = g = b = _g;
-        } else {
-            if (h === 360) { h = 0; }
-            if (h > 360) { h -= 360; }
-            if (h < 0) { h += 360; }
-            h /= 60;
-            var i = floor(h);
-            var f = h - i;
-            var p = _g * (1 - c);
-            var q = p + _c * (1 - f);
-            var t = p + _c * f;
-            var v = p + _c;
-            switch (i) {
-                case 0: (assign = [v, t, p], r = assign[0], g = assign[1], b = assign[2]); break
-                case 1: (assign$1 = [q, v, p], r = assign$1[0], g = assign$1[1], b = assign$1[2]); break
-                case 2: (assign$2 = [p, v, t], r = assign$2[0], g = assign$2[1], b = assign$2[2]); break
-                case 3: (assign$3 = [p, q, v], r = assign$3[0], g = assign$3[1], b = assign$3[2]); break
-                case 4: (assign$4 = [t, p, v], r = assign$4[0], g = assign$4[1], b = assign$4[2]); break
-                case 5: (assign$5 = [v, p, q], r = assign$5[0], g = assign$5[1], b = assign$5[2]); break
-            }
-        }
-        return [r, g, b, args.length > 3 ? args[3] : 1];
-    };
-
-    var hcg2rgb_1 = hcg2rgb;
-
-    var unpack$b = utils.unpack;
-    var type$4 = utils.type;
-
-
-
-
-
-
-    Color_1.prototype.hcg = function() {
-        return rgb2hcg_1(this._rgb);
-    };
-
-    chroma_1.hcg = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['hcg']) ));
-    };
-
-    input.format.hcg = hcg2rgb_1;
-
-    input.autodetect.push({
-        p: 1,
-        test: function () {
-            var args = [], len = arguments.length;
-            while ( len-- ) args[ len ] = arguments[ len ];
-
-            args = unpack$b(args, 'hcg');
-            if (type$4(args) === 'array' && args.length === 3) {
-                return 'hcg';
-            }
-        }
-    });
-
-    var unpack$c = utils.unpack;
-    var last$4 = utils.last;
-    var round$3 = Math.round;
-
-    var rgb2hex = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var ref = unpack$c(args, 'rgba');
-        var r = ref[0];
-        var g = ref[1];
-        var b = ref[2];
-        var a = ref[3];
-        var mode = last$4(args) || 'auto';
-        if (a === undefined) { a = 1; }
-        if (mode === 'auto') {
-            mode = a < 1 ? 'rgba' : 'rgb';
-        }
-        r = round$3(r);
-        g = round$3(g);
-        b = round$3(b);
-        var u = r << 16 | g << 8 | b;
-        var str = "000000" + u.toString(16); //#.toUpperCase();
-        str = str.substr(str.length - 6);
-        var hxa = '0' + round$3(a * 255).toString(16);
-        hxa = hxa.substr(hxa.length - 2);
-        switch (mode.toLowerCase()) {
-            case 'rgba': return ("#" + str + hxa);
-            case 'argb': return ("#" + hxa + str);
-            default: return ("#" + str);
-        }
-    };
-
-    var rgb2hex_1 = rgb2hex;
-
-    var type$5 = utils.type;
-
-
-
-
-    Color_1.prototype.hex = function(mode) {
-        return rgb2hex_1(this._rgb, mode);
-    };
-
-    chroma_1.hex = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['hex']) ));
-    };
-
-    input.format.hex = hex2rgb_1;
-    input.autodetect.push({
-        p: 4,
-        test: function (h) {
-            var rest = [], len = arguments.length - 1;
-            while ( len-- > 0 ) rest[ len ] = arguments[ len + 1 ];
-
-            if (!rest.length && type$5(h) === 'string' && [3,4,6,7,8,9].includes(h.length)) {
-                return 'hex';
-            }
-        }
-    });
-
-    var unpack$d = utils.unpack;
-    var TWOPI = utils.TWOPI;
-    var min = Math.min;
-    var sqrt = Math.sqrt;
-    var acos = Math.acos;
-
-    var rgb2hsi = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        /*
-        borrowed from here:
-        http://hummer.stanford.edu/museinfo/doc/examples/humdrum/keyscape2/rgb2hsi.cpp
-        */
-        var ref = unpack$d(args, 'rgb');
-        var r = ref[0];
-        var g = ref[1];
-        var b = ref[2];
-        r /= 255;
-        g /= 255;
-        b /= 255;
-        var h;
-        var min_ = min(r,g,b);
-        var i = (r+g+b) / 3;
-        var s = i > 0 ? 1 - min_/i : 0;
-        if (s === 0) {
-            h = NaN;
-        } else {
-            h = ((r-g)+(r-b)) / 2;
-            h /= sqrt((r-g)*(r-g) + (r-b)*(g-b));
-            h = acos(h);
-            if (b > g) {
-                h = TWOPI - h;
-            }
-            h /= TWOPI;
-        }
-        return [h*360,s,i];
-    };
-
-    var rgb2hsi_1 = rgb2hsi;
-
-    var unpack$e = utils.unpack;
-    var limit$1 = utils.limit;
-    var TWOPI$1 = utils.TWOPI;
-    var PITHIRD = utils.PITHIRD;
-    var cos = Math.cos;
-
-    /*
-     * hue [0..360]
-     * saturation [0..1]
-     * intensity [0..1]
-     */
-    var hsi2rgb = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        /*
-        borrowed from here:
-        http://hummer.stanford.edu/museinfo/doc/examples/humdrum/keyscape2/hsi2rgb.cpp
-        */
-        args = unpack$e(args, 'hsi');
-        var h = args[0];
-        var s = args[1];
-        var i = args[2];
-        var r,g,b;
-
-        if (isNaN(h)) { h = 0; }
-        if (isNaN(s)) { s = 0; }
-        // normalize hue
-        if (h > 360) { h -= 360; }
-        if (h < 0) { h += 360; }
-        h /= 360;
-        if (h < 1/3) {
-            b = (1-s)/3;
-            r = (1+s*cos(TWOPI$1*h)/cos(PITHIRD-TWOPI$1*h))/3;
-            g = 1 - (b+r);
-        } else if (h < 2/3) {
-            h -= 1/3;
-            r = (1-s)/3;
-            g = (1+s*cos(TWOPI$1*h)/cos(PITHIRD-TWOPI$1*h))/3;
-            b = 1 - (r+g);
-        } else {
-            h -= 2/3;
-            g = (1-s)/3;
-            b = (1+s*cos(TWOPI$1*h)/cos(PITHIRD-TWOPI$1*h))/3;
-            r = 1 - (g+b);
-        }
-        r = limit$1(i*r*3);
-        g = limit$1(i*g*3);
-        b = limit$1(i*b*3);
-        return [r*255, g*255, b*255, args.length > 3 ? args[3] : 1];
-    };
-
-    var hsi2rgb_1 = hsi2rgb;
-
-    var unpack$f = utils.unpack;
-    var type$6 = utils.type;
-
-
-
-
-
-
-    Color_1.prototype.hsi = function() {
-        return rgb2hsi_1(this._rgb);
-    };
-
-    chroma_1.hsi = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['hsi']) ));
-    };
-
-    input.format.hsi = hsi2rgb_1;
-
-    input.autodetect.push({
-        p: 2,
-        test: function () {
-            var args = [], len = arguments.length;
-            while ( len-- ) args[ len ] = arguments[ len ];
-
-            args = unpack$f(args, 'hsi');
-            if (type$6(args) === 'array' && args.length === 3) {
-                return 'hsi';
-            }
-        }
-    });
-
-    var unpack$g = utils.unpack;
-    var type$7 = utils.type;
-
-
-
-
-
-
-    Color_1.prototype.hsl = function() {
-        return rgb2hsl_1(this._rgb);
-    };
-
-    chroma_1.hsl = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['hsl']) ));
-    };
-
-    input.format.hsl = hsl2rgb_1;
-
-    input.autodetect.push({
-        p: 2,
-        test: function () {
-            var args = [], len = arguments.length;
-            while ( len-- ) args[ len ] = arguments[ len ];
-
-            args = unpack$g(args, 'hsl');
-            if (type$7(args) === 'array' && args.length === 3) {
-                return 'hsl';
-            }
-        }
-    });
-
-    var unpack$h = utils.unpack;
-    var min$1 = Math.min;
-    var max$1 = Math.max;
-
-    /*
-     * supported arguments:
-     * - rgb2hsv(r,g,b)
-     * - rgb2hsv([r,g,b])
-     * - rgb2hsv({r,g,b})
-     */
-    var rgb2hsl$1 = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        args = unpack$h(args, 'rgb');
-        var r = args[0];
-        var g = args[1];
-        var b = args[2];
-        var min_ = min$1(r, g, b);
-        var max_ = max$1(r, g, b);
-        var delta = max_ - min_;
-        var h,s,v;
-        v = max_ / 255.0;
-        if (max_ === 0) {
-            h = Number.NaN;
-            s = 0;
-        } else {
-            s = delta / max_;
-            if (r === max_) { h = (g - b) / delta; }
-            if (g === max_) { h = 2+(b - r) / delta; }
-            if (b === max_) { h = 4+(r - g) / delta; }
-            h *= 60;
-            if (h < 0) { h += 360; }
-        }
-        return [h, s, v]
-    };
-
-    var rgb2hsv = rgb2hsl$1;
-
-    var unpack$i = utils.unpack;
-    var floor$1 = Math.floor;
-
-    var hsv2rgb = function () {
-        var assign, assign$1, assign$2, assign$3, assign$4, assign$5;
-
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-        args = unpack$i(args, 'hsv');
-        var h = args[0];
-        var s = args[1];
-        var v = args[2];
-        var r,g,b;
-        v *= 255;
-        if (s === 0) {
-            r = g = b = v;
-        } else {
-            if (h === 360) { h = 0; }
-            if (h > 360) { h -= 360; }
-            if (h < 0) { h += 360; }
-            h /= 60;
-
-            var i = floor$1(h);
-            var f = h - i;
-            var p = v * (1 - s);
-            var q = v * (1 - s * f);
-            var t = v * (1 - s * (1 - f));
-
-            switch (i) {
-                case 0: (assign = [v, t, p], r = assign[0], g = assign[1], b = assign[2]); break
-                case 1: (assign$1 = [q, v, p], r = assign$1[0], g = assign$1[1], b = assign$1[2]); break
-                case 2: (assign$2 = [p, v, t], r = assign$2[0], g = assign$2[1], b = assign$2[2]); break
-                case 3: (assign$3 = [p, q, v], r = assign$3[0], g = assign$3[1], b = assign$3[2]); break
-                case 4: (assign$4 = [t, p, v], r = assign$4[0], g = assign$4[1], b = assign$4[2]); break
-                case 5: (assign$5 = [v, p, q], r = assign$5[0], g = assign$5[1], b = assign$5[2]); break
-            }
-        }
-        return [r,g,b,args.length > 3?args[3]:1];
-    };
-
-    var hsv2rgb_1 = hsv2rgb;
-
-    var unpack$j = utils.unpack;
-    var type$8 = utils.type;
-
-
-
-
-
-
-    Color_1.prototype.hsv = function() {
-        return rgb2hsv(this._rgb);
-    };
-
-    chroma_1.hsv = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['hsv']) ));
-    };
-
-    input.format.hsv = hsv2rgb_1;
-
-    input.autodetect.push({
-        p: 2,
-        test: function () {
-            var args = [], len = arguments.length;
-            while ( len-- ) args[ len ] = arguments[ len ];
-
-            args = unpack$j(args, 'hsv');
-            if (type$8(args) === 'array' && args.length === 3) {
-                return 'hsv';
-            }
-        }
-    });
-
-    var labConstants = {
-        // Corresponds roughly to RGB brighter/darker
-        Kn: 18,
-
-        // D65 standard referent
-        Xn: 0.950470,
-        Yn: 1,
-        Zn: 1.088830,
-
-        t0: 0.137931034,  // 4 / 29
-        t1: 0.206896552,  // 6 / 29
-        t2: 0.12841855,   // 3 * t1 * t1
-        t3: 0.008856452,  // t1 * t1 * t1
-    };
-
-    var unpack$k = utils.unpack;
-    var pow = Math.pow;
-
-    var rgb2lab = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var ref = unpack$k(args, 'rgb');
-        var r = ref[0];
-        var g = ref[1];
-        var b = ref[2];
-        var ref$1 = rgb2xyz(r,g,b);
-        var x = ref$1[0];
-        var y = ref$1[1];
-        var z = ref$1[2];
-        var l = 116 * y - 16;
-        return [l < 0 ? 0 : l, 500 * (x - y), 200 * (y - z)];
-    };
-
-    var rgb_xyz = function (r) {
-        if ((r /= 255) <= 0.04045) { return r / 12.92; }
-        return pow((r + 0.055) / 1.055, 2.4);
-    };
-
-    var xyz_lab = function (t) {
-        if (t > labConstants.t3) { return pow(t, 1 / 3); }
-        return t / labConstants.t2 + labConstants.t0;
-    };
-
-    var rgb2xyz = function (r,g,b) {
-        r = rgb_xyz(r);
-        g = rgb_xyz(g);
-        b = rgb_xyz(b);
-        var x = xyz_lab((0.4124564 * r + 0.3575761 * g + 0.1804375 * b) / labConstants.Xn);
-        var y = xyz_lab((0.2126729 * r + 0.7151522 * g + 0.0721750 * b) / labConstants.Yn);
-        var z = xyz_lab((0.0193339 * r + 0.1191920 * g + 0.9503041 * b) / labConstants.Zn);
-        return [x,y,z];
-    };
-
-    var rgb2lab_1 = rgb2lab;
-
-    var unpack$l = utils.unpack;
-    var pow$1 = Math.pow;
-
-    /*
-     * L* [0..100]
-     * a [-100..100]
-     * b [-100..100]
-     */
-    var lab2rgb = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        args = unpack$l(args, 'lab');
-        var l = args[0];
-        var a = args[1];
-        var b = args[2];
-        var x,y,z, r,g,b_;
-
-        y = (l + 16) / 116;
-        x = isNaN(a) ? y : y + a / 500;
-        z = isNaN(b) ? y : y - b / 200;
-
-        y = labConstants.Yn * lab_xyz(y);
-        x = labConstants.Xn * lab_xyz(x);
-        z = labConstants.Zn * lab_xyz(z);
-
-        r = xyz_rgb(3.2404542 * x - 1.5371385 * y - 0.4985314 * z);  // D65 -> sRGB
-        g = xyz_rgb(-0.9692660 * x + 1.8760108 * y + 0.0415560 * z);
-        b_ = xyz_rgb(0.0556434 * x - 0.2040259 * y + 1.0572252 * z);
-
-        return [r,g,b_,args.length > 3 ? args[3] : 1];
-    };
-
-    var xyz_rgb = function (r) {
-        return 255 * (r <= 0.00304 ? 12.92 * r : 1.055 * pow$1(r, 1 / 2.4) - 0.055)
-    };
-
-    var lab_xyz = function (t) {
-        return t > labConstants.t1 ? t * t * t : labConstants.t2 * (t - labConstants.t0)
-    };
-
-    var lab2rgb_1 = lab2rgb;
-
-    var unpack$m = utils.unpack;
-    var type$9 = utils.type;
-
-
-
-
-
-
-    Color_1.prototype.lab = function() {
-        return rgb2lab_1(this._rgb);
-    };
-
-    chroma_1.lab = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['lab']) ));
-    };
-
-    input.format.lab = lab2rgb_1;
-
-    input.autodetect.push({
-        p: 2,
-        test: function () {
-            var args = [], len = arguments.length;
-            while ( len-- ) args[ len ] = arguments[ len ];
-
-            args = unpack$m(args, 'lab');
-            if (type$9(args) === 'array' && args.length === 3) {
-                return 'lab';
-            }
-        }
-    });
-
-    var unpack$n = utils.unpack;
-    var RAD2DEG = utils.RAD2DEG;
-    var sqrt$1 = Math.sqrt;
-    var atan2 = Math.atan2;
-    var round$4 = Math.round;
-
-    var lab2lch = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var ref = unpack$n(args, 'lab');
-        var l = ref[0];
-        var a = ref[1];
-        var b = ref[2];
-        var c = sqrt$1(a * a + b * b);
-        var h = (atan2(b, a) * RAD2DEG + 360) % 360;
-        if (round$4(c*10000) === 0) { h = Number.NaN; }
-        return [l, c, h];
-    };
-
-    var lab2lch_1 = lab2lch;
-
-    var unpack$o = utils.unpack;
-
-
-
-    var rgb2lch = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var ref = unpack$o(args, 'rgb');
-        var r = ref[0];
-        var g = ref[1];
-        var b = ref[2];
-        var ref$1 = rgb2lab_1(r,g,b);
-        var l = ref$1[0];
-        var a = ref$1[1];
-        var b_ = ref$1[2];
-        return lab2lch_1(l,a,b_);
-    };
-
-    var rgb2lch_1 = rgb2lch;
-
-    var unpack$p = utils.unpack;
-    var DEG2RAD = utils.DEG2RAD;
-    var sin = Math.sin;
-    var cos$1 = Math.cos;
-
-    var lch2lab = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        /*
-        Convert from a qualitative parameter h and a quantitative parameter l to a 24-bit pixel.
-        These formulas were invented by David Dalrymple to obtain maximum contrast without going
-        out of gamut if the parameters are in the range 0-1.
-
-        A saturation multiplier was added by Gregor Aisch
-        */
-        var ref = unpack$p(args, 'lch');
-        var l = ref[0];
-        var c = ref[1];
-        var h = ref[2];
-        if (isNaN(h)) { h = 0; }
-        h = h * DEG2RAD;
-        return [l, cos$1(h) * c, sin(h) * c]
-    };
-
-    var lch2lab_1 = lch2lab;
-
-    var unpack$q = utils.unpack;
-
-
-
-    var lch2rgb = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        args = unpack$q(args, 'lch');
-        var l = args[0];
-        var c = args[1];
-        var h = args[2];
-        var ref = lch2lab_1 (l,c,h);
-        var L = ref[0];
-        var a = ref[1];
-        var b_ = ref[2];
-        var ref$1 = lab2rgb_1 (L,a,b_);
-        var r = ref$1[0];
-        var g = ref$1[1];
-        var b = ref$1[2];
-        return [r, g, b, args.length > 3 ? args[3] : 1];
-    };
-
-    var lch2rgb_1 = lch2rgb;
-
-    var unpack$r = utils.unpack;
-
-
-    var hcl2rgb = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var hcl = unpack$r(args, 'hcl').reverse();
-        return lch2rgb_1.apply(void 0, hcl);
-    };
-
-    var hcl2rgb_1 = hcl2rgb;
-
-    var unpack$s = utils.unpack;
-    var type$a = utils.type;
-
-
-
-
-
-
-    Color_1.prototype.lch = function() { return rgb2lch_1(this._rgb); };
-    Color_1.prototype.hcl = function() { return rgb2lch_1(this._rgb).reverse(); };
-
-    chroma_1.lch = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['lch']) ));
-    };
-    chroma_1.hcl = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['hcl']) ));
-    };
-
-    input.format.lch = lch2rgb_1;
-    input.format.hcl = hcl2rgb_1;
-
-    ['lch','hcl'].forEach(function (m) { return input.autodetect.push({
-        p: 2,
-        test: function () {
-            var args = [], len = arguments.length;
-            while ( len-- ) args[ len ] = arguments[ len ];
-
-            args = unpack$s(args, m);
-            if (type$a(args) === 'array' && args.length === 3) {
-                return m;
-            }
-        }
-    }); });
-
-    var type$b = utils.type;
-
-
-
-
-
-    Color_1.prototype.name = function() {
-        var hex = rgb2hex_1(this._rgb, 'rgb');
-        for (var i = 0, list = Object.keys(w3cx11_1); i < list.length; i += 1) {
-            var n = list[i];
-
-            if (w3cx11_1[n] === hex) { return n.toLowerCase(); }
-        }
-        return hex;
-    };
-
-    input.format.named = function (name) {
-        name = name.toLowerCase();
-        if (w3cx11_1[name]) { return hex2rgb_1(w3cx11_1[name]); }
-        throw new Error('unknown color name: '+name);
-    };
-
-    input.autodetect.push({
-        p: 5,
-        test: function (h) {
-            var rest = [], len = arguments.length - 1;
-            while ( len-- > 0 ) rest[ len ] = arguments[ len + 1 ];
-
-            if (!rest.length && type$b(h) === 'string' && w3cx11_1[h.toLowerCase()]) {
-                return 'named';
-            }
-        }
-    });
-
-    var unpack$t = utils.unpack;
-
-    var rgb2num = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var ref = unpack$t(args, 'rgb');
-        var r = ref[0];
-        var g = ref[1];
-        var b = ref[2];
-        return (r << 16) + (g << 8) + b;
-    };
-
-    var rgb2num_1 = rgb2num;
-
-    var type$c = utils.type;
-
-    var num2rgb = function (num) {
-        if (type$c(num) == "number" && num >= 0 && num <= 0xFFFFFF) {
-            var r = num >> 16;
-            var g = (num >> 8) & 0xFF;
-            var b = num & 0xFF;
-            return [r,g,b,1];
-        }
-        throw new Error("unknown num color: "+num);
-    };
-
-    var num2rgb_1 = num2rgb;
-
-    var type$d = utils.type;
-
-
-
-    Color_1.prototype.num = function() {
-        return rgb2num_1(this._rgb);
-    };
-
-    chroma_1.num = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['num']) ));
-    };
-
-    input.format.num = num2rgb_1;
-
-    input.autodetect.push({
-        p: 5,
-        test: function () {
-            var args = [], len = arguments.length;
-            while ( len-- ) args[ len ] = arguments[ len ];
-
-            if (args.length === 1 && type$d(args[0]) === 'number' && args[0] >= 0 && args[0] <= 0xFFFFFF) {
-                return 'num';
-            }
-        }
-    });
-
-    var unpack$u = utils.unpack;
-    var type$e = utils.type;
-    var round$5 = Math.round;
-
-    Color_1.prototype.rgb = function(rnd) {
-        if ( rnd === void 0 ) rnd=true;
-
-        if (rnd === false) { return this._rgb.slice(0,3); }
-        return this._rgb.slice(0,3).map(round$5);
-    };
-
-    Color_1.prototype.rgba = function(rnd) {
-        if ( rnd === void 0 ) rnd=true;
-
-        return this._rgb.slice(0,4).map(function (v,i) {
-            return i<3 ? (rnd === false ? v : round$5(v)) : v;
-        });
-    };
-
-    chroma_1.rgb = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['rgb']) ));
-    };
-
-    input.format.rgb = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var rgba = unpack$u(args, 'rgba');
-        if (rgba[3] === undefined) { rgba[3] = 1; }
-        return rgba;
-    };
-
-    input.autodetect.push({
-        p: 3,
-        test: function () {
-            var args = [], len = arguments.length;
-            while ( len-- ) args[ len ] = arguments[ len ];
-
-            args = unpack$u(args, 'rgba');
-            if (type$e(args) === 'array' && (args.length === 3 ||
-                args.length === 4 && type$e(args[3]) == 'number' && args[3] >= 0 && args[3] <= 1)) {
-                return 'rgb';
-            }
-        }
-    });
-
-    /*
-     * Based on implementation by Neil Bartlett
-     * https://github.com/neilbartlett/color-temperature
-     */
-
-    var log = Math.log;
-
-    var temperature2rgb = function (kelvin) {
-        var temp = kelvin / 100;
-        var r,g,b;
-        if (temp < 66) {
-            r = 255;
-            g = -155.25485562709179 - 0.44596950469579133 * (g = temp-2) + 104.49216199393888 * log(g);
-            b = temp < 20 ? 0 : -254.76935184120902 + 0.8274096064007395 * (b = temp-10) + 115.67994401066147 * log(b);
-        } else {
-            r = 351.97690566805693 + 0.114206453784165 * (r = temp-55) - 40.25366309332127 * log(r);
-            g = 325.4494125711974 + 0.07943456536662342 * (g = temp-50) - 28.0852963507957 * log(g);
-            b = 255;
-        }
-        return [r,g,b,1];
-    };
-
-    var temperature2rgb_1 = temperature2rgb;
-
-    /*
-     * Based on implementation by Neil Bartlett
-     * https://github.com/neilbartlett/color-temperature
-     **/
-
-
-    var unpack$v = utils.unpack;
-    var round$6 = Math.round;
-
-    var rgb2temperature = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        var rgb = unpack$v(args, 'rgb');
-        var r = rgb[0], b = rgb[2];
-        var minTemp = 1000;
-        var maxTemp = 40000;
-        var eps = 0.4;
-        var temp;
-        while (maxTemp - minTemp > eps) {
-            temp = (maxTemp + minTemp) * 0.5;
-            var rgb$1 = temperature2rgb_1(temp);
-            if ((rgb$1[2] / rgb$1[0]) >= (b / r)) {
-                maxTemp = temp;
-            } else {
-                minTemp = temp;
-            }
-        }
-        return round$6(temp);
-    };
-
-    var rgb2temperature_1 = rgb2temperature;
-
-    Color_1.prototype.temp =
-    Color_1.prototype.kelvin =
-    Color_1.prototype.temperature = function() {
-        return rgb2temperature_1(this._rgb);
-    };
-
-    chroma_1.temp =
-    chroma_1.kelvin =
-    chroma_1.temperature = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        return new (Function.prototype.bind.apply( Color_1, [ null ].concat( args, ['temp']) ));
-    };
-
-    input.format.temp =
-    input.format.kelvin =
-    input.format.temperature = temperature2rgb_1;
-
-    var type$f = utils.type;
-
-    Color_1.prototype.alpha = function(a, mutate) {
-        if ( mutate === void 0 ) mutate=false;
-
-        if (a !== undefined && type$f(a) === 'number') {
-            if (mutate) {
-                this._rgb[3] = a;
-                return this;
-            }
-            return new Color_1([this._rgb[0], this._rgb[1], this._rgb[2], a], 'rgb');
-        }
-        return this._rgb[3];
-    };
-
-    Color_1.prototype.clipped = function() {
-        return this._rgb._clipped || false;
-    };
-
-    Color_1.prototype.darken = function(amount) {
-    	if ( amount === void 0 ) amount=1;
-
-    	var me = this;
-    	var lab = me.lab();
-    	lab[0] -= labConstants.Kn * amount;
-    	return new Color_1(lab, 'lab').alpha(me.alpha(), true);
-    };
-
-    Color_1.prototype.brighten = function(amount) {
-    	if ( amount === void 0 ) amount=1;
-
-    	return this.darken(-amount);
-    };
-
-    Color_1.prototype.darker = Color_1.prototype.darken;
-    Color_1.prototype.brighter = Color_1.prototype.brighten;
-
-    Color_1.prototype.get = function(mc) {
-        var ref = mc.split('.');
-        var mode = ref[0];
-        var channel = ref[1];
-        var src = this[mode]();
-        if (channel) {
-            var i = mode.indexOf(channel);
-            if (i > -1) { return src[i]; }
-            throw new Error(("unknown channel " + channel + " in mode " + mode));
-        } else {
-            return src;
-        }
-    };
-
-    var type$g = utils.type;
-    var pow$2 = Math.pow;
-
-    var EPS = 1e-7;
-    var MAX_ITER = 20;
-
-    Color_1.prototype.luminance = function(lum) {
-        if (lum !== undefined && type$g(lum) === 'number') {
-            if (lum === 0) {
-                // return pure black
-                return new Color_1([0,0,0,this._rgb[3]], 'rgb');
-            }
-            if (lum === 1) {
-                // return pure white
-                return new Color_1([255,255,255,this._rgb[3]], 'rgb');
-            }
-            // compute new color using...
-            var cur_lum = this.luminance();
-            var mode = 'rgb';
-            var max_iter = MAX_ITER;
-
-            var test = function (low, high) {
-                var mid = low.interpolate(high, 0.5, mode);
-                var lm = mid.luminance();
-                if (Math.abs(lum - lm) < EPS || !max_iter--) {
-                    // close enough
-                    return mid;
-                }
-                return lm > lum ? test(low, mid) : test(mid, high);
-            };
-
-            var rgb = (cur_lum > lum ? test(new Color_1([0,0,0]), this) : test(this, new Color_1([255,255,255]))).rgb();
-            return new Color_1(rgb.concat( [this._rgb[3]]));
-        }
-        return rgb2luminance.apply(void 0, (this._rgb).slice(0,3));
-    };
-
-
-    var rgb2luminance = function (r,g,b) {
-        // relative luminance
-        // see http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
-        r = luminance_x(r);
-        g = luminance_x(g);
-        b = luminance_x(b);
-        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-    };
-
-    var luminance_x = function (x) {
-        x /= 255;
-        return x <= 0.03928 ? x/12.92 : pow$2((x+0.055)/1.055, 2.4);
-    };
-
-    var interpolator = {};
-
-    var type$h = utils.type;
-
-
-    var mix = function (col1, col2, f) {
-        if ( f === void 0 ) f=0.5;
-        var rest = [], len = arguments.length - 3;
-        while ( len-- > 0 ) rest[ len ] = arguments[ len + 3 ];
-
-        var mode = rest[0] || 'lrgb';
-        if (!interpolator[mode] && !rest.length) {
-            // fall back to the first supported mode
-            mode = Object.keys(interpolator)[0];
-        }
-        if (!interpolator[mode]) {
-            throw new Error(("interpolation mode " + mode + " is not defined"));
-        }
-        if (type$h(col1) !== 'object') { col1 = new Color_1(col1); }
-        if (type$h(col2) !== 'object') { col2 = new Color_1(col2); }
-        return interpolator[mode](col1, col2, f)
-            .alpha(col1.alpha() + f * (col2.alpha() - col1.alpha()));
-    };
-
-    Color_1.prototype.mix =
-    Color_1.prototype.interpolate = function(col2, f) {
-    	if ( f === void 0 ) f=0.5;
-    	var rest = [], len = arguments.length - 2;
-    	while ( len-- > 0 ) rest[ len ] = arguments[ len + 2 ];
-
-    	return mix.apply(void 0, [ this, col2, f ].concat( rest ));
-    };
-
-    Color_1.prototype.premultiply = function(mutate) {
-    	if ( mutate === void 0 ) mutate=false;
-
-    	var rgb = this._rgb;
-    	var a = rgb[3];
-    	if (mutate) {
-    		this._rgb = [rgb[0]*a, rgb[1]*a, rgb[2]*a, a];
-    		return this;
-    	} else {
-    		return new Color_1([rgb[0]*a, rgb[1]*a, rgb[2]*a, a], 'rgb');
-    	}
-    };
-
-    Color_1.prototype.saturate = function(amount) {
-    	if ( amount === void 0 ) amount=1;
-
-    	var me = this;
-    	var lch = me.lch();
-    	lch[1] += labConstants.Kn * amount;
-    	if (lch[1] < 0) { lch[1] = 0; }
-    	return new Color_1(lch, 'lch').alpha(me.alpha(), true);
-    };
-
-    Color_1.prototype.desaturate = function(amount) {
-    	if ( amount === void 0 ) amount=1;
-
-    	return this.saturate(-amount);
-    };
-
-    var type$i = utils.type;
-
-    Color_1.prototype.set = function(mc, value, mutate) {
-        if ( mutate === void 0 ) mutate=false;
-
-        var ref = mc.split('.');
-        var mode = ref[0];
-        var channel = ref[1];
-        var src = this[mode]();
-        if (channel) {
-            var i = mode.indexOf(channel);
-            if (i > -1) {
-                if (type$i(value) == 'string') {
-                    switch(value.charAt(0)) {
-                        case '+': src[i] += +value; break;
-                        case '-': src[i] += +value; break;
-                        case '*': src[i] *= +(value.substr(1)); break;
-                        case '/': src[i] /= +(value.substr(1)); break;
-                        default: src[i] = +value;
-                    }
-                } else if (type$i(value) === 'number') {
-                    src[i] = value;
-                } else {
-                    throw new Error("unsupported value for Color.set");
-                }
-                var out = new Color_1(src, mode);
-                if (mutate) {
-                    this._rgb = out._rgb;
-                    return this;
-                }
-                return out;
-            }
-            throw new Error(("unknown channel " + channel + " in mode " + mode));
-        } else {
-            return src;
-        }
-    };
-
-    var rgb$1 = function (col1, col2, f) {
-        var xyz0 = col1._rgb;
-        var xyz1 = col2._rgb;
-        return new Color_1(
-            xyz0[0] + f * (xyz1[0]-xyz0[0]),
-            xyz0[1] + f * (xyz1[1]-xyz0[1]),
-            xyz0[2] + f * (xyz1[2]-xyz0[2]),
-            'rgb'
-        )
-    };
-
-    // register interpolator
-    interpolator.rgb = rgb$1;
-
-    var sqrt$2 = Math.sqrt;
-    var pow$3 = Math.pow;
-
-    var lrgb = function (col1, col2, f) {
-        var ref = col1._rgb;
-        var x1 = ref[0];
-        var y1 = ref[1];
-        var z1 = ref[2];
-        var ref$1 = col2._rgb;
-        var x2 = ref$1[0];
-        var y2 = ref$1[1];
-        var z2 = ref$1[2];
-        return new Color_1(
-            sqrt$2(pow$3(x1,2) * (1-f) + pow$3(x2,2) * f),
-            sqrt$2(pow$3(y1,2) * (1-f) + pow$3(y2,2) * f),
-            sqrt$2(pow$3(z1,2) * (1-f) + pow$3(z2,2) * f),
-            'rgb'
-        )
-    };
-
-    // register interpolator
-    interpolator.lrgb = lrgb;
-
-    var lab$1 = function (col1, col2, f) {
-        var xyz0 = col1.lab();
-        var xyz1 = col2.lab();
-        return new Color_1(
-            xyz0[0] + f * (xyz1[0]-xyz0[0]),
-            xyz0[1] + f * (xyz1[1]-xyz0[1]),
-            xyz0[2] + f * (xyz1[2]-xyz0[2]),
-            'lab'
-        )
-    };
-
-    // register interpolator
-    interpolator.lab = lab$1;
-
-    var _hsx = function (col1, col2, f, m) {
-        var assign, assign$1;
-
-        var xyz0, xyz1;
-        if (m === 'hsl') {
-            xyz0 = col1.hsl();
-            xyz1 = col2.hsl();
-        } else if (m === 'hsv') {
-            xyz0 = col1.hsv();
-            xyz1 = col2.hsv();
-        } else if (m === 'hcg') {
-            xyz0 = col1.hcg();
-            xyz1 = col2.hcg();
-        } else if (m === 'hsi') {
-            xyz0 = col1.hsi();
-            xyz1 = col2.hsi();
-        } else if (m === 'lch' || m === 'hcl') {
-            m = 'hcl';
-            xyz0 = col1.hcl();
-            xyz1 = col2.hcl();
-        }
-
-        var hue0, hue1, sat0, sat1, lbv0, lbv1;
-        if (m.substr(0, 1) === 'h') {
-            (assign = xyz0, hue0 = assign[0], sat0 = assign[1], lbv0 = assign[2]);
-            (assign$1 = xyz1, hue1 = assign$1[0], sat1 = assign$1[1], lbv1 = assign$1[2]);
-        }
-
-        var sat, hue, lbv, dh;
-
-        if (!isNaN(hue0) && !isNaN(hue1)) {
-            // both colors have hue
-            if (hue1 > hue0 && hue1 - hue0 > 180) {
-                dh = hue1-(hue0+360);
-            } else if (hue1 < hue0 && hue0 - hue1 > 180) {
-                dh = hue1+360-hue0;
-            } else{
-                dh = hue1 - hue0;
-            }
-            hue = hue0 + f * dh;
-        } else if (!isNaN(hue0)) {
-            hue = hue0;
-            if ((lbv1 == 1 || lbv1 == 0) && m != 'hsv') { sat = sat0; }
-        } else if (!isNaN(hue1)) {
-            hue = hue1;
-            if ((lbv0 == 1 || lbv0 == 0) && m != 'hsv') { sat = sat1; }
-        } else {
-            hue = Number.NaN;
-        }
-
-        if (sat === undefined) { sat = sat0 + f * (sat1 - sat0); }
-        lbv = lbv0 + f * (lbv1-lbv0);
-        return new Color_1([hue, sat, lbv], m);
-    };
-
-    var lch$1 = function (col1, col2, f) {
-    	return _hsx(col1, col2, f, 'lch');
-    };
-
-    // register interpolator
-    interpolator.lch = lch$1;
-    interpolator.hcl = lch$1;
-
-    var num$1 = function (col1, col2, f) {
-        var c1 = col1.num();
-        var c2 = col2.num();
-        return new Color_1(c1 + f * (c2-c1), 'num')
-    };
-
-    // register interpolator
-    interpolator.num = num$1;
-
-    var hcg$1 = function (col1, col2, f) {
-    	return _hsx(col1, col2, f, 'hcg');
-    };
-
-    // register interpolator
-    interpolator.hcg = hcg$1;
-
-    var hsi$1 = function (col1, col2, f) {
-    	return _hsx(col1, col2, f, 'hsi');
-    };
-
-    // register interpolator
-    interpolator.hsi = hsi$1;
-
-    var hsl$1 = function (col1, col2, f) {
-    	return _hsx(col1, col2, f, 'hsl');
-    };
-
-    // register interpolator
-    interpolator.hsl = hsl$1;
-
-    var hsv$1 = function (col1, col2, f) {
-    	return _hsx(col1, col2, f, 'hsv');
-    };
-
-    // register interpolator
-    interpolator.hsv = hsv$1;
-
-    var clip_rgb$2 = utils.clip_rgb;
-    var pow$4 = Math.pow;
-    var sqrt$3 = Math.sqrt;
-    var PI$1 = Math.PI;
-    var cos$2 = Math.cos;
-    var sin$1 = Math.sin;
-    var atan2$1 = Math.atan2;
-
-    var average = function (colors, mode) {
-        if ( mode === void 0 ) mode='lrgb';
-
-        var l = colors.length;
-        // convert colors to Color objects
-        colors = colors.map(function (c) { return new Color_1(c); });
-        if (mode === 'lrgb') {
-            return _average_lrgb(colors)
-        }
-        var first = colors.shift();
-        var xyz = first.get(mode);
-        var cnt = [];
-        var dx = 0;
-        var dy = 0;
-        // initial color
-        for (var i=0; i<xyz.length; i++) {
-            xyz[i] = xyz[i] || 0;
-            cnt.push(isNaN(xyz[i]) ? 0 : 1);
-            if (mode.charAt(i) === 'h' && !isNaN(xyz[i])) {
-                var A = xyz[i] / 180 * PI$1;
-                dx += cos$2(A);
-                dy += sin$1(A);
-            }
-        }
-
-        var alpha = first.alpha();
-        colors.forEach(function (c) {
-            var xyz2 = c.get(mode);
-            alpha += c.alpha();
-            for (var i=0; i<xyz.length; i++) {
-                if (!isNaN(xyz2[i])) {
-                    cnt[i]++;
-                    if (mode.charAt(i) === 'h') {
-                        var A = xyz2[i] / 180 * PI$1;
-                        dx += cos$2(A);
-                        dy += sin$1(A);
-                    } else {
-                        xyz[i] += xyz2[i];
-                    }
-                }
-            }
-        });
-
-        for (var i$1=0; i$1<xyz.length; i$1++) {
-            if (mode.charAt(i$1) === 'h') {
-                var A$1 = atan2$1(dy / cnt[i$1], dx / cnt[i$1]) / PI$1 * 180;
-                while (A$1 < 0) { A$1 += 360; }
-                while (A$1 >= 360) { A$1 -= 360; }
-                xyz[i$1] = A$1;
-            } else {
-                xyz[i$1] = xyz[i$1]/cnt[i$1];
-            }
-        }
-        alpha /= l;
-        return (new Color_1(xyz, mode)).alpha(alpha > 0.99999 ? 1 : alpha, true);
-    };
-
-
-    var _average_lrgb = function (colors) {
-        var l = colors.length;
-        var f = 1/l;
-        var xyz = [0,0,0,0];
-        for (var i = 0, list = colors; i < list.length; i += 1) {
-            var col = list[i];
-
-            var rgb = col._rgb;
-            xyz[0] += pow$4(rgb[0],2) * f;
-            xyz[1] += pow$4(rgb[1],2) * f;
-            xyz[2] += pow$4(rgb[2],2) * f;
-            xyz[3] += rgb[3] * f;
-        }
-        xyz[0] = sqrt$3(xyz[0]);
-        xyz[1] = sqrt$3(xyz[1]);
-        xyz[2] = sqrt$3(xyz[2]);
-        if (xyz[3] > 0.9999999) { xyz[3] = 1; }
-        return new Color_1(clip_rgb$2(xyz));
-    };
-
-    // minimal multi-purpose interface
-
-    // @requires utils color analyze
-
-
-    var type$j = utils.type;
-
-    var pow$5 = Math.pow;
-
-    var scale = function(colors) {
-
-        // constructor
-        var _mode = 'rgb';
-        var _nacol = chroma_1('#ccc');
-        var _spread = 0;
-        // const _fixed = false;
-        var _domain = [0, 1];
-        var _pos = [];
-        var _padding = [0,0];
-        var _classes = false;
-        var _colors = [];
-        var _out = false;
-        var _min = 0;
-        var _max = 1;
-        var _correctLightness = false;
-        var _colorCache = {};
-        var _useCache = true;
-        var _gamma = 1;
-
-        // private methods
-
-        var setColors = function(colors) {
-            colors = colors || ['#fff', '#000'];
-            if (colors && type$j(colors) === 'string' && chroma_1.brewer &&
-                chroma_1.brewer[colors.toLowerCase()]) {
-                colors = chroma_1.brewer[colors.toLowerCase()];
-            }
-            if (type$j(colors) === 'array') {
-                // handle single color
-                if (colors.length === 1) {
-                    colors = [colors[0], colors[0]];
-                }
-                // make a copy of the colors
-                colors = colors.slice(0);
-                // convert to chroma classes
-                for (var c=0; c<colors.length; c++) {
-                    colors[c] = chroma_1(colors[c]);
-                }
-                // auto-fill color position
-                _pos.length = 0;
-                for (var c$1=0; c$1<colors.length; c$1++) {
-                    _pos.push(c$1/(colors.length-1));
-                }
-            }
-            resetCache();
-            return _colors = colors;
-        };
-
-        var getClass = function(value) {
-            if (_classes != null) {
-                var n = _classes.length-1;
-                var i = 0;
-                while (i < n && value >= _classes[i]) {
-                    i++;
-                }
-                return i-1;
-            }
-            return 0;
-        };
-
-        var tmap = function (t) { return t; };
-
-        // const classifyValue = function(value) {
-        //     let val = value;
-        //     if (_classes.length > 2) {
-        //         const n = _classes.length-1;
-        //         const i = getClass(value);
-        //         const minc = _classes[0] + ((_classes[1]-_classes[0]) * (0 + (_spread * 0.5)));  // center of 1st class
-        //         const maxc = _classes[n-1] + ((_classes[n]-_classes[n-1]) * (1 - (_spread * 0.5)));  // center of last class
-        //         val = _min + ((((_classes[i] + ((_classes[i+1] - _classes[i]) * 0.5)) - minc) / (maxc-minc)) * (_max - _min));
-        //     }
-        //     return val;
-        // };
-
-        var getColor = function(val, bypassMap) {
-            var col, t;
-            if (bypassMap == null) { bypassMap = false; }
-            if (isNaN(val) || (val === null)) { return _nacol; }
-            if (!bypassMap) {
-                if (_classes && (_classes.length > 2)) {
-                    // find the class
-                    var c = getClass(val);
-                    t = c / (_classes.length-2);
-                } else if (_max !== _min) {
-                    // just interpolate between min/max
-                    t = (val - _min) / (_max - _min);
-                } else {
-                    t = 1;
-                }
-            } else {
-                t = val;
-            }
-
-            if (!bypassMap) {
-                t = tmap(t);  // lightness correction
-            }
-
-            if (_gamma !== 1) { t = pow$5(t, _gamma); }
-
-            t = _padding[0] + (t * (1 - _padding[0] - _padding[1]));
-
-            t = Math.min(1, Math.max(0, t));
-
-            var k = Math.floor(t * 10000);
-
-            if (_useCache && _colorCache[k]) {
-                col = _colorCache[k];
-            } else {
-                if (type$j(_colors) === 'array') {
-                    //for i in [0.._pos.length-1]
-                    for (var i=0; i<_pos.length; i++) {
-                        var p = _pos[i];
-                        if (t <= p) {
-                            col = _colors[i];
-                            break;
-                        }
-                        if ((t >= p) && (i === (_pos.length-1))) {
-                            col = _colors[i];
-                            break;
-                        }
-                        if (t > p && t < _pos[i+1]) {
-                            t = (t-p)/(_pos[i+1]-p);
-                            col = chroma_1.interpolate(_colors[i], _colors[i+1], t, _mode);
-                            break;
-                        }
-                    }
-                } else if (type$j(_colors) === 'function') {
-                    col = _colors(t);
-                }
-                if (_useCache) { _colorCache[k] = col; }
-            }
-            return col;
-        };
-
-        var resetCache = function () { return _colorCache = {}; };
-
-        setColors(colors);
-
-        // public interface
-
-        var f = function(v) {
-            var c = chroma_1(getColor(v));
-            if (_out && c[_out]) { return c[_out](); } else { return c; }
-        };
-
-        f.classes = function(classes) {
-            if (classes != null) {
-                if (type$j(classes) === 'array') {
-                    _classes = classes;
-                    _domain = [classes[0], classes[classes.length-1]];
-                } else {
-                    var d = chroma_1.analyze(_domain);
-                    if (classes === 0) {
-                        _classes = [d.min, d.max];
-                    } else {
-                        _classes = chroma_1.limits(d, 'e', classes);
-                    }
-                }
-                return f;
-            }
-            return _classes;
-        };
-
-
-        f.domain = function(domain) {
-            if (!arguments.length) {
-                return _domain;
-            }
-            _min = domain[0];
-            _max = domain[domain.length-1];
-            _pos = [];
-            var k = _colors.length;
-            if ((domain.length === k) && (_min !== _max)) {
-                // update positions
-                for (var i = 0, list = Array.from(domain); i < list.length; i += 1) {
-                    var d = list[i];
-
-                  _pos.push((d-_min) / (_max-_min));
-                }
-            } else {
-                for (var c=0; c<k; c++) {
-                    _pos.push(c/(k-1));
-                }
-            }
-            _domain = [_min, _max];
-            return f;
-        };
-
-        f.mode = function(_m) {
-            if (!arguments.length) {
-                return _mode;
-            }
-            _mode = _m;
-            resetCache();
-            return f;
-        };
-
-        f.range = function(colors, _pos) {
-            setColors(colors, _pos);
-            return f;
-        };
-
-        f.out = function(_o) {
-            _out = _o;
-            return f;
-        };
-
-        f.spread = function(val) {
-            if (!arguments.length) {
-                return _spread;
-            }
-            _spread = val;
-            return f;
-        };
-
-        f.correctLightness = function(v) {
-            if (v == null) { v = true; }
-            _correctLightness = v;
-            resetCache();
-            if (_correctLightness) {
-                tmap = function(t) {
-                    var L0 = getColor(0, true).lab()[0];
-                    var L1 = getColor(1, true).lab()[0];
-                    var pol = L0 > L1;
-                    var L_actual = getColor(t, true).lab()[0];
-                    var L_ideal = L0 + ((L1 - L0) * t);
-                    var L_diff = L_actual - L_ideal;
-                    var t0 = 0;
-                    var t1 = 1;
-                    var max_iter = 20;
-                    while ((Math.abs(L_diff) > 1e-2) && (max_iter-- > 0)) {
-                        (function() {
-                            if (pol) { L_diff *= -1; }
-                            if (L_diff < 0) {
-                                t0 = t;
-                                t += (t1 - t) * 0.5;
-                            } else {
-                                t1 = t;
-                                t += (t0 - t) * 0.5;
-                            }
-                            L_actual = getColor(t, true).lab()[0];
-                            return L_diff = L_actual - L_ideal;
-                        })();
-                    }
-                    return t;
-                };
-            } else {
-                tmap = function (t) { return t; };
-            }
-            return f;
-        };
-
-        f.padding = function(p) {
-            if (p != null) {
-                if (type$j(p) === 'number') {
-                    p = [p,p];
-                }
-                _padding = p;
-                return f;
-            } else {
-                return _padding;
-            }
-        };
-
-        f.colors = function(numColors, out) {
-            // If no arguments are given, return the original colors that were provided
-            if (arguments.length < 2) { out = 'hex'; }
-            var result = [];
-
-            if (arguments.length === 0) {
-                result = _colors.slice(0);
-
-            } else if (numColors === 1) {
-                result = [f(0.5)];
-
-            } else if (numColors > 1) {
-                var dm = _domain[0];
-                var dd = _domain[1] - dm;
-                result = __range__(0, numColors, false).map(function (i) { return f( dm + ((i/(numColors-1)) * dd) ); });
-
-            } else { // returns all colors based on the defined classes
-                colors = [];
-                var samples = [];
-                if (_classes && (_classes.length > 2)) {
-                    for (var i = 1, end = _classes.length, asc = 1 <= end; asc ? i < end : i > end; asc ? i++ : i--) {
-                        samples.push((_classes[i-1]+_classes[i])*0.5);
-                    }
-                } else {
-                    samples = _domain;
-                }
-                result = samples.map(function (v) { return f(v); });
-            }
-
-            if (chroma_1[out]) {
-                result = result.map(function (c) { return c[out](); });
-            }
-            return result;
-        };
-
-        f.cache = function(c) {
-            if (c != null) {
-                _useCache = c;
-                return f;
-            } else {
-                return _useCache;
-            }
-        };
-
-        f.gamma = function(g) {
-            if (g != null) {
-                _gamma = g;
-                return f;
-            } else {
-                return _gamma;
-            }
-        };
-
-        f.nodata = function(d) {
-            if (d != null) {
-                _nacol = chroma_1(d);
-                return f;
-            } else {
-                return _nacol;
-            }
-        };
-
-        return f;
-    };
-
-    function __range__(left, right, inclusive) {
-      var range = [];
-      var ascending = left < right;
-      var end = !inclusive ? right : ascending ? right + 1 : right - 1;
-      for (var i = left; ascending ? i < end : i > end; ascending ? i++ : i--) {
-        range.push(i);
-      }
-      return range;
-    }
-
-    //
-    // interpolates between a set of colors uzing a bezier spline
-    //
-
-    // @requires utils lab
-
-
-
-
-    var bezier = function(colors) {
-        var assign, assign$1, assign$2;
-
-        var I, lab0, lab1, lab2;
-        colors = colors.map(function (c) { return new Color_1(c); });
-        if (colors.length === 2) {
-            // linear interpolation
-            (assign = colors.map(function (c) { return c.lab(); }), lab0 = assign[0], lab1 = assign[1]);
-            I = function(t) {
-                var lab = ([0, 1, 2].map(function (i) { return lab0[i] + (t * (lab1[i] - lab0[i])); }));
-                return new Color_1(lab, 'lab');
-            };
-        } else if (colors.length === 3) {
-            // quadratic bezier interpolation
-            (assign$1 = colors.map(function (c) { return c.lab(); }), lab0 = assign$1[0], lab1 = assign$1[1], lab2 = assign$1[2]);
-            I = function(t) {
-                var lab = ([0, 1, 2].map(function (i) { return ((1-t)*(1-t) * lab0[i]) + (2 * (1-t) * t * lab1[i]) + (t * t * lab2[i]); }));
-                return new Color_1(lab, 'lab');
-            };
-        } else if (colors.length === 4) {
-            // cubic bezier interpolation
-            var lab3;
-            (assign$2 = colors.map(function (c) { return c.lab(); }), lab0 = assign$2[0], lab1 = assign$2[1], lab2 = assign$2[2], lab3 = assign$2[3]);
-            I = function(t) {
-                var lab = ([0, 1, 2].map(function (i) { return ((1-t)*(1-t)*(1-t) * lab0[i]) + (3 * (1-t) * (1-t) * t * lab1[i]) + (3 * (1-t) * t * t * lab2[i]) + (t*t*t * lab3[i]); }));
-                return new Color_1(lab, 'lab');
-            };
-        } else if (colors.length === 5) {
-            var I0 = bezier(colors.slice(0, 3));
-            var I1 = bezier(colors.slice(2, 5));
-            I = function(t) {
-                if (t < 0.5) {
-                    return I0(t*2);
-                } else {
-                    return I1((t-0.5)*2);
-                }
-            };
-        }
-        return I;
-    };
-
-    var bezier_1 = function (colors) {
-        var f = bezier(colors);
-        f.scale = function () { return scale(f); };
-        return f;
-    };
-
-    /*
-     * interpolates between a set of colors uzing a bezier spline
-     * blend mode formulas taken from http://www.venture-ware.com/kevin/coding/lets-learn-math-photoshop-blend-modes/
-     */
-
-
-
-
-    var blend = function (bottom, top, mode) {
-        if (!blend[mode]) {
-            throw new Error('unknown blend mode ' + mode);
-        }
-        return blend[mode](bottom, top);
-    };
-
-    var blend_f = function (f) { return function (bottom,top) {
-            var c0 = chroma_1(top).rgb();
-            var c1 = chroma_1(bottom).rgb();
-            return chroma_1.rgb(f(c0, c1));
-        }; };
-
-    var each = function (f) { return function (c0, c1) {
-            var out = [];
-            out[0] = f(c0[0], c1[0]);
-            out[1] = f(c0[1], c1[1]);
-            out[2] = f(c0[2], c1[2]);
-            return out;
-        }; };
-
-    var normal = function (a) { return a; };
-    var multiply = function (a,b) { return a * b / 255; };
-    var darken$1 = function (a,b) { return a > b ? b : a; };
-    var lighten = function (a,b) { return a > b ? a : b; };
-    var screen = function (a,b) { return 255 * (1 - (1-a/255) * (1-b/255)); };
-    var overlay = function (a,b) { return b < 128 ? 2 * a * b / 255 : 255 * (1 - 2 * (1 - a / 255 ) * ( 1 - b / 255 )); };
-    var burn = function (a,b) { return 255 * (1 - (1 - b / 255) / (a/255)); };
-    var dodge = function (a,b) {
-        if (a === 255) { return 255; }
-        a = 255 * (b / 255) / (1 - a / 255);
-        return a > 255 ? 255 : a
-    };
-
-    // # add = (a,b) ->
-    // #     if (a + b > 255) then 255 else a + b
-
-    blend.normal = blend_f(each(normal));
-    blend.multiply = blend_f(each(multiply));
-    blend.screen = blend_f(each(screen));
-    blend.overlay = blend_f(each(overlay));
-    blend.darken = blend_f(each(darken$1));
-    blend.lighten = blend_f(each(lighten));
-    blend.dodge = blend_f(each(dodge));
-    blend.burn = blend_f(each(burn));
-    // blend.add = blend_f(each(add));
-
-    var blend_1 = blend;
-
-    // cubehelix interpolation
-    // based on D.A. Green "A colour scheme for the display of astronomical intensity images"
-    // http://astron-soc.in/bulletin/11June/289392011.pdf
-
-    var type$k = utils.type;
-    var clip_rgb$3 = utils.clip_rgb;
-    var TWOPI$2 = utils.TWOPI;
-    var pow$6 = Math.pow;
-    var sin$2 = Math.sin;
-    var cos$3 = Math.cos;
-
-
-    var cubehelix = function(start, rotations, hue, gamma, lightness) {
-        if ( start === void 0 ) start=300;
-        if ( rotations === void 0 ) rotations=-1.5;
-        if ( hue === void 0 ) hue=1;
-        if ( gamma === void 0 ) gamma=1;
-        if ( lightness === void 0 ) lightness=[0,1];
-
-        var dh = 0, dl;
-        if (type$k(lightness) === 'array') {
-            dl = lightness[1] - lightness[0];
-        } else {
-            dl = 0;
-            lightness = [lightness, lightness];
-        }
-
-        var f = function(fract) {
-            var a = TWOPI$2 * (((start+120)/360) + (rotations * fract));
-            var l = pow$6(lightness[0] + (dl * fract), gamma);
-            var h = dh !== 0 ? hue[0] + (fract * dh) : hue;
-            var amp = (h * l * (1-l)) / 2;
-            var cos_a = cos$3(a);
-            var sin_a = sin$2(a);
-            var r = l + (amp * ((-0.14861 * cos_a) + (1.78277* sin_a)));
-            var g = l + (amp * ((-0.29227 * cos_a) - (0.90649* sin_a)));
-            var b = l + (amp * (+1.97294 * cos_a));
-            return chroma_1(clip_rgb$3([r*255,g*255,b*255,1]));
-        };
-
-        f.start = function(s) {
-            if ((s == null)) { return start; }
-            start = s;
-            return f;
-        };
-
-        f.rotations = function(r) {
-            if ((r == null)) { return rotations; }
-            rotations = r;
-            return f;
-        };
-
-        f.gamma = function(g) {
-            if ((g == null)) { return gamma; }
-            gamma = g;
-            return f;
-        };
-
-        f.hue = function(h) {
-            if ((h == null)) { return hue; }
-            hue = h;
-            if (type$k(hue) === 'array') {
-                dh = hue[1] - hue[0];
-                if (dh === 0) { hue = hue[1]; }
-            } else {
-                dh = 0;
-            }
-            return f;
-        };
-
-        f.lightness = function(h) {
-            if ((h == null)) { return lightness; }
-            if (type$k(h) === 'array') {
-                lightness = h;
-                dl = h[1] - h[0];
-            } else {
-                lightness = [h,h];
-                dl = 0;
-            }
-            return f;
-        };
-
-        f.scale = function () { return chroma_1.scale(f); };
-
-        f.hue(hue);
-
-        return f;
-    };
-
-    var digits = '0123456789abcdef';
-
-    var floor$2 = Math.floor;
-    var random = Math.random;
-
-    var random_1 = function () {
-        var code = '#';
-        for (var i=0; i<6; i++) {
-            code += digits.charAt(floor$2(random() * 16));
-        }
-        return new Color_1(code, 'hex');
-    };
-
-    var log$1 = Math.log;
-    var pow$7 = Math.pow;
-    var floor$3 = Math.floor;
-    var abs = Math.abs;
-
-
-    var analyze = function (data, key) {
-        if ( key === void 0 ) key=null;
-
-        var r = {
-            min: Number.MAX_VALUE,
-            max: Number.MAX_VALUE*-1,
-            sum: 0,
-            values: [],
-            count: 0
-        };
-        if (type(data) === 'object') {
-            data = Object.values(data);
-        }
-        data.forEach(function (val) {
-            if (key && type(val) === 'object') { val = val[key]; }
-            if (val !== undefined && val !== null && !isNaN(val)) {
-                r.values.push(val);
-                r.sum += val;
-                if (val < r.min) { r.min = val; }
-                if (val > r.max) { r.max = val; }
-                r.count += 1;
-            }
-        });
-
-        r.domain = [r.min, r.max];
-
-        r.limits = function (mode, num) { return limits(r, mode, num); };
-
-        return r;
-    };
-
-
-    var limits = function (data, mode, num) {
-        if ( mode === void 0 ) mode='equal';
-        if ( num === void 0 ) num=7;
-
-        if (type(data) == 'array') {
-            data = analyze(data);
-        }
-        var min = data.min;
-        var max = data.max;
-        var values = data.values.sort(function (a,b) { return a-b; });
-
-        if (num === 1) { return [min,max]; }
-
-        var limits = [];
-
-        if (mode.substr(0,1) === 'c') { // continuous
-            limits.push(min);
-            limits.push(max);
-        }
-
-        if (mode.substr(0,1) === 'e') { // equal interval
-            limits.push(min);
-            for (var i=1; i<num; i++) {
-                limits.push(min+((i/num)*(max-min)));
-            }
-            limits.push(max);
-        }
-
-        else if (mode.substr(0,1) === 'l') { // log scale
-            if (min <= 0) {
-                throw new Error('Logarithmic scales are only possible for values > 0');
-            }
-            var min_log = Math.LOG10E * log$1(min);
-            var max_log = Math.LOG10E * log$1(max);
-            limits.push(min);
-            for (var i$1=1; i$1<num; i$1++) {
-                limits.push(pow$7(10, min_log + ((i$1/num) * (max_log - min_log))));
-            }
-            limits.push(max);
-        }
-
-        else if (mode.substr(0,1) === 'q') { // quantile scale
-            limits.push(min);
-            for (var i$2=1; i$2<num; i$2++) {
-                var p = ((values.length-1) * i$2)/num;
-                var pb = floor$3(p);
-                if (pb === p) {
-                    limits.push(values[pb]);
-                } else { // p > pb
-                    var pr = p - pb;
-                    limits.push((values[pb]*(1-pr)) + (values[pb+1]*pr));
-                }
-            }
-            limits.push(max);
-
-        }
-
-        else if (mode.substr(0,1) === 'k') { // k-means clustering
-            /*
-            implementation based on
-            http://code.google.com/p/figue/source/browse/trunk/figue.js#336
-            simplified for 1-d input values
-            */
-            var cluster;
-            var n = values.length;
-            var assignments = new Array(n);
-            var clusterSizes = new Array(num);
-            var repeat = true;
-            var nb_iters = 0;
-            var centroids = null;
-
-            // get seed values
-            centroids = [];
-            centroids.push(min);
-            for (var i$3=1; i$3<num; i$3++) {
-                centroids.push(min + ((i$3/num) * (max-min)));
-            }
-            centroids.push(max);
-
-            while (repeat) {
-                // assignment step
-                for (var j=0; j<num; j++) {
-                    clusterSizes[j] = 0;
-                }
-                for (var i$4=0; i$4<n; i$4++) {
-                    var value = values[i$4];
-                    var mindist = Number.MAX_VALUE;
-                    var best = (void 0);
-                    for (var j$1=0; j$1<num; j$1++) {
-                        var dist = abs(centroids[j$1]-value);
-                        if (dist < mindist) {
-                            mindist = dist;
-                            best = j$1;
-                        }
-                        clusterSizes[best]++;
-                        assignments[i$4] = best;
-                    }
-                }
-
-                // update centroids step
-                var newCentroids = new Array(num);
-                for (var j$2=0; j$2<num; j$2++) {
-                    newCentroids[j$2] = null;
-                }
-                for (var i$5=0; i$5<n; i$5++) {
-                    cluster = assignments[i$5];
-                    if (newCentroids[cluster] === null) {
-                        newCentroids[cluster] = values[i$5];
-                    } else {
-                        newCentroids[cluster] += values[i$5];
-                    }
-                }
-                for (var j$3=0; j$3<num; j$3++) {
-                    newCentroids[j$3] *= 1/clusterSizes[j$3];
-                }
-
-                // check convergence
-                repeat = false;
-                for (var j$4=0; j$4<num; j$4++) {
-                    if (newCentroids[j$4] !== centroids[j$4]) {
-                        repeat = true;
-                        break;
-                    }
-                }
-
-                centroids = newCentroids;
-                nb_iters++;
-
-                if (nb_iters > 200) {
-                    repeat = false;
-                }
-            }
-
-            // finished k-means clustering
-            // the next part is borrowed from gabrielflor.it
-            var kClusters = {};
-            for (var j$5=0; j$5<num; j$5++) {
-                kClusters[j$5] = [];
-            }
-            for (var i$6=0; i$6<n; i$6++) {
-                cluster = assignments[i$6];
-                kClusters[cluster].push(values[i$6]);
-            }
-            var tmpKMeansBreaks = [];
-            for (var j$6=0; j$6<num; j$6++) {
-                tmpKMeansBreaks.push(kClusters[j$6][0]);
-                tmpKMeansBreaks.push(kClusters[j$6][kClusters[j$6].length-1]);
-            }
-            tmpKMeansBreaks = tmpKMeansBreaks.sort(function (a,b){ return a-b; });
-            limits.push(tmpKMeansBreaks[0]);
-            for (var i$7=1; i$7 < tmpKMeansBreaks.length; i$7+= 2) {
-                var v = tmpKMeansBreaks[i$7];
-                if (!isNaN(v) && (limits.indexOf(v) === -1)) {
-                    limits.push(v);
-                }
-            }
-        }
-        return limits;
-    };
-
-    var analyze_1 = {analyze: analyze, limits: limits};
-
-    var contrast = function (a, b) {
-        // WCAG contrast ratio
-        // see http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
-        a = new Color_1(a);
-        b = new Color_1(b);
-        var l1 = a.luminance();
-        var l2 = b.luminance();
-        return l1 > l2 ? (l1 + 0.05) / (l2 + 0.05) : (l2 + 0.05) / (l1 + 0.05);
-    };
-
-    var sqrt$4 = Math.sqrt;
-    var atan2$2 = Math.atan2;
-    var abs$1 = Math.abs;
-    var cos$4 = Math.cos;
-    var PI$2 = Math.PI;
-
-    var deltaE = function(a, b, L, C) {
-        if ( L === void 0 ) L=1;
-        if ( C === void 0 ) C=1;
-
-        // Delta E (CMC)
-        // see http://www.brucelindbloom.com/index.html?Eqn_DeltaE_CMC.html
-        a = new Color_1(a);
-        b = new Color_1(b);
-        var ref = Array.from(a.lab());
-        var L1 = ref[0];
-        var a1 = ref[1];
-        var b1 = ref[2];
-        var ref$1 = Array.from(b.lab());
-        var L2 = ref$1[0];
-        var a2 = ref$1[1];
-        var b2 = ref$1[2];
-        var c1 = sqrt$4((a1 * a1) + (b1 * b1));
-        var c2 = sqrt$4((a2 * a2) + (b2 * b2));
-        var sl = L1 < 16.0 ? 0.511 : (0.040975 * L1) / (1.0 + (0.01765 * L1));
-        var sc = ((0.0638 * c1) / (1.0 + (0.0131 * c1))) + 0.638;
-        var h1 = c1 < 0.000001 ? 0.0 : (atan2$2(b1, a1) * 180.0) / PI$2;
-        while (h1 < 0) { h1 += 360; }
-        while (h1 >= 360) { h1 -= 360; }
-        var t = (h1 >= 164.0) && (h1 <= 345.0) ? (0.56 + abs$1(0.2 * cos$4((PI$2 * (h1 + 168.0)) / 180.0))) : (0.36 + abs$1(0.4 * cos$4((PI$2 * (h1 + 35.0)) / 180.0)));
-        var c4 = c1 * c1 * c1 * c1;
-        var f = sqrt$4(c4 / (c4 + 1900.0));
-        var sh = sc * (((f * t) + 1.0) - f);
-        var delL = L1 - L2;
-        var delC = c1 - c2;
-        var delA = a1 - a2;
-        var delB = b1 - b2;
-        var dH2 = ((delA * delA) + (delB * delB)) - (delC * delC);
-        var v1 = delL / (L * sl);
-        var v2 = delC / (C * sc);
-        var v3 = sh;
-        return sqrt$4((v1 * v1) + (v2 * v2) + (dH2 / (v3 * v3)));
-    };
-
-    // simple Euclidean distance
-    var distance = function(a, b, mode) {
-        if ( mode === void 0 ) mode='lab';
-
-        // Delta E (CIE 1976)
-        // see http://www.brucelindbloom.com/index.html?Equations.html
-        a = new Color_1(a);
-        b = new Color_1(b);
-        var l1 = a.get(mode);
-        var l2 = b.get(mode);
-        var sum_sq = 0;
-        for (var i in l1) {
-            var d = (l1[i] || 0) - (l2[i] || 0);
-            sum_sq += d*d;
-        }
-        return Math.sqrt(sum_sq);
-    };
-
-    var valid = function () {
-        var args = [], len = arguments.length;
-        while ( len-- ) args[ len ] = arguments[ len ];
-
-        try {
-            new (Function.prototype.bind.apply( Color_1, [ null ].concat( args) ));
-            return true;
-        } catch (e) {
-            return false;
-        }
-    };
-
-    // some pre-defined color scales:
-
-
-
-
-    var scales = {
-    	cool: function cool() { return scale([chroma_1.hsl(180,1,.9), chroma_1.hsl(250,.7,.4)]) },
-    	hot: function hot() { return scale(['#000','#f00','#ff0','#fff'], [0,.25,.75,1]).mode('rgb') }
-    };
-
-    /**
-        ColorBrewer colors for chroma.js
-
-        Copyright (c) 2002 Cynthia Brewer, Mark Harrower, and The
-        Pennsylvania State University.
-
-        Licensed under the Apache License, Version 2.0 (the "License");
-        you may not use this file except in compliance with the License.
-        You may obtain a copy of the License at
-        http://www.apache.org/licenses/LICENSE-2.0
-
-        Unless required by applicable law or agreed to in writing, software distributed
-        under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-        CONDITIONS OF ANY KIND, either express or implied. See the License for the
-        specific language governing permissions and limitations under the License.
-    */
-
-    var colorbrewer = {
-        // sequential
-        OrRd: ['#fff7ec', '#fee8c8', '#fdd49e', '#fdbb84', '#fc8d59', '#ef6548', '#d7301f', '#b30000', '#7f0000'],
-        PuBu: ['#fff7fb', '#ece7f2', '#d0d1e6', '#a6bddb', '#74a9cf', '#3690c0', '#0570b0', '#045a8d', '#023858'],
-        BuPu: ['#f7fcfd', '#e0ecf4', '#bfd3e6', '#9ebcda', '#8c96c6', '#8c6bb1', '#88419d', '#810f7c', '#4d004b'],
-        Oranges: ['#fff5eb', '#fee6ce', '#fdd0a2', '#fdae6b', '#fd8d3c', '#f16913', '#d94801', '#a63603', '#7f2704'],
-        BuGn: ['#f7fcfd', '#e5f5f9', '#ccece6', '#99d8c9', '#66c2a4', '#41ae76', '#238b45', '#006d2c', '#00441b'],
-        YlOrBr: ['#ffffe5', '#fff7bc', '#fee391', '#fec44f', '#fe9929', '#ec7014', '#cc4c02', '#993404', '#662506'],
-        YlGn: ['#ffffe5', '#f7fcb9', '#d9f0a3', '#addd8e', '#78c679', '#41ab5d', '#238443', '#006837', '#004529'],
-        Reds: ['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d'],
-        RdPu: ['#fff7f3', '#fde0dd', '#fcc5c0', '#fa9fb5', '#f768a1', '#dd3497', '#ae017e', '#7a0177', '#49006a'],
-        Greens: ['#f7fcf5', '#e5f5e0', '#c7e9c0', '#a1d99b', '#74c476', '#41ab5d', '#238b45', '#006d2c', '#00441b'],
-        YlGnBu: ['#ffffd9', '#edf8b1', '#c7e9b4', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8', '#253494', '#081d58'],
-        Purples: ['#fcfbfd', '#efedf5', '#dadaeb', '#bcbddc', '#9e9ac8', '#807dba', '#6a51a3', '#54278f', '#3f007d'],
-        GnBu: ['#f7fcf0', '#e0f3db', '#ccebc5', '#a8ddb5', '#7bccc4', '#4eb3d3', '#2b8cbe', '#0868ac', '#084081'],
-        Greys: ['#ffffff', '#f0f0f0', '#d9d9d9', '#bdbdbd', '#969696', '#737373', '#525252', '#252525', '#000000'],
-        YlOrRd: ['#ffffcc', '#ffeda0', '#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#bd0026', '#800026'],
-        PuRd: ['#f7f4f9', '#e7e1ef', '#d4b9da', '#c994c7', '#df65b0', '#e7298a', '#ce1256', '#980043', '#67001f'],
-        Blues: ['#f7fbff', '#deebf7', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b'],
-        PuBuGn: ['#fff7fb', '#ece2f0', '#d0d1e6', '#a6bddb', '#67a9cf', '#3690c0', '#02818a', '#016c59', '#014636'],
-        Viridis: ['#440154', '#482777', '#3f4a8a', '#31678e', '#26838f', '#1f9d8a', '#6cce5a', '#b6de2b', '#fee825'],
-
-        // diverging
-
-        Spectral: ['#9e0142', '#d53e4f', '#f46d43', '#fdae61', '#fee08b', '#ffffbf', '#e6f598', '#abdda4', '#66c2a5', '#3288bd', '#5e4fa2'],
-        RdYlGn: ['#a50026', '#d73027', '#f46d43', '#fdae61', '#fee08b', '#ffffbf', '#d9ef8b', '#a6d96a', '#66bd63', '#1a9850', '#006837'],
-        RdBu: ['#67001f', '#b2182b', '#d6604d', '#f4a582', '#fddbc7', '#f7f7f7', '#d1e5f0', '#92c5de', '#4393c3', '#2166ac', '#053061'],
-        PiYG: ['#8e0152', '#c51b7d', '#de77ae', '#f1b6da', '#fde0ef', '#f7f7f7', '#e6f5d0', '#b8e186', '#7fbc41', '#4d9221', '#276419'],
-        PRGn: ['#40004b', '#762a83', '#9970ab', '#c2a5cf', '#e7d4e8', '#f7f7f7', '#d9f0d3', '#a6dba0', '#5aae61', '#1b7837', '#00441b'],
-        RdYlBu: ['#a50026', '#d73027', '#f46d43', '#fdae61', '#fee090', '#ffffbf', '#e0f3f8', '#abd9e9', '#74add1', '#4575b4', '#313695'],
-        BrBG: ['#543005', '#8c510a', '#bf812d', '#dfc27d', '#f6e8c3', '#f5f5f5', '#c7eae5', '#80cdc1', '#35978f', '#01665e', '#003c30'],
-        RdGy: ['#67001f', '#b2182b', '#d6604d', '#f4a582', '#fddbc7', '#ffffff', '#e0e0e0', '#bababa', '#878787', '#4d4d4d', '#1a1a1a'],
-        PuOr: ['#7f3b08', '#b35806', '#e08214', '#fdb863', '#fee0b6', '#f7f7f7', '#d8daeb', '#b2abd2', '#8073ac', '#542788', '#2d004b'],
-
-        // qualitative
-
-        Set2: ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3', '#a6d854', '#ffd92f', '#e5c494', '#b3b3b3'],
-        Accent: ['#7fc97f', '#beaed4', '#fdc086', '#ffff99', '#386cb0', '#f0027f', '#bf5b17', '#666666'],
-        Set1: ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'],
-        Set3: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'],
-        Dark2: ['#1b9e77', '#d95f02', '#7570b3', '#e7298a', '#66a61e', '#e6ab02', '#a6761d', '#666666'],
-        Paired: ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928'],
-        Pastel2: ['#b3e2cd', '#fdcdac', '#cbd5e8', '#f4cae4', '#e6f5c9', '#fff2ae', '#f1e2cc', '#cccccc'],
-        Pastel1: ['#fbb4ae', '#b3cde3', '#ccebc5', '#decbe4', '#fed9a6', '#ffffcc', '#e5d8bd', '#fddaec', '#f2f2f2'],
-    };
-
-    // add lowercase aliases for case-insensitive matches
-    for (var i$1 = 0, list$1 = Object.keys(colorbrewer); i$1 < list$1.length; i$1 += 1) {
-        var key = list$1[i$1];
-
-        colorbrewer[key.toLowerCase()] = colorbrewer[key];
-    }
-
-    var colorbrewer_1 = colorbrewer;
-
-    // feel free to comment out anything to rollup
-    // a smaller chroma.js built
-
-    // io --> convert colors
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // operators --> modify existing Colors
-
-
-
-
-
-
-
-
-
-
-    // interpolators
-
-
-
-
-
-
-
-
-
-
-    // generators -- > create new colors
-    chroma_1.average = average;
-    chroma_1.bezier = bezier_1;
-    chroma_1.blend = blend_1;
-    chroma_1.cubehelix = cubehelix;
-    chroma_1.mix = chroma_1.interpolate = mix;
-    chroma_1.random = random_1;
-    chroma_1.scale = scale;
-
-    // other utility methods
-    chroma_1.analyze = analyze_1.analyze;
-    chroma_1.contrast = contrast;
-    chroma_1.deltaE = deltaE;
-    chroma_1.distance = distance;
-    chroma_1.limits = analyze_1.limits;
-    chroma_1.valid = valid;
-
-    // scale
-    chroma_1.scales = scales;
-
-    // colors
-    chroma_1.colors = w3cx11_1;
-    chroma_1.brewer = colorbrewer_1;
-
-    var chroma_js = chroma_1;
-
-    return chroma_js;
-
-})));
-
-},{}],56:[function(require,module,exports){
+},{"base64-js":21,"buffer":54,"ieee754":106}],55:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var Transform = require('stream').Transform
 var StringDecoder = require('string_decoder').StringDecoder
@@ -16205,693 +13011,7 @@ CipherBase.prototype._toString = function (value, enc, fin) {
 
 module.exports = CipherBase
 
-},{"inherits":109,"safe-buffer":236,"stream":256,"string_decoder":257}],57:[function(require,module,exports){
-// Generated by CoffeeScript 1.12.7
-(function() {
-  var ColorScheme,
-    slice = [].slice;
-
-  ColorScheme = (function() {
-    var clone, l, len, ref, typeIsArray, word;
-
-    typeIsArray = Array.isArray || function(value) {
-      return {}.toString.call(value) === '[object Array]';
-    };
-
-    ColorScheme.SCHEMES = {};
-
-    ref = "mono monochromatic contrast triade tetrade analogic".split(/\s+/);
-    for (l = 0, len = ref.length; l < len; l++) {
-      word = ref[l];
-      ColorScheme.SCHEMES[word] = true;
-    }
-
-    ColorScheme.PRESETS = {
-      "default": [-1, -1, 1, -0.7, 0.25, 1, 0.5, 1],
-      pastel: [0.5, -0.9, 0.5, 0.5, 0.1, 0.9, 0.75, 0.75],
-      soft: [0.3, -0.8, 0.3, 0.5, 0.1, 0.9, 0.5, 0.75],
-      light: [0.25, 1, 0.5, 0.75, 0.1, 1, 0.5, 1],
-      hard: [1, -1, 1, -0.6, 0.1, 1, 0.6, 1],
-      pale: [0.1, -0.85, 0.1, 0.5, 0.1, 1, 0.1, 0.75]
-    };
-
-    ColorScheme.COLOR_WHEEL = {
-      0: [255, 0, 0, 100],
-      15: [255, 51, 0, 100],
-      30: [255, 102, 0, 100],
-      45: [255, 128, 0, 100],
-      60: [255, 153, 0, 100],
-      75: [255, 178, 0, 100],
-      90: [255, 204, 0, 100],
-      105: [255, 229, 0, 100],
-      120: [255, 255, 0, 100],
-      135: [204, 255, 0, 100],
-      150: [153, 255, 0, 100],
-      165: [51, 255, 0, 100],
-      180: [0, 204, 0, 80],
-      195: [0, 178, 102, 70],
-      210: [0, 153, 153, 60],
-      225: [0, 102, 178, 70],
-      240: [0, 51, 204, 80],
-      255: [25, 25, 178, 70],
-      270: [51, 0, 153, 60],
-      285: [64, 0, 153, 60],
-      300: [102, 0, 153, 60],
-      315: [153, 0, 153, 60],
-      330: [204, 0, 153, 80],
-      345: [229, 0, 102, 90]
-    };
-
-    function ColorScheme() {
-      var colors, m;
-      colors = [];
-      for (m = 1; m <= 4; m++) {
-        colors.push(new ColorScheme.mutablecolor(60));
-      }
-      this.col = colors;
-      this._scheme = 'mono';
-      this._distance = 0.5;
-      this._web_safe = false;
-      this._add_complement = false;
-    }
-
-
-    /*
-    
-    colors()
-    
-    Returns an array of 4, 8, 12 or 16 colors in RRGGBB hexidecimal notation
-    (without a leading "#") depending on the color scheme and addComplement
-    parameter. For each set of four, the first is usually the most saturated color,
-    the second a darkened version, the third a pale version and fourth
-    a less-pale version.
-    
-    For example: With a contrast scheme, "colors()" would return eight colors.
-    Indexes 1 and 5 could be background colors, 2 and 6 could be foreground colors.
-    
-    Trust me, it's much better if you check out the Color Scheme web site, whose
-    URL is listed in "Description"
-     */
-
-    ColorScheme.prototype.colors = function() {
-      var dispatch, h, i, j, m, n, output, ref1, used_colors;
-      used_colors = 1;
-      h = this.col[0].get_hue();
-      dispatch = {
-        mono: (function(_this) {
-          return function() {};
-        })(this),
-        contrast: (function(_this) {
-          return function() {
-            used_colors = 2;
-            _this.col[1].set_hue(h);
-            return _this.col[1].rotate(180);
-          };
-        })(this),
-        triade: (function(_this) {
-          return function() {
-            var dif;
-            used_colors = 3;
-            dif = 60 * _this._distance;
-            _this.col[1].set_hue(h);
-            _this.col[1].rotate(180 - dif);
-            _this.col[2].set_hue(h);
-            return _this.col[2].rotate(180 + dif);
-          };
-        })(this),
-        tetrade: (function(_this) {
-          return function() {
-            var dif;
-            used_colors = 4;
-            dif = 90 * _this._distance;
-            _this.col[1].set_hue(h);
-            _this.col[1].rotate(180);
-            _this.col[2].set_hue(h);
-            _this.col[2].rotate(180 + dif);
-            _this.col[3].set_hue(h);
-            return _this.col[3].rotate(dif);
-          };
-        })(this),
-        analogic: (function(_this) {
-          return function() {
-            var dif;
-            used_colors = _this._add_complement ? 4 : 3;
-            dif = 60 * _this._distance;
-            _this.col[1].set_hue(h);
-            _this.col[1].rotate(dif);
-            _this.col[2].set_hue(h);
-            _this.col[2].rotate(360 - dif);
-            _this.col[3].set_hue(h);
-            return _this.col[3].rotate(180);
-          };
-        })(this)
-      };
-      dispatch['monochromatic'] = dispatch['mono'];
-      if (dispatch[this._scheme] != null) {
-        dispatch[this._scheme]();
-      } else {
-        throw "Unknown color scheme name: " + this._scheme;
-      }
-      output = [];
-      for (i = m = 0, ref1 = used_colors - 1; 0 <= ref1 ? m <= ref1 : m >= ref1; i = 0 <= ref1 ? ++m : --m) {
-        for (j = n = 0; n <= 3; j = ++n) {
-          output[i * 4 + j] = this.col[i].get_hex(this._web_safe, j);
-        }
-      }
-      return output;
-    };
-
-
-    /*
-    
-    colorset()
-    
-    Returns a list of lists of the colors in groups of four. This method simply
-    allows you to reference a color in the scheme by its group isntead of its
-    absolute index in the list of colors.  I am assuming that "colorset()"
-    will make it easier to use this module with the templating systems that are
-    out there.
-    
-    For example, if you were to follow the synopsis, say you wanted to retrieve
-    the two darkest colors from the first two groups of the scheme, which is
-    typically the second color in the group. You could retrieve them with
-    "colors()"
-    
-        first_background  = (scheme.colors())[1];
-        second_background = (scheme.colors())[5];
-    
-    Or, with this method,
-    
-        first_background  = (scheme.colorset())[0][1]
-        second_background = (scheme.colorset())[1][1]
-     */
-
-    ColorScheme.prototype.colorset = function() {
-      var flat_colors, grouped_colors;
-      flat_colors = clone(this.colors());
-      grouped_colors = [];
-      while (flat_colors.length > 0) {
-        grouped_colors.push(flat_colors.splice(0, 4));
-      }
-      return grouped_colors;
-    };
-
-
-    /*
-    
-    from_hue( degrees )
-    
-    Sets the base color hue, where 'degrees' is an integer. (Values greater than
-    359 and less than 0 wrap back around the wheel.)
-    
-    The default base hue is 0, or bright red.
-     */
-
-    ColorScheme.prototype.from_hue = function(h) {
-      if (h == null) {
-        throw "from_hue needs an argument";
-      }
-      this.col[0].set_hue(h);
-      return this;
-    };
-
-    ColorScheme.prototype.rgb2ryb = function() {
-      var blue, green, iN, maxgreen, maxyellow, red, rgb, white, yellow;
-      rgb = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-      if ((rgb[0] != null) && typeIsArray(rgb[0])) {
-        rgb = rgb[0];
-      }
-      red = rgb[0], green = rgb[1], blue = rgb[2];
-      white = Math.min(red, green, blue);
-      red -= white;
-      green -= white;
-      blue -= white;
-      maxgreen = Math.max(red, green, blue);
-      yellow = Math.min(red, green);
-      red -= yellow;
-      green -= yellow;
-      if (blue > 0 && green > 0) {
-        blue /= 2;
-        green /= 2;
-      }
-      yellow += green;
-      blue += green;
-      maxyellow = Math.max(red, yellow, blue);
-      if (maxyellow > 0) {
-        iN = maxgreen / maxyellow;
-        red *= iN;
-        yellow *= iN;
-        blue *= iN;
-      }
-      red += white;
-      yellow += white;
-      blue += white;
-      return [Math.floor(red), Math.floor(yellow), Math.floor(blue)];
-    };
-
-    ColorScheme.prototype.rgb2hsv = function() {
-      var b, d, g, h, max, min, r, rgb, s, v;
-      rgb = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-      if ((rgb[0] != null) && typeIsArray(rgb[0])) {
-        rgb = rgb[0];
-      }
-      r = rgb[0], g = rgb[1], b = rgb[2];
-      r /= 255;
-      g /= 255;
-      b /= 255;
-      min = Math.min.apply(Math, [r, g, b]);
-      max = Math.max.apply(Math, [r, g, b]);
-      d = max - min;
-      v = max;
-      s;
-      if (d > 0) {
-        s = d / max;
-      } else {
-        return [0, 0, v];
-      }
-      h = (r === max ? (g - b) / d : (g === max ? 2 + (b - r) / d : 4 + (r - g) / d));
-      h *= 60;
-      h %= 360;
-      return [h, s, v];
-    };
-
-    ColorScheme.prototype.rgbToHsv = function() {
-      var b, d, g, h, max, min, r, rgb, s, v;
-      rgb = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-      if ((rgb[0] != null) && typeIsArray(rgb[0])) {
-        rgb = rgb[0];
-      }
-      r = rgb[0], g = rgb[1], b = rgb[2];
-      r /= 255;
-      g /= 255;
-      b /= 255;
-      max = Math.max(r, g, b);
-      min = Math.min(r, g, b);
-      h = void 0;
-      s = void 0;
-      v = max;
-      d = max - min;
-      s = max === 0 ? 0 : d / max;
-      if (max === min) {
-        h = 0;
-      } else {
-        switch (max) {
-          case r:
-            h = (g - b) / d + (g < b ? 6 : 0);
-            break;
-          case g:
-            h = (b - r) / d + 2;
-            break;
-          case b:
-            h = (r - g) / d + 4;
-        }
-        h /= 6;
-      }
-      return [h, s, v];
-    };
-
-
-    /*
-    
-    from_hex( color )
-    
-    Sets the base color to the given color, where 'color' is in the hexidecimal
-    form RRGGBB. 'color' should not be preceded with a hash (#).
-    
-    The default base color is the equivalent of #ff0000, or bright red.
-     */
-
-    ColorScheme.prototype.from_hex = function(hex) {
-      var b, g, h, h0, h1, h2, hsv, i1, i2, num, r, ref1, ref2, rgbcap, s, v;
-      if (hex == null) {
-        throw "from_hex needs an argument";
-      }
-      if (!/^([0-9A-F]{2}){3}$/im.test(hex)) {
-        throw "from_hex(" + hex + ") - argument must be in the form of RRGGBB";
-      }
-      rgbcap = /(..)(..)(..)/.exec(hex).slice(1, 4);
-      ref1 = (function() {
-        var len1, m, results;
-        results = [];
-        for (m = 0, len1 = rgbcap.length; m < len1; m++) {
-          num = rgbcap[m];
-          results.push(parseInt(num, 16));
-        }
-        return results;
-      })(), r = ref1[0], g = ref1[1], b = ref1[2];
-      ref2 = this.rgb2ryb([r, g, b]), r = ref2[0], g = ref2[1], b = ref2[2];
-      hsv = this.rgbToHsv(r, g, b);
-      h0 = hsv[0];
-      h1 = 0;
-      h2 = 1000;
-      i1 = null;
-      i2 = null;
-      h = null;
-      s = null;
-      v = null;
-      h = hsv[0];
-      s = hsv[1];
-      v = hsv[2];
-      this.from_hue(h * 360);
-      this._set_variant_preset([s, v, s, v * 0.7, s * 0.25, 1, s * 0.5, 1]);
-      return this;
-    };
-
-
-    /*
-    
-    add_complement( BOOLEAN )
-    
-    If BOOLEAN is true, an extra set of colors will be produced using the
-    complement of the selected color.
-    
-    This only works with the analogic color scheme. The default is false.
-     */
-
-    ColorScheme.prototype.add_complement = function(b) {
-      if (b == null) {
-        throw "add_complement needs an argument";
-      }
-      this._add_complement = b;
-      return this;
-    };
-
-
-    /*
-    
-    web_safe( BOOL )
-    
-    Sets whether the colors returned by L<"colors()"> or L<"colorset()"> will be
-    web-safe.
-    
-    The default is false.
-     */
-
-    ColorScheme.prototype.web_safe = function(b) {
-      if (b == null) {
-        throw "web_safe needs an argument";
-      }
-      this._web_safe = b;
-      return this;
-    };
-
-
-    /*
-    
-    distance( FLOAT )
-    
-    'FLOAT'> must be a value from 0 to 1. You might use this with the "triade"
-    "tetrade" or "analogic" color schemes.
-    
-    The default is 0.5.
-     */
-
-    ColorScheme.prototype.distance = function(d) {
-      if (d == null) {
-        throw "distance needs an argument";
-      }
-      if (d < 0) {
-        throw "distance(" + d + ") - argument must be >= 0";
-      }
-      if (d > 1) {
-        throw "distance(" + d + ") - argument must be <= 1";
-      }
-      this._distance = d;
-      return this;
-    };
-
-
-    /*
-    
-    scheme( name )
-    
-    'name' must be a valid color scheme name. See "Color Schemes". The default
-    is "mono"
-     */
-
-    ColorScheme.prototype.scheme = function(name) {
-      if (name == null) {
-        return this._scheme;
-      } else {
-        if (ColorScheme.SCHEMES[name] == null) {
-          throw "'" + name + "' isn't a valid scheme name";
-        }
-        this._scheme = name;
-        return this;
-      }
-    };
-
-
-    /*
-    
-    variation( name )
-    
-    'name' must be a valid color variation name. See "Color Variations"
-     */
-
-    ColorScheme.prototype.variation = function(v) {
-      if (v == null) {
-        throw "variation needs an argument";
-      }
-      if (ColorScheme.PRESETS[v] == null) {
-        throw "'$v' isn't a valid variation name";
-      }
-      this._set_variant_preset(ColorScheme.PRESETS[v]);
-      return this;
-    };
-
-    ColorScheme.prototype._set_variant_preset = function(p) {
-      var i, m, results;
-      results = [];
-      for (i = m = 0; m <= 3; i = ++m) {
-        results.push(this.col[i].set_variant_preset(p));
-      }
-      return results;
-    };
-
-    clone = function(obj) {
-      var flags, key, newInstance;
-      if ((obj == null) || typeof obj !== 'object') {
-        return obj;
-      }
-      if (obj instanceof Date) {
-        return new Date(obj.getTime());
-      }
-      if (obj instanceof RegExp) {
-        flags = '';
-        if (obj.global != null) {
-          flags += 'g';
-        }
-        if (obj.ignoreCase != null) {
-          flags += 'i';
-        }
-        if (obj.multiline != null) {
-          flags += 'm';
-        }
-        if (obj.sticky != null) {
-          flags += 'y';
-        }
-        return new RegExp(obj.source, flags);
-      }
-      newInstance = new obj.constructor();
-      for (key in obj) {
-        newInstance[key] = clone(obj[key]);
-      }
-      return newInstance;
-    };
-
-    ColorScheme.mutablecolor = (function() {
-      mutablecolor.prototype.hue = 0;
-
-      mutablecolor.prototype.saturation = [];
-
-      mutablecolor.prototype.value = [];
-
-      mutablecolor.prototype.base_red = 0;
-
-      mutablecolor.prototype.base_green = 0;
-
-      mutablecolor.prototype.base_saturation = 0;
-
-      mutablecolor.prototype.base_value = 0;
-
-      function mutablecolor(hue) {
-        if (hue == null) {
-          throw "No hue specified";
-        }
-        this.saturation = [];
-        this.value = [];
-        this.base_red = 0;
-        this.base_green = 0;
-        this.base_blue = 0;
-        this.base_saturation = 0;
-        this.base_value = 0;
-        this.set_hue(hue);
-        this.set_variant_preset(ColorScheme.PRESETS['default']);
-      }
-
-      mutablecolor.prototype.get_hue = function() {
-        return this.hue;
-      };
-
-      mutablecolor.prototype.set_hue = function(h) {
-        var avrg, color, colorset1, colorset2, d, derivative1, derivative2, en, i, k;
-        avrg = function(a, b, k) {
-          return a + Math.round((b - a) * k);
-        };
-        this.hue = Math.round(h % 360);
-        d = this.hue % 15 + (this.hue - Math.floor(this.hue));
-        k = d / 15;
-        derivative1 = this.hue - Math.floor(d);
-        derivative2 = (derivative1 + 15) % 360;
-        if (derivative1 === 360) {
-          derivative1 = 0;
-        }
-        if (derivative2 === 360) {
-          derivative2 = 0;
-        }
-        colorset1 = ColorScheme.COLOR_WHEEL[derivative1];
-        colorset2 = ColorScheme.COLOR_WHEEL[derivative2];
-        en = {
-          red: 0,
-          green: 1,
-          blue: 2,
-          value: 3
-        };
-        for (color in en) {
-          i = en[color];
-          this["base_" + color] = avrg(colorset1[i], colorset2[i], k);
-        }
-        this.base_saturation = avrg(100, 100, k) / 100;
-        return this.base_value /= 100;
-      };
-
-      mutablecolor.prototype.rotate = function(angle) {
-        var newhue;
-        newhue = (this.hue + angle) % 360;
-        return this.set_hue(newhue);
-      };
-
-      mutablecolor.prototype.get_saturation = function(variation) {
-        var s, x;
-        x = this.saturation[variation];
-        s = x < 0 ? -x * this.base_saturation : x;
-        if (s > 1) {
-          s = 1;
-        }
-        if (s < 0) {
-          s = 0;
-        }
-        return s;
-      };
-
-      mutablecolor.prototype.get_value = function(variation) {
-        var v, x;
-        x = this.value[variation];
-        v = x < 0 ? -x * this.base_value : x;
-        if (v > 1) {
-          v = 1;
-        }
-        if (v < 0) {
-          v = 0;
-        }
-        return v;
-      };
-
-      mutablecolor.prototype.set_variant = function(variation, s, v) {
-        this.saturation[variation] = s;
-        return this.value[variation] = v;
-      };
-
-      mutablecolor.prototype.set_variant_preset = function(p) {
-        var i, m, results;
-        results = [];
-        for (i = m = 0; m <= 3; i = ++m) {
-          results.push(this.set_variant(i, p[2 * i], p[2 * i + 1]));
-        }
-        return results;
-      };
-
-      mutablecolor.prototype.get_hex = function(web_safe, variation) {
-        var c, color, formatted, i, k, len1, len2, m, max, min, n, ref1, rgb, rgbVal, s, str, v;
-        max = Math.max.apply(Math, (function() {
-          var len1, m, ref1, results;
-          ref1 = ['red', 'green', 'blue'];
-          results = [];
-          for (m = 0, len1 = ref1.length; m < len1; m++) {
-            color = ref1[m];
-            results.push(this["base_" + color]);
-          }
-          return results;
-        }).call(this));
-        min = Math.min.apply(Math, (function() {
-          var len1, m, ref1, results;
-          ref1 = ['red', 'green', 'blue'];
-          results = [];
-          for (m = 0, len1 = ref1.length; m < len1; m++) {
-            color = ref1[m];
-            results.push(this["base_" + color]);
-          }
-          return results;
-        }).call(this));
-        v = (variation < 0 ? this.base_value : this.get_value(variation)) * 255;
-        s = variation < 0 ? this.base_saturation : this.get_saturation(variation);
-        k = max > 0 ? v / max : 0;
-        rgb = [];
-        ref1 = ['red', 'green', 'blue'];
-        for (m = 0, len1 = ref1.length; m < len1; m++) {
-          color = ref1[m];
-          rgbVal = Math.min.apply(Math, [255, Math.round(v - (v - this["base_" + color] * k) * s)]);
-          rgb.push(rgbVal);
-        }
-        if (web_safe) {
-          rgb = (function() {
-            var len2, n, results;
-            results = [];
-            for (n = 0, len2 = rgb.length; n < len2; n++) {
-              c = rgb[n];
-              results.push(Math.round(c / 51) * 51);
-            }
-            return results;
-          })();
-        }
-        formatted = "";
-        for (n = 0, len2 = rgb.length; n < len2; n++) {
-          i = rgb[n];
-          str = i.toString(16);
-          if (str.length < 2) {
-            str = "0" + str;
-          }
-          formatted += str;
-        }
-        return formatted;
-      };
-
-      return mutablecolor;
-
-    })();
-
-    return ColorScheme;
-
-  })();
-
-  if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
-    module.exports = ColorScheme;
-  } else {
-    if (typeof define === 'function' && define.amd) {
-      define([], function() {
-        return ColorScheme;
-      });
-    } else {
-      window.ColorScheme = ColorScheme;
-    }
-  }
-
-}).call(this);
-
-
-
-},{}],58:[function(require,module,exports){
+},{"inherits":107,"safe-buffer":234,"stream":254,"string_decoder":255}],56:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -17002,7 +13122,7 @@ function objectToString(o) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":110}],59:[function(require,module,exports){
+},{"../../is-buffer/index.js":108}],57:[function(require,module,exports){
 (function (Buffer){
 var elliptic = require('elliptic')
 var BN = require('bn.js')
@@ -17130,7 +13250,7 @@ function formatReturnValue (bn, enc, len) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bn.js":22,"buffer":54,"elliptic":75}],60:[function(require,module,exports){
+},{"bn.js":22,"buffer":54,"elliptic":73}],58:[function(require,module,exports){
 'use strict'
 var inherits = require('inherits')
 var MD5 = require('md5.js')
@@ -17162,14 +13282,14 @@ module.exports = function createHash (alg) {
   return new Hash(sha(alg))
 }
 
-},{"cipher-base":56,"inherits":109,"md5.js":113,"ripemd160":235,"sha.js":249}],61:[function(require,module,exports){
+},{"cipher-base":55,"inherits":107,"md5.js":111,"ripemd160":233,"sha.js":247}],59:[function(require,module,exports){
 var MD5 = require('md5.js')
 
 module.exports = function (buffer) {
   return new MD5().update(buffer).digest()
 }
 
-},{"md5.js":113}],62:[function(require,module,exports){
+},{"md5.js":111}],60:[function(require,module,exports){
 'use strict'
 var inherits = require('inherits')
 var Legacy = require('./legacy')
@@ -17233,7 +13353,7 @@ module.exports = function createHmac (alg, key) {
   return new Hmac(alg, key)
 }
 
-},{"./legacy":63,"cipher-base":56,"create-hash/md5":61,"inherits":109,"ripemd160":235,"safe-buffer":236,"sha.js":249}],63:[function(require,module,exports){
+},{"./legacy":61,"cipher-base":55,"create-hash/md5":59,"inherits":107,"ripemd160":233,"safe-buffer":234,"sha.js":247}],61:[function(require,module,exports){
 'use strict'
 var inherits = require('inherits')
 var Buffer = require('safe-buffer').Buffer
@@ -17281,7 +13401,7 @@ Hmac.prototype._final = function () {
 }
 module.exports = Hmac
 
-},{"cipher-base":56,"inherits":109,"safe-buffer":236}],64:[function(require,module,exports){
+},{"cipher-base":55,"inherits":107,"safe-buffer":234}],62:[function(require,module,exports){
 'use strict'
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = require('randombytes')
@@ -17380,7 +13500,7 @@ exports.constants = {
   'POINT_CONVERSION_HYBRID': 6
 }
 
-},{"browserify-cipher":42,"browserify-sign":49,"browserify-sign/algos":46,"create-ecdh":59,"create-hash":60,"create-hmac":62,"diffie-hellman":71,"pbkdf2":204,"public-encrypt":211,"randombytes":217,"randomfill":218}],65:[function(require,module,exports){
+},{"browserify-cipher":42,"browserify-sign":49,"browserify-sign/algos":46,"create-ecdh":57,"create-hash":58,"create-hmac":60,"diffie-hellman":69,"pbkdf2":202,"public-encrypt":209,"randombytes":215,"randomfill":216}],63:[function(require,module,exports){
 'use strict';
 
 exports.utils = require('./des/utils');
@@ -17389,7 +13509,7 @@ exports.DES = require('./des/des');
 exports.CBC = require('./des/cbc');
 exports.EDE = require('./des/ede');
 
-},{"./des/cbc":66,"./des/cipher":67,"./des/des":68,"./des/ede":69,"./des/utils":70}],66:[function(require,module,exports){
+},{"./des/cbc":64,"./des/cipher":65,"./des/des":66,"./des/ede":67,"./des/utils":68}],64:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -17456,7 +13576,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
   }
 };
 
-},{"inherits":109,"minimalistic-assert":115}],67:[function(require,module,exports){
+},{"inherits":107,"minimalistic-assert":113}],65:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -17599,7 +13719,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
   return this._unpad(out);
 };
 
-},{"minimalistic-assert":115}],68:[function(require,module,exports){
+},{"minimalistic-assert":113}],66:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -17744,7 +13864,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
   utils.rip(l, r, out, off);
 };
 
-},{"../des":65,"inherits":109,"minimalistic-assert":115}],69:[function(require,module,exports){
+},{"../des":63,"inherits":107,"minimalistic-assert":113}],67:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -17801,7 +13921,7 @@ EDE.prototype._update = function _update(inp, inOff, out, outOff) {
 EDE.prototype._pad = DES.prototype._pad;
 EDE.prototype._unpad = DES.prototype._unpad;
 
-},{"../des":65,"inherits":109,"minimalistic-assert":115}],70:[function(require,module,exports){
+},{"../des":63,"inherits":107,"minimalistic-assert":113}],68:[function(require,module,exports){
 'use strict';
 
 exports.readUInt32BE = function readUInt32BE(bytes, off) {
@@ -18059,7 +14179,7 @@ exports.padSplit = function padSplit(num, size, group) {
   return out.join(' ');
 };
 
-},{}],71:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 (function (Buffer){
 var generatePrime = require('./lib/generatePrime')
 var primes = require('./lib/primes.json')
@@ -18105,7 +14225,7 @@ exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffi
 exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
 }).call(this,require("buffer").Buffer)
-},{"./lib/dh":72,"./lib/generatePrime":73,"./lib/primes.json":74,"buffer":54}],72:[function(require,module,exports){
+},{"./lib/dh":70,"./lib/generatePrime":71,"./lib/primes.json":72,"buffer":54}],70:[function(require,module,exports){
 (function (Buffer){
 var BN = require('bn.js');
 var MillerRabin = require('miller-rabin');
@@ -18273,7 +14393,7 @@ function formatReturnValue(bn, enc) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./generatePrime":73,"bn.js":22,"buffer":54,"miller-rabin":114,"randombytes":217}],73:[function(require,module,exports){
+},{"./generatePrime":71,"bn.js":22,"buffer":54,"miller-rabin":112,"randombytes":215}],71:[function(require,module,exports){
 var randomBytes = require('randombytes');
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
@@ -18380,7 +14500,7 @@ function findPrime(bits, gen) {
 
 }
 
-},{"bn.js":22,"miller-rabin":114,"randombytes":217}],74:[function(require,module,exports){
+},{"bn.js":22,"miller-rabin":112,"randombytes":215}],72:[function(require,module,exports){
 module.exports={
     "modp1": {
         "gen": "02",
@@ -18415,7 +14535,7 @@ module.exports={
         "prime": "ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"
     }
 }
-},{}],75:[function(require,module,exports){
+},{}],73:[function(require,module,exports){
 'use strict';
 
 var elliptic = exports;
@@ -18430,7 +14550,7 @@ elliptic.curves = require('./elliptic/curves');
 elliptic.ec = require('./elliptic/ec');
 elliptic.eddsa = require('./elliptic/eddsa');
 
-},{"../package.json":90,"./elliptic/curve":78,"./elliptic/curves":81,"./elliptic/ec":82,"./elliptic/eddsa":85,"./elliptic/utils":89,"brorand":23}],76:[function(require,module,exports){
+},{"../package.json":88,"./elliptic/curve":76,"./elliptic/curves":79,"./elliptic/ec":80,"./elliptic/eddsa":83,"./elliptic/utils":87,"brorand":23}],74:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -18807,7 +14927,7 @@ BasePoint.prototype.dblp = function dblp(k) {
   return r;
 };
 
-},{"../../elliptic":75,"bn.js":22}],77:[function(require,module,exports){
+},{"../../elliptic":73,"bn.js":22}],75:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -19242,7 +15362,7 @@ Point.prototype.eqXToP = function eqXToP(x) {
 Point.prototype.toP = Point.prototype.normalize;
 Point.prototype.mixedAdd = Point.prototype.add;
 
-},{"../../elliptic":75,"../curve":78,"bn.js":22,"inherits":109}],78:[function(require,module,exports){
+},{"../../elliptic":73,"../curve":76,"bn.js":22,"inherits":107}],76:[function(require,module,exports){
 'use strict';
 
 var curve = exports;
@@ -19252,7 +15372,7 @@ curve.short = require('./short');
 curve.mont = require('./mont');
 curve.edwards = require('./edwards');
 
-},{"./base":76,"./edwards":77,"./mont":79,"./short":80}],79:[function(require,module,exports){
+},{"./base":74,"./edwards":75,"./mont":77,"./short":78}],77:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -19434,7 +15554,7 @@ Point.prototype.getX = function getX() {
   return this.x.fromRed();
 };
 
-},{"../../elliptic":75,"../curve":78,"bn.js":22,"inherits":109}],80:[function(require,module,exports){
+},{"../../elliptic":73,"../curve":76,"bn.js":22,"inherits":107}],78:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -20373,7 +16493,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
   return this.z.cmpn(0) === 0;
 };
 
-},{"../../elliptic":75,"../curve":78,"bn.js":22,"inherits":109}],81:[function(require,module,exports){
+},{"../../elliptic":73,"../curve":76,"bn.js":22,"inherits":107}],79:[function(require,module,exports){
 'use strict';
 
 var curves = exports;
@@ -20580,7 +16700,7 @@ defineCurve('secp256k1', {
   ]
 });
 
-},{"../elliptic":75,"./precomputed/secp256k1":88,"hash.js":95}],82:[function(require,module,exports){
+},{"../elliptic":73,"./precomputed/secp256k1":86,"hash.js":93}],80:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -20822,7 +16942,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
   throw new Error('Unable to find valid recovery factor');
 };
 
-},{"../../elliptic":75,"./key":83,"./signature":84,"bn.js":22,"hmac-drbg":107}],83:[function(require,module,exports){
+},{"../../elliptic":73,"./key":81,"./signature":82,"bn.js":22,"hmac-drbg":105}],81:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -20943,7 +17063,7 @@ KeyPair.prototype.inspect = function inspect() {
          ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
 };
 
-},{"../../elliptic":75,"bn.js":22}],84:[function(require,module,exports){
+},{"../../elliptic":73,"bn.js":22}],82:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -21080,7 +17200,7 @@ Signature.prototype.toDER = function toDER(enc) {
   return utils.encode(res, enc);
 };
 
-},{"../../elliptic":75,"bn.js":22}],85:[function(require,module,exports){
+},{"../../elliptic":73,"bn.js":22}],83:[function(require,module,exports){
 'use strict';
 
 var hash = require('hash.js');
@@ -21200,7 +17320,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
   return val instanceof this.pointClass;
 };
 
-},{"../../elliptic":75,"./key":86,"./signature":87,"hash.js":95}],86:[function(require,module,exports){
+},{"../../elliptic":73,"./key":84,"./signature":85,"hash.js":93}],84:[function(require,module,exports){
 'use strict';
 
 var elliptic = require('../../elliptic');
@@ -21298,7 +17418,7 @@ KeyPair.prototype.getPublic = function getPublic(enc) {
 
 module.exports = KeyPair;
 
-},{"../../elliptic":75}],87:[function(require,module,exports){
+},{"../../elliptic":73}],85:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -21366,7 +17486,7 @@ Signature.prototype.toHex = function toHex() {
 
 module.exports = Signature;
 
-},{"../../elliptic":75,"bn.js":22}],88:[function(require,module,exports){
+},{"../../elliptic":73,"bn.js":22}],86:[function(require,module,exports){
 module.exports = {
   doubles: {
     step: 4,
@@ -22148,7 +18268,7 @@ module.exports = {
   }
 };
 
-},{}],89:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 'use strict';
 
 var utils = exports;
@@ -22270,7 +18390,7 @@ function intFromLE(bytes) {
 utils.intFromLE = intFromLE;
 
 
-},{"bn.js":22,"minimalistic-assert":115,"minimalistic-crypto-utils":116}],90:[function(require,module,exports){
+},{"bn.js":22,"minimalistic-assert":113,"minimalistic-crypto-utils":114}],88:[function(require,module,exports){
 module.exports={
   "_from": "elliptic@^6.0.0",
   "_id": "elliptic@6.4.1",
@@ -22359,7 +18479,7 @@ module.exports={
   "version": "6.4.1"
 }
 
-},{}],91:[function(require,module,exports){
+},{}],89:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -22884,7 +19004,7 @@ function functionBindPolyfill(context) {
   };
 }
 
-},{}],92:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var MD5 = require('md5.js')
 
@@ -22931,7 +19051,7 @@ function EVP_BytesToKey (password, salt, keyBits, ivLen) {
 
 module.exports = EVP_BytesToKey
 
-},{"md5.js":113,"safe-buffer":236}],93:[function(require,module,exports){
+},{"md5.js":111,"safe-buffer":234}],91:[function(require,module,exports){
 /**
  * fakerator v0.3.0
  * https://github.com/icebob/fakerator
@@ -34101,7 +30221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-},{}],94:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 'use strict'
 var Buffer = require('safe-buffer').Buffer
 var Transform = require('stream').Transform
@@ -34198,7 +30318,7 @@ HashBase.prototype._digest = function () {
 
 module.exports = HashBase
 
-},{"inherits":109,"safe-buffer":236,"stream":256}],95:[function(require,module,exports){
+},{"inherits":107,"safe-buffer":234,"stream":254}],93:[function(require,module,exports){
 var hash = exports;
 
 hash.utils = require('./hash/utils');
@@ -34215,7 +30335,7 @@ hash.sha384 = hash.sha.sha384;
 hash.sha512 = hash.sha.sha512;
 hash.ripemd160 = hash.ripemd.ripemd160;
 
-},{"./hash/common":96,"./hash/hmac":97,"./hash/ripemd":98,"./hash/sha":99,"./hash/utils":106}],96:[function(require,module,exports){
+},{"./hash/common":94,"./hash/hmac":95,"./hash/ripemd":96,"./hash/sha":97,"./hash/utils":104}],94:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -34309,7 +30429,7 @@ BlockHash.prototype._pad = function pad() {
   return res;
 };
 
-},{"./utils":106,"minimalistic-assert":115}],97:[function(require,module,exports){
+},{"./utils":104,"minimalistic-assert":113}],95:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -34358,7 +30478,7 @@ Hmac.prototype.digest = function digest(enc) {
   return this.outer.digest(enc);
 };
 
-},{"./utils":106,"minimalistic-assert":115}],98:[function(require,module,exports){
+},{"./utils":104,"minimalistic-assert":113}],96:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -34506,7 +30626,7 @@ var sh = [
   8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
 ];
 
-},{"./common":96,"./utils":106}],99:[function(require,module,exports){
+},{"./common":94,"./utils":104}],97:[function(require,module,exports){
 'use strict';
 
 exports.sha1 = require('./sha/1');
@@ -34515,7 +30635,7 @@ exports.sha256 = require('./sha/256');
 exports.sha384 = require('./sha/384');
 exports.sha512 = require('./sha/512');
 
-},{"./sha/1":100,"./sha/224":101,"./sha/256":102,"./sha/384":103,"./sha/512":104}],100:[function(require,module,exports){
+},{"./sha/1":98,"./sha/224":99,"./sha/256":100,"./sha/384":101,"./sha/512":102}],98:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -34591,7 +30711,7 @@ SHA1.prototype._digest = function digest(enc) {
     return utils.split32(this.h, 'big');
 };
 
-},{"../common":96,"../utils":106,"./common":105}],101:[function(require,module,exports){
+},{"../common":94,"../utils":104,"./common":103}],99:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -34623,7 +30743,7 @@ SHA224.prototype._digest = function digest(enc) {
 };
 
 
-},{"../utils":106,"./256":102}],102:[function(require,module,exports){
+},{"../utils":104,"./256":100}],100:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -34730,7 +30850,7 @@ SHA256.prototype._digest = function digest(enc) {
     return utils.split32(this.h, 'big');
 };
 
-},{"../common":96,"../utils":106,"./common":105,"minimalistic-assert":115}],103:[function(require,module,exports){
+},{"../common":94,"../utils":104,"./common":103,"minimalistic-assert":113}],101:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -34767,7 +30887,7 @@ SHA384.prototype._digest = function digest(enc) {
     return utils.split32(this.h.slice(0, 12), 'big');
 };
 
-},{"../utils":106,"./512":104}],104:[function(require,module,exports){
+},{"../utils":104,"./512":102}],102:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -35099,7 +31219,7 @@ function g1_512_lo(xh, xl) {
   return r;
 }
 
-},{"../common":96,"../utils":106,"minimalistic-assert":115}],105:[function(require,module,exports){
+},{"../common":94,"../utils":104,"minimalistic-assert":113}],103:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -35150,7 +31270,7 @@ function g1_256(x) {
 }
 exports.g1_256 = g1_256;
 
-},{"../utils":106}],106:[function(require,module,exports){
+},{"../utils":104}],104:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -35430,7 +31550,7 @@ function shr64_lo(ah, al, num) {
 }
 exports.shr64_lo = shr64_lo;
 
-},{"inherits":109,"minimalistic-assert":115}],107:[function(require,module,exports){
+},{"inherits":107,"minimalistic-assert":113}],105:[function(require,module,exports){
 'use strict';
 
 var hash = require('hash.js');
@@ -35545,7 +31665,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
   return utils.encode(res, enc);
 };
 
-},{"hash.js":95,"minimalistic-assert":115,"minimalistic-crypto-utils":116}],108:[function(require,module,exports){
+},{"hash.js":93,"minimalistic-assert":113,"minimalistic-crypto-utils":114}],106:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -35631,7 +31751,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],109:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -35656,7 +31776,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],110:[function(require,module,exports){
+},{}],108:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -35679,14 +31799,14 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],111:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],112:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -52797,7 +48917,7 @@ module.exports = Array.isArray || function (arr) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],113:[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 'use strict'
 var inherits = require('inherits')
 var HashBase = require('hash-base')
@@ -52945,7 +49065,7 @@ function fnI (a, b, c, d, m, k, s) {
 
 module.exports = MD5
 
-},{"hash-base":94,"inherits":109,"safe-buffer":236}],114:[function(require,module,exports){
+},{"hash-base":92,"inherits":107,"safe-buffer":234}],112:[function(require,module,exports){
 var bn = require('bn.js');
 var brorand = require('brorand');
 
@@ -53062,7 +49182,7 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
   return false;
 };
 
-},{"bn.js":22,"brorand":23}],115:[function(require,module,exports){
+},{"bn.js":22,"brorand":23}],113:[function(require,module,exports){
 module.exports = assert;
 
 function assert(val, msg) {
@@ -53075,7 +49195,7 @@ assert.equal = function assertEqual(l, r, msg) {
     throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
 };
 
-},{}],116:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 'use strict';
 
 var utils = exports;
@@ -53135,7 +49255,7 @@ utils.encode = function encode(arr, enc) {
     return arr;
 };
 
-},{}],117:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 /*
 Copyright (c) 2011, Rob Ellis, Chris Umbel
 
@@ -53310,7 +49430,7 @@ Sentences.prototype.type = function(callback) {
 
 module.exports = Sentences;
 
-},{"underscore":266}],118:[function(require,module,exports){
+},{"underscore":264}],116:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -53370,7 +49490,7 @@ BayesClassifier.load = load;
 
 module.exports = BayesClassifier;
 
-},{"../stemmers/porter_stemmer":145,"./classifier":119,"apparatus":5,"util":269}],119:[function(require,module,exports){
+},{"../stemmers/porter_stemmer":143,"./classifier":117,"apparatus":5,"util":267}],117:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -53539,7 +49659,7 @@ Classifier.load = load;
 
 module.exports = Classifier;
 
-},{"../stemmers/porter_stemmer":145,"events":91,"fs":52,"util":269}],120:[function(require,module,exports){
+},{"../stemmers/porter_stemmer":143,"events":89,"fs":52,"util":267}],118:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -53601,7 +49721,7 @@ LogisticRegressionClassifier.load = load;
 
 module.exports = LogisticRegressionClassifier;
 
-},{"../stemmers/porter_stemmer":145,"./classifier":119,"apparatus":5,"util":269}],121:[function(require,module,exports){
+},{"../stemmers/porter_stemmer":143,"./classifier":117,"apparatus":5,"util":267}],119:[function(require,module,exports){
 /*
 Copyright (c) 2011, John Crepezzi, Chris Umbel
 
@@ -53672,7 +49792,7 @@ var compare = function (str1, str2) {
 
 module.exports = compare;
 
-},{}],122:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 /*
 Copyright (c) 2012, Adam Phillabaum, Chris Umbel
 
@@ -53785,7 +49905,7 @@ function JaroWinklerDistance(s1, s2, dj) {
 }
 module.exports = JaroWinklerDistance;
 
-},{}],123:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 /*
 Copyright (c) 2012, Sid Nallu, Chris Umbel
 
@@ -53855,7 +49975,7 @@ function LevenshteinDistance (source, target, options) {
 
 module.exports = LevenshteinDistance;
 
-},{}],124:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -53932,7 +50052,7 @@ exports.normalize_ja = require('./normalizers/normalizer_ja').normalize_ja;
 exports.removeDiacritics = require('./normalizers/remove_diacritics');
 exports.transliterate_ja = require('./transliterators/ja');
 
-},{"./analyzers/sentence_analyzer":117,"./classifiers/bayes_classifier":118,"./classifiers/logistic_regression_classifier":120,"./distance/dice_coefficient":121,"./distance/jaro-winkler_distance":122,"./distance/levenshtein_distance":123,"./inflectors/count_inflector":125,"./inflectors/fr/noun_inflector":127,"./inflectors/ja/noun_inflector":128,"./inflectors/noun_inflector":129,"./inflectors/present_verb_inflector":130,"./ngrams/ngrams":132,"./ngrams/ngrams_zh":133,"./normalizers/normalizer":134,"./normalizers/normalizer_ja":135,"./normalizers/remove_diacritics":137,"./phonetics/dm_soundex":138,"./phonetics/double_metaphone":139,"./phonetics/metaphone":140,"./phonetics/soundex":142,"./stemmers/lancaster_stemmer":144,"./stemmers/porter_stemmer":145,"./stemmers/porter_stemmer_es":146,"./stemmers/porter_stemmer_fa":147,"./stemmers/porter_stemmer_fr":148,"./stemmers/porter_stemmer_it":149,"./stemmers/porter_stemmer_no":150,"./stemmers/porter_stemmer_ru":151,"./stemmers/stemmer_fr":155,"./stemmers/stemmer_ja":157,"./stemmers/stemmer_pl":159,"./tfidf/tfidf":161,"./tokenizers/aggressive_tokenizer":162,"./tokenizers/aggressive_tokenizer_es":163,"./tokenizers/aggressive_tokenizer_fa":164,"./tokenizers/aggressive_tokenizer_it":166,"./tokenizers/aggressive_tokenizer_nl":167,"./tokenizers/aggressive_tokenizer_no":168,"./tokenizers/aggressive_tokenizer_pl":169,"./tokenizers/aggressive_tokenizer_pt":170,"./tokenizers/aggressive_tokenizer_ru":171,"./tokenizers/regexp_tokenizer":172,"./tokenizers/tokenizer_ja":174,"./tokenizers/treebank_word_tokenizer":175,"./transliterators/ja":176,"./trie/trie":177,"./util/edge_weighted_digraph":179,"./util/longest_path_tree":180,"./util/shortest_path_tree":181,"./util/stopwords":182,"./wordnet/wordnet":195}],125:[function(require,module,exports){
+},{"./analyzers/sentence_analyzer":115,"./classifiers/bayes_classifier":116,"./classifiers/logistic_regression_classifier":118,"./distance/dice_coefficient":119,"./distance/jaro-winkler_distance":120,"./distance/levenshtein_distance":121,"./inflectors/count_inflector":123,"./inflectors/fr/noun_inflector":125,"./inflectors/ja/noun_inflector":126,"./inflectors/noun_inflector":127,"./inflectors/present_verb_inflector":128,"./ngrams/ngrams":130,"./ngrams/ngrams_zh":131,"./normalizers/normalizer":132,"./normalizers/normalizer_ja":133,"./normalizers/remove_diacritics":135,"./phonetics/dm_soundex":136,"./phonetics/double_metaphone":137,"./phonetics/metaphone":138,"./phonetics/soundex":140,"./stemmers/lancaster_stemmer":142,"./stemmers/porter_stemmer":143,"./stemmers/porter_stemmer_es":144,"./stemmers/porter_stemmer_fa":145,"./stemmers/porter_stemmer_fr":146,"./stemmers/porter_stemmer_it":147,"./stemmers/porter_stemmer_no":148,"./stemmers/porter_stemmer_ru":149,"./stemmers/stemmer_fr":153,"./stemmers/stemmer_ja":155,"./stemmers/stemmer_pl":157,"./tfidf/tfidf":159,"./tokenizers/aggressive_tokenizer":160,"./tokenizers/aggressive_tokenizer_es":161,"./tokenizers/aggressive_tokenizer_fa":162,"./tokenizers/aggressive_tokenizer_it":164,"./tokenizers/aggressive_tokenizer_nl":165,"./tokenizers/aggressive_tokenizer_no":166,"./tokenizers/aggressive_tokenizer_pl":167,"./tokenizers/aggressive_tokenizer_pt":168,"./tokenizers/aggressive_tokenizer_ru":169,"./tokenizers/regexp_tokenizer":170,"./tokenizers/tokenizer_ja":172,"./tokenizers/treebank_word_tokenizer":173,"./transliterators/ja":174,"./trie/trie":175,"./util/edge_weighted_digraph":177,"./util/longest_path_tree":178,"./util/shortest_path_tree":179,"./util/stopwords":180,"./wordnet/wordnet":193}],123:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -53988,7 +50108,7 @@ CountInflector.nth = nth;
 
 module.exports = CountInflector;
 
-},{}],126:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -54018,7 +50138,7 @@ var FormSet = function() {
 
 module.exports = FormSet;
 
-},{}],127:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -54255,7 +50375,7 @@ util.inherits(NounInflector, SingularPluralInflector);
 
 module.exports = NounInflector;
 
-},{"../form_set":126,"../singular_plural_inflector":131,"util":269}],128:[function(require,module,exports){
+},{"../form_set":124,"../singular_plural_inflector":129,"util":267}],126:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -54392,7 +50512,7 @@ util.inherits(NounInflector, SingularPluralInflector);
 
 module.exports = NounInflector;
 
-},{"../form_set":126,"../singular_plural_inflector":131,"util":269}],129:[function(require,module,exports){
+},{"../form_set":124,"../singular_plural_inflector":129,"util":267}],127:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -54499,7 +50619,7 @@ util.inherits(NounInflector, SingularPluralInflector);
     
 module.exports = NounInflector;
 
-},{"./form_set":126,"./singular_plural_inflector":131,"util":269}],130:[function(require,module,exports){
+},{"./form_set":124,"./singular_plural_inflector":129,"util":267}],128:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -54575,7 +50695,7 @@ util.inherits(VerbInflector, SingularPluralInflector);
 
 module.exports = VerbInflector;
 
-},{"./form_set":126,"./singular_plural_inflector":131,"util":269}],131:[function(require,module,exports){
+},{"./form_set":124,"./singular_plural_inflector":129,"util":267}],129:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -54686,7 +50806,7 @@ TenseInflector.prototype.izeRegExps = function(token, forms) {
 
 module.exports = TenseInflector;
 
-},{}],132:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 /*
 Copyright (c) 2011, Rob Ellis, Chris Umbel
 
@@ -54779,7 +50899,7 @@ var ngrams = function(sequence, n, startSymbol, endSymbol) {
 }
 
 
-},{"../tokenizers/regexp_tokenizer":172,"underscore":266}],133:[function(require,module,exports){
+},{"../tokenizers/regexp_tokenizer":170,"underscore":264}],131:[function(require,module,exports){
 /*
 Copyright (c) 2014, Lee Wenzhu
 
@@ -54864,7 +50984,7 @@ var ngrams = function(sequence, n, startSymbol, endSymbol) {
 };
 
 
-},{"underscore":266}],134:[function(require,module,exports){
+},{"underscore":264}],132:[function(require,module,exports){
 /*
  Copyright (c) 2013, Kenneth Koch
 
@@ -54961,7 +51081,7 @@ exports.normalize_tokens = normalize_tokens;
 
 
 
-},{"../util/utils":192}],135:[function(require,module,exports){
+},{"../util/utils":190}],133:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -55587,7 +51707,7 @@ var normalize_ja = function(str) {
 exports.normalize_ja = normalize_ja;
 exports.converters = converters;
 
-},{"../util/utils":192,"../util/utils.js":192}],136:[function(require,module,exports){
+},{"../util/utils":190,"../util/utils.js":190}],134:[function(require,module,exports){
 /*
  Copyright (c) 2014, Kristoffer Brabrand
 
@@ -55647,7 +51767,7 @@ var remove_diacritics = function(text) {
 
 // export the relevant stuff.
 exports.remove_diacritics = remove_diacritics;
-},{}],137:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 /*
  Copyright (c) 2012, Alexy Maslennikov
 
@@ -55770,7 +51890,7 @@ module.exports = function(str) {
 	return str;
 };
 
-},{}],138:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 /*
 Copyright (c) 2012, Alexy Maslenninkov
 
@@ -56019,7 +52139,7 @@ soundex.process = process;
 module.exports = soundex;
 
 
-},{"./phonetic":141}],139:[function(require,module,exports){
+},{"./phonetic":139}],137:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -56527,7 +52647,7 @@ DoubleMetaphone.compare = compare
 DoubleMetaphone.process = process;
 DoubleMetaphone.isVowel = isVowel;
 
-},{"./phonetic":141}],140:[function(require,module,exports){
+},{"./phonetic":139}],138:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -56717,7 +52837,7 @@ Metaphone.dropY = dropY;
 Metaphone.transformZ = transformZ;
 Metaphone.dropVowels = dropVowels;
 
-},{"./phonetic":141}],141:[function(require,module,exports){
+},{"./phonetic":139}],139:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -56773,7 +52893,7 @@ module.exports = function() {
     };
 };
 
-},{"../tokenizers/aggressive_tokenizer":162,"../util/stopwords":182}],142:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer":160,"../util/stopwords":180}],140:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -56855,7 +52975,7 @@ SoundEx.transformR = transformR;
 SoundEx.condense = condense;
 SoundEx.padRight0 = padRight0;
 
-},{"./phonetic":141}],143:[function(require,module,exports){
+},{"./phonetic":139}],141:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -57647,7 +53767,7 @@ exports.rules = {
 };
 
 
-},{}],144:[function(require,module,exports){
+},{}],142:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -57723,7 +53843,7 @@ module.exports = LancasterStemmer;
 LancasterStemmer.stem = function(token) {
     return applyRuleSection(token.toLowerCase(), true);
 }
-},{"./lancaster_rules":143,"./stemmer":152}],145:[function(require,module,exports){
+},{"./lancaster_rules":141,"./stemmer":150}],143:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -57930,7 +54050,7 @@ PorterStemmer.step4 = step4;
 PorterStemmer.step5a = step5a;
 PorterStemmer.step5b = step5b;
 
-},{"./stemmer":152}],146:[function(require,module,exports){
+},{"./stemmer":150}],144:[function(require,module,exports){
 /*
 Copyright (c) 2012, David Przybilla, Chris Umbel
 
@@ -58153,7 +54273,7 @@ PorterStemmer.stem = function(token) {
 
 };
 
-},{"./stemmer_es":153}],147:[function(require,module,exports){
+},{"./stemmer_es":151}],145:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 Farsi Porter Stemmer by Fardin Koochaki <me@fardinak.com>
@@ -58187,7 +54307,7 @@ module.exports = PorterStemmer;
 PorterStemmer.stem = function(token) {
     return token;
 };
-},{"./stemmer_fa":154}],148:[function(require,module,exports){
+},{"./stemmer_fa":152}],146:[function(require,module,exports){
 'use strict';
 
 /*
@@ -58565,7 +54685,7 @@ function endsin(token, suffix) {
   if (token.length < suffix.length) return false;
   return (token.slice(-suffix.length) == suffix);
 };
-},{"./stemmer_fr":155}],149:[function(require,module,exports){
+},{"./stemmer_fr":153}],147:[function(require,module,exports){
 /*
 Copyright (c) 2012, Leonardo Fenu, Chris Umbel
 
@@ -58799,7 +54919,7 @@ PorterStemmer.stem = function(token) {
 	return token.toLowerCase();
 
 };
-},{"./stemmer_it":156}],150:[function(require,module,exports){
+},{"./stemmer_it":154}],148:[function(require,module,exports){
 /*
 Copyright (c) 2014, Kristoffer Brabrand
 
@@ -58955,7 +55075,7 @@ PorterStemmer.step1b = step1b;
 PorterStemmer.step1c = step1c;
 PorterStemmer.step2  = step2;
 PorterStemmer.step3  = step3;
-},{"./stemmer_no":158}],151:[function(require,module,exports){
+},{"./stemmer_no":156}],149:[function(require,module,exports){
 /*
 Copyright (c) 2012, Polyakov Vladimir, Chris Umbel
 
@@ -59108,7 +55228,7 @@ PorterStemmer.stem = function(token) {
 	return head + superlativeResult;
 };
 
-},{"./stemmer_ru":160}],152:[function(require,module,exports){
+},{"./stemmer_ru":158}],150:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -59171,7 +55291,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer":162,"../util/stopwords":182}],153:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer":160,"../util/stopwords":180}],151:[function(require,module,exports){
 /*
 Copyright (c) 2012, David Przybilla, Chris Umbel
 
@@ -59231,7 +55351,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer_es":163,"../util/stopwords_es":183}],154:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_es":161,"../util/stopwords_es":181}],152:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 Farsi Stemmer by Fardin Koochaki <me@fardinak.com>
@@ -59287,7 +55407,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer_fa":164,"../util/stopwords_fa":184}],155:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_fa":162,"../util/stopwords_fa":182}],153:[function(require,module,exports){
 /*
 Copyright (c) 2014, Ismaël Héry
 
@@ -59347,7 +55467,7 @@ module.exports = function() {
    };
 }
 
-},{"../tokenizers/aggressive_tokenizer_fr":165,"../util/stopwords_fr":185}],156:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_fr":163,"../util/stopwords_fr":183}],154:[function(require,module,exports){
 var stopwords = require('../util/stopwords_it');
 var Tokenizer = require('../tokenizers/aggressive_tokenizer_it');
 
@@ -59384,7 +55504,7 @@ module.exports = function() {
         };
     };
 }
-},{"../tokenizers/aggressive_tokenizer_it":166,"../util/stopwords_it":186}],157:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_it":164,"../util/stopwords_it":184}],155:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -59524,7 +55644,7 @@ StemmerJa.prototype.attach = function() {
 
 module.exports = StemmerJa;
 
-},{"../tokenizers/tokenizer_ja":174,"../util/stopwords_ja":187}],158:[function(require,module,exports){
+},{"../tokenizers/tokenizer_ja":172,"../util/stopwords_ja":185}],156:[function(require,module,exports){
 /*
 Copyright (c) 2014, Kristoffer Brabrand
 
@@ -59587,7 +55707,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer_no":168,"../util/stopwords_no":188}],159:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_no":166,"../util/stopwords_no":186}],157:[function(require,module,exports){
 /*
 Copyright (c) 2013, Paweł Łaskarzewski
 
@@ -59647,7 +55767,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer_pl":169,"../util/stopwords_pl":189}],160:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_pl":167,"../util/stopwords_pl":187}],158:[function(require,module,exports){
 /*
 Copyright (c) 2012, Polyakov Vladimir, Chris Umbel
 
@@ -59707,7 +55827,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer_ru":171,"../util/stopwords_ru":190}],161:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_ru":169,"../util/stopwords_ru":188}],159:[function(require,module,exports){
 (function (Buffer){
 /*
 Copyright (c) 2011, Rob Ellis, Chris Umbel
@@ -59905,7 +56025,7 @@ TfIdf.prototype.setTokenizer = function(t) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"../tokenizers/regexp_tokenizer":172,"../util/stopwords":182,"buffer":54,"fs":52,"underscore":266}],162:[function(require,module,exports){
+},{"../tokenizers/regexp_tokenizer":170,"../util/stopwords":180,"buffer":54,"fs":52,"underscore":264}],160:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -59943,7 +56063,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/\W+/));
 };
 
-},{"./tokenizer":173,"util":269}],163:[function(require,module,exports){
+},{"./tokenizer":171,"util":267}],161:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel,David Przybilla
 
@@ -59981,7 +56101,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/[^a-zA-Zá-úÁ-ÚñÑüÜ]+/));
 };
 
-},{"./tokenizer":173,"util":269}],164:[function(require,module,exports){
+},{"./tokenizer":171,"util":267}],162:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 Farsi Aggressive Tokenizer by Fardin Koochaki <me@fardinak.com>
@@ -60031,7 +56151,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.clearEmptyString(text.split(/\s+/));
 };
 
-},{"./tokenizer":173,"util":269}],165:[function(require,module,exports){
+},{"./tokenizer":171,"util":267}],163:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -60069,7 +56189,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/[^a-z0-9äâàéèëêïîöôùüûœç]+/i));
 };
 
-},{"./tokenizer":173,"util":269}],166:[function(require,module,exports){
+},{"./tokenizer":171,"util":267}],164:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel,David Przybilla
 
@@ -60107,7 +56227,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/\W+/));
 };
 
-},{"./tokenizer":173,"util":269}],167:[function(require,module,exports){
+},{"./tokenizer":171,"util":267}],165:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel, Martijn de Boer
 
@@ -60145,7 +56265,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/[^a-zA-Z0-9_']+/));
 };
 
-},{"./tokenizer":173,"util":269}],168:[function(require,module,exports){
+},{"./tokenizer":171,"util":267}],166:[function(require,module,exports){
 /*
 Copyright (c) 2014, Kristoffer Brabrand
 
@@ -60186,7 +56306,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/[^A-Za-z0-9_æøåÆØÅäÄöÖüÜ]+/));
 };
 
-},{"../normalizers/normalizer_no":136,"./tokenizer":173,"util":269}],169:[function(require,module,exports){
+},{"../normalizers/normalizer_no":134,"./tokenizer":171,"util":267}],167:[function(require,module,exports){
 /*
 Copyright (c) 2013, Paweł Łaskarzewski
 
@@ -60233,7 +56353,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.withoutEmpty(this.clearText(text).split(' '));
 };
 
-},{"./tokenizer":173,"util":269}],170:[function(require,module,exports){
+},{"./tokenizer":171,"util":267}],168:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel,David Przybilla
 
@@ -60275,7 +56395,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.withoutEmpty(this.trim(text.split(/[^a-zA-Zà-úÀ-Ú]/)));
 };
 
-},{"./tokenizer":173,"util":269}],171:[function(require,module,exports){
+},{"./tokenizer":171,"util":267}],169:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -60322,7 +56442,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.withoutEmpty(this.clearText(text).split(' '));
 };
 
-},{"./tokenizer":173,"util":269}],172:[function(require,module,exports){
+},{"./tokenizer":171,"util":267}],170:[function(require,module,exports){
 /*
 Copyright (c) 2011, Rob Ellis, Chris Umbel
 
@@ -60410,7 +56530,7 @@ var WordPunctTokenizer = function(options) {
 util.inherits(WordPunctTokenizer, RegexpTokenizer);
 exports.WordPunctTokenizer = WordPunctTokenizer;
 
-},{"./tokenizer":173,"underscore":266,"util":269}],173:[function(require,module,exports){
+},{"./tokenizer":171,"underscore":264,"util":267}],171:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -60463,7 +56583,7 @@ Tokenizer.prototype.tokenize = function() {};
 
 module.exports = Tokenizer;
 
-},{}],174:[function(require,module,exports){
+},{}],172:[function(require,module,exports){
 // Original copyright:
 /*
  Copyright (c) 2008, Taku Kudo
@@ -60742,7 +56862,7 @@ TokenizerJa.prototype.tokenize = function(text) {
 
 module.exports = TokenizerJa;
 
-},{"../normalizers/normalizer_ja":135,"./tokenizer":173,"util":269}],175:[function(require,module,exports){
+},{"../normalizers/normalizer_ja":133,"./tokenizer":171,"util":267}],173:[function(require,module,exports){
 /*
 Copyright (c) 2011, Rob Ellis, Chris Umbel
 
@@ -60818,7 +56938,7 @@ TreebankWordTokenizer.prototype.tokenize = function(text) {
 
 module.exports = TreebankWordTokenizer;
 
-},{"./tokenizer":173,"underscore":266,"util":269}],176:[function(require,module,exports){
+},{"./tokenizer":171,"underscore":264,"util":267}],174:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -61402,7 +57522,7 @@ module.exports = function(str) {
   return str;
 };
 
-},{"../../util/utils":192}],177:[function(require,module,exports){
+},{"../../util/utils":190}],175:[function(require,module,exports){
 /*
 Copyright (c) 2014 Ken Koch
 
@@ -61634,7 +57754,7 @@ Trie.prototype.getSize = function() {
  **/
 module.exports = Trie;
 
-},{}],178:[function(require,module,exports){
+},{}],176:[function(require,module,exports){
 /*
  Copyright (c) 2014, Lee Wenzhu
 
@@ -61686,7 +57806,7 @@ Bag.prototype.unpack = function() {
 
 module.exports = Bag;
 
-},{}],179:[function(require,module,exports){
+},{}],177:[function(require,module,exports){
 /*
  Copyright (c) 2014, Lee Wenzhu
 
@@ -61800,7 +57920,7 @@ EdgeWeightedDigraph.prototype.toString = function() {
 
 module.exports = EdgeWeightedDigraph;
 
-},{"./bag":178,"util":269}],180:[function(require,module,exports){
+},{"./bag":176,"util":267}],178:[function(require,module,exports){
 /*
  Copyright (c) 2014, Lee Wenzhu
 
@@ -61901,7 +58021,7 @@ LongestPathTree.prototype.pathTo = function(v) {
 
 module.exports = LongestPathTree;
 
-},{"./edge_weighted_digraph":179,"./topological":191}],181:[function(require,module,exports){
+},{"./edge_weighted_digraph":177,"./topological":189}],179:[function(require,module,exports){
 /*
  Copyright (c) 2014, Lee Wenzhu
 
@@ -62003,7 +58123,7 @@ ShortestPathTree.prototype.pathTo = function(v) {
 
 module.exports = ShortestPathTree;
 
-},{"./edge_weighted_digraph":179,"./topological":191}],182:[function(require,module,exports){
+},{"./edge_weighted_digraph":177,"./topological":189}],180:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -62046,7 +58166,7 @@ var words = [
 // tell the world about the noise words.    
 exports.words = words;
 
-},{}],183:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 /*
 Copyright (c) 2011, David Przybilla, Chris Umbel
 
@@ -62084,7 +58204,7 @@ var words = [
 // tell the world about the noise words.    
 exports.words = words;
 
-},{}],184:[function(require,module,exports){
+},{}],182:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 Farsi Stop Words by Fardin Koochaki <me@fardinak.com>
@@ -62124,7 +58244,7 @@ var words = [
 // tell the world about the noise words.    
 exports.words = words;
 
-},{}],185:[function(require,module,exports){
+},{}],183:[function(require,module,exports){
 /*
  Copyright (c) 2014, Ismaël Héry
 
@@ -62320,7 +58440,7 @@ var words = ['être', 'avoir', 'faire',
 
 exports.words = words;
 
-},{}],186:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 /*
 Copyright (c) 2011, David Przybilla, Chris Umbel
 
@@ -62374,7 +58494,7 @@ var words = [
 // tell the world about the noise words.    
 exports.words = words;
 
-},{}],187:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 // Original copyright:
 /*
  Licensed to the Apache Software Foundation (ASF) under one or more
@@ -62435,7 +58555,7 @@ var words = ['の', 'に', 'は', 'を', 'た', 'が', 'で', 'て', 'と', 'し
 // tell the world about the noise words.
 module.exports = words;
 
-},{}],188:[function(require,module,exports){
+},{}],186:[function(require,module,exports){
 /*
 Copyright (c) 2014, Kristoffer Brabrand
 
@@ -62478,7 +58598,7 @@ var words = [
 
 // tell the world about the noise words.
 exports.words = words;
-},{}],189:[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 /*
 Copyright (c) 2013, Paweł Łaskarzewski
 
@@ -62542,7 +58662,7 @@ var words = [
 // tell the world about the noise words.
 exports.words = words;
 
-},{}],190:[function(require,module,exports){
+},{}],188:[function(require,module,exports){
 /*
 Copyright (c) 2011, Polyakov Vladimir, Chris Umbel
 
@@ -62585,7 +58705,7 @@ var words = [
 // tell the world about the noise words.    
 exports.words = words;
 
-},{}],191:[function(require,module,exports){
+},{}],189:[function(require,module,exports){
 /*
  Copyright (c) 2014, Lee Wenzhu
 
@@ -62685,7 +58805,7 @@ function uniqueVertexs(edges) {
 
 module.exports = Topological;
 
-},{}],192:[function(require,module,exports){
+},{}],190:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -62806,7 +58926,7 @@ exports.replacer = replacer;
 exports.flip = flip;
 exports.merge = merge;
 
-},{}],193:[function(require,module,exports){
+},{}],191:[function(require,module,exports){
 (function (Buffer){
 /*
 Copyright (c) 2011, Chris Umbel
@@ -62896,7 +59016,7 @@ DataFile.prototype.get = get;
 module.exports = DataFile;
 
 }).call(this,require("buffer").Buffer)
-},{"./wordnet_file":196,"buffer":54,"fs":52,"util":269}],194:[function(require,module,exports){
+},{"./wordnet_file":194,"buffer":54,"fs":52,"util":267}],192:[function(require,module,exports){
 (function (Buffer){
 /*
 Copyright (c) 2011, Chris Umbel
@@ -63040,7 +59160,7 @@ IndexFile.prototype._findAt = findAt;
 module.exports = IndexFile;
 
 }).call(this,require("buffer").Buffer)
-},{"./wordnet_file":196,"buffer":54,"fs":52,"util":269}],195:[function(require,module,exports){
+},{"./wordnet_file":194,"buffer":54,"fs":52,"util":267}],193:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -63211,7 +59331,7 @@ function WordNet(dataDir) {
 
 module.exports = WordNet;
 
-},{"./data_file":193,"./index_file":194,"WNdb":undefined}],196:[function(require,module,exports){
+},{"./data_file":191,"./index_file":192,"WNdb":undefined}],194:[function(require,module,exports){
 (function (Buffer){
 /*
 Copyright (c) 2011, Chris Umbel
@@ -63284,7 +59404,7 @@ WordNetFile.appendLineChar = appendLineChar;
 module.exports = WordNetFile;
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":54,"fs":52,"path":203,"util":269}],197:[function(require,module,exports){
+},{"buffer":54,"fs":52,"path":201,"util":267}],195:[function(require,module,exports){
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -63335,7 +59455,7 @@ exports.homedir = function () {
 	return '/'
 };
 
-},{}],198:[function(require,module,exports){
+},{}],196:[function(require,module,exports){
 module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
@@ -63349,7 +59469,7 @@ module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.43": "aes-256-ofb",
 "2.16.840.1.101.3.4.1.44": "aes-256-cfb"
 }
-},{}],199:[function(require,module,exports){
+},{}],197:[function(require,module,exports){
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
 'use strict'
@@ -63473,7 +59593,7 @@ exports.signature = asn1.define('signature', function () {
   )
 })
 
-},{"./certificate":200,"asn1.js":7}],200:[function(require,module,exports){
+},{"./certificate":198,"asn1.js":7}],198:[function(require,module,exports){
 // from https://github.com/Rantanen/node-dtls/blob/25a7dc861bda38cfeac93a723500eea4f0ac2e86/Certificate.js
 // thanks to @Rantanen
 
@@ -63564,7 +59684,7 @@ var X509Certificate = asn.define('X509Certificate', function () {
 
 module.exports = X509Certificate
 
-},{"asn1.js":7}],201:[function(require,module,exports){
+},{"asn1.js":7}],199:[function(require,module,exports){
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED[\n\r]+DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)[\n\r]+([0-9A-z\n\r\+\/\=]+)[\n\r]+/m
 var startRegex = /^-----BEGIN ((?:.*? KEY)|CERTIFICATE)-----/m
@@ -63597,7 +59717,7 @@ module.exports = function (okey, password) {
   }
 }
 
-},{"browserify-aes":27,"evp_bytestokey":92,"safe-buffer":236}],202:[function(require,module,exports){
+},{"browserify-aes":27,"evp_bytestokey":90,"safe-buffer":234}],200:[function(require,module,exports){
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
 var fixProc = require('./fixProc')
@@ -63706,7 +59826,7 @@ function decrypt (data, password) {
   return Buffer.concat(out)
 }
 
-},{"./aesid.json":198,"./asn1":199,"./fixProc":201,"browserify-aes":27,"pbkdf2":204,"safe-buffer":236}],203:[function(require,module,exports){
+},{"./aesid.json":196,"./asn1":197,"./fixProc":199,"browserify-aes":27,"pbkdf2":202,"safe-buffer":234}],201:[function(require,module,exports){
 (function (process){
 // .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
 // backported and transplited with Babel, with backwards-compat fixes
@@ -64012,11 +60132,11 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":210}],204:[function(require,module,exports){
+},{"_process":208}],202:[function(require,module,exports){
 exports.pbkdf2 = require('./lib/async')
 exports.pbkdf2Sync = require('./lib/sync')
 
-},{"./lib/async":205,"./lib/sync":208}],205:[function(require,module,exports){
+},{"./lib/async":203,"./lib/sync":206}],203:[function(require,module,exports){
 (function (process,global){
 var checkParameters = require('./precondition')
 var defaultEncoding = require('./default-encoding')
@@ -64120,7 +60240,7 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./default-encoding":206,"./precondition":207,"./sync":208,"_process":210,"safe-buffer":236}],206:[function(require,module,exports){
+},{"./default-encoding":204,"./precondition":205,"./sync":206,"_process":208,"safe-buffer":234}],204:[function(require,module,exports){
 (function (process){
 var defaultEncoding
 /* istanbul ignore next */
@@ -64134,7 +60254,7 @@ if (process.browser) {
 module.exports = defaultEncoding
 
 }).call(this,require('_process'))
-},{"_process":210}],207:[function(require,module,exports){
+},{"_process":208}],205:[function(require,module,exports){
 (function (Buffer){
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
 
@@ -64166,7 +60286,7 @@ module.exports = function (password, salt, iterations, keylen) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":110}],208:[function(require,module,exports){
+},{"../../is-buffer/index.js":108}],206:[function(require,module,exports){
 var md5 = require('create-hash/md5')
 var RIPEMD160 = require('ripemd160')
 var sha = require('sha.js')
@@ -64272,7 +60392,7 @@ function pbkdf2 (password, salt, iterations, keylen, digest) {
 
 module.exports = pbkdf2
 
-},{"./default-encoding":206,"./precondition":207,"create-hash/md5":61,"ripemd160":235,"safe-buffer":236,"sha.js":249}],209:[function(require,module,exports){
+},{"./default-encoding":204,"./precondition":205,"create-hash/md5":59,"ripemd160":233,"safe-buffer":234,"sha.js":247}],207:[function(require,module,exports){
 /* -*- js-indent-level: 4; -*- */
 
 "use strict";
@@ -64338,7 +60458,7 @@ function well1024a (entropy_) {
              getUInt32: getUInt32 };
 }
 
-},{}],210:[function(require,module,exports){
+},{}],208:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -64524,7 +60644,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],211:[function(require,module,exports){
+},{}],209:[function(require,module,exports){
 exports.publicEncrypt = require('./publicEncrypt')
 exports.privateDecrypt = require('./privateDecrypt')
 
@@ -64536,7 +60656,7 @@ exports.publicDecrypt = function publicDecrypt (key, buf) {
   return exports.privateDecrypt(key, buf, true)
 }
 
-},{"./privateDecrypt":213,"./publicEncrypt":214}],212:[function(require,module,exports){
+},{"./privateDecrypt":211,"./publicEncrypt":212}],210:[function(require,module,exports){
 var createHash = require('create-hash')
 var Buffer = require('safe-buffer').Buffer
 
@@ -64557,7 +60677,7 @@ function i2ops (c) {
   return out
 }
 
-},{"create-hash":60,"safe-buffer":236}],213:[function(require,module,exports){
+},{"create-hash":58,"safe-buffer":234}],211:[function(require,module,exports){
 var parseKeys = require('parse-asn1')
 var mgf = require('./mgf')
 var xor = require('./xor')
@@ -64664,7 +60784,7 @@ function compare (a, b) {
   return dif
 }
 
-},{"./mgf":212,"./withPublic":215,"./xor":216,"bn.js":22,"browserify-rsa":45,"create-hash":60,"parse-asn1":202,"safe-buffer":236}],214:[function(require,module,exports){
+},{"./mgf":210,"./withPublic":213,"./xor":214,"bn.js":22,"browserify-rsa":45,"create-hash":58,"parse-asn1":200,"safe-buffer":234}],212:[function(require,module,exports){
 var parseKeys = require('parse-asn1')
 var randomBytes = require('randombytes')
 var createHash = require('create-hash')
@@ -64754,7 +60874,7 @@ function nonZero (len) {
   return out
 }
 
-},{"./mgf":212,"./withPublic":215,"./xor":216,"bn.js":22,"browserify-rsa":45,"create-hash":60,"parse-asn1":202,"randombytes":217,"safe-buffer":236}],215:[function(require,module,exports){
+},{"./mgf":210,"./withPublic":213,"./xor":214,"bn.js":22,"browserify-rsa":45,"create-hash":58,"parse-asn1":200,"randombytes":215,"safe-buffer":234}],213:[function(require,module,exports){
 var BN = require('bn.js')
 var Buffer = require('safe-buffer').Buffer
 
@@ -64768,7 +60888,7 @@ function withPublic (paddedMsg, key) {
 
 module.exports = withPublic
 
-},{"bn.js":22,"safe-buffer":236}],216:[function(require,module,exports){
+},{"bn.js":22,"safe-buffer":234}],214:[function(require,module,exports){
 module.exports = function xor (a, b) {
   var len = a.length
   var i = -1
@@ -64778,7 +60898,7 @@ module.exports = function xor (a, b) {
   return a
 }
 
-},{}],217:[function(require,module,exports){
+},{}],215:[function(require,module,exports){
 (function (process,global){
 'use strict'
 
@@ -64832,7 +60952,7 @@ function randomBytes (size, cb) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":210,"safe-buffer":236}],218:[function(require,module,exports){
+},{"_process":208,"safe-buffer":234}],216:[function(require,module,exports){
 (function (process,global){
 'use strict'
 
@@ -64944,9 +61064,9 @@ function randomFillSync (buf, offset, size) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":210,"randombytes":217,"safe-buffer":236}],219:[function(require,module,exports){
+},{"_process":208,"randombytes":215,"safe-buffer":234}],217:[function(require,module,exports){
 module.exports = require("./lib/randy.js");
-},{"./lib/randy.js":220}],220:[function(require,module,exports){
+},{"./lib/randy.js":218}],218:[function(require,module,exports){
 (function (process){
 /* -*- js-indent-level: 4; -*- */
 
@@ -65234,10 +61354,10 @@ var randy = (function () {
 })();
 
 }).call(this,require('_process'))
-},{"_process":210,"crypto":64,"os":197,"prng-well1024a":209}],221:[function(require,module,exports){
+},{"_process":208,"crypto":62,"os":195,"prng-well1024a":207}],219:[function(require,module,exports){
 module.exports = require('./lib/_stream_duplex.js');
 
-},{"./lib/_stream_duplex.js":222}],222:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":220}],220:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -65369,7 +61489,7 @@ Duplex.prototype._destroy = function (err, cb) {
 
   pna.nextTick(cb, err);
 };
-},{"./_stream_readable":224,"./_stream_writable":226,"core-util-is":58,"inherits":109,"process-nextick-args":230}],223:[function(require,module,exports){
+},{"./_stream_readable":222,"./_stream_writable":224,"core-util-is":56,"inherits":107,"process-nextick-args":228}],221:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -65417,7 +61537,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":225,"core-util-is":58,"inherits":109}],224:[function(require,module,exports){
+},{"./_stream_transform":223,"core-util-is":56,"inherits":107}],222:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -66439,7 +62559,7 @@ function indexOf(xs, x) {
   return -1;
 }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./_stream_duplex":222,"./internal/streams/BufferList":227,"./internal/streams/destroy":228,"./internal/streams/stream":229,"_process":210,"core-util-is":58,"events":91,"inherits":109,"isarray":111,"process-nextick-args":230,"safe-buffer":236,"string_decoder/":257,"util":24}],225:[function(require,module,exports){
+},{"./_stream_duplex":220,"./internal/streams/BufferList":225,"./internal/streams/destroy":226,"./internal/streams/stream":227,"_process":208,"core-util-is":56,"events":89,"inherits":107,"isarray":109,"process-nextick-args":228,"safe-buffer":234,"string_decoder/":255,"util":24}],223:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -66654,7 +62774,7 @@ function done(stream, er, data) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":222,"core-util-is":58,"inherits":109}],226:[function(require,module,exports){
+},{"./_stream_duplex":220,"core-util-is":56,"inherits":107}],224:[function(require,module,exports){
 (function (process,global,setImmediate){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -67344,7 +63464,7 @@ Writable.prototype._destroy = function (err, cb) {
   cb(err);
 };
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("timers").setImmediate)
-},{"./_stream_duplex":222,"./internal/streams/destroy":228,"./internal/streams/stream":229,"_process":210,"core-util-is":58,"inherits":109,"process-nextick-args":230,"safe-buffer":236,"timers":265,"util-deprecate":267}],227:[function(require,module,exports){
+},{"./_stream_duplex":220,"./internal/streams/destroy":226,"./internal/streams/stream":227,"_process":208,"core-util-is":56,"inherits":107,"process-nextick-args":228,"safe-buffer":234,"timers":263,"util-deprecate":265}],225:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -67424,7 +63544,7 @@ if (util && util.inspect && util.inspect.custom) {
     return this.constructor.name + ' ' + obj;
   };
 }
-},{"safe-buffer":236,"util":24}],228:[function(require,module,exports){
+},{"safe-buffer":234,"util":24}],226:[function(require,module,exports){
 'use strict';
 
 /*<replacement>*/
@@ -67499,10 +63619,10 @@ module.exports = {
   destroy: destroy,
   undestroy: undestroy
 };
-},{"process-nextick-args":230}],229:[function(require,module,exports){
+},{"process-nextick-args":228}],227:[function(require,module,exports){
 module.exports = require('events').EventEmitter;
 
-},{"events":91}],230:[function(require,module,exports){
+},{"events":89}],228:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -67550,10 +63670,10 @@ function nextTick(fn, arg1, arg2, arg3) {
 
 
 }).call(this,require('_process'))
-},{"_process":210}],231:[function(require,module,exports){
+},{"_process":208}],229:[function(require,module,exports){
 module.exports = require('./readable').PassThrough
 
-},{"./readable":232}],232:[function(require,module,exports){
+},{"./readable":230}],230:[function(require,module,exports){
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = exports;
 exports.Readable = exports;
@@ -67562,13 +63682,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":222,"./lib/_stream_passthrough.js":223,"./lib/_stream_readable.js":224,"./lib/_stream_transform.js":225,"./lib/_stream_writable.js":226}],233:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":220,"./lib/_stream_passthrough.js":221,"./lib/_stream_readable.js":222,"./lib/_stream_transform.js":223,"./lib/_stream_writable.js":224}],231:[function(require,module,exports){
 module.exports = require('./readable').Transform
 
-},{"./readable":232}],234:[function(require,module,exports){
+},{"./readable":230}],232:[function(require,module,exports){
 module.exports = require('./lib/_stream_writable.js');
 
-},{"./lib/_stream_writable.js":226}],235:[function(require,module,exports){
+},{"./lib/_stream_writable.js":224}],233:[function(require,module,exports){
 'use strict'
 var Buffer = require('buffer').Buffer
 var inherits = require('inherits')
@@ -67733,7 +63853,7 @@ function fn5 (a, b, c, d, e, m, k, s) {
 
 module.exports = RIPEMD160
 
-},{"buffer":54,"hash-base":94,"inherits":109}],236:[function(require,module,exports){
+},{"buffer":54,"hash-base":92,"inherits":107}],234:[function(require,module,exports){
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
 var Buffer = buffer.Buffer
@@ -67797,7 +63917,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
   return buffer.SlowBuffer(size)
 }
 
-},{"buffer":54}],237:[function(require,module,exports){
+},{"buffer":54}],235:[function(require,module,exports){
 // A library of seedable RNGs implemented in Javascript.
 //
 // Usage:
@@ -67859,7 +63979,7 @@ sr.tychei = tychei;
 
 module.exports = sr;
 
-},{"./lib/alea":238,"./lib/tychei":239,"./lib/xor128":240,"./lib/xor4096":241,"./lib/xorshift7":242,"./lib/xorwow":243,"./seedrandom":244}],238:[function(require,module,exports){
+},{"./lib/alea":236,"./lib/tychei":237,"./lib/xor128":238,"./lib/xor4096":239,"./lib/xorshift7":240,"./lib/xorwow":241,"./seedrandom":242}],236:[function(require,module,exports){
 // A port of an algorithm by Johannes Baagøe <baagoe@baagoe.com>, 2010
 // http://baagoe.com/en/RandomMusings/javascript/
 // https://github.com/nquinlan/better-random-numbers-for-javascript-mirror
@@ -67975,7 +64095,7 @@ if (module && module.exports) {
 
 
 
-},{}],239:[function(require,module,exports){
+},{}],237:[function(require,module,exports){
 // A Javascript implementaion of the "Tyche-i" prng algorithm by
 // Samuel Neves and Filipe Araujo.
 // See https://eden.dei.uc.pt/~sneves/pubs/2011-snfa2.pdf
@@ -68080,7 +64200,7 @@ if (module && module.exports) {
 
 
 
-},{}],240:[function(require,module,exports){
+},{}],238:[function(require,module,exports){
 // A Javascript implementaion of the "xor128" prng algorithm by
 // George Marsaglia.  See http://www.jstatsoft.org/v08/i14/paper
 
@@ -68163,7 +64283,7 @@ if (module && module.exports) {
 
 
 
-},{}],241:[function(require,module,exports){
+},{}],239:[function(require,module,exports){
 // A Javascript implementaion of Richard Brent's Xorgens xor4096 algorithm.
 //
 // This fast non-cryptographic random number generator is designed for
@@ -68311,7 +64431,7 @@ if (module && module.exports) {
   (typeof define) == 'function' && define   // present with an AMD loader
 );
 
-},{}],242:[function(require,module,exports){
+},{}],240:[function(require,module,exports){
 // A Javascript implementaion of the "xorshift7" algorithm by
 // François Panneton and Pierre L'ecuyer:
 // "On the Xorgshift Random Number Generators"
@@ -68410,7 +64530,7 @@ if (module && module.exports) {
 );
 
 
-},{}],243:[function(require,module,exports){
+},{}],241:[function(require,module,exports){
 // A Javascript implementaion of the "xorwow" prng algorithm by
 // George Marsaglia.  See http://www.jstatsoft.org/v08/i14/paper
 
@@ -68498,7 +64618,7 @@ if (module && module.exports) {
 
 
 
-},{}],244:[function(require,module,exports){
+},{}],242:[function(require,module,exports){
 /*
 Copyright 2014 David Bau.
 
@@ -68753,7 +64873,7 @@ if ((typeof module) == 'object' && module.exports) {
   Math    // math: package containing random, pow, and seedrandom
 );
 
-},{"crypto":24}],245:[function(require,module,exports){
+},{"crypto":24}],243:[function(require,module,exports){
 var natural = require('natural');
 var nounInflector = new natural.NounInflector();
 var articles = require('articles/lib/Articles.js');
@@ -68842,7 +64962,7 @@ Sentencer.prototype.make = function(template) {
 var instance = new Sentencer();
 module.exports = instance;
 
-},{"./words/adjectives.js":246,"./words/nouns.js":247,"articles/lib/Articles.js":6,"lodash":112,"natural":124,"randy":219}],246:[function(require,module,exports){
+},{"./words/adjectives.js":244,"./words/nouns.js":245,"articles/lib/Articles.js":6,"lodash":110,"natural":122,"randy":217}],244:[function(require,module,exports){
 // yes, we're going to be crude and load all the words into memory... it's really not so bad.
 // the list comes from this gem:
 // http://www.ashley-bovan.co.uk/words/partsofspeech.html
@@ -74023,7 +70143,7 @@ module.exports = ["abased",
 "zippy",
 "zonate",
 "zoning"];
-},{}],247:[function(require,module,exports){
+},{}],245:[function(require,module,exports){
 // yes, we're going to be crude and load all the words into memory... it's really not so bad.
 // the list comes from this gem:
 // http://www.ashley-bovan.co.uk/words/partsofspeech.html
@@ -76301,7 +72421,7 @@ module.exports = ["aardvark",
 "zone",
 "zoo",
 "zoology"];
-},{}],248:[function(require,module,exports){
+},{}],246:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 
 // prototype class for hash functions
@@ -76384,7 +72504,7 @@ Hash.prototype._update = function () {
 
 module.exports = Hash
 
-},{"safe-buffer":236}],249:[function(require,module,exports){
+},{"safe-buffer":234}],247:[function(require,module,exports){
 var exports = module.exports = function SHA (algorithm) {
   algorithm = algorithm.toLowerCase()
 
@@ -76401,7 +72521,7 @@ exports.sha256 = require('./sha256')
 exports.sha384 = require('./sha384')
 exports.sha512 = require('./sha512')
 
-},{"./sha":250,"./sha1":251,"./sha224":252,"./sha256":253,"./sha384":254,"./sha512":255}],250:[function(require,module,exports){
+},{"./sha":248,"./sha1":249,"./sha224":250,"./sha256":251,"./sha384":252,"./sha512":253}],248:[function(require,module,exports){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-0, as defined
  * in FIPS PUB 180-1
@@ -76497,7 +72617,7 @@ Sha.prototype._hash = function () {
 
 module.exports = Sha
 
-},{"./hash":248,"inherits":109,"safe-buffer":236}],251:[function(require,module,exports){
+},{"./hash":246,"inherits":107,"safe-buffer":234}],249:[function(require,module,exports){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
  * in FIPS PUB 180-1
@@ -76598,7 +72718,7 @@ Sha1.prototype._hash = function () {
 
 module.exports = Sha1
 
-},{"./hash":248,"inherits":109,"safe-buffer":236}],252:[function(require,module,exports){
+},{"./hash":246,"inherits":107,"safe-buffer":234}],250:[function(require,module,exports){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
  * in FIPS 180-2
@@ -76653,7 +72773,7 @@ Sha224.prototype._hash = function () {
 
 module.exports = Sha224
 
-},{"./hash":248,"./sha256":253,"inherits":109,"safe-buffer":236}],253:[function(require,module,exports){
+},{"./hash":246,"./sha256":251,"inherits":107,"safe-buffer":234}],251:[function(require,module,exports){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
  * in FIPS 180-2
@@ -76790,7 +72910,7 @@ Sha256.prototype._hash = function () {
 
 module.exports = Sha256
 
-},{"./hash":248,"inherits":109,"safe-buffer":236}],254:[function(require,module,exports){
+},{"./hash":246,"inherits":107,"safe-buffer":234}],252:[function(require,module,exports){
 var inherits = require('inherits')
 var SHA512 = require('./sha512')
 var Hash = require('./hash')
@@ -76849,7 +72969,7 @@ Sha384.prototype._hash = function () {
 
 module.exports = Sha384
 
-},{"./hash":248,"./sha512":255,"inherits":109,"safe-buffer":236}],255:[function(require,module,exports){
+},{"./hash":246,"./sha512":253,"inherits":107,"safe-buffer":234}],253:[function(require,module,exports){
 var inherits = require('inherits')
 var Hash = require('./hash')
 var Buffer = require('safe-buffer').Buffer
@@ -77111,7 +73231,7 @@ Sha512.prototype._hash = function () {
 
 module.exports = Sha512
 
-},{"./hash":248,"inherits":109,"safe-buffer":236}],256:[function(require,module,exports){
+},{"./hash":246,"inherits":107,"safe-buffer":234}],254:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -77240,7 +73360,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":91,"inherits":109,"readable-stream/duplex.js":221,"readable-stream/passthrough.js":231,"readable-stream/readable.js":232,"readable-stream/transform.js":233,"readable-stream/writable.js":234}],257:[function(require,module,exports){
+},{"events":89,"inherits":107,"readable-stream/duplex.js":219,"readable-stream/passthrough.js":229,"readable-stream/readable.js":230,"readable-stream/transform.js":231,"readable-stream/writable.js":232}],255:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -77537,7 +73657,7 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
-},{"safe-buffer":236}],258:[function(require,module,exports){
+},{"safe-buffer":234}],256:[function(require,module,exports){
 (function (global){
 // Copyright (c) 2011, Chris Umbel
 
@@ -77553,7 +73673,7 @@ exports.Line.Segment = require('./line.segment');
 exports.Sylvester = require('./sylvester');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./line":259,"./line.segment":260,"./matrix":261,"./plane":262,"./sylvester":263,"./vector":264}],259:[function(require,module,exports){
+},{"./line":257,"./line.segment":258,"./matrix":259,"./plane":260,"./sylvester":261,"./vector":262}],257:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 var Vector = require('./vector');
 var Matrix = require('./matrix');
@@ -77786,7 +73906,7 @@ Line.Z = Line.create(Vector.Zero(3), Vector.k);
 
 module.exports = Line;
 
-},{"./matrix":261,"./plane":262,"./sylvester":263,"./vector":264}],260:[function(require,module,exports){
+},{"./matrix":259,"./plane":260,"./sylvester":261,"./vector":262}],258:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 // Line.Segment class - depends on Line and its dependencies.
 
@@ -77914,7 +74034,7 @@ Line.Segment.create = function(v1, v2) {
 
 module.exports = Line.Segment;
 
-},{"./line":259,"./vector":264}],261:[function(require,module,exports){
+},{"./line":257,"./vector":262}],259:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 // Matrix class - depends on Vector.
 
@@ -78952,7 +75072,7 @@ Matrix.Ones = function(n, m) {
 
 module.exports = Matrix;
 
-},{"./sylvester":263,"./vector":264,"fs":52,"lapack":undefined}],262:[function(require,module,exports){
+},{"./sylvester":261,"./vector":262,"fs":52,"lapack":undefined}],260:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 // Plane class - depends on Vector. Some methods require Matrix and Line.
 var Vector = require('./vector');
@@ -79228,7 +75348,7 @@ Plane.fromPoints = function(points) {
 
 module.exports = Plane;
 
-},{"./line":259,"./matrix":261,"./sylvester":263,"./vector":264}],263:[function(require,module,exports){
+},{"./line":257,"./matrix":259,"./sylvester":261,"./vector":262}],261:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 // This file is required in order for any other classes to work. Some Vector methods work with the
 // other Sylvester classes and are useless unless they are included. Other classes such as Line and
@@ -79245,7 +75365,7 @@ var Sylvester = {
 
 module.exports = Sylvester;
 
-},{}],264:[function(require,module,exports){
+},{}],262:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 // This file is required in order for any other classes to work. Some Vector methods work with the
 // other Sylvester classes and are useless unless they are included. Other classes such as Line and
@@ -79685,7 +75805,7 @@ Vector.log = function(v) {
 
 module.exports = Vector;
 
-},{"./matrix":261,"./sylvester":263}],265:[function(require,module,exports){
+},{"./matrix":259,"./sylvester":261}],263:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -79764,7 +75884,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":210,"timers":265}],266:[function(require,module,exports){
+},{"process/browser.js":208,"timers":263}],264:[function(require,module,exports){
 (function (global){
 //     Underscore.js 1.9.1
 //     http://underscorejs.org
@@ -81460,7 +77580,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
 }());
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],267:[function(require,module,exports){
+},{}],265:[function(require,module,exports){
 (function (global){
 
 /**
@@ -81531,14 +77651,14 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],268:[function(require,module,exports){
+},{}],266:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],269:[function(require,module,exports){
+},{}],267:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -82128,7 +78248,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":268,"_process":210,"inherits":109}],270:[function(require,module,exports){
+},{"./support/isBuffer":266,"_process":208,"inherits":107}],268:[function(require,module,exports){
 var indexOf = function (xs, item) {
     if (xs.indexOf) return xs.indexOf(item);
     else for (var i = 0; i < xs.length; i++) {
@@ -82279,24 +78399,8 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{}],271:[function(require,module,exports){
+},{}],269:[function(require,module,exports){
 "use strict";
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -82306,87 +78410,249 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var Sentencer = require('sentencer');
 
-var seedrandom = require('seedrandom');
-
-var ColorScheme = require('color-scheme');
-
 var fakerator = require("fakerator/dist/locales/en-CA")();
 
-var chroma = require("chroma-js");
-
-var ease = {
-  linear: function linear(t) {
-    return t;
-  },
-  easeInQuad: function easeInQuad(t) {
-    return t * t;
-  },
-  easeOutQuad: function easeOutQuad(t) {
-    return t * (2 - t);
-  },
-  easeInOutQuad: function easeInOutQuad(t) {
-    return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-  },
-  easeInCubic: function easeInCubic(t) {
-    return t * t * t;
-  },
-  easeOutCubic: function easeOutCubic(t) {
-    return --t * t * t + 1;
-  },
-  easeInOutCubic: function easeInOutCubic(t) {
-    return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-  },
-  easeInQuart: function easeInQuart(t) {
-    return t * t * t * t;
-  },
-  easeOutQuart: function easeOutQuart(t) {
-    return 1 - --t * t * t * t;
-  },
-  easeInOutQuart: function easeInOutQuart(t) {
-    return t < .5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t;
-  },
-  easeInQuint: function easeInQuint(t) {
-    return t * t * t * t * t;
-  },
-  easeOutQuint: function easeOutQuint(t) {
-    return 1 + --t * t * t * t * t;
-  },
-  easeInOutQuint: function easeInOutQuint(t) {
-    return t < .5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
-  }
-};
-Sentencer.configure({
-  actions: {
-    place: function place() {
-      return getPlace();
-    },
-    name: function name() {
-      return getName();
-    },
-    greeting: function greeting() {
-      return getGreeting();
-    },
-    preposition: function preposition() {
-      return getPreposition();
-    },
-    mod: function mod() {
-      return getMod();
-    }
-  }
-});
+var Painting = require('./painting.js');
 
 var Artist =
 /*#__PURE__*/
 function () {
-  function Artist(title) {
+  function Artist() {
     _classCallCheck(this, Artist);
 
     this.name = "Anna Denson";
-    this.title = title;
-    this.rnd = seedrandom(this.title);
+    this.paintings = [];
+    this.fakerator = fakerator;
+    this.sentencer = Sentencer;
+    this.sentencer.configure({
+      actions: {
+        place: this.getPlace(),
+        name: this.getName(),
+        greeting: this.getGreeting(),
+        preposition: this.getPreposition(),
+        mod: this.getMod()
+      }
+    });
   }
 
   _createClass(Artist, [{
+    key: "paint",
+    value: function paint() {
+      var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.createTitle();
+      var painting = new Painting(title);
+      this.paintings.push(painting);
+      return this;
+    }
+  }, {
+    key: "display",
+    value: function display(container) {
+      for (var paintingCount = 0; paintingCount < this.paintings.length; paintingCount++) {
+        var thisPainting = this.paintings[paintingCount];
+        thisPainting.display(container);
+        console.log(thisPainting);
+      }
+    }
+  }, {
+    key: "createTitle",
+    value: function createTitle() {
+      var title;
+      title = this.titleCase(this.sentencer.make(this.getTitleTemplate()));
+      return title;
+    }
+  }, {
+    key: "getTitleTemplate",
+    value: function getTitleTemplate() {
+      var titleTemplates = ['The {{ adjective }} {{ noun }}', 'The {{ mod }} {{ noun }} of {{ noun }}', 'The {{ mod }} {{ nouns }} {{ preposition }} {{ name }}', 'The {{ nouns }} of {{ place }}', '{{ greeting }} to {{ place }}', '{{ an_adjective }} {{ noun }}', '{{ noun }} {{ preposition }} {{ nouns }}', '{{ adjective }} {{ nouns }}', '{{ nouns }} {{ preposition }} {{ place }}', '{{ greeting }} {{ preposition }} {{ place }}', '{{ greeting }} {{ preposition }} {{ noun }}', '{{ adjective }} {{ nouns }} {{ preposition }} {{ place }}', '{{ adjective }} {{ place }}', '{{ mod }} {{ name }} {{ preposition }} {{ place }}', '{{ mod }} {{ name }} {{ preposition }} {{ nouns }}', '{{ adjective }} {{ mod }} {{ name }}'];
+      var titleTemplate = titleTemplates[Math.floor(Math.random() * titleTemplates.length)];
+      ;
+      return titleTemplate;
+    }
+  }, {
+    key: "getPlace",
+    value: function getPlace() {
+      var option = this.randInt(1, 3);
+      var place;
+
+      switch (option) {
+        case 1:
+          place = this.fakerator.address.country();
+          break;
+
+        case 2:
+          place = this.fakerator.address.city();
+          break;
+
+        default:
+          place = this.fakerator.address.streetName();
+      }
+
+      return place;
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      var option = this.randInt(1, 3);
+      var name;
+
+      switch (option) {
+        case 1:
+          name = this.fakerator.names.firstName();
+          break;
+
+        case 2:
+          name = this.fakerator.names.lastName();
+          break;
+
+        default:
+          name = this.fakerator.names.firstName() + ' ' + fakerator.names.lastName();
+      }
+
+      return name;
+    }
+  }, {
+    key: "getGreeting",
+    value: function getGreeting() {
+      var greetings = ['farewell', 'welcome', 'lament'];
+      var greeting;
+      greeting = greetings[Math.floor(Math.random() * greetings.length)];
+      ;
+      return greeting;
+    }
+  }, {
+    key: "getPreposition",
+    value: function getPreposition() {
+      var prepositions = ["above", "absent", "across", "after", "against", "along", "around", "as", "aside", "astride", "at", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "by", "despite", "down", "during", "failing", "following", "for", "from", "given", "in", "inside", "into", "like", "midst", "near", "of", "off", "on", "onto", "opposite", "outside", "over", "past", "round", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "with", "within", "without"];
+      var preposition;
+      preposition = prepositions[Math.floor(Math.random() * prepositions.length)];
+      ;
+      return preposition;
+    }
+  }, {
+    key: "getMod",
+    value: function getMod() {
+      var mods = ['young', 'good', 'old', 'bad', 'late', 'poor', 'small', 'big', 'royal', 'ambitious', 'courageous', 'petulant', 'obtuse'];
+      var mod = " ";
+
+      if (this.randBool()) {
+        mod = mods[Math.floor(Math.random() * mods.length)];
+      }
+
+      return mod;
+    }
+  }, {
+    key: "titleCase",
+    value: function titleCase(str) {
+      var blacklist = ['of', 'a', 'an', 'at', 'from', 'on', 'to', 'up', 'by', 'in', 'so'];
+      var string = str.replace(/ {1,}/g, " ");
+      return string.toLowerCase().split(' ').map(function (word, index) {
+        if (blacklist.indexOf(word) !== -1 && index > 0) {
+          return word;
+        } else if (typeof word[0] !== 'undefined') {
+          return word.replace(word[0], word[0].toUpperCase());
+        } else {
+          if (word != ' ') {
+            return word;
+          }
+        }
+      }).join(' ');
+    }
+  }, {
+    key: "randInt",
+    value: function randInt(min, max) {
+      var _int;
+
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      _int = Math.floor(Math.random() * (max - min + 1)) + min;
+      return _int;
+    }
+  }, {
+    key: "randBool",
+    value: function randBool(odds) {
+      var bool;
+
+      if (odds == undefined) {
+        bool = Math.random() >= 0.5;
+      } else {
+        bool = Math.random() <= odds / 100;
+      }
+
+      return bool;
+    }
+  }]);
+
+  return Artist;
+}();
+
+module.exports = Artist;
+
+},{"./painting.js":272,"fakerator/dist/locales/en-CA":91,"sentencer":243}],270:[function(require,module,exports){
+"use strict";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Canvas =
+/*#__PURE__*/
+function () {
+  function Canvas() {
+    _classCallCheck(this, Canvas);
+
+    this.ease = {
+      linear: function linear(t) {
+        return t;
+      },
+      easeInQuad: function easeInQuad(t) {
+        return t * t;
+      },
+      easeOutQuad: function easeOutQuad(t) {
+        return t * (2 - t);
+      },
+      easeInOutQuad: function easeInOutQuad(t) {
+        return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      },
+      easeInCubic: function easeInCubic(t) {
+        return t * t * t;
+      },
+      easeOutCubic: function easeOutCubic(t) {
+        return --t * t * t + 1;
+      },
+      easeInOutCubic: function easeInOutCubic(t) {
+        return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+      },
+      easeInQuart: function easeInQuart(t) {
+        return t * t * t * t;
+      },
+      easeOutQuart: function easeOutQuart(t) {
+        return 1 - --t * t * t * t;
+      },
+      easeInOutQuart: function easeInOutQuart(t) {
+        return t < .5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t;
+      },
+      easeInQuint: function easeInQuint(t) {
+        return t * t * t * t * t;
+      },
+      easeOutQuint: function easeOutQuint(t) {
+        return 1 + --t * t * t * t * t;
+      },
+      easeInOutQuint: function easeInOutQuint(t) {
+        return t < .5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
+      }
+    };
+  }
+
+  _createClass(Canvas, [{
     key: "rotateHue",
     value: function rotateHue(hue, rotation) {
       var rotatedHue;
@@ -82401,17 +78667,21 @@ function () {
   }, {
     key: "hsl",
     value: function hsl(array) {
-      var h = array[0];
-      var s = array[1];
-      var l = array[2];
+      var _array = _slicedToArray(array, 3),
+          h = _array[0],
+          s = _array[1],
+          l = _array[2];
+
       return 'hsl(' + h + ',' + s + '%,' + l + '%)';
     }
   }, {
     key: "hsla",
     value: function hsla(array, alpha) {
-      var h = array[0];
-      var s = array[1];
-      var l = array[2];
+      var _array2 = _slicedToArray(array, 3),
+          h = _array2[0],
+          s = _array2[1],
+          l = _array2[2];
+
       return 'hsl(' + h + ',' + s + '%,' + l + '%, ' + alpha + ')';
     }
   }, {
@@ -82425,10 +78695,9 @@ function () {
         random = Math.random() * (max - min) + min;
         odds = random > bias ? (max - random) / (max - bias) : (random - min) / (bias - min);
         odds = Math.pow(odds, influence);
-        odds = ease[easingOption](odds);
+        odds = this.ease[easingOption](odds);
       } while (Math.random() > odds);
 
-      2;
       return random;
     }
   }, {
@@ -82468,21 +78737,62 @@ function () {
     }
   }]);
 
-  return Artist;
+  return Canvas;
 }();
+
+module.exports = Canvas;
+
+},{}],271:[function(require,module,exports){
+"use strict";
+
+var Artist = require('./artist.js');
+
+var artist = new Artist('Anna Denson');
+var container = document.querySelector('.wrapper');
+artist.paint().display(container);
+
+},{"./artist.js":269}],272:[function(require,module,exports){
+"use strict";
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var seedrandom = require('seedrandom');
+
+var Canvas = require('./canvas.js');
 
 var Painting =
 /*#__PURE__*/
-function (_Artist) {
-  _inherits(Painting, _Artist);
+function (_Canvas) {
+  _inherits(Painting, _Canvas);
 
   function Painting(title) {
     var _this;
 
     _classCallCheck(this, Painting);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Painting).call(this, title));
-    _this.colour = {};
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Painting).call(this));
+    _this.title = title;
+    _this.rnd = seedrandom(_this.title);
     /* Generate World Constants */
 
     _this.time = _this.getTime();
@@ -82497,7 +78807,7 @@ function (_Artist) {
     _this.container.classList.add('container');
 
     _this.canvas = _this.generateCanvas();
-    _this.infoCard = getInfoCard(_this.title, _this.name);
+    _this.infoCard = _this.getInfoCard();
     _this.ctx = _this.canvas.getContext("2d");
 
     _this.container.appendChild(_this.canvas);
@@ -82511,15 +78821,8 @@ function (_Artist) {
     _this.feature = _this.getFeature();
     /* Generate World Colours */
 
-    _this.colour.sky = _this.getSkyColour();
-    _this.colour.horizon = _this.getHorizonColour();
-    _this.colour.skyFill = _this.getSkyFill();
-    _this.colour.land = _this.getLandColour();
-    _this.colour.landFill = _this.getLandFill();
-    _this.colour.fog = _this.getFogColour();
-    _this.colour.fogFill = _this.getFogFill();
-    _this.colour.feature = _this.getFeatureColour();
-    _this.colour.featureFill = _this.getFeatureFill();
+    _this.colour = _this.getColour();
+    _this.fill = _this.getFill();
     return _this;
   }
 
@@ -82546,11 +78849,13 @@ function (_Artist) {
 
       this.ctx.fillStyle = this.colour.fogFill;
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      return this;
     }
   }, {
     key: "display",
     value: function display(container) {
       container.appendChild(this.container);
+      return this;
     }
   }, {
     key: "generateCanvas",
@@ -82606,7 +78911,7 @@ function (_Artist) {
       var aspectRatios = this.aspectRatios();
       var aspectRatio;
 
-      if (randBool(30)) {
+      if (_get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this, 30)) {
         aspectRatio = aspectRatios[Math.floor(this.rnd() * (aspectRatios.length - 1))];
         aspectRatio = 1 / aspectRatio;
       } else {
@@ -82643,88 +78948,131 @@ function (_Artist) {
       return colourSchemes[Math.floor(this.rnd() * colourSchemes.length)];
     }
   }, {
-    key: "getSkyColour",
-    value: function getSkyColour() {
-      var h = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, randBias(0, 240, 60, 1), 180); // Random hue between cyan and yellow, bias towards blue
+    key: "getColour",
+    value: function getColour() {
+      var colour = {};
+      /* Sky */
 
+      var skyH, skyS, skyL;
+      skyH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 240, 60, 1), 180); // Random hue between cyan and yellow, bias towards blue
 
-      var s = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 60, 1);
-
-      var l;
+      skyS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 60, 1);
 
       if (this.time == 'night') {
-        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 25, 2);
+        skyL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 25, 2);
       } else if (this.time == 'twilight') {
-        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 35, 2);
+        skyL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 35, 2);
       } else {
-        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 60, 1);
+        skyL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 60, 1);
       }
 
-      return [h, s, l];
-    }
-  }, {
-    key: "getHorizonColour",
-    value: function getHorizonColour() {
-      var horizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, this.colour.sky[0], _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
+      colour.sky = [skyH, skyS, skyL];
+      /* Horizon */
 
-      var horizonS = this.colour.sky[1];
+      var horizonH, horizonS, horizonL;
+      horizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
+      horizonS = skyS;
+      horizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyL - 5, skyL + 40, skyL + 10, 1);
+      colour.horizon = [horizonH, horizonS, horizonL];
+      /* Land */
 
-      var horizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.colour.sky[2] - 5, this.colour.sky[2] + 40, this.colour.sky[2] + 10, 1);
-
-      return [horizonH, horizonS, horizonL];
-    }
-  }, {
-    key: "getSkyFill",
-    value: function getSkyFill() {
-      var fill = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
-      fill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.sky));
-      fill.addColorStop(1 - this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.horizon));
-      return fill;
-    }
-  }, {
-    key: "getLandColour",
-    value: function getLandColour() {
-      var skyH = this.colour.sky[0];
-      var skyS = this.colour.sky[1];
-      var skyL = this.colour.sky[2];
-      var h;
+      var landH, landS, landL;
 
       if (this.colourScheme == 'mono') {
-        h = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyH - 30, skyH + 30, skyH, 1);
+        landH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyH - 30, skyH + 30, skyH, 1);
       } else if (this.colourScheme == 'triad') {
-        h = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 105, 135, 120, 1));
+        landH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 105, 135, 120, 1));
       }
 
-      var s = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyS - 15, skyS + 15, skyS, 1);
-
-      var l;
+      landS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyS - 15, skyS + 15, skyS, 1);
 
       if (this.time == 'night') {
-        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 5, 30, 18, 1);
+        landL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 5, 30, 18, 1);
       } else if (this.time == 'twilight') {
-        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 10, 50, 20, 1);
+        landL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 10, 50, 20, 1);
       } else {
-        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 10, 70, 25, 1);
+        landL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 10, 70, 25, 1);
       }
 
-      return [h, s, l];
+      colour.land = [landH, landS, landL];
+      /* Land Horizon */
+
+      var landHorizonH, landHorizonS, landHorizonL;
+      landHorizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, landH, _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
+      landHorizonS = landS * .6;
+      landHorizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, landL - 5, landL + 20, landL + 6, 3);
+      colour.landHorizonColour = [landHorizonH, landHorizonS, landHorizonL];
+      /* Feature */
+
+      var featureH, featureS, featureL;
+
+      if (_get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this)) {
+        featureH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, -160), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 200), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 180), 1, 'easeInQuart');
+      } else {
+        featureH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, -20), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 20), skyH, 1, 'easeInQuart');
+      }
+
+      featureS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyS - 30, 0), skyS + 10, skyS - 15, 1);
+      featureL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyL - 20, 0), skyL + 15, skyL - 10, 1);
+      colour.feature = [featureH, featureS, featureL];
+      /* Feature Horizon */
+
+      var featureHorizonH, featureHorizonS, featureHorizonL;
+      featureHorizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, featureH, _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
+      featureHorizonS = featureS * .6;
+      featureHorizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, featureL - 5, featureL + 20, featureL + 6, 3);
+      colour.featureHorizonColour = [featureHorizonH, featureHorizonS, featureHorizonL];
+      /* Fog */
+
+      var fogH, fogS, fogL;
+      fogH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonH - 15, horizonH + 15, horizonH, 1);
+      fogS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonS - 15, horizonS + 15, horizonS, 1);
+      fogL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 25, 80, horizonL, 1);
+      colour.fog = [fogH, fogS, fogL];
+      return colour;
     }
   }, {
-    key: "getLandFill",
-    value: function getLandFill() {
-      var fill = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
+    key: "getFill",
+    value: function getFill() {
+      var fill = {};
+      var colour = this.colour;
+      var fogBlur = this.ease.easeInQuad(this.fog) / 10;
+      /* Sky */
 
-      var horizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, this.colour.land[0], _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
+      var sky;
+      sky = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
+      sky.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.sky));
+      sky.addColorStop(1 - this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.horizon));
+      fill.sky = sky;
+      /* Land */
 
-      var horizonS = this.colour.land[1] * .6;
+      var land;
+      land = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
+      land.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.horizon));
+      land.addColorStop(fogBlur, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.landHorizonColour));
+      land.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.land));
+      fill.land = land;
+      /* Feature */
 
-      var horizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.colour.land[2] - 5, this.colour.land[2] + 20, this.colour.land[2] + 6, 3);
+      var feature;
+      feature = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
+      feature.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.horizon, 0));
+      feature.addColorStop(fogBlur, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.featureHorizonColour, 0.8));
+      feature.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.feature));
+      fill.feature = feature;
+      /* Fog */
 
-      this.colour.landHorizonColour = [horizonH, horizonS, horizonL];
-      var fogBlur = ease.easeInQuad(this.fog) / 10;
-      fill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.horizon));
-      fill.addColorStop(fogBlur, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.landHorizonColour));
-      fill.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.land));
+      var fog;
+      fog = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
+
+      var upperFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.ease.easeInQuad(this.fog), this.fog, this.ease.easeOutQuint(this.fog));
+
+      var lowerFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.ease.easeInQuint(this.fog), this.fog, this.ease.easeInQuad(this.fog), 3);
+
+      fog.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.fog, upperFogAlpha));
+      fog.addColorStop(1 - this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.fog, this.fog));
+      fog.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.fog, lowerFogAlpha));
+      fill.fog = fog;
       return fill;
     }
   }, {
@@ -82748,235 +79096,27 @@ function (_Artist) {
       return feature;
     }
   }, {
-    key: "getFeatureColour",
-    value: function getFeatureColour() {
-      var skyH = this.colour.sky[0];
-      var skyS = this.colour.sky[1];
-      var skyL = this.colour.sky[2];
-
-      var h = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, -20), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 20), skyH, 1, 'easeInQuart');
-
-      if (_get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this)) {
-        h = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, -160), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 200), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 180), 1, 'easeInQuart');
-      }
-
-      var s = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyS - 30, 0), skyS + 10, skyS - 15, 1);
-
-      var l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyL - 20, 0), skyL + 15, skyL - 10, 1);
-
-      return [h, s, l];
-    }
-  }, {
-    key: "getFeatureFill",
-    value: function getFeatureFill() {
-      var fill = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
-
-      var horizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, this.colour.feature[0], _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
-
-      var horizonS = this.colour.feature[1] * .6;
-
-      var horizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.colour.feature[2] - 5, this.colour.feature[2] + 20, this.colour.feature[2] + 6, 3);
-
-      this.colour.featureHorizonColour = [horizonH, horizonS, horizonL];
-      var fogBlur = ease.easeInQuad(this.fog) / 10;
-      fill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, this.colour.horizon, 0));
-      fill.addColorStop(fogBlur, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, this.colour.featureHorizonColour, 0.8));
-      fill.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.feature));
-      return fill;
-    }
-  }, {
-    key: "getFogColour",
-    value: function getFogColour() {
-      var horizonH = this.colour.horizon[0];
-      var horizonS = this.colour.horizon[1];
-      var horizonL = this.colour.horizon[2];
-
-      var h = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonH - 15, horizonH + 15, horizonH, 1);
-
-      var s = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonS - 15, horizonS + 15, horizonS, 1);
-
-      var l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 25, 80, horizonL, 1);
-
-      return [h, s, l];
-    }
-  }, {
-    key: "getFogFill",
-    value: function getFogFill() {
-      var fogFill = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
-
-      var upperFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, ease.easeInQuad(this.fog), this.fog, ease.easeOutQuint(this.fog));
-
-      var lowerFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, ease.easeInQuint(this.fog), this.fog, ease.easeInQuad(this.fog), 3);
-
-      fogFill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, this.colour.fog, upperFogAlpha));
-      fogFill.addColorStop(1 - this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, this.colour.fog, this.fog));
-      fogFill.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, this.colour.fog, lowerFogAlpha));
-      return fogFill;
-    }
-  }, {
     key: "getFog",
     value: function getFog() {
       var fog;
-      fog = ease.easeOutQuad(_get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 10, 1) / 100);
+      fog = this.ease.easeOutQuad(_get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 10, 1) / 100);
       return fog;
+    }
+  }, {
+    key: "getInfoCard",
+    value: function getInfoCard() {
+      var infoCard = document.createElement("div");
+      infoCard.setAttribute('class', 'info-card');
+      infoCard.innerHTML = "<h3 class='info-card__title'>" + this.title + "</h3>";
+      infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__artist'>" + this.name + "</span>, 2019</p>";
+      infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__medium'>Javascript & HTML Canvas</span></p>";
+      return infoCard;
     }
   }]);
 
   return Painting;
-}(Artist);
+}(Canvas);
 
-var painting = new Painting(titleCase(Sentencer.make(getTitleTemplate())));
-var outputElement = document.querySelector('.wrapper');
-painting.paint();
-painting.display(outputElement);
+module.exports = Painting;
 
-function getTitleTemplate() {
-  var titleTemplates = ['The {{ adjective }} {{ noun }}', 'The {{ mod }} {{ noun }} of {{ noun }}', 'The {{ mod }} {{ nouns }} {{ preposition }} {{ name }}', 'The {{ nouns }} of {{ place }}', '{{ greeting }} to {{ place }}', '{{ an_adjective }} {{ noun }}', '{{ noun }} {{ preposition }} {{ nouns }}', '{{ adjective }} {{ nouns }}', '{{ nouns }} {{ preposition }} {{ place }}', '{{ greeting }} {{ preposition }} {{ place }}', '{{ greeting }} {{ preposition }} {{ noun }}', '{{ adjective }} {{ nouns }} {{ preposition }} {{ place }}', '{{ adjective }} {{ place }}', '{{ mod }} {{ name }} {{ preposition }} {{ place }}', '{{ mod }} {{ name }} {{ preposition }} {{ nouns }}', '{{ adjective }} {{ mod }} {{ name }}'];
-  var titleTemplate = titleTemplates[Math.floor(Math.random() * titleTemplates.length)];
-  ;
-  return titleTemplate;
-}
-
-function getPlace() {
-  var option = randInt(1, 3);
-  var place;
-
-  switch (option) {
-    case 1:
-      place = fakerator.address.country();
-      break;
-
-    case 2:
-      place = fakerator.address.city();
-      break;
-
-    default:
-      place = fakerator.address.streetName();
-  }
-
-  return place;
-}
-
-function getName() {
-  var option = randInt(1, 3);
-  var name;
-
-  switch (option) {
-    case 1:
-      name = fakerator.names.firstName();
-      break;
-
-    case 2:
-      name = fakerator.names.lastName();
-      break;
-
-    default:
-      name = fakerator.names.firstName() + ' ' + fakerator.names.lastName();
-  }
-
-  return name;
-}
-
-function getGreeting() {
-  var greetings = ['farewell', 'welcome', 'lament'];
-  var greeting;
-  greeting = greetings[Math.floor(Math.random() * greetings.length)];
-  ;
-  return greeting;
-}
-
-function getPreposition() {
-  var prepositions = ["above", "absent", "across", "after", "against", "along", "around", "as", "aside", "astride", "at", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "by", "despite", "down", "during", "failing", "following", "for", "from", "given", "in", "inside", "into", "like", "midst", "near", "of", "off", "on", "onto", "opposite", "outside", "over", "past", "round", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "with", "within", "without"];
-  var preposition;
-  preposition = prepositions[Math.floor(Math.random() * prepositions.length)];
-  ;
-  return preposition;
-}
-
-function getMod() {
-  var mods = ['young', 'good', 'old', 'bad', 'late', 'poor', 'small', 'big', 'royal', 'ambitious', 'courageous', 'petulant', 'obtuse'];
-  var mod = " ";
-
-  if (randBool()) {
-    mod = mods[Math.floor(Math.random() * mods.length)];
-  }
-
-  return mod;
-}
-
-function getInfoCard(title, name) {
-  var infoCard = document.createElement("div");
-  infoCard.setAttribute('class', 'info-card');
-  infoCard.innerHTML = "<h3 class='info-card__title'>" + title + "</h3>";
-  infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__artist'>" + name + "</span>, 2019</p>";
-  infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__medium'>Javascript & HTML Canvas</span></p>";
-  infoCard.addEventListener("click", function () {
-    enterTitle(title);
-  });
-  return infoCard;
-}
-
-function titleCase(str) {
-  var blacklist = ['of', 'a', 'an', 'at', 'from', 'on', 'to', 'up', 'by', 'in', 'so'];
-  var string = str.replace(/ {1,}/g, " ");
-  return string.toLowerCase().split(' ').map(function (word, index) {
-    if (blacklist.indexOf(word) !== -1 && index > 0) {
-      return word;
-    } else if (typeof word[0] !== 'undefined') {
-      return word.replace(word[0], word[0].toUpperCase());
-    } else {
-      if (word != ' ') {
-        return word;
-      }
-    }
-  }).join(' ');
-}
-
-function enterTitle(current) {
-  var title = prompt("Please enter a title.", current);
-
-  if (title != null) {
-    generatePainting(title);
-  }
-}
-
-function randBias(min, max, bias) {
-  var influence = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-  var rnd = Math.random() * (max - min) + min,
-      mix = Math.random() * influence;
-  return rnd * (1 - mix) + bias * mix;
-}
-
-function randInt(min, max) {
-  var _int2;
-
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  _int2 = Math.floor(Math.random() * (max - min + 1)) + min;
-  return _int2;
-}
-
-function randDecimal(min) {
-  var random;
-  random = Math.random();
-
-  if (min) {
-    random = min + (1 - min) * random;
-  }
-
-  return random;
-}
-
-function randBool(odds) {
-  var bool;
-
-  if (odds == undefined) {
-    bool = Math.random() >= 0.5;
-  } else {
-    bool = Math.random() <= odds / 100;
-  }
-
-  return bool;
-}
-
-},{"chroma-js":55,"color-scheme":57,"fakerator/dist/locales/en-CA":93,"seedrandom":237,"sentencer":245}]},{},[271]);
+},{"./canvas.js":270,"seedrandom":235}]},{},[271]);
