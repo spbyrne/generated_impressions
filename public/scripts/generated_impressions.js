@@ -78607,6 +78607,8 @@ module.exports = Artist;
 },{"./painting.js":272,"fakerator/dist/locales/en-CA":91,"sentencer":243}],270:[function(require,module,exports){
 "use strict";
 
+function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -78701,6 +78703,38 @@ function () {
           l = _array2[2];
 
       return 'hsl(' + h + ',' + s + '%,' + l + '%, ' + alpha + ')';
+    }
+  }, {
+    key: "mixHsl",
+    value: function mixHsl(hslArrayOne, hslArrayTwo, mix1, mix2) {
+      var totalMix = mix1 + mix2;
+
+      var _hslArrayOne = _slicedToArray(hslArrayOne, 3),
+          h1 = _hslArrayOne[0],
+          s1 = _hslArrayOne[1],
+          l1 = _hslArrayOne[2];
+
+      var _hslArrayTwo = _slicedToArray(hslArrayTwo, 3),
+          h2 = _hslArrayTwo[0],
+          s2 = _hslArrayTwo[1],
+          l2 = _hslArrayTwo[2];
+
+      var h, s, l;
+
+      if (Math.abs(h1 - hsl20) > 0.5) {
+        h1 += (_readOnlyError("h1"), 1);
+      } // > 179.5 is shorter part from wheel to 359
+
+
+      h = mix1 / totalMix * h1 + mix2 / totalMix * h2;
+      s = mix1 / totalMix * s1 + mix2 / totalMix * s2;
+      l = mix1 / totalMix * l1 + mix2 / totalMix * l2;
+
+      if (h > 1) {
+        h -= 1;
+      }
+
+      return [h, s, l];
     }
   }, {
     key: "randBias",
@@ -79058,7 +79092,7 @@ function (_Canvas) {
       var feature;
       feature = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
       feature.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.horizon, 0));
-      feature.addColorStop(fogBlur, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.featureHorizonColour, 0.8));
+      feature.addColorStop(fogBlur * 2, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.featureHorizonColour, 0.8));
       feature.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.feature));
       fill.feature = feature;
       /* Fog */

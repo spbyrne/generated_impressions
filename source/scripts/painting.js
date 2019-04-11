@@ -230,7 +230,7 @@ class Painting extends Canvas {
     let feature;
     feature = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
     feature.addColorStop(0, super.hsla(colour.horizon,0));
-    feature.addColorStop(fogBlur, super.hsla(colour.featureHorizonColour,0.8));
+    feature.addColorStop(fogBlur * 2, super.hsla(colour.featureHorizonColour,0.8));
     feature.addColorStop(1, super.hsl(colour.feature));
     fill.feature = feature;
 

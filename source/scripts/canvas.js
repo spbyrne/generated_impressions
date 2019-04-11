@@ -36,6 +36,19 @@ class Canvas {
     return 'hsl(' + h + ',' + s + '%,' + l + '%, ' + alpha + ')';
   }
 
+  mixHsl(hslArrayOne,hslArrayTwo,mix1,mix2) {
+    var totalMix = mix1 + mix2;
+    const [h1, s1, l1] = hslArrayOne;
+    const [h2, s2, l2] = hslArrayTwo;
+    let h, s, l;
+    if (Math.abs(h1 - hsl20) > 0.5) { h1 += 1; } // > 179.5 is shorter part from wheel to 359
+    h = (mix1 / totalMix) * h1 + (mix2 / totalMix) * h2;  
+    s = (mix1 / totalMix) * s1 + (mix2 / totalMix) * s2; 
+    l = (mix1 / totalMix) * l1 + (mix2 / totalMix) * l2; 
+    if (h > 1) { h -= 1; } 
+    return [h, s, l];
+  }
+
   randBias(min, max, bias, influence = 1, easingOption = 'easeInOutQuad') {
 
     let random, odds;
