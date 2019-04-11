@@ -78801,7 +78801,7 @@ var Artist = require('./artist.js');
 
 var artist = new Artist('Anna Denson');
 var container = document.querySelector('.wrapper');
-artist.paint().display(container);
+artist.paint().paint().paint().paint().paint().paint().paint().paint().paint().display(container);
 
 },{"./artist.js":269}],272:[function(require,module,exports){
 "use strict";
@@ -79125,9 +79125,10 @@ function (_Canvas) {
 
       feature.x1 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, minUnit, cW - minUnit, bias, 1, 'easeOutQuad');
       feature.y1 = cH * (1 - this.horizon);
-      feature.x2 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, -cW * 1.5, cW * 2.5, cW / 2, 1, 'easeOutQuad');
+      feature.x2bias = feature.x1 < cW / 2 ? cW * .33 : cW * .66;
+      feature.x2 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, -cW * 1.5, cW * 2.5, feature.x2bias, 1, 'easeOutQuad');
       feature.y2 = cH;
-      feature.width = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, minUnit, cW, cW / 1.6, 1, 'easeInQuad');
+      feature.width = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, cw / 10, cW, cW / 1.6, 1, 'easeOutQuad');
       return feature;
     }
   }, {

@@ -258,7 +258,7 @@ class Painting extends Canvas {
     }
     feature.x1 = super.randBias(minUnit,cW - minUnit,bias,1,'easeOutQuad');
     feature.y1 = cH * (1 - this.horizon);
-    feature.x2bias = (feature.x1 < cW / 2) cW * .33 ? : cW * .66;
+    feature.x2bias = (feature.x1 < cW / 2) ? cW * .33 : cW * .66;
     feature.x2 = super.randBias(-cW*1.5,cW*2.5,feature.x2bias,1,'easeOutQuad');
     feature.y2 = cH;
     feature.width = super.randBias(cw / 10,cW,cW/1.6,1,'easeOutQuad');
