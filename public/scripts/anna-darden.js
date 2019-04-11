@@ -82282,6 +82282,22 @@ exports.createContext = Script.createContext = function (context) {
 },{}],271:[function(require,module,exports){
 "use strict";
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -82298,6 +82314,47 @@ var fakerator = require("fakerator/dist/locales/en-CA")();
 
 var chroma = require("chroma-js");
 
+var ease = {
+  linear: function linear(t) {
+    return t;
+  },
+  easeInQuad: function easeInQuad(t) {
+    return t * t;
+  },
+  easeOutQuad: function easeOutQuad(t) {
+    return t * (2 - t);
+  },
+  easeInOutQuad: function easeInOutQuad(t) {
+    return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  },
+  easeInCubic: function easeInCubic(t) {
+    return t * t * t;
+  },
+  easeOutCubic: function easeOutCubic(t) {
+    return --t * t * t + 1;
+  },
+  easeInOutCubic: function easeInOutCubic(t) {
+    return t < .5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+  },
+  easeInQuart: function easeInQuart(t) {
+    return t * t * t * t;
+  },
+  easeOutQuart: function easeOutQuart(t) {
+    return 1 - --t * t * t * t;
+  },
+  easeInOutQuart: function easeInOutQuart(t) {
+    return t < .5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t;
+  },
+  easeInQuint: function easeInQuint(t) {
+    return t * t * t * t * t;
+  },
+  easeOutQuint: function easeOutQuint(t) {
+    return 1 + --t * t * t * t * t;
+  },
+  easeInOutQuint: function easeInOutQuint(t) {
+    return t < .5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
+  }
+};
 Sentencer.configure({
   actions: {
     place: function place() {
@@ -82318,62 +82375,173 @@ Sentencer.configure({
   }
 });
 
-var Painting =
+var Artist =
 /*#__PURE__*/
 function () {
-  function Painting(title) {
-    _classCallCheck(this, Painting);
+  function Artist(title) {
+    _classCallCheck(this, Artist);
 
     this.title = title;
-    this.colour = {};
-    this.times = ['night', 'twilight', 'day'];
-    this.aspectRatios = [1.2,
-    /* Purdy - 6/5 */
-    1.33333333333,
-    /* Old School TV - 4/3 */
-    1.4,
-    /* Photo - 7/5 */
-    1.77777777778
-    /* 16/9 */
-    ];
-    this.colourSchemes = ['mono', 'triad'];
+    this.rnd = seedrandom(this.title);
+  }
+
+  _createClass(Artist, [{
+    key: "rotateHue",
+    value: function rotateHue(hue, rotation) {
+      var rotatedHue;
+      rotatedHue = hue - rotation;
+
+      if (rotatedHue < 0) {
+        rotatedHue = 360 + rotatedHue;
+      }
+
+      return rotatedHue;
+    }
+  }, {
+    key: "hsl",
+    value: function hsl(array) {
+      var h = array[0];
+      var s = array[1];
+      var l = array[2];
+      return 'hsl(' + h + ',' + s + '%,' + l + '%)';
+    }
+  }, {
+    key: "hsla",
+    value: function hsla(array, alpha) {
+      var h = array[0];
+      var s = array[1];
+      var l = array[2];
+      return 'hsl(' + h + ',' + s + '%,' + l + '%, ' + alpha + ')';
+    }
+  }, {
+    key: "randBias",
+    value: function randBias(min, max, bias) {
+      var influence = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+      var easingOption = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'easeInOutQuad';
+      var random, odds;
+
+      do {
+        random = Math.random() * (max - min) + min;
+        odds = random > bias ? (max - random) / (max - bias) : (random - min) / (bias - min);
+        odds = Math.pow(odds, influence);
+        odds = ease[easingOption](odds);
+      } while (Math.random() > odds);
+
+      2;
+      return random;
+    }
+  }, {
+    key: "randInt",
+    value: function randInt(min, max) {
+      var _int;
+
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      _int = Math.floor(this.rnd() * (max - min + 1)) + min;
+      return _int;
+    }
+  }, {
+    key: "randDecimal",
+    value: function randDecimal(min) {
+      var random;
+      random = this.rnd();
+
+      if (min) {
+        random = min + (1 - min) * random;
+      }
+
+      return random;
+    }
+  }, {
+    key: "randBool",
+    value: function randBool(odds) {
+      var bool;
+
+      if (odds == undefined) {
+        bool = this.rnd() >= 0.5;
+      } else {
+        bool = this.rnd() <= odds / 100;
+      }
+
+      return bool;
+    }
+  }]);
+
+  return Artist;
+}();
+
+var Painting =
+/*#__PURE__*/
+function (_Artist) {
+  _inherits(Painting, _Artist);
+
+  function Painting(title) {
+    var _this;
+
+    _classCallCheck(this, Painting);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Painting).call(this, title));
+    _this.colour = {};
+    /* Generate World Constants */
+
+    _this.time = _this.getTime();
+    _this.aspectRatio = _this.getAspectRatio();
+    _this.colourScheme = _this.getColourScheme();
+    _this.horizon = _this.getRatio();
+    _this.fog = _this.getFog();
+    /* Set Up Environment */
+
+    _this.container = document.createElement("div");
+
+    _this.container.classList.add('container');
+
+    _this.canvas = _this.generateCanvas();
+    _this.infoCard = getInfoCard(_this.title);
+    _this.ctx = _this.canvas.getContext("2d");
+
+    _this.container.appendChild(_this.canvas);
+
+    _this.container.appendChild(_this.infoCard);
+    /* Set Up Scene Objects */
+
+
+    _this.landHeight = _this.canvas.height * _this.horizon;
+    _this.landY = _this.canvas.height - _this.landHeight;
+    /* Generate World Colours */
+
+    _this.colour.sky = _this.getSkyColour();
+    _this.colour.horizon = _this.getHorizonColour();
+    _this.colour.skyFill = _this.getSkyFill();
+    _this.colour.land = _this.getLandColour();
+    _this.colour.landFill = _this.getLandFill();
+    _this.colour.fog = _this.getFogColour();
+    _this.colour.fogFill = _this.getFogFill();
+    _this.colour.feature = _this.getFeatureColour();
+    return _this;
   }
 
   _createClass(Painting, [{
-    key: "generatePainting",
-    value: function generatePainting() {
-      seedrandom(this.title, {
-        global: true
-      });
-      /* Generate World Constants */
+    key: "paint",
+    value: function paint() {
+      /* Paint Sky */
+      this.ctx.fillStyle = this.colour.skyFill;
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      /* Paint Land */
 
-      this.time = this.getTime();
-      this.aspectRatio = this.getAspectRatio();
-      this.colourScheme = this.getColourScheme();
-      this.horizon = this.getRatio();
-      this.fog = this.getFog();
-      /* Generate World Colours */
+      this.ctx.fillStyle = this.colour.landFill;
+      this.ctx.fillRect(0, this.landY, this.canvas.width, this.landHeight);
+      /* Paint Feature */
 
-      this.colour.sky = this.getSkyColour();
-      this.colour.horizon = this.getHorizonColour();
-      this.colour.land = this.getLandColour();
-      this.colour.fog = this.getFogColour();
-      this.colour.feature = this.getFeatureColour();
-      /* Set Up Environment */
+      this.ctx.fillStyle = this.featureFill;
+      /* Paint Fog */
 
-      this.container = document.querySelector('.container');
-      this.container.innerHTML = "";
-      this.canvas = this.generateCanvas();
-      this.infoCard = getInfoCard(this.title);
-      this.ctx = this.canvas.getContext("2d");
-      this.container.appendChild(this.canvas);
-      this.container.appendChild(this.infoCard);
-      /* Draw Stuff */
-
-      this.drawSky();
-      this.drawLand();
-      this.drawFeature();
-      this.drawFog();
+      this.ctx.fillStyle = this.colour.fogFill;
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+  }, {
+    key: "display",
+    value: function display(container) {
+      container.appendChild(this.container);
     }
   }, {
     key: "generateCanvas",
@@ -82395,20 +82563,45 @@ function () {
       return canvas;
     }
   }, {
+    key: "times",
+    value: function times() {
+      return ['night', 'twilight', 'day'];
+    }
+  }, {
+    key: "aspectRatios",
+    value: function aspectRatios() {
+      return [1.2,
+      /* Purdy - 6/5 */
+      1.33333333333,
+      /* Old School TV - 4/3 */
+      1.4,
+      /* Photo - 7/5 */
+      1.77777777778
+      /* 16/9 */
+      ];
+    }
+  }, {
+    key: "colourSchemes",
+    value: function colourSchemes() {
+      return ['mono', 'triad'];
+    }
+  }, {
     key: "getTime",
     value: function getTime() {
-      return this.times[Math.floor(Math.random() * this.times.length)];
+      var times = this.times();
+      return times[Math.floor(this.rnd() * times.length)];
     }
   }, {
     key: "getAspectRatio",
     value: function getAspectRatio() {
+      var aspectRatios = this.aspectRatios();
       var aspectRatio;
 
       if (randBool(30)) {
-        aspectRatio = this.aspectRatios[Math.floor(Math.random() * (this.aspectRatios.length - 1))];
+        aspectRatio = aspectRatios[Math.floor(this.rnd() * (aspectRatios.length - 1))];
         aspectRatio = 1 / aspectRatio;
       } else {
-        aspectRatio = this.aspectRatios[Math.floor(Math.random() * this.aspectRatios.length)];
+        aspectRatio = aspectRatios[Math.floor(this.rnd() * aspectRatios.length)];
       }
 
       return aspectRatio;
@@ -82418,8 +82611,10 @@ function () {
     value: function getRatio() {
       var ratio = 1;
       var goldenRatio = 1.6180339887498948482045868;
-      var exponent = randBias(1, 4, 2, 1);
-      var inverse = randBool(30);
+
+      var exponent = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 1, 4, 2, 1);
+
+      var inverse = _get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this, 30);
 
       for (var i = 0; i < exponent; i++) {
         ratio = ratio / goldenRatio;
@@ -82434,22 +82629,25 @@ function () {
   }, {
     key: "getColourScheme",
     value: function getColourScheme() {
-      return this.colourSchemes[Math.floor(Math.random() * this.colourSchemes.length)];
+      var colourSchemes = this.colourSchemes();
+      return colourSchemes[Math.floor(this.rnd() * colourSchemes.length)];
     }
   }, {
     key: "getSkyColour",
     value: function getSkyColour() {
-      var h = rotateHue(randBias(0, 240, 60, 1), 180); // Random hue between cyan and yellow, bias towards blue
+      var h = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, randBias(0, 240, 60, 1), 180); // Random hue between cyan and yellow, bias towards blue
 
-      var s = randBias(0, 100, 60, 1);
+
+      var s = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 60, 1);
+
       var l;
 
       if (this.time == 'night') {
-        l = randBias(0, 100, 25, 1);
+        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 25, 2);
       } else if (this.time == 'twilight') {
-        l = randBias(0, 100, 35, 1);
+        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 35, 2);
       } else {
-        l = randBias(0, 100, 60, 1);
+        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 60, 1);
       }
 
       return [h, s, l];
@@ -82457,29 +82655,21 @@ function () {
   }, {
     key: "getHorizonColour",
     value: function getHorizonColour() {
-      var horizonH = rotateHue(this.colour.sky[0], randInt(0, 30));
+      var horizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, this.colour.sky[0], _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
+
       var horizonS = this.colour.sky[1];
-      var horizonL = randBias(this.colour.sky[2] - 5, this.colour.sky[2] + 40, this.colour.sky[2] + 10, 1);
+
+      var horizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.colour.sky[2] - 5, this.colour.sky[2] + 40, this.colour.sky[2] + 10, 1);
+
       return [horizonH, horizonS, horizonL];
     }
   }, {
     key: "getSkyFill",
     value: function getSkyFill() {
       var fill = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
-      var horizonH = rotateHue(this.colour.sky[0], randInt(0, 30));
-      var horizonS = this.colour.sky[1];
-      var horizonL = randBias(this.colour.sky[2] - 5, this.colour.sky[2] + 40, this.colour.sky[2] + 10, 1);
-      this.colour.horizon = [horizonH, horizonS, horizonL];
-      fill.addColorStop(0, hsl(this.colour.sky));
-      fill.addColorStop(1, hsl(this.colour.horizon));
+      fill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.sky));
+      fill.addColorStop(1 - this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.horizon));
       return fill;
-    }
-  }, {
-    key: "drawSky",
-    value: function drawSky() {
-      var skyFill = this.getSkyFill();
-      this.ctx.fillStyle = skyFill;
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
   }, {
     key: "getLandColour",
@@ -82490,52 +82680,57 @@ function () {
       var h;
 
       if (this.colourScheme == 'mono') {
-        h = randBias(skyH - 30, skyH + 30, skyH, 1);
+        h = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyH - 30, skyH + 30, skyH, 1);
       } else if (this.colourScheme == 'triad') {
-        h = rotateHue(skyH, randBias(105, 135, 120, 1));
+        h = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 105, 135, 120, 1));
       }
 
-      var s = randBias(skyS - 15, skyS + 15, skyS, 1);
+      var s = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyS - 15, skyS + 15, skyS, 1);
+
       var l;
 
       if (this.time == 'night') {
-        l = randBias(5, 30, 18, 1);
+        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 5, 30, 18, 1);
       } else if (this.time == 'twilight') {
-        l = randBias(10, 50, 20, 1);
+        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 10, 50, 20, 1);
       } else {
-        l = randBias(10, 70, 25, 1);
+        l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 10, 70, 25, 1);
       }
 
       return [h, s, l];
     }
   }, {
     key: "getLandFill",
-    value: function getLandFill(landHeight, landY) {
-      var fill = this.ctx.createLinearGradient(0, landY, 0, landY + landHeight);
-      var horizonH = rotateHue(this.colour.land[0], randInt(0, 30));
+    value: function getLandFill() {
+      var fill = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
+
+      var horizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, this.colour.land[0], _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
+
       var horizonS = this.colour.land[1] * .6;
-      var horizonL = randBias(this.colour.land[1] - 5, this.colour.land[1] + 10, this.colour.land[1] + 7, 1);
+
+      var horizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.colour.land[2] - 5, this.colour.land[2] + 20, this.colour.land[2] + 6, 3);
+
       this.colour.landHorizonColour = [horizonH, horizonS, horizonL];
-      var fogBlur = this.fog / 40;
-      fill.addColorStop(0, hsl(this.colour.horizon));
-      fill.addColorStop(fogBlur, hsl(this.colour.landHorizonColour));
-      fill.addColorStop(1, hsl(this.colour.land));
+      var fogBlur = ease.easeOutQuint(this.fog) / 10;
+      fill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.horizon));
+      fill.addColorStop(fogBlur, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.landHorizonColour));
+      fill.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, this.colour.land));
       return fill;
-    }
-  }, {
-    key: "drawLand",
-    value: function drawLand() {
-      var landHeight = this.canvas.height * this.horizon;
-      var landY = this.canvas.height - landHeight;
-      var landFill = this.getLandFill(landHeight, landY);
-      this.ctx.fillStyle = landFill;
-      this.ctx.fillRect(0, landY, this.canvas.width, landHeight);
     }
   }, {
     key: "getFeature",
     value: function getFeature() {
       var feature;
-      feature = randBias(0, 100, 25, 1) / 100;
+      var cW,
+          canvasWidth = this.canvas.width;
+      var minUnit = cW / 20;
+      var bias = cW / 3;
+
+      if (_get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this)) {
+        bias = cW - bias;
+      }
+
+      feature.x1 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, minUnit, cW - minUnit);
       return feature;
     }
   }, {
@@ -82544,9 +82739,13 @@ function () {
       var horizonH = this.colour.horizon[0];
       var horizonS = this.colour.horizon[1];
       var horizonL = this.colour.horizon[2];
-      var h = randBias(horizonH - 15, horizonH + 15, horizonH, 1);
-      var s = randBias(horizonS - 15, horizonS + 15, horizonS, 1);
-      var l = randBias(horizonL - 15, horizonL + 15, horizonL, 1);
+
+      var h = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonH - 15, horizonH + 15, horizonH, 1);
+
+      var s = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonS - 15, horizonS + 15, horizonS, 1);
+
+      var l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonL - 15, horizonL + 15, horizonL, 1);
+
       return [h, s, l];
     }
   }, {
@@ -82556,116 +82755,50 @@ function () {
       return featureFill;
     }
   }, {
-    key: "drawFeature",
-    value: function drawFeature() {//let featureFill = this.getFeatureFill();
-      //this.ctx.fillStyle = featureFill;
-      //this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-  }, {
     key: "getFogColour",
     value: function getFogColour() {
       var horizonH = this.colour.horizon[0];
       var horizonS = this.colour.horizon[1];
       var horizonL = this.colour.horizon[2];
-      var h = randBias(horizonH - 15, horizonH + 15, horizonH, 1);
-      var s = randBias(horizonS - 15, horizonS + 15, horizonS, 1);
-      var l = randBias(horizonL - 15, horizonL + 15, horizonL, 1);
+
+      var h = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonH - 15, horizonH + 15, horizonH, 1);
+
+      var s = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonS - 15, horizonS + 15, horizonS, 1);
+
+      var l = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 25, 80, horizonL, 1);
+
       return [h, s, l];
     }
   }, {
     key: "getFogFill",
     value: function getFogFill() {
       var fogFill = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
-      fogFill.addColorStop(0, hsla(this.colour.sky, this.fog / 2));
-      fogFill.addColorStop(1 - this.horizon, hsla(this.colour.fog, this.fog));
-      fogFill.addColorStop(1, hsla(this.colour.land, this.fog / 10));
+
+      var upperFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, ease.easeInQuad(this.fog), this.fog, ease.easeOutQuint(this.fog));
+
+      var lowerFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, ease.easeInQuint(this.fog), this.fog, ease.easeInQuad(this.fog), 3);
+
+      fogFill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, this.colour.fog, upperFogAlpha));
+      fogFill.addColorStop(1 - this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, this.colour.fog, this.fog));
+      fogFill.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, this.colour.fog, lowerFogAlpha));
       return fogFill;
-    }
-  }, {
-    key: "drawFog",
-    value: function drawFog() {
-      var fogFill = this.getFogFill();
-      this.ctx.fillStyle = fogFill;
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
   }, {
     key: "getFog",
     value: function getFog() {
       var fog;
-      fog = randBias(0, 100, 25, 1) / 100;
+      fog = ease.easeOutQuad(_get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 10, 1) / 100);
       return fog;
     }
   }]);
 
   return Painting;
-}();
+}(Artist);
 
 var painting = new Painting(titleCase(Sentencer.make(getTitleTemplate())));
-painting.generatePainting();
-
-function rotateHue(hue, rotation) {
-  var rotatedHue;
-  rotatedHue = hue - rotation;
-
-  if (rotatedHue < 0) {
-    rotatedHue = 360 + rotatedHue;
-  }
-
-  return rotatedHue;
-}
-
-function hsl(array) {
-  var h = array[0];
-  var s = array[1];
-  var l = array[2];
-  return 'hsl(' + h + ',' + s + '%,' + l + '%)';
-}
-
-function hsla(array, alpha) {
-  var h = array[0];
-  var s = array[1];
-  var l = array[2];
-  return 'hsl(' + h + ',' + s + '%,' + l + '%, ' + alpha + ')';
-}
-
-function randBias(min, max, bias) {
-  var influence = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-  var rnd = Math.random() * (max - min) + min,
-      mix = Math.random() * influence;
-  return rnd * (1 - mix) + bias * mix;
-}
-
-function randInt(min, max) {
-  var _int;
-
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  _int = Math.floor(Math.random() * (max - min + 1)) + min;
-  return _int;
-}
-
-function randDecimal(min) {
-  var random;
-  random = Math.random();
-
-  if (min) {
-    random = min + (1 - min) * random;
-  }
-
-  return random;
-}
-
-function randBool(odds) {
-  var bool;
-
-  if (odds == undefined) {
-    bool = Math.random() >= 0.5;
-  } else {
-    bool = Math.random() <= odds / 100;
-  }
-
-  return bool;
-}
+var outputElement = document.querySelector('.wrapper');
+painting.paint();
+painting.display(outputElement);
 
 function getTitleTemplate() {
   var titleTemplates = ['The {{ adjective }} {{ noun }}', 'The {{ mod }} {{ noun }} of {{ noun }}', 'The {{ mod }} {{ nouns }} {{ preposition }} {{ name }}', 'The {{ nouns }} of {{ place }}', '{{ greeting }} to {{ place }}', '{{ an_adjective }} {{ noun }}', '{{ noun }} {{ preposition }} {{ nouns }}', '{{ adjective }} {{ nouns }}', '{{ nouns }} {{ preposition }} {{ place }}', '{{ greeting }} {{ preposition }} {{ place }}', '{{ greeting }} {{ preposition }} {{ noun }}', '{{ adjective }} {{ nouns }} {{ preposition }} {{ place }}', '{{ adjective }} {{ place }}', '{{ mod }} {{ name }} {{ preposition }} {{ place }}', '{{ mod }} {{ name }} {{ preposition }} {{ nouns }}', '{{ adjective }} {{ mod }} {{ name }}'];
@@ -82775,6 +82908,45 @@ function enterTitle(current) {
   if (title != null) {
     generatePainting(title);
   }
+}
+
+function randBias(min, max, bias) {
+  var influence = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+  var rnd = Math.random() * (max - min) + min,
+      mix = Math.random() * influence;
+  return rnd * (1 - mix) + bias * mix;
+}
+
+function randInt(min, max) {
+  var _int2;
+
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  _int2 = Math.floor(Math.random() * (max - min + 1)) + min;
+  return _int2;
+}
+
+function randDecimal(min) {
+  var random;
+  random = Math.random();
+
+  if (min) {
+    random = min + (1 - min) * random;
+  }
+
+  return random;
+}
+
+function randBool(odds) {
+  var bool;
+
+  if (odds == undefined) {
+    bool = Math.random() >= 0.5;
+  } else {
+    bool = Math.random() <= odds / 100;
+  }
+
+  return bool;
 }
 
 },{"chroma-js":55,"color-scheme":57,"fakerator/dist/locales/en-CA":93,"seedrandom":237,"sentencer":245}]},{},[271]);

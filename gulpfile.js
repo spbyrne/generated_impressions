@@ -26,7 +26,7 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts', function () {
-  return browserify('source/scripts/anna-bernard.js')
+  return browserify('source/scripts/generated_impressions.js')
   .transform("babelify", {presets: ["@babel/preset-env"]})
   .exclude('WNdb')
   .exclude('lapack')
@@ -34,12 +34,12 @@ gulp.task('scripts', function () {
   .pipe(source('bundle.js'))
   .pipe(buffer()) 
   //.pipe(uglify())
-  .pipe(rename("anna-bernard.js"))
+  .pipe(rename("generated_impressions.js"))
   .pipe(gulp.dest('./public/scripts/'));
 });
 
 gulp.task('scripts-prod', function () {
-  return browserify('source/scripts/anna-bernard.js')
+  return browserify('source/scripts/generated_impressions.js')
   .transform("babelify", {presets: ["@babel/preset-env"]})
   .exclude('WNdb')
   .exclude('lapack')
@@ -47,7 +47,7 @@ gulp.task('scripts-prod', function () {
   .pipe(source('bundle.js'))
   .pipe(buffer()) 
   .pipe(uglify())
-  .pipe(rename("anna-bernard.js"))
+  .pipe(rename("generated_impressions.js"))
   .pipe(gulp.dest('./public/scripts/'));
 });
 
