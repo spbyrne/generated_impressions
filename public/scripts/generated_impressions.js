@@ -78414,6 +78414,114 @@ var fakerator = require("fakerator/dist/locales/en-CA")();
 
 var Painting = require('./painting.js');
 
+Sentencer.configure({
+  actions: {
+    place: function place() {
+      return getPlace();
+    },
+    name: function name() {
+      return getName();
+    },
+    greeting: function greeting() {
+      return getGreeting();
+    },
+    preposition: function preposition() {
+      return getPreposition();
+    },
+    mod: function mod() {
+      return getMod();
+    }
+  }
+});
+
+function getPlace() {
+  var option = randInt(1, 3);
+  var place;
+
+  switch (option) {
+    case 1:
+      place = fakerator.address.country();
+      break;
+
+    case 2:
+      place = fakerator.address.city();
+      break;
+
+    default:
+      place = fakerator.address.streetName();
+  }
+
+  return place;
+}
+
+function getName() {
+  var option = randInt(1, 3);
+  var name;
+
+  switch (option) {
+    case 1:
+      name = fakerator.names.firstName();
+      break;
+
+    case 2:
+      name = fakerator.names.lastName();
+      break;
+
+    default:
+      name = fakerator.names.firstName() + ' ' + fakerator.names.lastName();
+  }
+
+  return name;
+}
+
+function getGreeting() {
+  var greetings = ['farewell', 'welcome', 'lament'];
+  var greeting;
+  greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  ;
+  return greeting;
+}
+
+function getPreposition() {
+  var prepositions = ["above", "absent", "across", "after", "against", "along", "around", "as", "aside", "astride", "at", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "by", "despite", "down", "during", "failing", "following", "for", "from", "given", "in", "inside", "into", "like", "midst", "near", "of", "off", "on", "onto", "opposite", "outside", "over", "past", "round", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "with", "within", "without"];
+  var preposition;
+  preposition = prepositions[Math.floor(Math.random() * prepositions.length)];
+  ;
+  return preposition;
+}
+
+function getMod() {
+  var mods = ['young', 'good', 'old', 'bad', 'late', 'poor', 'small', 'big', 'royal', 'ambitious', 'courageous', 'petulant', 'obtuse'];
+  var mod = " ";
+
+  if (randBool()) {
+    mod = mods[Math.floor(Math.random() * mods.length)];
+  }
+
+  return mod;
+}
+
+function randInt(min, max) {
+  var _int;
+
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  _int = Math.floor(Math.random() * (max - min + 1)) + min;
+  return _int;
+}
+
+function randBool(odds) {
+  var bool;
+
+  if (odds == undefined) {
+    bool = Math.random() >= 0.5;
+  } else {
+    bool = Math.random() <= odds / 100;
+  }
+
+  return bool;
+}
+
 var Artist =
 /*#__PURE__*/
 function () {
@@ -78422,17 +78530,7 @@ function () {
 
     this.name = "Anna Denson";
     this.paintings = [];
-    this.fakerator = fakerator;
     this.sentencer = Sentencer;
-    this.sentencer.configure({
-      actions: {
-        place: this.getPlace(),
-        name: this.getName(),
-        greeting: this.getGreeting(),
-        preposition: this.getPreposition(),
-        mod: this.getMod()
-      }
-    });
   }
 
   _createClass(Artist, [{
@@ -78440,6 +78538,7 @@ function () {
     value: function paint() {
       var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.createTitle();
       var painting = new Painting(title);
+      painting.paint();
       this.paintings.push(painting);
       return this;
     }
@@ -78468,78 +78567,6 @@ function () {
       return titleTemplate;
     }
   }, {
-    key: "getPlace",
-    value: function getPlace() {
-      var option = this.randInt(1, 3);
-      var place;
-
-      switch (option) {
-        case 1:
-          place = this.fakerator.address.country();
-          break;
-
-        case 2:
-          place = this.fakerator.address.city();
-          break;
-
-        default:
-          place = this.fakerator.address.streetName();
-      }
-
-      return place;
-    }
-  }, {
-    key: "getName",
-    value: function getName() {
-      var option = this.randInt(1, 3);
-      var name;
-
-      switch (option) {
-        case 1:
-          name = this.fakerator.names.firstName();
-          break;
-
-        case 2:
-          name = this.fakerator.names.lastName();
-          break;
-
-        default:
-          name = this.fakerator.names.firstName() + ' ' + fakerator.names.lastName();
-      }
-
-      return name;
-    }
-  }, {
-    key: "getGreeting",
-    value: function getGreeting() {
-      var greetings = ['farewell', 'welcome', 'lament'];
-      var greeting;
-      greeting = greetings[Math.floor(Math.random() * greetings.length)];
-      ;
-      return greeting;
-    }
-  }, {
-    key: "getPreposition",
-    value: function getPreposition() {
-      var prepositions = ["above", "absent", "across", "after", "against", "along", "around", "as", "aside", "astride", "at", "atop", "barring", "before", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "by", "despite", "down", "during", "failing", "following", "for", "from", "given", "in", "inside", "into", "like", "midst", "near", "of", "off", "on", "onto", "opposite", "outside", "over", "past", "round", "since", "than", "through", "throughout", "till", "times", "to", "toward", "towards", "under", "underneath", "unlike", "until", "unto", "up", "upon", "versus", "with", "within", "without"];
-      var preposition;
-      preposition = prepositions[Math.floor(Math.random() * prepositions.length)];
-      ;
-      return preposition;
-    }
-  }, {
-    key: "getMod",
-    value: function getMod() {
-      var mods = ['young', 'good', 'old', 'bad', 'late', 'poor', 'small', 'big', 'royal', 'ambitious', 'courageous', 'petulant', 'obtuse'];
-      var mod = " ";
-
-      if (this.randBool()) {
-        mod = mods[Math.floor(Math.random() * mods.length)];
-      }
-
-      return mod;
-    }
-  }, {
     key: "titleCase",
     value: function titleCase(str) {
       var blacklist = ['of', 'a', 'an', 'at', 'from', 'on', 'to', 'up', 'by', 'in', 'so'];
@@ -78555,29 +78582,6 @@ function () {
           }
         }
       }).join(' ');
-    }
-  }, {
-    key: "randInt",
-    value: function randInt(min, max) {
-      var _int;
-
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      _int = Math.floor(Math.random() * (max - min + 1)) + min;
-      return _int;
-    }
-  }, {
-    key: "randBool",
-    value: function randBool(odds) {
-      var bool;
-
-      if (odds == undefined) {
-        bool = Math.random() >= 0.5;
-      } else {
-        bool = Math.random() <= odds / 100;
-      }
-
-      return bool;
     }
   }]);
 
@@ -78830,24 +78834,23 @@ function (_Canvas) {
     key: "paint",
     value: function paint() {
       /* Paint Sky */
-      this.ctx.fillStyle = this.colour.skyFill;
+      this.ctx.fillStyle = this.fill.sky;
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       /* Paint Land */
 
-      this.ctx.fillStyle = this.colour.landFill;
+      this.ctx.fillStyle = this.fill.land;
       this.ctx.fillRect(0, this.landY, this.canvas.width, this.landHeight);
       /* Paint Feature */
 
-      this.ctx.fillStyle = this.featureFill;
       this.ctx.lineWidth = 100;
-      this.ctx.fillStyle = this.colour.featureFill;
+      this.ctx.fillStyle = this.fill.feature;
       this.ctx.moveTo(this.feature.x1, this.feature.y1);
       this.ctx.lineTo(this.feature.x2 - this.feature.width / 2, this.feature.y2);
       this.ctx.lineTo(this.feature.x2 + this.feature.width / 2, this.feature.y2);
       this.ctx.fill();
       /* Paint Fog */
 
-      this.ctx.fillStyle = this.colour.fogFill;
+      this.ctx.fillStyle = this.fill.fog;
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       return this;
     }

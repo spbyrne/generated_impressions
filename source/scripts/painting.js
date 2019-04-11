@@ -36,25 +36,23 @@ class Painting extends Canvas {
 
   paint() {
     /* Paint Sky */
-    this.ctx.fillStyle = this.colour.skyFill;
+    this.ctx.fillStyle = this.fill.sky;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     /* Paint Land */
-    this.ctx.fillStyle = this.colour.landFill;
+    this.ctx.fillStyle = this.fill.land;
     this.ctx.fillRect(0, this.landY, this.canvas.width, this.landHeight);
 
     /* Paint Feature */
-    this.ctx.fillStyle = this.featureFill;
-
     this.ctx.lineWidth = 100;
-    this.ctx.fillStyle = this.colour.featureFill;
+    this.ctx.fillStyle = this.fill.feature;
     this.ctx.moveTo(this.feature.x1,this.feature.y1);
     this.ctx.lineTo(this.feature.x2 - (this.feature.width / 2),this.feature.y2);
     this.ctx.lineTo(this.feature.x2 + (this.feature.width / 2),this.feature.y2);
     this.ctx.fill();
 
     /* Paint Fog */
-    this.ctx.fillStyle = this.colour.fogFill;
+    this.ctx.fillStyle = this.fill.fog;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     return this;
