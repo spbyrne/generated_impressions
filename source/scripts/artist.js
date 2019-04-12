@@ -106,10 +106,13 @@ class Artist {
     this.sentencer = Sentencer;
   }
 
-  paint(title = this.createTitle()) {
-    let painting = new Painting(title);
-    painting.paint();
-    this.paintings.push(painting);
+  paint(number = 1) {
+    for (let i = 0; i < number; i++) {
+      let title = this.createTitle();
+      let painting = new Painting(title);
+      painting.paint();
+      this.paintings.push(painting);
+    }
     return this;
   }
 

@@ -4,24 +4,26 @@ const Canvas = require('./canvas.js');
 class Painting extends Canvas {
 
   constructor(title) {
-    super();
+    super(title);
     this.title = title;
     this.rnd = seedrandom(this.title);
 
     /* Generate World Constants */
     this.time = this.getTime();
     this.aspectRatio = this.getAspectRatio();
-    this.colourScheme = this.getColourScheme();
-    this.horizon = this.getRatio();
-    this.fog = this.getFog();
 
     /* Set Up Environment */
     this.canvas = this.generateCanvas();
     this.ctx = this.canvas.getContext("2d");
 
     /* Set Up Scene Objects */
-    this.landHeight = this.canvas.height * this.horizon;
-    this.landY = this.canvas.height - this.landHeight;
+    this.colourScheme = this.getColourScheme();
+    this.horizon = this.getRatio();
+    this.fog = this.getFog();
+    this.horizonBlur = this.ease.easeInQuad(this.fog) / 10;
+    console.log(this.horizonBlur);
+    this.landY = this.canvas.height * this.horizon;
+    this.landHeight = this.canvas.height - this.landY;
     this.feature = this.getFeature();
 
     /* Generate World Colours */
@@ -115,7 +117,7 @@ class Painting extends Canvas {
     let ratio = 1;
     let goldenRatio = 1.6180339887498948482045868;
     let exponent = super.randBias(1,4,2,1);
-    let inverse = super.randBool(30);
+    let inverse = super.randBool(70);
     for (let i = 0; i < exponent; i++) {
       ratio = ratio / goldenRatio;
     }
@@ -209,20 +211,19 @@ class Painting extends Canvas {
   getFill() {
     let fill = {};
     let colour = this.colour;
-    let fogBlur = this.ease.easeInQuad(this.fog) / 10;
 
     /* Sky */
     let sky;
     sky = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
     sky.addColorStop(0, super.hsl(colour.sky));
-    sky.addColorStop(1 - this.horizon, super.hsl(colour.horizon));
+    sky.addColorStop(this.horizon, super.hsl(colour.horizon));
     fill.sky = sky;
     
     /* Land */
     let land;
     land = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
     land.addColorStop(0, super.hsl(colour.horizon));
-    land.addColorStop(fogBlur, super.hsl(colour.landHorizonColour));
+    land.addColorStop(this.horizonBlur, super.hsl(colour.landHorizonColour));
     land.addColorStop(1, super.hsl(colour.land));
     fill.land = land;
 
@@ -230,7 +231,7 @@ class Painting extends Canvas {
     let feature;
     feature = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
     feature.addColorStop(0, super.hsla(colour.horizon,0));
-    feature.addColorStop(fogBlur * 2, super.hsla(colour.featureHorizonColour,0.8));
+    feature.addColorStop(this.horizonBlur * super.randInt(1,10,4), super.hsla(colour.featureHorizonColour,0.8));
     feature.addColorStop(1, super.hsl(colour.feature));
     fill.feature = feature;
 
@@ -238,9 +239,9 @@ class Painting extends Canvas {
     let fog;
     fog = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
     let upperFogAlpha = super.randBias(this.ease.easeInQuad(this.fog),this.fog,this.ease.easeOutQuint(this.fog));
-    let lowerFogAlpha = super.randBias(this.ease.easeInQuint(this.fog),this.fog,this.ease.easeInQuad(this.fog),3);
+    let lowerFogAlpha = super.randBias(this.fog * 0.4,this.fog,this.fog * 0.8,3);
     fog.addColorStop(0, super.hsla(colour.fog,upperFogAlpha));
-    fog.addColorStop(1 - this.horizon, super.hsla(colour.fog,this.fog));
+    fog.addColorStop(this.horizon, super.hsla(colour.fog,this.fog));
     fog.addColorStop(1, super.hsla(colour.fog,lowerFogAlpha));
     fill.fog = fog;
 
@@ -257,7 +258,7 @@ class Painting extends Canvas {
       bias = cW - bias;
     }
     feature.x1 = super.randBias(minUnit,cW - minUnit,bias,1,'easeOutQuad');
-    feature.y1 = cH * (1 - this.horizon);
+    feature.y1 = this.landY + this.landHeight * this.horizonBlur * 0.5;
     feature.x2bias = (feature.x1 < cW / 2) ? cW * .33 : cW * .66;
     feature.x2 = super.randBias(-cW*1.5,cW*2.5,feature.x2bias,1,'easeOutQuad');
     feature.y2 = cH;

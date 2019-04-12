@@ -1,5 +1,5 @@
 const Artist = require('./artist.js');
+const painter = new Artist('Anna Denson');
+const container = document.querySelector('.wrapper');
 
-let artist = new Artist('Anna Denson');
-let container = document.querySelector('.wrapper');
-artist.paint().paint().paint().paint().paint().paint().paint().paint().paint().display(container);
+painter.paint(20).display(container);

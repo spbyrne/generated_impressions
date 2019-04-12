@@ -50,15 +50,15 @@ class Canvas {
   }
 
   randBias(min, max, bias, influence = 1, easingOption = 'easeInOutQuad') {
-
     let random, odds;
     do {
-    random = Math.random() * (max - min) + min;
-    odds = (random > bias) ? (max - random) / (max - bias) : (random - min) / (bias - min);
-    odds = Math.pow(odds,influence);
-    odds = this.ease[easingOption](odds);
+      random = this.rnd() * (max - min) + min;
+      odds = (random > bias) ? (max - random) / (max - bias) : (random - min) / (bias - min);
+      odds = Math.pow(odds,influence);
+      odds = this.ease[easingOption](odds);
+      odds = (odds == 0) ? bias : odds;
     }
-    while (Math.random() > odds);
+    while (this.rnd() > odds);
     return random;
   }
   

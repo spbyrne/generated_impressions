@@ -78536,10 +78536,15 @@ function () {
   _createClass(Artist, [{
     key: "paint",
     value: function paint() {
-      var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.createTitle();
-      var painting = new Painting(title);
-      painting.paint();
-      this.paintings.push(painting);
+      var number = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      for (var i = 0; i < number; i++) {
+        var title = this.createTitle();
+        var painting = new Painting(title);
+        painting.paint();
+        this.paintings.push(painting);
+      }
+
       return this;
     }
   }, {
@@ -78744,11 +78749,12 @@ function () {
       var random, odds;
 
       do {
-        random = Math.random() * (max - min) + min;
+        random = this.rnd() * (max - min) + min;
         odds = random > bias ? (max - random) / (max - bias) : (random - min) / (bias - min);
         odds = Math.pow(odds, influence);
         odds = this.ease[easingOption](odds);
-      } while (Math.random() > odds);
+        odds = odds == 0 ? bias : odds;
+      } while (this.rnd() > odds);
 
       return random;
     }
@@ -78799,9 +78805,9 @@ module.exports = Canvas;
 
 var Artist = require('./artist.js');
 
-var artist = new Artist('Anna Denson');
+var painter = new Artist('Anna Denson');
 var container = document.querySelector('.wrapper');
-artist.paint().paint().paint().paint().paint().paint().paint().paint().paint().display(container);
+painter.paint(20).display(container);
 
 },{"./artist.js":269}],272:[function(require,module,exports){
 "use strict";
@@ -78842,24 +78848,26 @@ function (_Canvas) {
 
     _classCallCheck(this, Painting);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Painting).call(this));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Painting).call(this, title));
     _this.title = title;
     _this.rnd = seedrandom(_this.title);
     /* Generate World Constants */
 
     _this.time = _this.getTime();
     _this.aspectRatio = _this.getAspectRatio();
-    _this.colourScheme = _this.getColourScheme();
-    _this.horizon = _this.getRatio();
-    _this.fog = _this.getFog();
     /* Set Up Environment */
 
     _this.canvas = _this.generateCanvas();
     _this.ctx = _this.canvas.getContext("2d");
     /* Set Up Scene Objects */
 
-    _this.landHeight = _this.canvas.height * _this.horizon;
-    _this.landY = _this.canvas.height - _this.landHeight;
+    _this.colourScheme = _this.getColourScheme();
+    _this.horizon = _this.getRatio();
+    _this.fog = _this.getFog();
+    _this.horizonBlur = _this.ease.easeInQuad(_this.fog) / 10;
+    console.log(_this.horizonBlur);
+    _this.landY = _this.canvas.height * _this.horizon;
+    _this.landHeight = _this.canvas.height - _this.landY;
     _this.feature = _this.getFeature();
     /* Generate World Colours */
 
@@ -78963,7 +78971,7 @@ function (_Canvas) {
 
       var exponent = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 1, 4, 2, 1);
 
-      var inverse = _get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this, 30);
+      var inverse = _get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this, 70);
 
       for (var i = 0; i < exponent; i++) {
         ratio = ratio / goldenRatio;
@@ -79071,20 +79079,19 @@ function (_Canvas) {
     value: function getFill() {
       var fill = {};
       var colour = this.colour;
-      var fogBlur = this.ease.easeInQuad(this.fog) / 10;
       /* Sky */
 
       var sky;
       sky = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
       sky.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.sky));
-      sky.addColorStop(1 - this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.horizon));
+      sky.addColorStop(this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.horizon));
       fill.sky = sky;
       /* Land */
 
       var land;
       land = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
       land.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.horizon));
-      land.addColorStop(fogBlur, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.landHorizonColour));
+      land.addColorStop(this.horizonBlur, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.landHorizonColour));
       land.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.land));
       fill.land = land;
       /* Feature */
@@ -79092,7 +79099,7 @@ function (_Canvas) {
       var feature;
       feature = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
       feature.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.horizon, 0));
-      feature.addColorStop(fogBlur * 2, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.featureHorizonColour, 0.8));
+      feature.addColorStop(this.horizonBlur * _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 1, 10, 4), _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.featureHorizonColour, 0.8));
       feature.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.feature));
       fill.feature = feature;
       /* Fog */
@@ -79102,10 +79109,10 @@ function (_Canvas) {
 
       var upperFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.ease.easeInQuad(this.fog), this.fog, this.ease.easeOutQuint(this.fog));
 
-      var lowerFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.ease.easeInQuint(this.fog), this.fog, this.ease.easeInQuad(this.fog), 3);
+      var lowerFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.fog * 0.4, this.fog, this.fog * 0.8, 3);
 
       fog.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.fog, upperFogAlpha));
-      fog.addColorStop(1 - this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.fog, this.fog));
+      fog.addColorStop(this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.fog, this.fog));
       fog.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.fog, lowerFogAlpha));
       fill.fog = fog;
       return fill;
@@ -79124,7 +79131,7 @@ function (_Canvas) {
       }
 
       feature.x1 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, minUnit, cW - minUnit, bias, 1, 'easeOutQuad');
-      feature.y1 = cH * (1 - this.horizon);
+      feature.y1 = this.landY + this.landHeight * this.horizonBlur * 0.5;
       feature.x2bias = feature.x1 < cW / 2 ? cW * .33 : cW * .66;
       feature.x2 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, -cW * 1.5, cW * 2.5, feature.x2bias, 1, 'easeOutQuad');
       feature.y2 = cH;
