@@ -78877,7 +78877,7 @@ var Artist = require('./artist.js');
 
 var painter = new Artist();
 var container = document.querySelector('.wrapper');
-painter.paint(5).display(container);
+painter.paint(10).display(container);
 
 },{"./artist.js":270}],273:[function(require,module,exports){
 "use strict";
