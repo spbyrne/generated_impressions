@@ -42,7 +42,6 @@ class Painting extends Canvas {
     this.ctx.fillRect(0, this.landY, this.canvas.width, this.landHeight);
 
     /* Paint Feature */
-    this.ctx.lineWidth = 100;
     this.ctx.fillStyle = this.fill.feature;
     this.ctx.moveTo(this.feature.x1,this.feature.y1);
     this.ctx.lineTo(this.feature.x2,this.feature.y2);
@@ -54,15 +53,24 @@ class Painting extends Canvas {
     this.ctx.fillStyle = this.fill.fog;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    
     /* Paint Trees */
     for (let i = 0; i < this.trees.length; i++) {
       let tree = this.trees[i];
-      this.ctx.fillStyle = tree.fillStyle;
-      this.ctx.fillRect(tree.x, tree.y - tree.height, tree.width, tree.height);
+      this.paintTree(tree,i);
     }
 
     return this;
+  }
+
+  paintTree(tree,i) {
+    this.fill.tree[i] = this.getTreeFill(tree);
+    this.ctx.fillStyle = this.fill.tree[i];
+    this.ctx.beginPath();
+    this.ctx.moveTo(tree.x, tree.y);
+    this.ctx.lineTo(tree.x + tree.width, tree.y);
+    this.ctx.lineTo(tree.x + (tree.width / 2), tree.y - tree.height);
+    this.ctx.closePath();
+    this.ctx.fill(); 
   }
 
   generateCanvas() {
@@ -126,7 +134,7 @@ class Painting extends Canvas {
   getRatio() {
     let ratio = 1;
     let goldenRatio = 1.6180339887498948482045868;
-    let exponent = super.randBias(1,4,2,1);
+    let exponent = super.randBias(1,4,2);
     let inverse = super.randBool(70);
     for (let i = 0; i < exponent; i++) {
       ratio = ratio / goldenRatio;
@@ -134,7 +142,7 @@ class Painting extends Canvas {
     if (inverse) {
       ratio = 1 - ratio;
     }
-    ratio = super.randBias(ratio / 2, ratio * 1.5, ratio, 1, 'easeInQuint');
+    ratio = super.randBias(ratio / 2, ratio * 1.5, ratio, 'easeInQuint');
     return ratio;
   }
 
@@ -148,14 +156,14 @@ class Painting extends Canvas {
 
     /* Sky */
     let skyH, skyS, skyL;
-    skyH = super.rotateHue(super.randBias(0,240,60,1),180); // Random hue between cyan and yellow, bias towards blue
-    skyS = super.randBias(0, 100, 60, 1);
+    skyH = super.rotateHue(super.randBias(0,240,60),180); // Random hue between cyan and yellow, bias towards blue
+    skyS = super.randBias(0, 100, 60);
     if (this.time == 'night') {
-      skyL = super.randBias(0, 100, 25, 2);
+      skyL = super.randBias(0, 100, 25);
     } else if (this.time == 'twilight') {
-      skyL = super.randBias(0, 100, 35, 2);
+      skyL = super.randBias(0, 100, 35);
     } else {
-      skyL = super.randBias(0, 100, 60, 1);
+      skyL = super.randBias(0, 100, 60);
     }
     colour.sky = [skyH,skyS,skyL];
     
@@ -163,23 +171,23 @@ class Painting extends Canvas {
     let horizonH, horizonS, horizonL;
     horizonH = super.rotateHue(skyH,super.randInt(0,30));
     horizonS = skyS;
-    horizonL = super.randBias(skyL - 5, skyL + 40, skyL + 10, 1);
+    horizonL = super.randBias(skyL - 5, skyL + 40, skyL + 10);
     colour.horizon = [horizonH,horizonS,horizonL];
 
     /* Land */
     let landH, landS, landL;
     if (this.colourScheme == 'mono') {
-      landH = super.randBias(skyH  - 30, skyH + 30, skyH,1);
+      landH = super.randBias(skyH  - 30, skyH + 30, skyH);
     } else if ((this.colourScheme == 'triad')) {
-      landH = super.rotateHue(skyH, super.randBias(105,135,120,1));
+      landH = super.rotateHue(skyH, super.randBias(105,135,120));
     }
-    landS = super.randBias(skyS  - 15, skyS + 15, skyS,1);
+    landS = super.randBias(skyS  - 15, skyS + 15, skyS);
     if (this.time == 'night') {
-      landL = super.randBias(5, 30, 18,1);
+      landL = super.randBias(5, 30, 18);
     } else if (this.time == 'twilight') {
-      landL = super.randBias(10, 50, 20, 1);
+      landL = super.randBias(10, 50, 20);
     } else {
-      landL = super.randBias(10,70,25,1);
+      landL = super.randBias(10,70,25);
     }
     colour.land = [landH,landS,landL];
 
@@ -187,32 +195,32 @@ class Painting extends Canvas {
     let landHorizonH, landHorizonS, landHorizonL;
     landHorizonH = super.rotateHue(landH, super.randInt(0,30));
     landHorizonS = landS * .6;
-    landHorizonL = super.randBias(landL - 5,landL + 20, landL + 6, 3);
+    landHorizonL = super.randBias(landL - 5,landL + 20, landL + 6, 'easeInQuint');
     colour.landHorizonColour = [landHorizonH,landHorizonS,landHorizonL];
 
     /* Feature */
     let featureH, featureS, featureL;
     if (super.randBool()) {
-      featureH = super.randBias(super.rotateHue(skyH,-160), super.rotateHue(skyH,200), super.rotateHue(skyH,180),1,'easeInQuart');
+      featureH = super.randBias(super.rotateHue(skyH,-160), super.rotateHue(skyH,200), super.rotateHue(skyH,180),'easeInQuart');
     } else {
-      featureH = super.randBias(super.rotateHue(skyH,-20), super.rotateHue(skyH,20), skyH,1,'easeInQuart');
+      featureH = super.randBias(super.rotateHue(skyH,-20), super.rotateHue(skyH,20), skyH,'easeInQuart');
     }
-    featureS = super.randBias(Math.max(skyS  - 30,0), skyS + 10, skyS - 15,1);
-    featureL = super.randBias(Math.max(skyL  - 20,0), skyL + 15, skyL - 10,1);
+    featureS = super.randBias(Math.max(skyS  - 30,0), skyS + 10, skyS - 15);
+    featureL = super.randBias(Math.max(skyL  - 20,0), skyL + 15, skyL - 10);
     colour.feature = [featureH,featureS,featureL];
 
     /* Feature Horizon */
     let featureHorizonH, featureHorizonS, featureHorizonL;
     featureHorizonH = super.rotateHue(featureH, super.randInt(0,30));
     featureHorizonS = featureS * .6;
-    featureHorizonL = super.randBias(featureL - 5,featureL + 20, featureL + 6, 3);
+    featureHorizonL = super.randBias(featureL - 5,featureL + 20, featureL + 6, 'easeInQuint');
     colour.featureHorizonColour = [featureHorizonH,featureHorizonS,featureHorizonL];
 
     /* Fog */
     let fogH, fogS, fogL;
-    fogH = super.randBias(horizonH  - 15, horizonH + 15, horizonH,1);
-    fogS = super.randBias(horizonS  - 15, horizonS + 15, horizonS,1);
-    fogL = super.randBias(25, 80, horizonL,1);
+    fogH = super.randBias(horizonH  - 15, horizonH + 15, horizonH);
+    fogS = super.randBias(horizonS  - 15, horizonS + 15, horizonS);
+    fogL = super.randBias(25, 80, horizonL);
     colour.fog = [fogH,fogS,fogL];
 
     /* Tree */
@@ -220,7 +228,7 @@ class Painting extends Canvas {
     if (this.colourScheme == 'mono') {
       treeH = super.randBias(super.rotateHue(skyH,-20),super.rotateHue(skyH,20),skyH);
     } else if ((this.colourScheme == 'triad')) {
-      treeH = super.randBias(super.rotateHue(skyH,100),super.rotateHue(skyH,140),super.rotateHue(skyH,-120),);
+      treeH = super.randBias(super.rotateHue(skyH,100),super.rotateHue(skyH,140),super.rotateHue(skyH,-120));
     }
     treeS = landS;
     treeL = super.randBias(20,50,30);
@@ -260,11 +268,13 @@ class Painting extends Canvas {
     let fog;
     fog = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
     let upperFogAlpha = super.randBias(this.ease.easeInQuad(this.fog),this.fog,this.ease.easeOutQuint(this.fog));
-    let lowerFogAlpha = super.randBias(this.fog * 0.4,this.fog,this.fog * 0.8,3);
+    let lowerFogAlpha = super.randBias(this.fog * 0.4,this.fog,this.fog * 0.8, 'easeInQuint');
     fog.addColorStop(0, super.hsla(colour.fog,upperFogAlpha));
     fog.addColorStop(this.horizon, super.hsla(colour.fog,this.fog));
     fog.addColorStop(1, super.hsla(colour.fog,lowerFogAlpha));
     fill.fog = fog;
+
+    fill.tree = [];
 
     return fill;
   };
@@ -277,11 +287,11 @@ class Painting extends Canvas {
       bias = this.canvas.width - bias;
     }
 
-    feature.x1 = super.randBias(minUnit,this.canvas.width - minUnit,bias,1,'easeOutQuad');
+    feature.x1 = super.randBias(minUnit,this.canvas.width - minUnit,bias,'easeOutQuad');
     feature.y1 = this.landY + this.landHeight * this.horizonBlur * 0.5;
     feature.x2bias = (feature.x1 < this.canvas.width / 2) ? this.canvas.width * .33 : this.canvas.width * .66;
-    feature.width = super.randBias(this.canvas.width / 10,this.canvas.width,this.canvas.width/1.6,1,'easeOutQuad');
-    feature.x2 = super.randBias(-this.canvas.width*1.5,this.canvas.width*2.5,feature.x2bias,1,'easeOutQuad') - (feature.width / 2);
+    feature.width = super.randBias(this.canvas.width / 10,this.canvas.width,this.canvas.width/1.6,'easeOutQuad');
+    feature.x2 = super.randBias(-this.canvas.width*1.5,this.canvas.width*2.5,feature.x2bias,'easeOutQuad') - (feature.width / 2);
     feature.y2 = this.canvas.height;
     feature.x3 = feature.x2  + feature.width;
     feature.y3 = this.canvas.height;
@@ -294,9 +304,9 @@ class Painting extends Canvas {
 
   getTrees() {
     let trees = [];
-    let number = super.randBias(0,200,20);
-    let heightBias = super.randBias(this.unit / 10, this.unit * 2, this.unit * 1.5);
-    let widthBias = this.unit / 80;
+    let number = super.randBias(0,500,20);
+    let heightBias = super.randBias(this.unit / 10, this.unit * 2, this.unit / 1.6);
+    let widthBias = this.unit / 40;
     for (let i = 0; i < number; i++) {
       let tree = this.getTree(heightBias,widthBias);
       trees.push(tree);
@@ -309,16 +319,16 @@ class Painting extends Canvas {
 
   getTree(heightBias,widthBias) {
     let tree = {};
-    tree.height = super.randBias(this.unit / 10, this.unit * 3, heightBias, 1, 'easeInQuint');
-    tree.width = super.randBias(this.unit / 100, tree.height / 1.6, widthBias, 1, 'easeInQuint');
+    tree.height = super.randBias(this.unit / 10, this.unit * 2, heightBias, 'easeInQuint');
+    tree.width = super.randBias(this.unit / 60, tree.height / 2, widthBias, 'easeInQuint');
     tree.localUnit = (this.unit / 3);
     tree.minY = this.landY;
-    tree.maxY = this.canvas.height;
-    tree.yBias = tree.minY;
+    tree.maxY = this.canvas.height + this.unit / 6;
+    tree.yBias = tree.minY + (this.horizonBlur * this.landHeight);
 
     do {
       tree.x = -tree.localUnit + super.randInt(0,this.canvas.width + (tree.localUnit * 2));
-      tree.y = super.randBias(tree.minY,tree.maxY,tree.yBias,1,'easeInQuint');
+      tree.y = super.randBias(tree.minY,tree.maxY,tree.yBias,'easeInQuint');
     }
     while(this.inside([tree.x,tree.y],this.feature.poly))
 
@@ -330,15 +340,28 @@ class Painting extends Canvas {
       tree.x = tree.x - tree.width;
     }
 
-    var colourRGB = this.ctx.getImageData(tree.x, tree.y, 1, 1).data;
-    var colourHSL = super.rgbToHsl(colourRGB);
-    tree.fillStyle = 'black' //super.hsl(super.mixHsl(colourHSL,this.colour.tree,tree.sizeMod, 1 - tree.sizeMod));
     return tree;
+  }
+
+  getTreeFill(tree) {
+    let treeFill, groundColour, colourRGB, colourHSL, sampleX, sampleY;
+
+    sampleX = (tree.x < 1) ? 1 : (tree.x > this.canvas.width) ? this.canvas.width - 1 : tree.x;
+    sampleY = (tree.y > this.canvas.height) ? this.canvas.height - 1  : tree.y;
+    colourRGB = this.ctx.getImageData(sampleX, sampleY, 1, 1).data;
+    colourHSL = super.rgbToHsl(colourRGB);
+    groundColour = super.hsl(colourHSL);
+
+    treeFill = this.ctx.createLinearGradient(0, tree.y - tree.height, 0, tree.y);
+    treeFill.addColorStop(0, super.hsl(super.mixHsl(this.colour.horizon,this.colour.tree,tree.sizeMod, 1 - tree.sizeMod)));
+    treeFill.addColorStop(1, groundColour);
+
+    return treeFill;
   }
 
   getFog() {
     let fog;
-    fog = this.ease.easeOutQuad(super.randBias(0,100,10,1) / 100);
+    fog = this.ease.easeOutQuad(super.randBias(0,100,10) / 100);
     return fog;
   }
 

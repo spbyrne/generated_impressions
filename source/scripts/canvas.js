@@ -30,12 +30,18 @@ class Canvas {
   }
   
   hsl(array) {
-    const [h, s, l] = array;
+    let [h, s, l] = array;
+    h = Math.round(h);
+    s = Math.round(s);
+    l = Math.round(l);
     return 'hsl(' + h + ',' + s + '%,' + l + '%)';
   }
   
   hsla(array,alpha) {
-    const [h, s, l] = array;
+    let [h, s, l] = array;
+    h = Math.round(h);
+    s = Math.round(s);
+    l = Math.round(l);
     return 'hsl(' + h + ',' + s + '%,' + l + '%, ' + alpha + ')';
   }
 
@@ -54,37 +60,65 @@ class Canvas {
 
   rgbToHsl(array) {
     let [r,g,b] = array;
-    r /= 255, g /= 255, b /= 255;
-  
-    var max = Math.max(r, g, b), min = Math.min(r, g, b);
-    var h, s, l = (max + min) / 2;
-  
-    if (max == min) {
-      h = s = 0; // achromatic
-    } else {
-      var d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-  
-      switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        case b: h = (r - g) / d + 4; break;
-      }
-  
-      h /= 6;
-    }
+    // Make r, g, and b fractions of 1
+    r /= 255;
+    g /= 255;
+    b /= 255;
+
+    // Find greatest and smallest channel values
+    let cmin = Math.min(r,g,b),
+        cmax = Math.max(r,g,b),
+        delta = cmax - cmin,
+        h = 0,
+        s = 0,
+        l = 0;
+
+    // Calculate hue
+    // No difference
+    if (delta == 0)
+      h = 0;
+    // Red is max
+    else if (cmax == r)
+      h = ((g - b) / delta) % 6;
+    // Green is max
+    else if (cmax == g)
+      h = (b - r) / delta + 2;
+    // Blue is max
+    else
+      h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+      
+    // Make negative hues positive behind 360°
+    if (h < 0)
+        h += 360;
+
+        // Calculate lightness
+    l = (cmax + cmin) / 2;
+
+    // Calculate saturation
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+      
+    // Multiply l and s by 100
+    s = +(s * 100).toFixed(1);
+    l = +(l * 100).toFixed(1);
   
     return [ h, s, l ];
   }  
 
-  randBias(min, max, bias, influence = 1, easingOption = 'easeInOutQuad') {
+  randBias(min, max, bias, easingOption = 'easeInOutQuad', wholeNumber = false) {
+    max = (max < min) ? min + 1 : max;
+    bias = (bias > max) ? max : (bias < min) ? min : bias;
     let random = 0;
     let odds = 0;
     while (this.rnd() > odds) {
-      random = this.rnd() * (max - min) + min;
+      if (wholeNumber) {
+        random = Math.floor(this.rnd() * (max - min + 1)) + min;
+      } else {
+        random = this.rnd() * (max - min) + min;
+      }
       odds = (random > bias) ? (max - random) / (max - bias) : (random - min) / (bias - min);
       odds = this.ease[easingOption](odds);
-      odds = (odds == 0) ? bias : odds;
     }
     return random;
   }

@@ -78718,6 +78718,9 @@ function () {
           s = _array[1],
           l = _array[2];
 
+      h = Math.round(h);
+      s = Math.round(s);
+      l = Math.round(l);
       return 'hsl(' + h + ',' + s + '%,' + l + '%)';
     }
   }, {
@@ -78728,6 +78731,9 @@ function () {
           s = _array2[1],
           l = _array2[2];
 
+      h = Math.round(h);
+      s = Math.round(s);
+      l = Math.round(l);
       return 'hsl(' + h + ',' + s + '%,' + l + '%, ' + alpha + ')';
     }
   }, {
@@ -78768,53 +78774,56 @@ function () {
       var _array3 = _slicedToArray(array, 3),
           r = _array3[0],
           g = _array3[1],
-          b = _array3[2];
+          b = _array3[2]; // Make r, g, and b fractions of 1
 
-      r /= 255, g /= 255, b /= 255;
-      var max = Math.max(r, g, b),
-          min = Math.min(r, g, b);
-      var h,
-          s,
-          l = (max + min) / 2;
 
-      if (max == min) {
-        h = s = 0; // achromatic
-      } else {
-        var d = max - min;
-        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      r /= 255;
+      g /= 255;
+      b /= 255; // Find greatest and smallest channel values
 
-        switch (max) {
-          case r:
-            h = (g - b) / d + (g < b ? 6 : 0);
-            break;
+      var cmin = Math.min(r, g, b),
+          cmax = Math.max(r, g, b),
+          delta = cmax - cmin,
+          h = 0,
+          s = 0,
+          l = 0; // Calculate hue
+      // No difference
 
-          case g:
-            h = (b - r) / d + 2;
-            break;
+      if (delta == 0) h = 0; // Red is max
+      else if (cmax == r) h = (g - b) / delta % 6; // Green is max
+        else if (cmax == g) h = (b - r) / delta + 2; // Blue is max
+          else h = (r - g) / delta + 4;
+      h = Math.round(h * 60); // Make negative hues positive behind 360°
 
-          case b:
-            h = (r - g) / d + 4;
-            break;
-        }
+      if (h < 0) h += 360; // Calculate lightness
 
-        h /= 6;
-      }
+      l = (cmax + cmin) / 2; // Calculate saturation
 
+      s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1)); // Multiply l and s by 100
+
+      s = +(s * 100).toFixed(1);
+      l = +(l * 100).toFixed(1);
       return [h, s, l];
     }
   }, {
     key: "randBias",
     value: function randBias(min, max, bias) {
-      var influence = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-      var easingOption = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'easeInOutQuad';
+      var easingOption = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'easeInOutQuad';
+      var wholeNumber = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+      max = max < min ? min + 1 : max;
+      bias = bias > max ? max : bias < min ? min : bias;
       var random = 0;
       var odds = 0;
 
       while (this.rnd() > odds) {
-        random = this.rnd() * (max - min) + min;
+        if (wholeNumber) {
+          random = Math.floor(this.rnd() * (max - min + 1)) + min;
+        } else {
+          random = this.rnd() * (max - min) + min;
+        }
+
         odds = random > bias ? (max - random) / (max - bias) : (random - min) / (bias - min);
         odds = this.ease[easingOption](odds);
-        odds = odds == 0 ? bias : odds;
       }
 
       return random;
@@ -78868,7 +78877,7 @@ var Artist = require('./artist.js');
 
 var painter = new Artist();
 var container = document.querySelector('.wrapper');
-painter.paint(20).display(container);
+painter.paint(5).display(container);
 
 },{"./artist.js":270}],273:[function(require,module,exports){
 "use strict";
@@ -78950,7 +78959,6 @@ function (_Canvas) {
       this.ctx.fillRect(0, this.landY, this.canvas.width, this.landHeight);
       /* Paint Feature */
 
-      this.ctx.lineWidth = 100;
       this.ctx.fillStyle = this.fill.feature;
       this.ctx.moveTo(this.feature.x1, this.feature.y1);
       this.ctx.lineTo(this.feature.x2, this.feature.y2);
@@ -78964,11 +78972,22 @@ function (_Canvas) {
 
       for (var i = 0; i < this.trees.length; i++) {
         var tree = this.trees[i];
-        this.ctx.fillStyle = tree.fillStyle;
-        this.ctx.fillRect(tree.x, tree.y - tree.height, tree.width, tree.height);
+        this.paintTree(tree, i);
       }
 
       return this;
+    }
+  }, {
+    key: "paintTree",
+    value: function paintTree(tree, i) {
+      this.fill.tree[i] = this.getTreeFill(tree);
+      this.ctx.fillStyle = this.fill.tree[i];
+      this.ctx.beginPath();
+      this.ctx.moveTo(tree.x, tree.y);
+      this.ctx.lineTo(tree.x + tree.width, tree.y);
+      this.ctx.lineTo(tree.x + tree.width / 2, tree.y - tree.height);
+      this.ctx.closePath();
+      this.ctx.fill();
     }
   }, {
     key: "generateCanvas",
@@ -79039,7 +79058,7 @@ function (_Canvas) {
       var ratio = 1;
       var goldenRatio = 1.6180339887498948482045868;
 
-      var exponent = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 1, 4, 2, 1);
+      var exponent = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 1, 4, 2);
 
       var inverse = _get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this, 70);
 
@@ -79051,7 +79070,7 @@ function (_Canvas) {
         ratio = 1 - ratio;
       }
 
-      ratio = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, ratio / 2, ratio * 1.5, ratio, 1, 'easeInQuint');
+      ratio = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, ratio / 2, ratio * 1.5, ratio, 'easeInQuint');
       return ratio;
     }
   }, {
@@ -79067,16 +79086,16 @@ function (_Canvas) {
       /* Sky */
 
       var skyH, skyS, skyL;
-      skyH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 240, 60, 1), 180); // Random hue between cyan and yellow, bias towards blue
+      skyH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 240, 60), 180); // Random hue between cyan and yellow, bias towards blue
 
-      skyS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 60, 1);
+      skyS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 60);
 
       if (this.time == 'night') {
-        skyL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 25, 2);
+        skyL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 25);
       } else if (this.time == 'twilight') {
-        skyL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 35, 2);
+        skyL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 35);
       } else {
-        skyL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 60, 1);
+        skyL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 60);
       }
 
       colour.sky = [skyH, skyS, skyL];
@@ -79085,26 +79104,26 @@ function (_Canvas) {
       var horizonH, horizonS, horizonL;
       horizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
       horizonS = skyS;
-      horizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyL - 5, skyL + 40, skyL + 10, 1);
+      horizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyL - 5, skyL + 40, skyL + 10);
       colour.horizon = [horizonH, horizonS, horizonL];
       /* Land */
 
       var landH, landS, landL;
 
       if (this.colourScheme == 'mono') {
-        landH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyH - 30, skyH + 30, skyH, 1);
+        landH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyH - 30, skyH + 30, skyH);
       } else if (this.colourScheme == 'triad') {
-        landH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 105, 135, 120, 1));
+        landH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 105, 135, 120));
       }
 
-      landS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyS - 15, skyS + 15, skyS, 1);
+      landS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, skyS - 15, skyS + 15, skyS);
 
       if (this.time == 'night') {
-        landL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 5, 30, 18, 1);
+        landL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 5, 30, 18);
       } else if (this.time == 'twilight') {
-        landL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 10, 50, 20, 1);
+        landL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 10, 50, 20);
       } else {
-        landL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 10, 70, 25, 1);
+        landL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 10, 70, 25);
       }
 
       colour.land = [landH, landS, landL];
@@ -79113,34 +79132,34 @@ function (_Canvas) {
       var landHorizonH, landHorizonS, landHorizonL;
       landHorizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, landH, _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
       landHorizonS = landS * .6;
-      landHorizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, landL - 5, landL + 20, landL + 6, 3);
+      landHorizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, landL - 5, landL + 20, landL + 6, 'easeInQuint');
       colour.landHorizonColour = [landHorizonH, landHorizonS, landHorizonL];
       /* Feature */
 
       var featureH, featureS, featureL;
 
       if (_get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this)) {
-        featureH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, -160), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 200), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 180), 1, 'easeInQuart');
+        featureH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, -160), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 200), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 180), 'easeInQuart');
       } else {
-        featureH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, -20), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 20), skyH, 1, 'easeInQuart');
+        featureH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, -20), _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, skyH, 20), skyH, 'easeInQuart');
       }
 
-      featureS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyS - 30, 0), skyS + 10, skyS - 15, 1);
-      featureL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyL - 20, 0), skyL + 15, skyL - 10, 1);
+      featureS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyS - 30, 0), skyS + 10, skyS - 15);
+      featureL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyL - 20, 0), skyL + 15, skyL - 10);
       colour.feature = [featureH, featureS, featureL];
       /* Feature Horizon */
 
       var featureHorizonH, featureHorizonS, featureHorizonL;
       featureHorizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, featureH, _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
       featureHorizonS = featureS * .6;
-      featureHorizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, featureL - 5, featureL + 20, featureL + 6, 3);
+      featureHorizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, featureL - 5, featureL + 20, featureL + 6, 'easeInQuint');
       colour.featureHorizonColour = [featureHorizonH, featureHorizonS, featureHorizonL];
       /* Fog */
 
       var fogH, fogS, fogL;
-      fogH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonH - 15, horizonH + 15, horizonH, 1);
-      fogS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonS - 15, horizonS + 15, horizonS, 1);
-      fogL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 25, 80, horizonL, 1);
+      fogH = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonH - 15, horizonH + 15, horizonH);
+      fogS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, horizonS - 15, horizonS + 15, horizonS);
+      fogL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 25, 80, horizonL);
       colour.fog = [fogH, fogS, fogL];
       /* Tree */
 
@@ -79192,12 +79211,13 @@ function (_Canvas) {
 
       var upperFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.ease.easeInQuad(this.fog), this.fog, this.ease.easeOutQuint(this.fog));
 
-      var lowerFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.fog * 0.4, this.fog, this.fog * 0.8, 3);
+      var lowerFogAlpha = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.fog * 0.4, this.fog, this.fog * 0.8, 'easeInQuint');
 
       fog.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.fog, upperFogAlpha));
       fog.addColorStop(this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.fog, this.fog));
       fog.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.fog, lowerFogAlpha));
       fill.fog = fog;
+      fill.tree = [];
       return fill;
     }
   }, {
@@ -79211,11 +79231,11 @@ function (_Canvas) {
         bias = this.canvas.width - bias;
       }
 
-      feature.x1 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, minUnit, this.canvas.width - minUnit, bias, 1, 'easeOutQuad');
+      feature.x1 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, minUnit, this.canvas.width - minUnit, bias, 'easeOutQuad');
       feature.y1 = this.landY + this.landHeight * this.horizonBlur * 0.5;
       feature.x2bias = feature.x1 < this.canvas.width / 2 ? this.canvas.width * .33 : this.canvas.width * .66;
-      feature.width = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.canvas.width / 10, this.canvas.width, this.canvas.width / 1.6, 1, 'easeOutQuad');
-      feature.x2 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, -this.canvas.width * 1.5, this.canvas.width * 2.5, feature.x2bias, 1, 'easeOutQuad') - feature.width / 2;
+      feature.width = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.canvas.width / 10, this.canvas.width, this.canvas.width / 1.6, 'easeOutQuad');
+      feature.x2 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, -this.canvas.width * 1.5, this.canvas.width * 2.5, feature.x2bias, 'easeOutQuad') - feature.width / 2;
       feature.y2 = this.canvas.height;
       feature.x3 = feature.x2 + feature.width;
       feature.y3 = this.canvas.height;
@@ -79228,11 +79248,11 @@ function (_Canvas) {
     value: function getTrees() {
       var trees = [];
 
-      var number = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 200, 20);
+      var number = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 500, 20);
 
-      var heightBias = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.unit / 10, this.unit * 2, this.unit * 1.5);
+      var heightBias = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.unit / 10, this.unit * 2, this.unit / 1.6);
 
-      var widthBias = this.unit / 80;
+      var widthBias = this.unit / 40;
 
       for (var i = 0; i < number; i++) {
         var tree = this.getTree(heightBias, widthBias);
@@ -79248,16 +79268,16 @@ function (_Canvas) {
     key: "getTree",
     value: function getTree(heightBias, widthBias) {
       var tree = {};
-      tree.height = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.unit / 10, this.unit * 3, heightBias, 1, 'easeInQuint');
-      tree.width = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.unit / 100, tree.height / 1.6, widthBias, 1, 'easeInQuint');
+      tree.height = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.unit / 10, this.unit * 2, heightBias, 'easeInQuint');
+      tree.width = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.unit / 60, tree.height / 2, widthBias, 'easeInQuint');
       tree.localUnit = this.unit / 3;
       tree.minY = this.landY;
-      tree.maxY = this.canvas.height;
-      tree.yBias = tree.minY;
+      tree.maxY = this.canvas.height + this.unit / 6;
+      tree.yBias = tree.minY + this.horizonBlur * this.landHeight;
 
       do {
         tree.x = -tree.localUnit + _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, this.canvas.width + tree.localUnit * 2);
-        tree.y = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, tree.minY, tree.maxY, tree.yBias, 1, 'easeInQuint');
+        tree.y = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, tree.minY, tree.maxY, tree.yBias, 'easeInQuint');
       } while (this.inside([tree.x, tree.y], this.feature.poly));
 
       tree.sizeMod = (tree.y - this.landY) / this.landHeight;
@@ -79268,19 +79288,27 @@ function (_Canvas) {
         tree.x = tree.x - tree.width;
       }
 
-      var colourRGB = this.ctx.getImageData(tree.x, tree.y, 1, 1).data;
-
-      var colourHSL = _get(_getPrototypeOf(Painting.prototype), "rgbToHsl", this).call(this, colourRGB);
-
-      tree.fillStyle = 'black'; //super.hsl(super.mixHsl(colourHSL,this.colour.tree,tree.sizeMod, 1 - tree.sizeMod));
-
       return tree;
+    }
+  }, {
+    key: "getTreeFill",
+    value: function getTreeFill(tree) {
+      var treeFill, groundColour, colourRGB, colourHSL, sampleX, sampleY;
+      sampleX = tree.x < 1 ? 1 : tree.x > this.canvas.width ? this.canvas.width - 1 : tree.x;
+      sampleY = tree.y > this.canvas.height ? this.canvas.height - 1 : tree.y;
+      colourRGB = this.ctx.getImageData(sampleX, sampleY, 1, 1).data;
+      colourHSL = _get(_getPrototypeOf(Painting.prototype), "rgbToHsl", this).call(this, colourRGB);
+      groundColour = _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colourHSL);
+      treeFill = this.ctx.createLinearGradient(0, tree.y - tree.height, 0, tree.y);
+      treeFill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, _get(_getPrototypeOf(Painting.prototype), "mixHsl", this).call(this, this.colour.horizon, this.colour.tree, tree.sizeMod, 1 - tree.sizeMod)));
+      treeFill.addColorStop(1, groundColour);
+      return treeFill;
     }
   }, {
     key: "getFog",
     value: function getFog() {
       var fog;
-      fog = this.ease.easeOutQuad(_get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 10, 1) / 100);
+      fog = this.ease.easeOutQuad(_get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 100, 10) / 100);
       return fog;
     }
   }, {
