@@ -17,14 +17,15 @@ class Painting extends Canvas {
     this.ctx = this.canvas.getContext("2d");
 
     /* Set Up Scene Objects */
+    this.unit = (this.canvas.height + this.canvas.width) / 2;
     this.colourScheme = this.getColourScheme();
     this.horizon = this.getRatio();
     this.fog = this.getFog();
     this.horizonBlur = this.ease.easeInQuad(this.fog) / 10;
-    console.log(this.horizonBlur);
     this.landY = this.canvas.height * this.horizon;
     this.landHeight = this.canvas.height - this.landY;
     this.feature = this.getFeature();
+    this.trees = this.getTrees();
 
     /* Generate World Colours */
     this.colour = this.getColour();
@@ -44,13 +45,22 @@ class Painting extends Canvas {
     this.ctx.lineWidth = 100;
     this.ctx.fillStyle = this.fill.feature;
     this.ctx.moveTo(this.feature.x1,this.feature.y1);
-    this.ctx.lineTo(this.feature.x2 - (this.feature.width / 2),this.feature.y2);
-    this.ctx.lineTo(this.feature.x2 + (this.feature.width / 2),this.feature.y2);
-    this.ctx.fill();
+    this.ctx.lineTo(this.feature.x2,this.feature.y2);
+    this.ctx.lineTo(this.feature.x3,this.feature.y3);
+    this.ctx.fill(); 
+
 
     /* Paint Fog */
     this.ctx.fillStyle = this.fill.fog;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    
+    /* Paint Trees */
+    for (let i = 0; i < this.trees.length; i++) {
+      let tree = this.trees[i];
+      this.ctx.fillStyle = tree.fillStyle;
+      this.ctx.fillRect(tree.x, tree.y - tree.height, tree.width, tree.height);
+    }
 
     return this;
   }
@@ -205,6 +215,17 @@ class Painting extends Canvas {
     fogL = super.randBias(25, 80, horizonL,1);
     colour.fog = [fogH,fogS,fogL];
 
+    /* Tree */
+    let treeH, treeS, treeL;
+    if (this.colourScheme == 'mono') {
+      treeH = super.randBias(super.rotateHue(skyH,-20),super.rotateHue(skyH,20),skyH);
+    } else if ((this.colourScheme == 'triad')) {
+      treeH = super.randBias(super.rotateHue(skyH,100),super.rotateHue(skyH,140),super.rotateHue(skyH,-120),);
+    }
+    treeS = landS;
+    treeL = super.randBias(20,50,30);
+    colour.tree = [treeH,treeS,treeL];
+
     return colour;
   };
 
@@ -250,20 +271,69 @@ class Painting extends Canvas {
 
   getFeature() {
     let feature = {};
-    let cW = this.canvas.width;
-    let cH = this.canvas.height;
-    let minUnit = cW / 20;
-    let bias = cW / 3;
+    let minUnit = this.unit / 20;
+    let bias = this.canvas.width / 3;
     if (super.randBool()) {
-      bias = cW - bias;
+      bias = this.canvas.width - bias;
     }
-    feature.x1 = super.randBias(minUnit,cW - minUnit,bias,1,'easeOutQuad');
+
+    feature.x1 = super.randBias(minUnit,this.canvas.width - minUnit,bias,1,'easeOutQuad');
     feature.y1 = this.landY + this.landHeight * this.horizonBlur * 0.5;
-    feature.x2bias = (feature.x1 < cW / 2) ? cW * .33 : cW * .66;
-    feature.x2 = super.randBias(-cW*1.5,cW*2.5,feature.x2bias,1,'easeOutQuad');
-    feature.y2 = cH;
-    feature.width = super.randBias(cW / 10,cW,cW/1.6,1,'easeOutQuad');
+    feature.x2bias = (feature.x1 < this.canvas.width / 2) ? this.canvas.width * .33 : this.canvas.width * .66;
+    feature.width = super.randBias(this.canvas.width / 10,this.canvas.width,this.canvas.width/1.6,1,'easeOutQuad');
+    feature.x2 = super.randBias(-this.canvas.width*1.5,this.canvas.width*2.5,feature.x2bias,1,'easeOutQuad') - (feature.width / 2);
+    feature.y2 = this.canvas.height;
+    feature.x3 = feature.x2  + feature.width;
+    feature.y3 = this.canvas.height;
+    
+    let addedHeight = this.unit / 3;
+    feature.poly = [[feature.x1,feature.y2],[feature.x2,feature.y2],[feature.x2,feature.y2 + addedHeight],[feature.x3,feature.y3 + addedHeight],[feature.x3,feature.y3]];
+
     return feature;
+  }
+
+  getTrees() {
+    let trees = [];
+    let number = super.randBias(0,200,20);
+    let heightBias = super.randBias(this.unit / 10, this.unit * 2, this.unit * 1.5);
+    let widthBias = this.unit / 80;
+    for (let i = 0; i < number; i++) {
+      let tree = this.getTree(heightBias,widthBias);
+      trees.push(tree);
+    }
+    trees.sort(function(a, b){
+      return a.y-b.y
+    });
+    return trees;
+  }
+
+  getTree(heightBias,widthBias) {
+    let tree = {};
+    tree.height = super.randBias(this.unit / 10, this.unit * 3, heightBias, 1, 'easeInQuint');
+    tree.width = super.randBias(this.unit / 100, tree.height / 1.6, widthBias, 1, 'easeInQuint');
+    tree.localUnit = (this.unit / 3);
+    tree.minY = this.landY;
+    tree.maxY = this.canvas.height;
+    tree.yBias = tree.minY;
+
+    do {
+      tree.x = -tree.localUnit + super.randInt(0,this.canvas.width + (tree.localUnit * 2));
+      tree.y = super.randBias(tree.minY,tree.maxY,tree.yBias,1,'easeInQuint');
+    }
+    while(this.inside([tree.x,tree.y],this.feature.poly))
+
+    tree.sizeMod = (tree.y - this.landY) / this.landHeight;
+    tree.width = tree.width * tree.sizeMod;
+    tree.height = tree.height * tree.sizeMod;
+
+    if (this.inside([tree.x + tree.width,tree.y],this.feature.poly)) {
+      tree.x = tree.x - tree.width;
+    }
+
+    var colourRGB = this.ctx.getImageData(tree.x, tree.y, 1, 1).data;
+    var colourHSL = super.rgbToHsl(colourRGB);
+    tree.fillStyle = 'black' //super.hsl(super.mixHsl(colourHSL,this.colour.tree,tree.sizeMod, 1 - tree.sizeMod));
+    return tree;
   }
 
   getFog() {

@@ -101,7 +101,7 @@ function randBool(odds) {
 
 class Artist {
   constructor() {
-    this.name = "Anna Denson";
+    this.name = fakerator.names.firstName() + ' ' + fakerator.names.lastName();
     this.paintings = [];
     this.sentencer = Sentencer;
   }
