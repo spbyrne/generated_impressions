@@ -1,5 +1,3 @@
-var inside = require('point-in-polygon')
-
 class Canvas {
   constructor() {
     this.ease = {
@@ -16,8 +14,7 @@ class Canvas {
       easeInQuint: function (t) { return t*t*t*t*t },
       easeOutQuint: function (t) { return 1+(--t)*t*t*t*t },
       easeInOutQuint: function (t) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t }
-    };
-    this.inside = inside;
+    }
   }
 
   rotateHue(hue,rotation) {
@@ -148,6 +145,22 @@ class Canvas {
       bool = this.rnd() <= (odds / 100);
     }
     return bool;
+  }
+
+  inside(point, vs) {
+    var x = point[0], y = point[1];
+
+    var inside = false;
+    for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+        var xi = vs[i][0], yi = vs[i][1];
+        var xj = vs[j][0], yj = vs[j][1];
+
+        var intersect = ((yi > y) != (yj > y))
+            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+    }
+
+    return inside;
   }
 }
 

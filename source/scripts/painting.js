@@ -245,7 +245,7 @@ class Painting extends Canvas {
     let sky;
     sky = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
     sky.addColorStop(0, super.hsl(colour.sky));
-    sky.addColorStop(this.horizon, super.hsl(colour.horizon));
+    sky.addColorStop((this.horizon > 1) ? 1 : this.horizon, super.hsl(colour.horizon));
     fill.sky = sky;
     
     /* Land */
@@ -297,14 +297,14 @@ class Painting extends Canvas {
     feature.y3 = this.canvas.height;
     
     let addedHeight = this.unit / 3;
-    feature.poly = [[feature.x1,feature.y2],[feature.x2,feature.y2],[feature.x2,feature.y2 + addedHeight],[feature.x3,feature.y3 + addedHeight],[feature.x3,feature.y3]];
+    feature.poly = [[feature.x1,feature.y1],[feature.x2,feature.y2],[feature.x2,feature.y2 + addedHeight],[feature.x3,feature.y3 + addedHeight],[feature.x3,feature.y3]];
 
     return feature;
   }
 
   getTrees() {
     let trees = [];
-    let number = super.randBias(0,500,20);
+    let number = super.randBias(0,500,20,'easeOutQuad');
     let heightBias = super.randBias(this.unit / 10, this.unit * 2, this.unit / 1.6);
     let widthBias = this.unit / 40;
     for (let i = 0; i < number; i++) {
@@ -324,19 +324,19 @@ class Painting extends Canvas {
     tree.localUnit = (this.unit / 3);
     tree.minY = this.landY;
     tree.maxY = this.canvas.height + this.unit / 6;
-    tree.yBias = tree.minY + (this.horizonBlur * this.landHeight);
+    tree.yBias = tree.minY + 1;
 
     do {
       tree.x = -tree.localUnit + super.randInt(0,this.canvas.width + (tree.localUnit * 2));
       tree.y = super.randBias(tree.minY,tree.maxY,tree.yBias,'easeInQuint');
     }
-    while(this.inside([tree.x,tree.y],this.feature.poly))
+    while(super.inside([tree.x,tree.y],this.feature.poly))
 
     tree.sizeMod = (tree.y - this.landY) / this.landHeight;
     tree.width = tree.width * tree.sizeMod;
     tree.height = tree.height * tree.sizeMod;
 
-    if (this.inside([tree.x + tree.width,tree.y],this.feature.poly)) {
+    if (super.inside([tree.x + tree.width,tree.y],this.feature.poly)) {
       tree.x = tree.x - tree.width;
     }
 
