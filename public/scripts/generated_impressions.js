@@ -131,7 +131,7 @@ BayesClassifier.prototype.probabilityOfClass = probabilityOfClass;
 BayesClassifier.restore = restore;
 
 module.exports = BayesClassifier;
-},{"./classifier":2,"util":267}],2:[function(require,module,exports){
+},{"./classifier":2,"util":277}],2:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -381,7 +381,7 @@ LogisticRegressionClassifier.restore = restore;
 
 module.exports = LogisticRegressionClassifier;
 
-},{"./classifier":2,"sylvester":256,"util":267}],4:[function(require,module,exports){
+},{"./classifier":2,"sylvester":266,"util":277}],4:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -501,7 +501,7 @@ KMeans.prototype.cluster = cluster;
 
 module.exports = KMeans;
 
-},{"sylvester":256}],5:[function(require,module,exports){
+},{"sylvester":266}],5:[function(require,module,exports){
 
 exports.BayesClassifier = require('./classifier/bayes_classifier');
 exports.LogisticRegressionClassifier = require('./classifier/logistic_regression_classifier');
@@ -3972,7 +3972,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
   return this._getEncoder(enc).encode(data, reporter);
 };
 
-},{"../asn1":7,"inherits":107,"vm":268}],9:[function(require,module,exports){
+},{"../asn1":7,"inherits":111,"vm":278}],9:[function(require,module,exports){
 var inherits = require('inherits');
 var Reporter = require('../base').Reporter;
 var Buffer = require('buffer').Buffer;
@@ -4090,7 +4090,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
   return out;
 };
 
-},{"../base":10,"buffer":54,"inherits":107}],10:[function(require,module,exports){
+},{"../base":10,"buffer":54,"inherits":111}],10:[function(require,module,exports){
 var base = exports;
 
 base.Reporter = require('./reporter').Reporter;
@@ -4734,7 +4734,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
   return /^[A-Za-z0-9 '\(\)\+,\-\.\/:=\?]*$/.test(str);
 };
 
-},{"../base":10,"minimalistic-assert":113}],12:[function(require,module,exports){
+},{"../base":10,"minimalistic-assert":117}],12:[function(require,module,exports){
 var inherits = require('inherits');
 
 function Reporter(options) {
@@ -4857,7 +4857,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
   return this;
 };
 
-},{"inherits":107}],13:[function(require,module,exports){
+},{"inherits":111}],13:[function(require,module,exports){
 var constants = require('../constants');
 
 exports.tagClass = {
@@ -5248,7 +5248,7 @@ function derDecodeLen(buf, primitive, fail) {
   return len;
 }
 
-},{"../../asn1":7,"inherits":107}],16:[function(require,module,exports){
+},{"../../asn1":7,"inherits":111}],16:[function(require,module,exports){
 var decoders = exports;
 
 decoders.der = require('./der');
@@ -5305,7 +5305,7 @@ PEMDecoder.prototype.decode = function decode(data, options) {
   return DERDecoder.prototype.decode.call(this, input, options);
 };
 
-},{"./der":15,"buffer":54,"inherits":107}],18:[function(require,module,exports){
+},{"./der":15,"buffer":54,"inherits":111}],18:[function(require,module,exports){
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -5602,7 +5602,7 @@ function encodeTag(tag, primitive, cls, reporter) {
   return res;
 }
 
-},{"../../asn1":7,"buffer":54,"inherits":107}],19:[function(require,module,exports){
+},{"../../asn1":7,"buffer":54,"inherits":111}],19:[function(require,module,exports){
 var encoders = exports;
 
 encoders.der = require('./der');
@@ -5631,7 +5631,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
   return out.join('\n');
 };
 
-},{"./der":18,"inherits":107}],21:[function(require,module,exports){
+},{"./der":18,"inherits":111}],21:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -9512,7 +9512,7 @@ AES.prototype.scrub = function () {
 
 module.exports.AES = AES
 
-},{"safe-buffer":234}],26:[function(require,module,exports){
+},{"safe-buffer":244}],26:[function(require,module,exports){
 var aes = require('./aes')
 var Buffer = require('safe-buffer').Buffer
 var Transform = require('cipher-base')
@@ -9631,7 +9631,7 @@ StreamCipher.prototype.setAAD = function setAAD (buf) {
 
 module.exports = StreamCipher
 
-},{"./aes":25,"./ghash":30,"./incr32":31,"buffer-xor":53,"cipher-base":55,"inherits":107,"safe-buffer":234}],27:[function(require,module,exports){
+},{"./aes":25,"./ghash":30,"./incr32":31,"buffer-xor":53,"cipher-base":55,"inherits":111,"safe-buffer":244}],27:[function(require,module,exports){
 var ciphers = require('./encrypter')
 var deciphers = require('./decrypter')
 var modes = require('./modes/list.json')
@@ -9772,7 +9772,7 @@ function createDecipher (suite, password) {
 exports.createDecipher = createDecipher
 exports.createDecipheriv = createDecipheriv
 
-},{"./aes":25,"./authCipher":26,"./modes":38,"./streamCipher":41,"cipher-base":55,"evp_bytestokey":90,"inherits":107,"safe-buffer":234}],29:[function(require,module,exports){
+},{"./aes":25,"./authCipher":26,"./modes":38,"./streamCipher":41,"cipher-base":55,"evp_bytestokey":92,"inherits":111,"safe-buffer":244}],29:[function(require,module,exports){
 var MODES = require('./modes')
 var AuthCipher = require('./authCipher')
 var Buffer = require('safe-buffer').Buffer
@@ -9888,7 +9888,7 @@ function createCipher (suite, password) {
 exports.createCipheriv = createCipheriv
 exports.createCipher = createCipher
 
-},{"./aes":25,"./authCipher":26,"./modes":38,"./streamCipher":41,"cipher-base":55,"evp_bytestokey":90,"inherits":107,"safe-buffer":234}],30:[function(require,module,exports){
+},{"./aes":25,"./authCipher":26,"./modes":38,"./streamCipher":41,"cipher-base":55,"evp_bytestokey":92,"inherits":111,"safe-buffer":244}],30:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var ZEROES = Buffer.alloc(16, 0)
 
@@ -9979,7 +9979,7 @@ GHASH.prototype.final = function (abl, bl) {
 
 module.exports = GHASH
 
-},{"safe-buffer":234}],31:[function(require,module,exports){
+},{"safe-buffer":244}],31:[function(require,module,exports){
 function incr32 (iv) {
   var len = iv.length
   var item
@@ -10050,7 +10050,7 @@ exports.encrypt = function (self, data, decrypt) {
   return out
 }
 
-},{"buffer-xor":53,"safe-buffer":234}],34:[function(require,module,exports){
+},{"buffer-xor":53,"safe-buffer":244}],34:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 
 function encryptByte (self, byteParam, decrypt) {
@@ -10094,7 +10094,7 @@ exports.encrypt = function (self, chunk, decrypt) {
   return out
 }
 
-},{"safe-buffer":234}],35:[function(require,module,exports){
+},{"safe-buffer":244}],35:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 
 function encryptByte (self, byteParam, decrypt) {
@@ -10121,7 +10121,7 @@ exports.encrypt = function (self, chunk, decrypt) {
   return out
 }
 
-},{"safe-buffer":234}],36:[function(require,module,exports){
+},{"safe-buffer":244}],36:[function(require,module,exports){
 var xor = require('buffer-xor')
 var Buffer = require('safe-buffer').Buffer
 var incr32 = require('../incr32')
@@ -10153,7 +10153,7 @@ exports.encrypt = function (self, chunk) {
   return xor(chunk, pad)
 }
 
-},{"../incr32":31,"buffer-xor":53,"safe-buffer":234}],37:[function(require,module,exports){
+},{"../incr32":31,"buffer-xor":53,"safe-buffer":244}],37:[function(require,module,exports){
 exports.encrypt = function (self, block) {
   return self._cipher.encryptBlock(block)
 }
@@ -10424,7 +10424,7 @@ StreamCipher.prototype._final = function () {
 
 module.exports = StreamCipher
 
-},{"./aes":25,"cipher-base":55,"inherits":107,"safe-buffer":234}],42:[function(require,module,exports){
+},{"./aes":25,"cipher-base":55,"inherits":111,"safe-buffer":244}],42:[function(require,module,exports){
 var DES = require('browserify-des')
 var aes = require('browserify-aes/browser')
 var aesModes = require('browserify-aes/modes')
@@ -10493,7 +10493,7 @@ exports.createDecipher = exports.Decipher = createDecipher
 exports.createDecipheriv = exports.Decipheriv = createDecipheriv
 exports.listCiphers = exports.getCiphers = getCiphers
 
-},{"browserify-aes/browser":27,"browserify-aes/modes":38,"browserify-des":43,"browserify-des/modes":44,"evp_bytestokey":90}],43:[function(require,module,exports){
+},{"browserify-aes/browser":27,"browserify-aes/modes":38,"browserify-des":43,"browserify-des/modes":44,"evp_bytestokey":92}],43:[function(require,module,exports){
 var CipherBase = require('cipher-base')
 var des = require('des.js')
 var inherits = require('inherits')
@@ -10545,7 +10545,7 @@ DES.prototype._final = function () {
   return Buffer.from(this._des.final())
 }
 
-},{"cipher-base":55,"des.js":63,"inherits":107,"safe-buffer":234}],44:[function(require,module,exports){
+},{"cipher-base":55,"des.js":63,"inherits":111,"safe-buffer":244}],44:[function(require,module,exports){
 exports['des-ecb'] = {
   key: 8,
   iv: 0
@@ -10615,7 +10615,7 @@ function getr(priv) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bn.js":22,"buffer":54,"randombytes":215}],46:[function(require,module,exports){
+},{"bn.js":22,"buffer":54,"randombytes":225}],46:[function(require,module,exports){
 module.exports = require('./browser/algorithms.json')
 
 },{"./browser/algorithms.json":47}],47:[function(require,module,exports){
@@ -10877,7 +10877,7 @@ module.exports = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./algorithms.json":47,"./sign":50,"./verify":51,"buffer":54,"create-hash":58,"inherits":107,"stream":254}],50:[function(require,module,exports){
+},{"./algorithms.json":47,"./sign":50,"./verify":51,"buffer":54,"create-hash":58,"inherits":111,"stream":264}],50:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var createHmac = require('create-hmac')
@@ -11026,7 +11026,7 @@ module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
 }).call(this,require("buffer").Buffer)
-},{"./curves.json":48,"bn.js":22,"browserify-rsa":45,"buffer":54,"create-hmac":60,"elliptic":73,"parse-asn1":200}],51:[function(require,module,exports){
+},{"./curves.json":48,"bn.js":22,"browserify-rsa":45,"buffer":54,"create-hmac":60,"elliptic":74,"parse-asn1":210}],51:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var BN = require('bn.js')
@@ -11113,7 +11113,7 @@ function checkValue (b, q) {
 module.exports = verify
 
 }).call(this,require("buffer").Buffer)
-},{"./curves.json":48,"bn.js":22,"buffer":54,"elliptic":73,"parse-asn1":200}],52:[function(require,module,exports){
+},{"./curves.json":48,"bn.js":22,"buffer":54,"elliptic":74,"parse-asn1":210}],52:[function(require,module,exports){
 arguments[4][24][0].apply(exports,arguments)
 },{"dup":24}],53:[function(require,module,exports){
 (function (Buffer){
@@ -12910,7 +12910,7 @@ function numberIsNaN (obj) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"base64-js":21,"buffer":54,"ieee754":106}],55:[function(require,module,exports){
+},{"base64-js":21,"buffer":54,"ieee754":110}],55:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var Transform = require('stream').Transform
 var StringDecoder = require('string_decoder').StringDecoder
@@ -13011,7 +13011,7 @@ CipherBase.prototype._toString = function (value, enc, fin) {
 
 module.exports = CipherBase
 
-},{"inherits":107,"safe-buffer":234,"stream":254,"string_decoder":255}],56:[function(require,module,exports){
+},{"inherits":111,"safe-buffer":244,"stream":264,"string_decoder":265}],56:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -13122,7 +13122,7 @@ function objectToString(o) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":108}],57:[function(require,module,exports){
+},{"../../is-buffer/index.js":112}],57:[function(require,module,exports){
 (function (Buffer){
 var elliptic = require('elliptic')
 var BN = require('bn.js')
@@ -13250,7 +13250,7 @@ function formatReturnValue (bn, enc, len) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bn.js":22,"buffer":54,"elliptic":73}],58:[function(require,module,exports){
+},{"bn.js":22,"buffer":54,"elliptic":74}],58:[function(require,module,exports){
 'use strict'
 var inherits = require('inherits')
 var MD5 = require('md5.js')
@@ -13282,14 +13282,14 @@ module.exports = function createHash (alg) {
   return new Hash(sha(alg))
 }
 
-},{"cipher-base":55,"inherits":107,"md5.js":111,"ripemd160":233,"sha.js":247}],59:[function(require,module,exports){
+},{"cipher-base":55,"inherits":111,"md5.js":115,"ripemd160":243,"sha.js":257}],59:[function(require,module,exports){
 var MD5 = require('md5.js')
 
 module.exports = function (buffer) {
   return new MD5().update(buffer).digest()
 }
 
-},{"md5.js":111}],60:[function(require,module,exports){
+},{"md5.js":115}],60:[function(require,module,exports){
 'use strict'
 var inherits = require('inherits')
 var Legacy = require('./legacy')
@@ -13353,7 +13353,7 @@ module.exports = function createHmac (alg, key) {
   return new Hmac(alg, key)
 }
 
-},{"./legacy":61,"cipher-base":55,"create-hash/md5":59,"inherits":107,"ripemd160":233,"safe-buffer":234,"sha.js":247}],61:[function(require,module,exports){
+},{"./legacy":61,"cipher-base":55,"create-hash/md5":59,"inherits":111,"ripemd160":243,"safe-buffer":244,"sha.js":257}],61:[function(require,module,exports){
 'use strict'
 var inherits = require('inherits')
 var Buffer = require('safe-buffer').Buffer
@@ -13401,7 +13401,7 @@ Hmac.prototype._final = function () {
 }
 module.exports = Hmac
 
-},{"cipher-base":55,"inherits":107,"safe-buffer":234}],62:[function(require,module,exports){
+},{"cipher-base":55,"inherits":111,"safe-buffer":244}],62:[function(require,module,exports){
 'use strict'
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = require('randombytes')
@@ -13500,7 +13500,7 @@ exports.constants = {
   'POINT_CONVERSION_HYBRID': 6
 }
 
-},{"browserify-cipher":42,"browserify-sign":49,"browserify-sign/algos":46,"create-ecdh":57,"create-hash":58,"create-hmac":60,"diffie-hellman":69,"pbkdf2":202,"public-encrypt":209,"randombytes":215,"randomfill":216}],63:[function(require,module,exports){
+},{"browserify-cipher":42,"browserify-sign":49,"browserify-sign/algos":46,"create-ecdh":57,"create-hash":58,"create-hmac":60,"diffie-hellman":70,"pbkdf2":212,"public-encrypt":219,"randombytes":225,"randomfill":226}],63:[function(require,module,exports){
 'use strict';
 
 exports.utils = require('./des/utils');
@@ -13576,7 +13576,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
   }
 };
 
-},{"inherits":107,"minimalistic-assert":113}],65:[function(require,module,exports){
+},{"inherits":111,"minimalistic-assert":117}],65:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -13719,7 +13719,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
   return this._unpad(out);
 };
 
-},{"minimalistic-assert":113}],66:[function(require,module,exports){
+},{"minimalistic-assert":117}],66:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -13864,7 +13864,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
   utils.rip(l, r, out, off);
 };
 
-},{"../des":63,"inherits":107,"minimalistic-assert":113}],67:[function(require,module,exports){
+},{"../des":63,"inherits":111,"minimalistic-assert":117}],67:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -13921,7 +13921,7 @@ EDE.prototype._update = function _update(inp, inOff, out, outOff) {
 EDE.prototype._pad = DES.prototype._pad;
 EDE.prototype._unpad = DES.prototype._unpad;
 
-},{"../des":63,"inherits":107,"minimalistic-assert":113}],68:[function(require,module,exports){
+},{"../des":63,"inherits":111,"minimalistic-assert":117}],68:[function(require,module,exports){
 'use strict';
 
 exports.readUInt32BE = function readUInt32BE(bytes, off) {
@@ -14180,6 +14180,61 @@ exports.padSplit = function padSplit(num, size, group) {
 };
 
 },{}],69:[function(require,module,exports){
+/**
+ * matchesSelector v2.0.2
+ * matchesSelector( element, '.selector' )
+ * MIT license
+ */
+
+/*jshint browser: true, strict: true, undef: true, unused: true */
+
+( function( window, factory ) {
+  /*global define: false, module: false */
+  'use strict';
+  // universal module definition
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory();
+  } else {
+    // browser global
+    window.matchesSelector = factory();
+  }
+
+}( window, function factory() {
+  'use strict';
+
+  var matchesMethod = ( function() {
+    var ElemProto = window.Element.prototype;
+    // check for the standard method name first
+    if ( ElemProto.matches ) {
+      return 'matches';
+    }
+    // check un-prefixed
+    if ( ElemProto.matchesSelector ) {
+      return 'matchesSelector';
+    }
+    // check vendor prefixes
+    var prefixes = [ 'webkit', 'moz', 'ms', 'o' ];
+
+    for ( var i=0; i < prefixes.length; i++ ) {
+      var prefix = prefixes[i];
+      var method = prefix + 'MatchesSelector';
+      if ( ElemProto[ method ] ) {
+        return method;
+      }
+    }
+  })();
+
+  return function matchesSelector( elem, selector ) {
+    return elem[ matchesMethod ]( selector );
+  };
+
+}));
+
+},{}],70:[function(require,module,exports){
 (function (Buffer){
 var generatePrime = require('./lib/generatePrime')
 var primes = require('./lib/primes.json')
@@ -14225,7 +14280,7 @@ exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffi
 exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
 }).call(this,require("buffer").Buffer)
-},{"./lib/dh":70,"./lib/generatePrime":71,"./lib/primes.json":72,"buffer":54}],70:[function(require,module,exports){
+},{"./lib/dh":71,"./lib/generatePrime":72,"./lib/primes.json":73,"buffer":54}],71:[function(require,module,exports){
 (function (Buffer){
 var BN = require('bn.js');
 var MillerRabin = require('miller-rabin');
@@ -14393,7 +14448,7 @@ function formatReturnValue(bn, enc) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./generatePrime":71,"bn.js":22,"buffer":54,"miller-rabin":112,"randombytes":215}],71:[function(require,module,exports){
+},{"./generatePrime":72,"bn.js":22,"buffer":54,"miller-rabin":116,"randombytes":225}],72:[function(require,module,exports){
 var randomBytes = require('randombytes');
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
@@ -14500,7 +14555,7 @@ function findPrime(bits, gen) {
 
 }
 
-},{"bn.js":22,"miller-rabin":112,"randombytes":215}],72:[function(require,module,exports){
+},{"bn.js":22,"miller-rabin":116,"randombytes":225}],73:[function(require,module,exports){
 module.exports={
     "modp1": {
         "gen": "02",
@@ -14535,7 +14590,7 @@ module.exports={
         "prime": "ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"
     }
 }
-},{}],73:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 'use strict';
 
 var elliptic = exports;
@@ -14550,7 +14605,7 @@ elliptic.curves = require('./elliptic/curves');
 elliptic.ec = require('./elliptic/ec');
 elliptic.eddsa = require('./elliptic/eddsa');
 
-},{"../package.json":88,"./elliptic/curve":76,"./elliptic/curves":79,"./elliptic/ec":80,"./elliptic/eddsa":83,"./elliptic/utils":87,"brorand":23}],74:[function(require,module,exports){
+},{"../package.json":89,"./elliptic/curve":77,"./elliptic/curves":80,"./elliptic/ec":81,"./elliptic/eddsa":84,"./elliptic/utils":88,"brorand":23}],75:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -14927,7 +14982,7 @@ BasePoint.prototype.dblp = function dblp(k) {
   return r;
 };
 
-},{"../../elliptic":73,"bn.js":22}],75:[function(require,module,exports){
+},{"../../elliptic":74,"bn.js":22}],76:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -15362,7 +15417,7 @@ Point.prototype.eqXToP = function eqXToP(x) {
 Point.prototype.toP = Point.prototype.normalize;
 Point.prototype.mixedAdd = Point.prototype.add;
 
-},{"../../elliptic":73,"../curve":76,"bn.js":22,"inherits":107}],76:[function(require,module,exports){
+},{"../../elliptic":74,"../curve":77,"bn.js":22,"inherits":111}],77:[function(require,module,exports){
 'use strict';
 
 var curve = exports;
@@ -15372,7 +15427,7 @@ curve.short = require('./short');
 curve.mont = require('./mont');
 curve.edwards = require('./edwards');
 
-},{"./base":74,"./edwards":75,"./mont":77,"./short":78}],77:[function(require,module,exports){
+},{"./base":75,"./edwards":76,"./mont":78,"./short":79}],78:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -15554,7 +15609,7 @@ Point.prototype.getX = function getX() {
   return this.x.fromRed();
 };
 
-},{"../../elliptic":73,"../curve":76,"bn.js":22,"inherits":107}],78:[function(require,module,exports){
+},{"../../elliptic":74,"../curve":77,"bn.js":22,"inherits":111}],79:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -16493,7 +16548,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
   return this.z.cmpn(0) === 0;
 };
 
-},{"../../elliptic":73,"../curve":76,"bn.js":22,"inherits":107}],79:[function(require,module,exports){
+},{"../../elliptic":74,"../curve":77,"bn.js":22,"inherits":111}],80:[function(require,module,exports){
 'use strict';
 
 var curves = exports;
@@ -16700,7 +16755,7 @@ defineCurve('secp256k1', {
   ]
 });
 
-},{"../elliptic":73,"./precomputed/secp256k1":86,"hash.js":93}],80:[function(require,module,exports){
+},{"../elliptic":74,"./precomputed/secp256k1":87,"hash.js":97}],81:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -16942,7 +16997,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
   throw new Error('Unable to find valid recovery factor');
 };
 
-},{"../../elliptic":73,"./key":81,"./signature":82,"bn.js":22,"hmac-drbg":105}],81:[function(require,module,exports){
+},{"../../elliptic":74,"./key":82,"./signature":83,"bn.js":22,"hmac-drbg":109}],82:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -17063,7 +17118,7 @@ KeyPair.prototype.inspect = function inspect() {
          ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
 };
 
-},{"../../elliptic":73,"bn.js":22}],82:[function(require,module,exports){
+},{"../../elliptic":74,"bn.js":22}],83:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -17200,7 +17255,7 @@ Signature.prototype.toDER = function toDER(enc) {
   return utils.encode(res, enc);
 };
 
-},{"../../elliptic":73,"bn.js":22}],83:[function(require,module,exports){
+},{"../../elliptic":74,"bn.js":22}],84:[function(require,module,exports){
 'use strict';
 
 var hash = require('hash.js');
@@ -17320,7 +17375,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
   return val instanceof this.pointClass;
 };
 
-},{"../../elliptic":73,"./key":84,"./signature":85,"hash.js":93}],84:[function(require,module,exports){
+},{"../../elliptic":74,"./key":85,"./signature":86,"hash.js":97}],85:[function(require,module,exports){
 'use strict';
 
 var elliptic = require('../../elliptic');
@@ -17418,7 +17473,7 @@ KeyPair.prototype.getPublic = function getPublic(enc) {
 
 module.exports = KeyPair;
 
-},{"../../elliptic":73}],85:[function(require,module,exports){
+},{"../../elliptic":74}],86:[function(require,module,exports){
 'use strict';
 
 var BN = require('bn.js');
@@ -17486,7 +17541,7 @@ Signature.prototype.toHex = function toHex() {
 
 module.exports = Signature;
 
-},{"../../elliptic":73,"bn.js":22}],86:[function(require,module,exports){
+},{"../../elliptic":74,"bn.js":22}],87:[function(require,module,exports){
 module.exports = {
   doubles: {
     step: 4,
@@ -18268,7 +18323,7 @@ module.exports = {
   }
 };
 
-},{}],87:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 'use strict';
 
 var utils = exports;
@@ -18390,7 +18445,7 @@ function intFromLE(bytes) {
 utils.intFromLE = intFromLE;
 
 
-},{"bn.js":22,"minimalistic-assert":113,"minimalistic-crypto-utils":114}],88:[function(require,module,exports){
+},{"bn.js":22,"minimalistic-assert":117,"minimalistic-crypto-utils":118}],89:[function(require,module,exports){
 module.exports={
   "_from": "elliptic@^6.0.0",
   "_id": "elliptic@6.4.1",
@@ -18479,7 +18534,121 @@ module.exports={
   "version": "6.4.1"
 }
 
-},{}],89:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
+/**
+ * EvEmitter v1.1.0
+ * Lil' event emitter
+ * MIT License
+ */
+
+/* jshint unused: true, undef: true, strict: true */
+
+( function( global, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, window */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD - RequireJS
+    define( factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory();
+  } else {
+    // Browser globals
+    global.EvEmitter = factory();
+  }
+
+}( typeof window != 'undefined' ? window : this, function() {
+
+"use strict";
+
+function EvEmitter() {}
+
+var proto = EvEmitter.prototype;
+
+proto.on = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // set events hash
+  var events = this._events = this._events || {};
+  // set listeners array
+  var listeners = events[ eventName ] = events[ eventName ] || [];
+  // only add once
+  if ( listeners.indexOf( listener ) == -1 ) {
+    listeners.push( listener );
+  }
+
+  return this;
+};
+
+proto.once = function( eventName, listener ) {
+  if ( !eventName || !listener ) {
+    return;
+  }
+  // add event
+  this.on( eventName, listener );
+  // set once flag
+  // set onceEvents hash
+  var onceEvents = this._onceEvents = this._onceEvents || {};
+  // set onceListeners object
+  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+  // set flag
+  onceListeners[ listener ] = true;
+
+  return this;
+};
+
+proto.off = function( eventName, listener ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  var index = listeners.indexOf( listener );
+  if ( index != -1 ) {
+    listeners.splice( index, 1 );
+  }
+
+  return this;
+};
+
+proto.emitEvent = function( eventName, args ) {
+  var listeners = this._events && this._events[ eventName ];
+  if ( !listeners || !listeners.length ) {
+    return;
+  }
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice(0);
+  args = args || [];
+  // once stuff
+  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+  for ( var i=0; i < listeners.length; i++ ) {
+    var listener = listeners[i]
+    var isOnce = onceListeners && onceListeners[ listener ];
+    if ( isOnce ) {
+      // remove listener
+      // remove before trigger to prevent recursion
+      this.off( eventName, listener );
+      // unset once flag
+      delete onceListeners[ listener ];
+    }
+    // trigger listener
+    listener.apply( this, args );
+  }
+
+  return this;
+};
+
+proto.allOff = function() {
+  delete this._events;
+  delete this._onceEvents;
+};
+
+return EvEmitter;
+
+}));
+
+},{}],91:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -19004,7 +19173,7 @@ function functionBindPolyfill(context) {
   };
 }
 
-},{}],90:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 var MD5 = require('md5.js')
 
@@ -19051,7 +19220,7 @@ function EVP_BytesToKey (password, salt, keyBits, ivLen) {
 
 module.exports = EVP_BytesToKey
 
-},{"md5.js":111,"safe-buffer":234}],91:[function(require,module,exports){
+},{"md5.js":115,"safe-buffer":244}],93:[function(require,module,exports){
 /**
  * fakerator v0.3.0
  * https://github.com/icebob/fakerator
@@ -30221,7 +30390,459 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-},{}],92:[function(require,module,exports){
+},{}],94:[function(require,module,exports){
+/**
+ * Fizzy UI utils v2.0.7
+ * MIT license
+ */
+
+/*jshint browser: true, undef: true, unused: true, strict: true */
+
+( function( window, factory ) {
+  // universal module definition
+  /*jshint strict: false */ /*globals define, module, require */
+
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [
+      'desandro-matches-selector/matches-selector'
+    ], function( matchesSelector ) {
+      return factory( window, matchesSelector );
+    });
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      window,
+      require('desandro-matches-selector')
+    );
+  } else {
+    // browser global
+    window.fizzyUIUtils = factory(
+      window,
+      window.matchesSelector
+    );
+  }
+
+}( window, function factory( window, matchesSelector ) {
+
+'use strict';
+
+var utils = {};
+
+// ----- extend ----- //
+
+// extends objects
+utils.extend = function( a, b ) {
+  for ( var prop in b ) {
+    a[ prop ] = b[ prop ];
+  }
+  return a;
+};
+
+// ----- modulo ----- //
+
+utils.modulo = function( num, div ) {
+  return ( ( num % div ) + div ) % div;
+};
+
+// ----- makeArray ----- //
+
+var arraySlice = Array.prototype.slice;
+
+// turn element or nodeList into an array
+utils.makeArray = function( obj ) {
+  if ( Array.isArray( obj ) ) {
+    // use object if already an array
+    return obj;
+  }
+  // return empty array if undefined or null. #6
+  if ( obj === null || obj === undefined ) {
+    return [];
+  }
+
+  var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
+  if ( isArrayLike ) {
+    // convert nodeList to array
+    return arraySlice.call( obj );
+  }
+
+  // array of single index
+  return [ obj ];
+};
+
+// ----- removeFrom ----- //
+
+utils.removeFrom = function( ary, obj ) {
+  var index = ary.indexOf( obj );
+  if ( index != -1 ) {
+    ary.splice( index, 1 );
+  }
+};
+
+// ----- getParent ----- //
+
+utils.getParent = function( elem, selector ) {
+  while ( elem.parentNode && elem != document.body ) {
+    elem = elem.parentNode;
+    if ( matchesSelector( elem, selector ) ) {
+      return elem;
+    }
+  }
+};
+
+// ----- getQueryElement ----- //
+
+// use element as selector string
+utils.getQueryElement = function( elem ) {
+  if ( typeof elem == 'string' ) {
+    return document.querySelector( elem );
+  }
+  return elem;
+};
+
+// ----- handleEvent ----- //
+
+// enable .ontype to trigger from .addEventListener( elem, 'type' )
+utils.handleEvent = function( event ) {
+  var method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+// ----- filterFindElements ----- //
+
+utils.filterFindElements = function( elems, selector ) {
+  // make array of elems
+  elems = utils.makeArray( elems );
+  var ffElems = [];
+
+  elems.forEach( function( elem ) {
+    // check that elem is an actual element
+    if ( !( elem instanceof HTMLElement ) ) {
+      return;
+    }
+    // add elem if no selector
+    if ( !selector ) {
+      ffElems.push( elem );
+      return;
+    }
+    // filter & find items if we have a selector
+    // filter
+    if ( matchesSelector( elem, selector ) ) {
+      ffElems.push( elem );
+    }
+    // find children
+    var childElems = elem.querySelectorAll( selector );
+    // concat childElems to filterFound array
+    for ( var i=0; i < childElems.length; i++ ) {
+      ffElems.push( childElems[i] );
+    }
+  });
+
+  return ffElems;
+};
+
+// ----- debounceMethod ----- //
+
+utils.debounceMethod = function( _class, methodName, threshold ) {
+  threshold = threshold || 100;
+  // original method
+  var method = _class.prototype[ methodName ];
+  var timeoutName = methodName + 'Timeout';
+
+  _class.prototype[ methodName ] = function() {
+    var timeout = this[ timeoutName ];
+    clearTimeout( timeout );
+
+    var args = arguments;
+    var _this = this;
+    this[ timeoutName ] = setTimeout( function() {
+      method.apply( _this, args );
+      delete _this[ timeoutName ];
+    }, threshold );
+  };
+};
+
+// ----- docReady ----- //
+
+utils.docReady = function( callback ) {
+  var readyState = document.readyState;
+  if ( readyState == 'complete' || readyState == 'interactive' ) {
+    // do async to allow for other scripts to run. metafizzy/flickity#441
+    setTimeout( callback );
+  } else {
+    document.addEventListener( 'DOMContentLoaded', callback );
+  }
+};
+
+// ----- htmlInit ----- //
+
+// http://jamesroberts.name/blog/2010/02/22/string-functions-for-javascript-trim-to-camel-case-to-dashed-and-to-underscore/
+utils.toDashed = function( str ) {
+  return str.replace( /(.)([A-Z])/g, function( match, $1, $2 ) {
+    return $1 + '-' + $2;
+  }).toLowerCase();
+};
+
+var console = window.console;
+/**
+ * allow user to initialize classes via [data-namespace] or .js-namespace class
+ * htmlInit( Widget, 'widgetName' )
+ * options are parsed from data-namespace-options
+ */
+utils.htmlInit = function( WidgetClass, namespace ) {
+  utils.docReady( function() {
+    var dashedNamespace = utils.toDashed( namespace );
+    var dataAttr = 'data-' + dashedNamespace;
+    var dataAttrElems = document.querySelectorAll( '[' + dataAttr + ']' );
+    var jsDashElems = document.querySelectorAll( '.js-' + dashedNamespace );
+    var elems = utils.makeArray( dataAttrElems )
+      .concat( utils.makeArray( jsDashElems ) );
+    var dataOptionsAttr = dataAttr + '-options';
+    var jQuery = window.jQuery;
+
+    elems.forEach( function( elem ) {
+      var attr = elem.getAttribute( dataAttr ) ||
+        elem.getAttribute( dataOptionsAttr );
+      var options;
+      try {
+        options = attr && JSON.parse( attr );
+      } catch ( error ) {
+        // log error, do not initialize
+        if ( console ) {
+          console.error( 'Error parsing ' + dataAttr + ' on ' + elem.className +
+          ': ' + error );
+        }
+        return;
+      }
+      // initialize
+      var instance = new WidgetClass( elem, options );
+      // make available via $().data('namespace')
+      if ( jQuery ) {
+        jQuery.data( elem, namespace, instance );
+      }
+    });
+
+  });
+};
+
+// -----  ----- //
+
+return utils;
+
+}));
+
+},{"desandro-matches-selector":69}],95:[function(require,module,exports){
+/*!
+ * getSize v2.0.3
+ * measure size of elements
+ * MIT license
+ */
+
+/* jshint browser: true, strict: true, undef: true, unused: true */
+/* globals console: false */
+
+( function( window, factory ) {
+  /* jshint strict: false */ /* globals define, module */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory();
+  } else {
+    // browser global
+    window.getSize = factory();
+  }
+
+})( window, function factory() {
+'use strict';
+
+// -------------------------- helpers -------------------------- //
+
+// get a number from a string, not a percentage
+function getStyleSize( value ) {
+  var num = parseFloat( value );
+  // not a percent like '100%', and a number
+  var isValid = value.indexOf('%') == -1 && !isNaN( num );
+  return isValid && num;
+}
+
+function noop() {}
+
+var logError = typeof console == 'undefined' ? noop :
+  function( message ) {
+    console.error( message );
+  };
+
+// -------------------------- measurements -------------------------- //
+
+var measurements = [
+  'paddingLeft',
+  'paddingRight',
+  'paddingTop',
+  'paddingBottom',
+  'marginLeft',
+  'marginRight',
+  'marginTop',
+  'marginBottom',
+  'borderLeftWidth',
+  'borderRightWidth',
+  'borderTopWidth',
+  'borderBottomWidth'
+];
+
+var measurementsLength = measurements.length;
+
+function getZeroSize() {
+  var size = {
+    width: 0,
+    height: 0,
+    innerWidth: 0,
+    innerHeight: 0,
+    outerWidth: 0,
+    outerHeight: 0
+  };
+  for ( var i=0; i < measurementsLength; i++ ) {
+    var measurement = measurements[i];
+    size[ measurement ] = 0;
+  }
+  return size;
+}
+
+// -------------------------- getStyle -------------------------- //
+
+/**
+ * getStyle, get style of element, check for Firefox bug
+ * https://bugzilla.mozilla.org/show_bug.cgi?id=548397
+ */
+function getStyle( elem ) {
+  var style = getComputedStyle( elem );
+  if ( !style ) {
+    logError( 'Style returned ' + style +
+      '. Are you running this code in a hidden iframe on Firefox? ' +
+      'See https://bit.ly/getsizebug1' );
+  }
+  return style;
+}
+
+// -------------------------- setup -------------------------- //
+
+var isSetup = false;
+
+var isBoxSizeOuter;
+
+/**
+ * setup
+ * check isBoxSizerOuter
+ * do on first getSize() rather than on page load for Firefox bug
+ */
+function setup() {
+  // setup once
+  if ( isSetup ) {
+    return;
+  }
+  isSetup = true;
+
+  // -------------------------- box sizing -------------------------- //
+
+  /**
+   * Chrome & Safari measure the outer-width on style.width on border-box elems
+   * IE11 & Firefox<29 measures the inner-width
+   */
+  var div = document.createElement('div');
+  div.style.width = '200px';
+  div.style.padding = '1px 2px 3px 4px';
+  div.style.borderStyle = 'solid';
+  div.style.borderWidth = '1px 2px 3px 4px';
+  div.style.boxSizing = 'border-box';
+
+  var body = document.body || document.documentElement;
+  body.appendChild( div );
+  var style = getStyle( div );
+  // round value for browser zoom. desandro/masonry#928
+  isBoxSizeOuter = Math.round( getStyleSize( style.width ) ) == 200;
+  getSize.isBoxSizeOuter = isBoxSizeOuter;
+
+  body.removeChild( div );
+}
+
+// -------------------------- getSize -------------------------- //
+
+function getSize( elem ) {
+  setup();
+
+  // use querySeletor if elem is string
+  if ( typeof elem == 'string' ) {
+    elem = document.querySelector( elem );
+  }
+
+  // do not proceed on non-objects
+  if ( !elem || typeof elem != 'object' || !elem.nodeType ) {
+    return;
+  }
+
+  var style = getStyle( elem );
+
+  // if hidden, everything is 0
+  if ( style.display == 'none' ) {
+    return getZeroSize();
+  }
+
+  var size = {};
+  size.width = elem.offsetWidth;
+  size.height = elem.offsetHeight;
+
+  var isBorderBox = size.isBorderBox = style.boxSizing == 'border-box';
+
+  // get all measurements
+  for ( var i=0; i < measurementsLength; i++ ) {
+    var measurement = measurements[i];
+    var value = style[ measurement ];
+    var num = parseFloat( value );
+    // any 'auto', 'medium' value will be 0
+    size[ measurement ] = !isNaN( num ) ? num : 0;
+  }
+
+  var paddingWidth = size.paddingLeft + size.paddingRight;
+  var paddingHeight = size.paddingTop + size.paddingBottom;
+  var marginWidth = size.marginLeft + size.marginRight;
+  var marginHeight = size.marginTop + size.marginBottom;
+  var borderWidth = size.borderLeftWidth + size.borderRightWidth;
+  var borderHeight = size.borderTopWidth + size.borderBottomWidth;
+
+  var isBorderBoxSizeOuter = isBorderBox && isBoxSizeOuter;
+
+  // overwrite width and height if we can get it from style
+  var styleWidth = getStyleSize( style.width );
+  if ( styleWidth !== false ) {
+    size.width = styleWidth +
+      // add padding and border unless it's already including it
+      ( isBorderBoxSizeOuter ? 0 : paddingWidth + borderWidth );
+  }
+
+  var styleHeight = getStyleSize( style.height );
+  if ( styleHeight !== false ) {
+    size.height = styleHeight +
+      // add padding and border unless it's already including it
+      ( isBorderBoxSizeOuter ? 0 : paddingHeight + borderHeight );
+  }
+
+  size.innerWidth = size.width - ( paddingWidth + borderWidth );
+  size.innerHeight = size.height - ( paddingHeight + borderHeight );
+
+  size.outerWidth = size.width + marginWidth;
+  size.outerHeight = size.height + marginHeight;
+
+  return size;
+}
+
+return getSize;
+
+});
+
+},{}],96:[function(require,module,exports){
 'use strict'
 var Buffer = require('safe-buffer').Buffer
 var Transform = require('stream').Transform
@@ -30318,7 +30939,7 @@ HashBase.prototype._digest = function () {
 
 module.exports = HashBase
 
-},{"inherits":107,"safe-buffer":234,"stream":254}],93:[function(require,module,exports){
+},{"inherits":111,"safe-buffer":244,"stream":264}],97:[function(require,module,exports){
 var hash = exports;
 
 hash.utils = require('./hash/utils');
@@ -30335,7 +30956,7 @@ hash.sha384 = hash.sha.sha384;
 hash.sha512 = hash.sha.sha512;
 hash.ripemd160 = hash.ripemd.ripemd160;
 
-},{"./hash/common":94,"./hash/hmac":95,"./hash/ripemd":96,"./hash/sha":97,"./hash/utils":104}],94:[function(require,module,exports){
+},{"./hash/common":98,"./hash/hmac":99,"./hash/ripemd":100,"./hash/sha":101,"./hash/utils":108}],98:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -30429,7 +31050,7 @@ BlockHash.prototype._pad = function pad() {
   return res;
 };
 
-},{"./utils":104,"minimalistic-assert":113}],95:[function(require,module,exports){
+},{"./utils":108,"minimalistic-assert":117}],99:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -30478,7 +31099,7 @@ Hmac.prototype.digest = function digest(enc) {
   return this.outer.digest(enc);
 };
 
-},{"./utils":104,"minimalistic-assert":113}],96:[function(require,module,exports){
+},{"./utils":108,"minimalistic-assert":117}],100:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -30626,7 +31247,7 @@ var sh = [
   8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
 ];
 
-},{"./common":94,"./utils":104}],97:[function(require,module,exports){
+},{"./common":98,"./utils":108}],101:[function(require,module,exports){
 'use strict';
 
 exports.sha1 = require('./sha/1');
@@ -30635,7 +31256,7 @@ exports.sha256 = require('./sha/256');
 exports.sha384 = require('./sha/384');
 exports.sha512 = require('./sha/512');
 
-},{"./sha/1":98,"./sha/224":99,"./sha/256":100,"./sha/384":101,"./sha/512":102}],98:[function(require,module,exports){
+},{"./sha/1":102,"./sha/224":103,"./sha/256":104,"./sha/384":105,"./sha/512":106}],102:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -30711,7 +31332,7 @@ SHA1.prototype._digest = function digest(enc) {
     return utils.split32(this.h, 'big');
 };
 
-},{"../common":94,"../utils":104,"./common":103}],99:[function(require,module,exports){
+},{"../common":98,"../utils":108,"./common":107}],103:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -30743,7 +31364,7 @@ SHA224.prototype._digest = function digest(enc) {
 };
 
 
-},{"../utils":104,"./256":100}],100:[function(require,module,exports){
+},{"../utils":108,"./256":104}],104:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -30850,7 +31471,7 @@ SHA256.prototype._digest = function digest(enc) {
     return utils.split32(this.h, 'big');
 };
 
-},{"../common":94,"../utils":104,"./common":103,"minimalistic-assert":113}],101:[function(require,module,exports){
+},{"../common":98,"../utils":108,"./common":107,"minimalistic-assert":117}],105:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -30887,7 +31508,7 @@ SHA384.prototype._digest = function digest(enc) {
     return utils.split32(this.h.slice(0, 12), 'big');
 };
 
-},{"../utils":104,"./512":102}],102:[function(require,module,exports){
+},{"../utils":108,"./512":106}],106:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -31219,7 +31840,7 @@ function g1_512_lo(xh, xl) {
   return r;
 }
 
-},{"../common":94,"../utils":104,"minimalistic-assert":113}],103:[function(require,module,exports){
+},{"../common":98,"../utils":108,"minimalistic-assert":117}],107:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -31270,7 +31891,7 @@ function g1_256(x) {
 }
 exports.g1_256 = g1_256;
 
-},{"../utils":104}],104:[function(require,module,exports){
+},{"../utils":108}],108:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -31550,7 +32171,7 @@ function shr64_lo(ah, al, num) {
 }
 exports.shr64_lo = shr64_lo;
 
-},{"inherits":107,"minimalistic-assert":113}],105:[function(require,module,exports){
+},{"inherits":111,"minimalistic-assert":117}],109:[function(require,module,exports){
 'use strict';
 
 var hash = require('hash.js');
@@ -31665,7 +32286,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
   return utils.encode(res, enc);
 };
 
-},{"hash.js":93,"minimalistic-assert":113,"minimalistic-crypto-utils":114}],106:[function(require,module,exports){
+},{"hash.js":97,"minimalistic-assert":117,"minimalistic-crypto-utils":118}],110:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -31751,7 +32372,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],107:[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -31776,7 +32397,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],108:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -31799,14 +32420,14 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],109:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],110:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -48917,7 +49538,7 @@ module.exports = Array.isArray || function (arr) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],111:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 'use strict'
 var inherits = require('inherits')
 var HashBase = require('hash-base')
@@ -49065,7 +49686,7 @@ function fnI (a, b, c, d, m, k, s) {
 
 module.exports = MD5
 
-},{"hash-base":92,"inherits":107,"safe-buffer":234}],112:[function(require,module,exports){
+},{"hash-base":96,"inherits":111,"safe-buffer":244}],116:[function(require,module,exports){
 var bn = require('bn.js');
 var brorand = require('brorand');
 
@@ -49182,7 +49803,7 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
   return false;
 };
 
-},{"bn.js":22,"brorand":23}],113:[function(require,module,exports){
+},{"bn.js":22,"brorand":23}],117:[function(require,module,exports){
 module.exports = assert;
 
 function assert(val, msg) {
@@ -49195,7 +49816,7 @@ assert.equal = function assertEqual(l, r, msg) {
     throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
 };
 
-},{}],114:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 'use strict';
 
 var utils = exports;
@@ -49255,7 +49876,7 @@ utils.encode = function encode(arr, enc) {
     return arr;
 };
 
-},{}],115:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 /*
 Copyright (c) 2011, Rob Ellis, Chris Umbel
 
@@ -49430,7 +50051,7 @@ Sentences.prototype.type = function(callback) {
 
 module.exports = Sentences;
 
-},{"underscore":264}],116:[function(require,module,exports){
+},{"underscore":274}],120:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -49490,7 +50111,7 @@ BayesClassifier.load = load;
 
 module.exports = BayesClassifier;
 
-},{"../stemmers/porter_stemmer":143,"./classifier":117,"apparatus":5,"util":267}],117:[function(require,module,exports){
+},{"../stemmers/porter_stemmer":147,"./classifier":121,"apparatus":5,"util":277}],121:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -49659,7 +50280,7 @@ Classifier.load = load;
 
 module.exports = Classifier;
 
-},{"../stemmers/porter_stemmer":143,"events":89,"fs":52,"util":267}],118:[function(require,module,exports){
+},{"../stemmers/porter_stemmer":147,"events":91,"fs":52,"util":277}],122:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -49721,7 +50342,7 @@ LogisticRegressionClassifier.load = load;
 
 module.exports = LogisticRegressionClassifier;
 
-},{"../stemmers/porter_stemmer":143,"./classifier":117,"apparatus":5,"util":267}],119:[function(require,module,exports){
+},{"../stemmers/porter_stemmer":147,"./classifier":121,"apparatus":5,"util":277}],123:[function(require,module,exports){
 /*
 Copyright (c) 2011, John Crepezzi, Chris Umbel
 
@@ -49792,7 +50413,7 @@ var compare = function (str1, str2) {
 
 module.exports = compare;
 
-},{}],120:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 /*
 Copyright (c) 2012, Adam Phillabaum, Chris Umbel
 
@@ -49905,7 +50526,7 @@ function JaroWinklerDistance(s1, s2, dj) {
 }
 module.exports = JaroWinklerDistance;
 
-},{}],121:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 /*
 Copyright (c) 2012, Sid Nallu, Chris Umbel
 
@@ -49975,7 +50596,7 @@ function LevenshteinDistance (source, target, options) {
 
 module.exports = LevenshteinDistance;
 
-},{}],122:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -50052,7 +50673,7 @@ exports.normalize_ja = require('./normalizers/normalizer_ja').normalize_ja;
 exports.removeDiacritics = require('./normalizers/remove_diacritics');
 exports.transliterate_ja = require('./transliterators/ja');
 
-},{"./analyzers/sentence_analyzer":115,"./classifiers/bayes_classifier":116,"./classifiers/logistic_regression_classifier":118,"./distance/dice_coefficient":119,"./distance/jaro-winkler_distance":120,"./distance/levenshtein_distance":121,"./inflectors/count_inflector":123,"./inflectors/fr/noun_inflector":125,"./inflectors/ja/noun_inflector":126,"./inflectors/noun_inflector":127,"./inflectors/present_verb_inflector":128,"./ngrams/ngrams":130,"./ngrams/ngrams_zh":131,"./normalizers/normalizer":132,"./normalizers/normalizer_ja":133,"./normalizers/remove_diacritics":135,"./phonetics/dm_soundex":136,"./phonetics/double_metaphone":137,"./phonetics/metaphone":138,"./phonetics/soundex":140,"./stemmers/lancaster_stemmer":142,"./stemmers/porter_stemmer":143,"./stemmers/porter_stemmer_es":144,"./stemmers/porter_stemmer_fa":145,"./stemmers/porter_stemmer_fr":146,"./stemmers/porter_stemmer_it":147,"./stemmers/porter_stemmer_no":148,"./stemmers/porter_stemmer_ru":149,"./stemmers/stemmer_fr":153,"./stemmers/stemmer_ja":155,"./stemmers/stemmer_pl":157,"./tfidf/tfidf":159,"./tokenizers/aggressive_tokenizer":160,"./tokenizers/aggressive_tokenizer_es":161,"./tokenizers/aggressive_tokenizer_fa":162,"./tokenizers/aggressive_tokenizer_it":164,"./tokenizers/aggressive_tokenizer_nl":165,"./tokenizers/aggressive_tokenizer_no":166,"./tokenizers/aggressive_tokenizer_pl":167,"./tokenizers/aggressive_tokenizer_pt":168,"./tokenizers/aggressive_tokenizer_ru":169,"./tokenizers/regexp_tokenizer":170,"./tokenizers/tokenizer_ja":172,"./tokenizers/treebank_word_tokenizer":173,"./transliterators/ja":174,"./trie/trie":175,"./util/edge_weighted_digraph":177,"./util/longest_path_tree":178,"./util/shortest_path_tree":179,"./util/stopwords":180,"./wordnet/wordnet":193}],123:[function(require,module,exports){
+},{"./analyzers/sentence_analyzer":119,"./classifiers/bayes_classifier":120,"./classifiers/logistic_regression_classifier":122,"./distance/dice_coefficient":123,"./distance/jaro-winkler_distance":124,"./distance/levenshtein_distance":125,"./inflectors/count_inflector":127,"./inflectors/fr/noun_inflector":129,"./inflectors/ja/noun_inflector":130,"./inflectors/noun_inflector":131,"./inflectors/present_verb_inflector":132,"./ngrams/ngrams":134,"./ngrams/ngrams_zh":135,"./normalizers/normalizer":136,"./normalizers/normalizer_ja":137,"./normalizers/remove_diacritics":139,"./phonetics/dm_soundex":140,"./phonetics/double_metaphone":141,"./phonetics/metaphone":142,"./phonetics/soundex":144,"./stemmers/lancaster_stemmer":146,"./stemmers/porter_stemmer":147,"./stemmers/porter_stemmer_es":148,"./stemmers/porter_stemmer_fa":149,"./stemmers/porter_stemmer_fr":150,"./stemmers/porter_stemmer_it":151,"./stemmers/porter_stemmer_no":152,"./stemmers/porter_stemmer_ru":153,"./stemmers/stemmer_fr":157,"./stemmers/stemmer_ja":159,"./stemmers/stemmer_pl":161,"./tfidf/tfidf":163,"./tokenizers/aggressive_tokenizer":164,"./tokenizers/aggressive_tokenizer_es":165,"./tokenizers/aggressive_tokenizer_fa":166,"./tokenizers/aggressive_tokenizer_it":168,"./tokenizers/aggressive_tokenizer_nl":169,"./tokenizers/aggressive_tokenizer_no":170,"./tokenizers/aggressive_tokenizer_pl":171,"./tokenizers/aggressive_tokenizer_pt":172,"./tokenizers/aggressive_tokenizer_ru":173,"./tokenizers/regexp_tokenizer":174,"./tokenizers/tokenizer_ja":176,"./tokenizers/treebank_word_tokenizer":177,"./transliterators/ja":178,"./trie/trie":179,"./util/edge_weighted_digraph":181,"./util/longest_path_tree":182,"./util/shortest_path_tree":183,"./util/stopwords":184,"./wordnet/wordnet":197}],127:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -50108,7 +50729,7 @@ CountInflector.nth = nth;
 
 module.exports = CountInflector;
 
-},{}],124:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -50138,7 +50759,7 @@ var FormSet = function() {
 
 module.exports = FormSet;
 
-},{}],125:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -50375,7 +50996,7 @@ util.inherits(NounInflector, SingularPluralInflector);
 
 module.exports = NounInflector;
 
-},{"../form_set":124,"../singular_plural_inflector":129,"util":267}],126:[function(require,module,exports){
+},{"../form_set":128,"../singular_plural_inflector":133,"util":277}],130:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -50512,7 +51133,7 @@ util.inherits(NounInflector, SingularPluralInflector);
 
 module.exports = NounInflector;
 
-},{"../form_set":124,"../singular_plural_inflector":129,"util":267}],127:[function(require,module,exports){
+},{"../form_set":128,"../singular_plural_inflector":133,"util":277}],131:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -50619,7 +51240,7 @@ util.inherits(NounInflector, SingularPluralInflector);
     
 module.exports = NounInflector;
 
-},{"./form_set":124,"./singular_plural_inflector":129,"util":267}],128:[function(require,module,exports){
+},{"./form_set":128,"./singular_plural_inflector":133,"util":277}],132:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -50695,7 +51316,7 @@ util.inherits(VerbInflector, SingularPluralInflector);
 
 module.exports = VerbInflector;
 
-},{"./form_set":124,"./singular_plural_inflector":129,"util":267}],129:[function(require,module,exports){
+},{"./form_set":128,"./singular_plural_inflector":133,"util":277}],133:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -50806,7 +51427,7 @@ TenseInflector.prototype.izeRegExps = function(token, forms) {
 
 module.exports = TenseInflector;
 
-},{}],130:[function(require,module,exports){
+},{}],134:[function(require,module,exports){
 /*
 Copyright (c) 2011, Rob Ellis, Chris Umbel
 
@@ -50899,7 +51520,7 @@ var ngrams = function(sequence, n, startSymbol, endSymbol) {
 }
 
 
-},{"../tokenizers/regexp_tokenizer":170,"underscore":264}],131:[function(require,module,exports){
+},{"../tokenizers/regexp_tokenizer":174,"underscore":274}],135:[function(require,module,exports){
 /*
 Copyright (c) 2014, Lee Wenzhu
 
@@ -50984,7 +51605,7 @@ var ngrams = function(sequence, n, startSymbol, endSymbol) {
 };
 
 
-},{"underscore":264}],132:[function(require,module,exports){
+},{"underscore":274}],136:[function(require,module,exports){
 /*
  Copyright (c) 2013, Kenneth Koch
 
@@ -51081,7 +51702,7 @@ exports.normalize_tokens = normalize_tokens;
 
 
 
-},{"../util/utils":190}],133:[function(require,module,exports){
+},{"../util/utils":194}],137:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -51707,7 +52328,7 @@ var normalize_ja = function(str) {
 exports.normalize_ja = normalize_ja;
 exports.converters = converters;
 
-},{"../util/utils":190,"../util/utils.js":190}],134:[function(require,module,exports){
+},{"../util/utils":194,"../util/utils.js":194}],138:[function(require,module,exports){
 /*
  Copyright (c) 2014, Kristoffer Brabrand
 
@@ -51767,7 +52388,7 @@ var remove_diacritics = function(text) {
 
 // export the relevant stuff.
 exports.remove_diacritics = remove_diacritics;
-},{}],135:[function(require,module,exports){
+},{}],139:[function(require,module,exports){
 /*
  Copyright (c) 2012, Alexy Maslennikov
 
@@ -51890,7 +52511,7 @@ module.exports = function(str) {
 	return str;
 };
 
-},{}],136:[function(require,module,exports){
+},{}],140:[function(require,module,exports){
 /*
 Copyright (c) 2012, Alexy Maslenninkov
 
@@ -52139,7 +52760,7 @@ soundex.process = process;
 module.exports = soundex;
 
 
-},{"./phonetic":139}],137:[function(require,module,exports){
+},{"./phonetic":143}],141:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -52647,7 +53268,7 @@ DoubleMetaphone.compare = compare
 DoubleMetaphone.process = process;
 DoubleMetaphone.isVowel = isVowel;
 
-},{"./phonetic":139}],138:[function(require,module,exports){
+},{"./phonetic":143}],142:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -52837,7 +53458,7 @@ Metaphone.dropY = dropY;
 Metaphone.transformZ = transformZ;
 Metaphone.dropVowels = dropVowels;
 
-},{"./phonetic":139}],139:[function(require,module,exports){
+},{"./phonetic":143}],143:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -52893,7 +53514,7 @@ module.exports = function() {
     };
 };
 
-},{"../tokenizers/aggressive_tokenizer":160,"../util/stopwords":180}],140:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer":164,"../util/stopwords":184}],144:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -52975,7 +53596,7 @@ SoundEx.transformR = transformR;
 SoundEx.condense = condense;
 SoundEx.padRight0 = padRight0;
 
-},{"./phonetic":139}],141:[function(require,module,exports){
+},{"./phonetic":143}],145:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -53767,7 +54388,7 @@ exports.rules = {
 };
 
 
-},{}],142:[function(require,module,exports){
+},{}],146:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -53843,7 +54464,7 @@ module.exports = LancasterStemmer;
 LancasterStemmer.stem = function(token) {
     return applyRuleSection(token.toLowerCase(), true);
 }
-},{"./lancaster_rules":141,"./stemmer":150}],143:[function(require,module,exports){
+},{"./lancaster_rules":145,"./stemmer":154}],147:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -54050,7 +54671,7 @@ PorterStemmer.step4 = step4;
 PorterStemmer.step5a = step5a;
 PorterStemmer.step5b = step5b;
 
-},{"./stemmer":150}],144:[function(require,module,exports){
+},{"./stemmer":154}],148:[function(require,module,exports){
 /*
 Copyright (c) 2012, David Przybilla, Chris Umbel
 
@@ -54273,7 +54894,7 @@ PorterStemmer.stem = function(token) {
 
 };
 
-},{"./stemmer_es":151}],145:[function(require,module,exports){
+},{"./stemmer_es":155}],149:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 Farsi Porter Stemmer by Fardin Koochaki <me@fardinak.com>
@@ -54307,7 +54928,7 @@ module.exports = PorterStemmer;
 PorterStemmer.stem = function(token) {
     return token;
 };
-},{"./stemmer_fa":152}],146:[function(require,module,exports){
+},{"./stemmer_fa":156}],150:[function(require,module,exports){
 'use strict';
 
 /*
@@ -54685,7 +55306,7 @@ function endsin(token, suffix) {
   if (token.length < suffix.length) return false;
   return (token.slice(-suffix.length) == suffix);
 };
-},{"./stemmer_fr":153}],147:[function(require,module,exports){
+},{"./stemmer_fr":157}],151:[function(require,module,exports){
 /*
 Copyright (c) 2012, Leonardo Fenu, Chris Umbel
 
@@ -54919,7 +55540,7 @@ PorterStemmer.stem = function(token) {
 	return token.toLowerCase();
 
 };
-},{"./stemmer_it":154}],148:[function(require,module,exports){
+},{"./stemmer_it":158}],152:[function(require,module,exports){
 /*
 Copyright (c) 2014, Kristoffer Brabrand
 
@@ -55075,7 +55696,7 @@ PorterStemmer.step1b = step1b;
 PorterStemmer.step1c = step1c;
 PorterStemmer.step2  = step2;
 PorterStemmer.step3  = step3;
-},{"./stemmer_no":156}],149:[function(require,module,exports){
+},{"./stemmer_no":160}],153:[function(require,module,exports){
 /*
 Copyright (c) 2012, Polyakov Vladimir, Chris Umbel
 
@@ -55228,7 +55849,7 @@ PorterStemmer.stem = function(token) {
 	return head + superlativeResult;
 };
 
-},{"./stemmer_ru":158}],150:[function(require,module,exports){
+},{"./stemmer_ru":162}],154:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -55291,7 +55912,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer":160,"../util/stopwords":180}],151:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer":164,"../util/stopwords":184}],155:[function(require,module,exports){
 /*
 Copyright (c) 2012, David Przybilla, Chris Umbel
 
@@ -55351,7 +55972,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer_es":161,"../util/stopwords_es":181}],152:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_es":165,"../util/stopwords_es":185}],156:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 Farsi Stemmer by Fardin Koochaki <me@fardinak.com>
@@ -55407,7 +56028,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer_fa":162,"../util/stopwords_fa":182}],153:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_fa":166,"../util/stopwords_fa":186}],157:[function(require,module,exports){
 /*
 Copyright (c) 2014, Ismaël Héry
 
@@ -55467,7 +56088,7 @@ module.exports = function() {
    };
 }
 
-},{"../tokenizers/aggressive_tokenizer_fr":163,"../util/stopwords_fr":183}],154:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_fr":167,"../util/stopwords_fr":187}],158:[function(require,module,exports){
 var stopwords = require('../util/stopwords_it');
 var Tokenizer = require('../tokenizers/aggressive_tokenizer_it');
 
@@ -55504,7 +56125,7 @@ module.exports = function() {
         };
     };
 }
-},{"../tokenizers/aggressive_tokenizer_it":164,"../util/stopwords_it":184}],155:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_it":168,"../util/stopwords_it":188}],159:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -55644,7 +56265,7 @@ StemmerJa.prototype.attach = function() {
 
 module.exports = StemmerJa;
 
-},{"../tokenizers/tokenizer_ja":172,"../util/stopwords_ja":185}],156:[function(require,module,exports){
+},{"../tokenizers/tokenizer_ja":176,"../util/stopwords_ja":189}],160:[function(require,module,exports){
 /*
 Copyright (c) 2014, Kristoffer Brabrand
 
@@ -55707,7 +56328,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer_no":166,"../util/stopwords_no":186}],157:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_no":170,"../util/stopwords_no":190}],161:[function(require,module,exports){
 /*
 Copyright (c) 2013, Paweł Łaskarzewski
 
@@ -55767,7 +56388,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer_pl":167,"../util/stopwords_pl":187}],158:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_pl":171,"../util/stopwords_pl":191}],162:[function(require,module,exports){
 /*
 Copyright (c) 2012, Polyakov Vladimir, Chris Umbel
 
@@ -55827,7 +56448,7 @@ module.exports = function() {
     };
 }
 
-},{"../tokenizers/aggressive_tokenizer_ru":169,"../util/stopwords_ru":188}],159:[function(require,module,exports){
+},{"../tokenizers/aggressive_tokenizer_ru":173,"../util/stopwords_ru":192}],163:[function(require,module,exports){
 (function (Buffer){
 /*
 Copyright (c) 2011, Rob Ellis, Chris Umbel
@@ -56025,7 +56646,7 @@ TfIdf.prototype.setTokenizer = function(t) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"../tokenizers/regexp_tokenizer":170,"../util/stopwords":180,"buffer":54,"fs":52,"underscore":264}],160:[function(require,module,exports){
+},{"../tokenizers/regexp_tokenizer":174,"../util/stopwords":184,"buffer":54,"fs":52,"underscore":274}],164:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -56063,7 +56684,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/\W+/));
 };
 
-},{"./tokenizer":171,"util":267}],161:[function(require,module,exports){
+},{"./tokenizer":175,"util":277}],165:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel,David Przybilla
 
@@ -56101,7 +56722,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/[^a-zA-Zá-úÁ-ÚñÑüÜ]+/));
 };
 
-},{"./tokenizer":171,"util":267}],162:[function(require,module,exports){
+},{"./tokenizer":175,"util":277}],166:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 Farsi Aggressive Tokenizer by Fardin Koochaki <me@fardinak.com>
@@ -56151,7 +56772,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.clearEmptyString(text.split(/\s+/));
 };
 
-},{"./tokenizer":171,"util":267}],163:[function(require,module,exports){
+},{"./tokenizer":175,"util":277}],167:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -56189,7 +56810,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/[^a-z0-9äâàéèëêïîöôùüûœç]+/i));
 };
 
-},{"./tokenizer":171,"util":267}],164:[function(require,module,exports){
+},{"./tokenizer":175,"util":277}],168:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel,David Przybilla
 
@@ -56227,7 +56848,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/\W+/));
 };
 
-},{"./tokenizer":171,"util":267}],165:[function(require,module,exports){
+},{"./tokenizer":175,"util":277}],169:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel, Martijn de Boer
 
@@ -56265,7 +56886,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/[^a-zA-Z0-9_']+/));
 };
 
-},{"./tokenizer":171,"util":267}],166:[function(require,module,exports){
+},{"./tokenizer":175,"util":277}],170:[function(require,module,exports){
 /*
 Copyright (c) 2014, Kristoffer Brabrand
 
@@ -56306,7 +56927,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.trim(text.split(/[^A-Za-z0-9_æøåÆØÅäÄöÖüÜ]+/));
 };
 
-},{"../normalizers/normalizer_no":134,"./tokenizer":171,"util":267}],167:[function(require,module,exports){
+},{"../normalizers/normalizer_no":138,"./tokenizer":175,"util":277}],171:[function(require,module,exports){
 /*
 Copyright (c) 2013, Paweł Łaskarzewski
 
@@ -56353,7 +56974,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.withoutEmpty(this.clearText(text).split(' '));
 };
 
-},{"./tokenizer":171,"util":267}],168:[function(require,module,exports){
+},{"./tokenizer":175,"util":277}],172:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel,David Przybilla
 
@@ -56395,7 +57016,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.withoutEmpty(this.trim(text.split(/[^a-zA-Zà-úÀ-Ú]/)));
 };
 
-},{"./tokenizer":171,"util":267}],169:[function(require,module,exports){
+},{"./tokenizer":175,"util":277}],173:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -56442,7 +57063,7 @@ AggressiveTokenizer.prototype.tokenize = function(text) {
     return this.withoutEmpty(this.clearText(text).split(' '));
 };
 
-},{"./tokenizer":171,"util":267}],170:[function(require,module,exports){
+},{"./tokenizer":175,"util":277}],174:[function(require,module,exports){
 /*
 Copyright (c) 2011, Rob Ellis, Chris Umbel
 
@@ -56530,7 +57151,7 @@ var WordPunctTokenizer = function(options) {
 util.inherits(WordPunctTokenizer, RegexpTokenizer);
 exports.WordPunctTokenizer = WordPunctTokenizer;
 
-},{"./tokenizer":171,"underscore":264,"util":267}],171:[function(require,module,exports){
+},{"./tokenizer":175,"underscore":274,"util":277}],175:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -56583,7 +57204,7 @@ Tokenizer.prototype.tokenize = function() {};
 
 module.exports = Tokenizer;
 
-},{}],172:[function(require,module,exports){
+},{}],176:[function(require,module,exports){
 // Original copyright:
 /*
  Copyright (c) 2008, Taku Kudo
@@ -56862,7 +57483,7 @@ TokenizerJa.prototype.tokenize = function(text) {
 
 module.exports = TokenizerJa;
 
-},{"../normalizers/normalizer_ja":133,"./tokenizer":171,"util":267}],173:[function(require,module,exports){
+},{"../normalizers/normalizer_ja":137,"./tokenizer":175,"util":277}],177:[function(require,module,exports){
 /*
 Copyright (c) 2011, Rob Ellis, Chris Umbel
 
@@ -56938,7 +57559,7 @@ TreebankWordTokenizer.prototype.tokenize = function(text) {
 
 module.exports = TreebankWordTokenizer;
 
-},{"./tokenizer":171,"underscore":264,"util":267}],174:[function(require,module,exports){
+},{"./tokenizer":175,"underscore":274,"util":277}],178:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -57522,7 +58143,7 @@ module.exports = function(str) {
   return str;
 };
 
-},{"../../util/utils":190}],175:[function(require,module,exports){
+},{"../../util/utils":194}],179:[function(require,module,exports){
 /*
 Copyright (c) 2014 Ken Koch
 
@@ -57754,7 +58375,7 @@ Trie.prototype.getSize = function() {
  **/
 module.exports = Trie;
 
-},{}],176:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 /*
  Copyright (c) 2014, Lee Wenzhu
 
@@ -57806,7 +58427,7 @@ Bag.prototype.unpack = function() {
 
 module.exports = Bag;
 
-},{}],177:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 /*
  Copyright (c) 2014, Lee Wenzhu
 
@@ -57920,7 +58541,7 @@ EdgeWeightedDigraph.prototype.toString = function() {
 
 module.exports = EdgeWeightedDigraph;
 
-},{"./bag":176,"util":267}],178:[function(require,module,exports){
+},{"./bag":180,"util":277}],182:[function(require,module,exports){
 /*
  Copyright (c) 2014, Lee Wenzhu
 
@@ -58021,7 +58642,7 @@ LongestPathTree.prototype.pathTo = function(v) {
 
 module.exports = LongestPathTree;
 
-},{"./edge_weighted_digraph":177,"./topological":189}],179:[function(require,module,exports){
+},{"./edge_weighted_digraph":181,"./topological":193}],183:[function(require,module,exports){
 /*
  Copyright (c) 2014, Lee Wenzhu
 
@@ -58123,7 +58744,7 @@ ShortestPathTree.prototype.pathTo = function(v) {
 
 module.exports = ShortestPathTree;
 
-},{"./edge_weighted_digraph":177,"./topological":189}],180:[function(require,module,exports){
+},{"./edge_weighted_digraph":181,"./topological":193}],184:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -58166,7 +58787,7 @@ var words = [
 // tell the world about the noise words.    
 exports.words = words;
 
-},{}],181:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 /*
 Copyright (c) 2011, David Przybilla, Chris Umbel
 
@@ -58204,7 +58825,7 @@ var words = [
 // tell the world about the noise words.    
 exports.words = words;
 
-},{}],182:[function(require,module,exports){
+},{}],186:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 Farsi Stop Words by Fardin Koochaki <me@fardinak.com>
@@ -58244,7 +58865,7 @@ var words = [
 // tell the world about the noise words.    
 exports.words = words;
 
-},{}],183:[function(require,module,exports){
+},{}],187:[function(require,module,exports){
 /*
  Copyright (c) 2014, Ismaël Héry
 
@@ -58440,7 +59061,7 @@ var words = ['être', 'avoir', 'faire',
 
 exports.words = words;
 
-},{}],184:[function(require,module,exports){
+},{}],188:[function(require,module,exports){
 /*
 Copyright (c) 2011, David Przybilla, Chris Umbel
 
@@ -58494,7 +59115,7 @@ var words = [
 // tell the world about the noise words.    
 exports.words = words;
 
-},{}],185:[function(require,module,exports){
+},{}],189:[function(require,module,exports){
 // Original copyright:
 /*
  Licensed to the Apache Software Foundation (ASF) under one or more
@@ -58555,7 +59176,7 @@ var words = ['の', 'に', 'は', 'を', 'た', 'が', 'で', 'て', 'と', 'し
 // tell the world about the noise words.
 module.exports = words;
 
-},{}],186:[function(require,module,exports){
+},{}],190:[function(require,module,exports){
 /*
 Copyright (c) 2014, Kristoffer Brabrand
 
@@ -58598,7 +59219,7 @@ var words = [
 
 // tell the world about the noise words.
 exports.words = words;
-},{}],187:[function(require,module,exports){
+},{}],191:[function(require,module,exports){
 /*
 Copyright (c) 2013, Paweł Łaskarzewski
 
@@ -58662,7 +59283,7 @@ var words = [
 // tell the world about the noise words.
 exports.words = words;
 
-},{}],188:[function(require,module,exports){
+},{}],192:[function(require,module,exports){
 /*
 Copyright (c) 2011, Polyakov Vladimir, Chris Umbel
 
@@ -58705,7 +59326,7 @@ var words = [
 // tell the world about the noise words.    
 exports.words = words;
 
-},{}],189:[function(require,module,exports){
+},{}],193:[function(require,module,exports){
 /*
  Copyright (c) 2014, Lee Wenzhu
 
@@ -58805,7 +59426,7 @@ function uniqueVertexs(edges) {
 
 module.exports = Topological;
 
-},{}],190:[function(require,module,exports){
+},{}],194:[function(require,module,exports){
 /*
  Copyright (c) 2012, Guillaume Marty
 
@@ -58926,7 +59547,7 @@ exports.replacer = replacer;
 exports.flip = flip;
 exports.merge = merge;
 
-},{}],191:[function(require,module,exports){
+},{}],195:[function(require,module,exports){
 (function (Buffer){
 /*
 Copyright (c) 2011, Chris Umbel
@@ -59016,7 +59637,7 @@ DataFile.prototype.get = get;
 module.exports = DataFile;
 
 }).call(this,require("buffer").Buffer)
-},{"./wordnet_file":194,"buffer":54,"fs":52,"util":267}],192:[function(require,module,exports){
+},{"./wordnet_file":198,"buffer":54,"fs":52,"util":277}],196:[function(require,module,exports){
 (function (Buffer){
 /*
 Copyright (c) 2011, Chris Umbel
@@ -59160,7 +59781,7 @@ IndexFile.prototype._findAt = findAt;
 module.exports = IndexFile;
 
 }).call(this,require("buffer").Buffer)
-},{"./wordnet_file":194,"buffer":54,"fs":52,"util":267}],193:[function(require,module,exports){
+},{"./wordnet_file":198,"buffer":54,"fs":52,"util":277}],197:[function(require,module,exports){
 /*
 Copyright (c) 2011, Chris Umbel
 
@@ -59331,7 +59952,7 @@ function WordNet(dataDir) {
 
 module.exports = WordNet;
 
-},{"./data_file":191,"./index_file":192,"WNdb":undefined}],194:[function(require,module,exports){
+},{"./data_file":195,"./index_file":196,"WNdb":undefined}],198:[function(require,module,exports){
 (function (Buffer){
 /*
 Copyright (c) 2011, Chris Umbel
@@ -59404,7 +60025,7 @@ WordNetFile.appendLineChar = appendLineChar;
 module.exports = WordNetFile;
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":54,"fs":52,"path":201,"util":267}],195:[function(require,module,exports){
+},{"buffer":54,"fs":52,"path":211,"util":277}],199:[function(require,module,exports){
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -59455,7 +60076,2662 @@ exports.homedir = function () {
 	return '/'
 };
 
-},{}],196:[function(require,module,exports){
+},{}],200:[function(require,module,exports){
+/**
+ * Outlayer Item
+ */
+
+( function( window, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, require */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD - RequireJS
+    define( [
+        'ev-emitter/ev-emitter',
+        'get-size/get-size'
+      ],
+      factory
+    );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory(
+      require('ev-emitter'),
+      require('get-size')
+    );
+  } else {
+    // browser global
+    window.Outlayer = {};
+    window.Outlayer.Item = factory(
+      window.EvEmitter,
+      window.getSize
+    );
+  }
+
+}( window, function factory( EvEmitter, getSize ) {
+'use strict';
+
+// ----- helpers ----- //
+
+function isEmptyObj( obj ) {
+  for ( var prop in obj ) {
+    return false;
+  }
+  prop = null;
+  return true;
+}
+
+// -------------------------- CSS3 support -------------------------- //
+
+
+var docElemStyle = document.documentElement.style;
+
+var transitionProperty = typeof docElemStyle.transition == 'string' ?
+  'transition' : 'WebkitTransition';
+var transformProperty = typeof docElemStyle.transform == 'string' ?
+  'transform' : 'WebkitTransform';
+
+var transitionEndEvent = {
+  WebkitTransition: 'webkitTransitionEnd',
+  transition: 'transitionend'
+}[ transitionProperty ];
+
+// cache all vendor properties that could have vendor prefix
+var vendorProperties = {
+  transform: transformProperty,
+  transition: transitionProperty,
+  transitionDuration: transitionProperty + 'Duration',
+  transitionProperty: transitionProperty + 'Property',
+  transitionDelay: transitionProperty + 'Delay'
+};
+
+// -------------------------- Item -------------------------- //
+
+function Item( element, layout ) {
+  if ( !element ) {
+    return;
+  }
+
+  this.element = element;
+  // parent layout class, i.e. Masonry, Isotope, or Packery
+  this.layout = layout;
+  this.position = {
+    x: 0,
+    y: 0
+  };
+
+  this._create();
+}
+
+// inherit EvEmitter
+var proto = Item.prototype = Object.create( EvEmitter.prototype );
+proto.constructor = Item;
+
+proto._create = function() {
+  // transition objects
+  this._transn = {
+    ingProperties: {},
+    clean: {},
+    onEnd: {}
+  };
+
+  this.css({
+    position: 'absolute'
+  });
+};
+
+// trigger specified handler for event type
+proto.handleEvent = function( event ) {
+  var method = 'on' + event.type;
+  if ( this[ method ] ) {
+    this[ method ]( event );
+  }
+};
+
+proto.getSize = function() {
+  this.size = getSize( this.element );
+};
+
+/**
+ * apply CSS styles to element
+ * @param {Object} style
+ */
+proto.css = function( style ) {
+  var elemStyle = this.element.style;
+
+  for ( var prop in style ) {
+    // use vendor property if available
+    var supportedProp = vendorProperties[ prop ] || prop;
+    elemStyle[ supportedProp ] = style[ prop ];
+  }
+};
+
+ // measure position, and sets it
+proto.getPosition = function() {
+  var style = getComputedStyle( this.element );
+  var isOriginLeft = this.layout._getOption('originLeft');
+  var isOriginTop = this.layout._getOption('originTop');
+  var xValue = style[ isOriginLeft ? 'left' : 'right' ];
+  var yValue = style[ isOriginTop ? 'top' : 'bottom' ];
+  var x = parseFloat( xValue );
+  var y = parseFloat( yValue );
+  // convert percent to pixels
+  var layoutSize = this.layout.size;
+  if ( xValue.indexOf('%') != -1 ) {
+    x = ( x / 100 ) * layoutSize.width;
+  }
+  if ( yValue.indexOf('%') != -1 ) {
+    y = ( y / 100 ) * layoutSize.height;
+  }
+  // clean up 'auto' or other non-integer values
+  x = isNaN( x ) ? 0 : x;
+  y = isNaN( y ) ? 0 : y;
+  // remove padding from measurement
+  x -= isOriginLeft ? layoutSize.paddingLeft : layoutSize.paddingRight;
+  y -= isOriginTop ? layoutSize.paddingTop : layoutSize.paddingBottom;
+
+  this.position.x = x;
+  this.position.y = y;
+};
+
+// set settled position, apply padding
+proto.layoutPosition = function() {
+  var layoutSize = this.layout.size;
+  var style = {};
+  var isOriginLeft = this.layout._getOption('originLeft');
+  var isOriginTop = this.layout._getOption('originTop');
+
+  // x
+  var xPadding = isOriginLeft ? 'paddingLeft' : 'paddingRight';
+  var xProperty = isOriginLeft ? 'left' : 'right';
+  var xResetProperty = isOriginLeft ? 'right' : 'left';
+
+  var x = this.position.x + layoutSize[ xPadding ];
+  // set in percentage or pixels
+  style[ xProperty ] = this.getXValue( x );
+  // reset other property
+  style[ xResetProperty ] = '';
+
+  // y
+  var yPadding = isOriginTop ? 'paddingTop' : 'paddingBottom';
+  var yProperty = isOriginTop ? 'top' : 'bottom';
+  var yResetProperty = isOriginTop ? 'bottom' : 'top';
+
+  var y = this.position.y + layoutSize[ yPadding ];
+  // set in percentage or pixels
+  style[ yProperty ] = this.getYValue( y );
+  // reset other property
+  style[ yResetProperty ] = '';
+
+  this.css( style );
+  this.emitEvent( 'layout', [ this ] );
+};
+
+proto.getXValue = function( x ) {
+  var isHorizontal = this.layout._getOption('horizontal');
+  return this.layout.options.percentPosition && !isHorizontal ?
+    ( ( x / this.layout.size.width ) * 100 ) + '%' : x + 'px';
+};
+
+proto.getYValue = function( y ) {
+  var isHorizontal = this.layout._getOption('horizontal');
+  return this.layout.options.percentPosition && isHorizontal ?
+    ( ( y / this.layout.size.height ) * 100 ) + '%' : y + 'px';
+};
+
+proto._transitionTo = function( x, y ) {
+  this.getPosition();
+  // get current x & y from top/left
+  var curX = this.position.x;
+  var curY = this.position.y;
+
+  var didNotMove = x == this.position.x && y == this.position.y;
+
+  // save end position
+  this.setPosition( x, y );
+
+  // if did not move and not transitioning, just go to layout
+  if ( didNotMove && !this.isTransitioning ) {
+    this.layoutPosition();
+    return;
+  }
+
+  var transX = x - curX;
+  var transY = y - curY;
+  var transitionStyle = {};
+  transitionStyle.transform = this.getTranslate( transX, transY );
+
+  this.transition({
+    to: transitionStyle,
+    onTransitionEnd: {
+      transform: this.layoutPosition
+    },
+    isCleaning: true
+  });
+};
+
+proto.getTranslate = function( x, y ) {
+  // flip cooridinates if origin on right or bottom
+  var isOriginLeft = this.layout._getOption('originLeft');
+  var isOriginTop = this.layout._getOption('originTop');
+  x = isOriginLeft ? x : -x;
+  y = isOriginTop ? y : -y;
+  return 'translate3d(' + x + 'px, ' + y + 'px, 0)';
+};
+
+// non transition + transform support
+proto.goTo = function( x, y ) {
+  this.setPosition( x, y );
+  this.layoutPosition();
+};
+
+proto.moveTo = proto._transitionTo;
+
+proto.setPosition = function( x, y ) {
+  this.position.x = parseFloat( x );
+  this.position.y = parseFloat( y );
+};
+
+// ----- transition ----- //
+
+/**
+ * @param {Object} style - CSS
+ * @param {Function} onTransitionEnd
+ */
+
+// non transition, just trigger callback
+proto._nonTransition = function( args ) {
+  this.css( args.to );
+  if ( args.isCleaning ) {
+    this._removeStyles( args.to );
+  }
+  for ( var prop in args.onTransitionEnd ) {
+    args.onTransitionEnd[ prop ].call( this );
+  }
+};
+
+/**
+ * proper transition
+ * @param {Object} args - arguments
+ *   @param {Object} to - style to transition to
+ *   @param {Object} from - style to start transition from
+ *   @param {Boolean} isCleaning - removes transition styles after transition
+ *   @param {Function} onTransitionEnd - callback
+ */
+proto.transition = function( args ) {
+  // redirect to nonTransition if no transition duration
+  if ( !parseFloat( this.layout.options.transitionDuration ) ) {
+    this._nonTransition( args );
+    return;
+  }
+
+  var _transition = this._transn;
+  // keep track of onTransitionEnd callback by css property
+  for ( var prop in args.onTransitionEnd ) {
+    _transition.onEnd[ prop ] = args.onTransitionEnd[ prop ];
+  }
+  // keep track of properties that are transitioning
+  for ( prop in args.to ) {
+    _transition.ingProperties[ prop ] = true;
+    // keep track of properties to clean up when transition is done
+    if ( args.isCleaning ) {
+      _transition.clean[ prop ] = true;
+    }
+  }
+
+  // set from styles
+  if ( args.from ) {
+    this.css( args.from );
+    // force redraw. http://blog.alexmaccaw.com/css-transitions
+    var h = this.element.offsetHeight;
+    // hack for JSHint to hush about unused var
+    h = null;
+  }
+  // enable transition
+  this.enableTransition( args.to );
+  // set styles that are transitioning
+  this.css( args.to );
+
+  this.isTransitioning = true;
+
+};
+
+// dash before all cap letters, including first for
+// WebkitTransform => -webkit-transform
+function toDashedAll( str ) {
+  return str.replace( /([A-Z])/g, function( $1 ) {
+    return '-' + $1.toLowerCase();
+  });
+}
+
+var transitionProps = 'opacity,' + toDashedAll( transformProperty );
+
+proto.enableTransition = function(/* style */) {
+  // HACK changing transitionProperty during a transition
+  // will cause transition to jump
+  if ( this.isTransitioning ) {
+    return;
+  }
+
+  // make `transition: foo, bar, baz` from style object
+  // HACK un-comment this when enableTransition can work
+  // while a transition is happening
+  // var transitionValues = [];
+  // for ( var prop in style ) {
+  //   // dash-ify camelCased properties like WebkitTransition
+  //   prop = vendorProperties[ prop ] || prop;
+  //   transitionValues.push( toDashedAll( prop ) );
+  // }
+  // munge number to millisecond, to match stagger
+  var duration = this.layout.options.transitionDuration;
+  duration = typeof duration == 'number' ? duration + 'ms' : duration;
+  // enable transition styles
+  this.css({
+    transitionProperty: transitionProps,
+    transitionDuration: duration,
+    transitionDelay: this.staggerDelay || 0
+  });
+  // listen for transition end event
+  this.element.addEventListener( transitionEndEvent, this, false );
+};
+
+// ----- events ----- //
+
+proto.onwebkitTransitionEnd = function( event ) {
+  this.ontransitionend( event );
+};
+
+proto.onotransitionend = function( event ) {
+  this.ontransitionend( event );
+};
+
+// properties that I munge to make my life easier
+var dashedVendorProperties = {
+  '-webkit-transform': 'transform'
+};
+
+proto.ontransitionend = function( event ) {
+  // disregard bubbled events from children
+  if ( event.target !== this.element ) {
+    return;
+  }
+  var _transition = this._transn;
+  // get property name of transitioned property, convert to prefix-free
+  var propertyName = dashedVendorProperties[ event.propertyName ] || event.propertyName;
+
+  // remove property that has completed transitioning
+  delete _transition.ingProperties[ propertyName ];
+  // check if any properties are still transitioning
+  if ( isEmptyObj( _transition.ingProperties ) ) {
+    // all properties have completed transitioning
+    this.disableTransition();
+  }
+  // clean style
+  if ( propertyName in _transition.clean ) {
+    // clean up style
+    this.element.style[ event.propertyName ] = '';
+    delete _transition.clean[ propertyName ];
+  }
+  // trigger onTransitionEnd callback
+  if ( propertyName in _transition.onEnd ) {
+    var onTransitionEnd = _transition.onEnd[ propertyName ];
+    onTransitionEnd.call( this );
+    delete _transition.onEnd[ propertyName ];
+  }
+
+  this.emitEvent( 'transitionEnd', [ this ] );
+};
+
+proto.disableTransition = function() {
+  this.removeTransitionStyles();
+  this.element.removeEventListener( transitionEndEvent, this, false );
+  this.isTransitioning = false;
+};
+
+/**
+ * removes style property from element
+ * @param {Object} style
+**/
+proto._removeStyles = function( style ) {
+  // clean up transition styles
+  var cleanStyle = {};
+  for ( var prop in style ) {
+    cleanStyle[ prop ] = '';
+  }
+  this.css( cleanStyle );
+};
+
+var cleanTransitionStyle = {
+  transitionProperty: '',
+  transitionDuration: '',
+  transitionDelay: ''
+};
+
+proto.removeTransitionStyles = function() {
+  // remove transition
+  this.css( cleanTransitionStyle );
+};
+
+// ----- stagger ----- //
+
+proto.stagger = function( delay ) {
+  delay = isNaN( delay ) ? 0 : delay;
+  this.staggerDelay = delay + 'ms';
+};
+
+// ----- show/hide/remove ----- //
+
+// remove element from DOM
+proto.removeElem = function() {
+  this.element.parentNode.removeChild( this.element );
+  // remove display: none
+  this.css({ display: '' });
+  this.emitEvent( 'remove', [ this ] );
+};
+
+proto.remove = function() {
+  // just remove element if no transition support or no transition
+  if ( !transitionProperty || !parseFloat( this.layout.options.transitionDuration ) ) {
+    this.removeElem();
+    return;
+  }
+
+  // start transition
+  this.once( 'transitionEnd', function() {
+    this.removeElem();
+  });
+  this.hide();
+};
+
+proto.reveal = function() {
+  delete this.isHidden;
+  // remove display: none
+  this.css({ display: '' });
+
+  var options = this.layout.options;
+
+  var onTransitionEnd = {};
+  var transitionEndProperty = this.getHideRevealTransitionEndProperty('visibleStyle');
+  onTransitionEnd[ transitionEndProperty ] = this.onRevealTransitionEnd;
+
+  this.transition({
+    from: options.hiddenStyle,
+    to: options.visibleStyle,
+    isCleaning: true,
+    onTransitionEnd: onTransitionEnd
+  });
+};
+
+proto.onRevealTransitionEnd = function() {
+  // check if still visible
+  // during transition, item may have been hidden
+  if ( !this.isHidden ) {
+    this.emitEvent('reveal');
+  }
+};
+
+/**
+ * get style property use for hide/reveal transition end
+ * @param {String} styleProperty - hiddenStyle/visibleStyle
+ * @returns {String}
+ */
+proto.getHideRevealTransitionEndProperty = function( styleProperty ) {
+  var optionStyle = this.layout.options[ styleProperty ];
+  // use opacity
+  if ( optionStyle.opacity ) {
+    return 'opacity';
+  }
+  // get first property
+  for ( var prop in optionStyle ) {
+    return prop;
+  }
+};
+
+proto.hide = function() {
+  // set flag
+  this.isHidden = true;
+  // remove display: none
+  this.css({ display: '' });
+
+  var options = this.layout.options;
+
+  var onTransitionEnd = {};
+  var transitionEndProperty = this.getHideRevealTransitionEndProperty('hiddenStyle');
+  onTransitionEnd[ transitionEndProperty ] = this.onHideTransitionEnd;
+
+  this.transition({
+    from: options.visibleStyle,
+    to: options.hiddenStyle,
+    // keep hidden stuff hidden
+    isCleaning: true,
+    onTransitionEnd: onTransitionEnd
+  });
+};
+
+proto.onHideTransitionEnd = function() {
+  // check if still hidden
+  // during transition, item may have been un-hidden
+  if ( this.isHidden ) {
+    this.css({ display: 'none' });
+    this.emitEvent('hide');
+  }
+};
+
+proto.destroy = function() {
+  this.css({
+    position: '',
+    left: '',
+    right: '',
+    top: '',
+    bottom: '',
+    transition: '',
+    transform: ''
+  });
+};
+
+return Item;
+
+}));
+
+},{"ev-emitter":90,"get-size":95}],201:[function(require,module,exports){
+/*!
+ * Outlayer v2.1.1
+ * the brains and guts of a layout library
+ * MIT license
+ */
+
+( function( window, factory ) {
+  'use strict';
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, require */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD - RequireJS
+    define( [
+        'ev-emitter/ev-emitter',
+        'get-size/get-size',
+        'fizzy-ui-utils/utils',
+        './item'
+      ],
+      function( EvEmitter, getSize, utils, Item ) {
+        return factory( window, EvEmitter, getSize, utils, Item);
+      }
+    );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS - Browserify, Webpack
+    module.exports = factory(
+      window,
+      require('ev-emitter'),
+      require('get-size'),
+      require('fizzy-ui-utils'),
+      require('./item')
+    );
+  } else {
+    // browser global
+    window.Outlayer = factory(
+      window,
+      window.EvEmitter,
+      window.getSize,
+      window.fizzyUIUtils,
+      window.Outlayer.Item
+    );
+  }
+
+}( window, function factory( window, EvEmitter, getSize, utils, Item ) {
+'use strict';
+
+// ----- vars ----- //
+
+var console = window.console;
+var jQuery = window.jQuery;
+var noop = function() {};
+
+// -------------------------- Outlayer -------------------------- //
+
+// globally unique identifiers
+var GUID = 0;
+// internal store of all Outlayer intances
+var instances = {};
+
+
+/**
+ * @param {Element, String} element
+ * @param {Object} options
+ * @constructor
+ */
+function Outlayer( element, options ) {
+  var queryElement = utils.getQueryElement( element );
+  if ( !queryElement ) {
+    if ( console ) {
+      console.error( 'Bad element for ' + this.constructor.namespace +
+        ': ' + ( queryElement || element ) );
+    }
+    return;
+  }
+  this.element = queryElement;
+  // add jQuery
+  if ( jQuery ) {
+    this.$element = jQuery( this.element );
+  }
+
+  // options
+  this.options = utils.extend( {}, this.constructor.defaults );
+  this.option( options );
+
+  // add id for Outlayer.getFromElement
+  var id = ++GUID;
+  this.element.outlayerGUID = id; // expando
+  instances[ id ] = this; // associate via id
+
+  // kick it off
+  this._create();
+
+  var isInitLayout = this._getOption('initLayout');
+  if ( isInitLayout ) {
+    this.layout();
+  }
+}
+
+// settings are for internal use only
+Outlayer.namespace = 'outlayer';
+Outlayer.Item = Item;
+
+// default options
+Outlayer.defaults = {
+  containerStyle: {
+    position: 'relative'
+  },
+  initLayout: true,
+  originLeft: true,
+  originTop: true,
+  resize: true,
+  resizeContainer: true,
+  // item options
+  transitionDuration: '0.4s',
+  hiddenStyle: {
+    opacity: 0,
+    transform: 'scale(0.001)'
+  },
+  visibleStyle: {
+    opacity: 1,
+    transform: 'scale(1)'
+  }
+};
+
+var proto = Outlayer.prototype;
+// inherit EvEmitter
+utils.extend( proto, EvEmitter.prototype );
+
+/**
+ * set options
+ * @param {Object} opts
+ */
+proto.option = function( opts ) {
+  utils.extend( this.options, opts );
+};
+
+/**
+ * get backwards compatible option value, check old name
+ */
+proto._getOption = function( option ) {
+  var oldOption = this.constructor.compatOptions[ option ];
+  return oldOption && this.options[ oldOption ] !== undefined ?
+    this.options[ oldOption ] : this.options[ option ];
+};
+
+Outlayer.compatOptions = {
+  // currentName: oldName
+  initLayout: 'isInitLayout',
+  horizontal: 'isHorizontal',
+  layoutInstant: 'isLayoutInstant',
+  originLeft: 'isOriginLeft',
+  originTop: 'isOriginTop',
+  resize: 'isResizeBound',
+  resizeContainer: 'isResizingContainer'
+};
+
+proto._create = function() {
+  // get items from children
+  this.reloadItems();
+  // elements that affect layout, but are not laid out
+  this.stamps = [];
+  this.stamp( this.options.stamp );
+  // set container style
+  utils.extend( this.element.style, this.options.containerStyle );
+
+  // bind resize method
+  var canBindResize = this._getOption('resize');
+  if ( canBindResize ) {
+    this.bindResize();
+  }
+};
+
+// goes through all children again and gets bricks in proper order
+proto.reloadItems = function() {
+  // collection of item elements
+  this.items = this._itemize( this.element.children );
+};
+
+
+/**
+ * turn elements into Outlayer.Items to be used in layout
+ * @param {Array or NodeList or HTMLElement} elems
+ * @returns {Array} items - collection of new Outlayer Items
+ */
+proto._itemize = function( elems ) {
+
+  var itemElems = this._filterFindItemElements( elems );
+  var Item = this.constructor.Item;
+
+  // create new Outlayer Items for collection
+  var items = [];
+  for ( var i=0; i < itemElems.length; i++ ) {
+    var elem = itemElems[i];
+    var item = new Item( elem, this );
+    items.push( item );
+  }
+
+  return items;
+};
+
+/**
+ * get item elements to be used in layout
+ * @param {Array or NodeList or HTMLElement} elems
+ * @returns {Array} items - item elements
+ */
+proto._filterFindItemElements = function( elems ) {
+  return utils.filterFindElements( elems, this.options.itemSelector );
+};
+
+/**
+ * getter method for getting item elements
+ * @returns {Array} elems - collection of item elements
+ */
+proto.getItemElements = function() {
+  return this.items.map( function( item ) {
+    return item.element;
+  });
+};
+
+// ----- init & layout ----- //
+
+/**
+ * lays out all items
+ */
+proto.layout = function() {
+  this._resetLayout();
+  this._manageStamps();
+
+  // don't animate first layout
+  var layoutInstant = this._getOption('layoutInstant');
+  var isInstant = layoutInstant !== undefined ?
+    layoutInstant : !this._isLayoutInited;
+  this.layoutItems( this.items, isInstant );
+
+  // flag for initalized
+  this._isLayoutInited = true;
+};
+
+// _init is alias for layout
+proto._init = proto.layout;
+
+/**
+ * logic before any new layout
+ */
+proto._resetLayout = function() {
+  this.getSize();
+};
+
+
+proto.getSize = function() {
+  this.size = getSize( this.element );
+};
+
+/**
+ * get measurement from option, for columnWidth, rowHeight, gutter
+ * if option is String -> get element from selector string, & get size of element
+ * if option is Element -> get size of element
+ * else use option as a number
+ *
+ * @param {String} measurement
+ * @param {String} size - width or height
+ * @private
+ */
+proto._getMeasurement = function( measurement, size ) {
+  var option = this.options[ measurement ];
+  var elem;
+  if ( !option ) {
+    // default to 0
+    this[ measurement ] = 0;
+  } else {
+    // use option as an element
+    if ( typeof option == 'string' ) {
+      elem = this.element.querySelector( option );
+    } else if ( option instanceof HTMLElement ) {
+      elem = option;
+    }
+    // use size of element, if element
+    this[ measurement ] = elem ? getSize( elem )[ size ] : option;
+  }
+};
+
+/**
+ * layout a collection of item elements
+ * @api public
+ */
+proto.layoutItems = function( items, isInstant ) {
+  items = this._getItemsForLayout( items );
+
+  this._layoutItems( items, isInstant );
+
+  this._postLayout();
+};
+
+/**
+ * get the items to be laid out
+ * you may want to skip over some items
+ * @param {Array} items
+ * @returns {Array} items
+ */
+proto._getItemsForLayout = function( items ) {
+  return items.filter( function( item ) {
+    return !item.isIgnored;
+  });
+};
+
+/**
+ * layout items
+ * @param {Array} items
+ * @param {Boolean} isInstant
+ */
+proto._layoutItems = function( items, isInstant ) {
+  this._emitCompleteOnItems( 'layout', items );
+
+  if ( !items || !items.length ) {
+    // no items, emit event with empty array
+    return;
+  }
+
+  var queue = [];
+
+  items.forEach( function( item ) {
+    // get x/y object from method
+    var position = this._getItemLayoutPosition( item );
+    // enqueue
+    position.item = item;
+    position.isInstant = isInstant || item.isLayoutInstant;
+    queue.push( position );
+  }, this );
+
+  this._processLayoutQueue( queue );
+};
+
+/**
+ * get item layout position
+ * @param {Outlayer.Item} item
+ * @returns {Object} x and y position
+ */
+proto._getItemLayoutPosition = function( /* item */ ) {
+  return {
+    x: 0,
+    y: 0
+  };
+};
+
+/**
+ * iterate over array and position each item
+ * Reason being - separating this logic prevents 'layout invalidation'
+ * thx @paul_irish
+ * @param {Array} queue
+ */
+proto._processLayoutQueue = function( queue ) {
+  this.updateStagger();
+  queue.forEach( function( obj, i ) {
+    this._positionItem( obj.item, obj.x, obj.y, obj.isInstant, i );
+  }, this );
+};
+
+// set stagger from option in milliseconds number
+proto.updateStagger = function() {
+  var stagger = this.options.stagger;
+  if ( stagger === null || stagger === undefined ) {
+    this.stagger = 0;
+    return;
+  }
+  this.stagger = getMilliseconds( stagger );
+  return this.stagger;
+};
+
+/**
+ * Sets position of item in DOM
+ * @param {Outlayer.Item} item
+ * @param {Number} x - horizontal position
+ * @param {Number} y - vertical position
+ * @param {Boolean} isInstant - disables transitions
+ */
+proto._positionItem = function( item, x, y, isInstant, i ) {
+  if ( isInstant ) {
+    // if not transition, just set CSS
+    item.goTo( x, y );
+  } else {
+    item.stagger( i * this.stagger );
+    item.moveTo( x, y );
+  }
+};
+
+/**
+ * Any logic you want to do after each layout,
+ * i.e. size the container
+ */
+proto._postLayout = function() {
+  this.resizeContainer();
+};
+
+proto.resizeContainer = function() {
+  var isResizingContainer = this._getOption('resizeContainer');
+  if ( !isResizingContainer ) {
+    return;
+  }
+  var size = this._getContainerSize();
+  if ( size ) {
+    this._setContainerMeasure( size.width, true );
+    this._setContainerMeasure( size.height, false );
+  }
+};
+
+/**
+ * Sets width or height of container if returned
+ * @returns {Object} size
+ *   @param {Number} width
+ *   @param {Number} height
+ */
+proto._getContainerSize = noop;
+
+/**
+ * @param {Number} measure - size of width or height
+ * @param {Boolean} isWidth
+ */
+proto._setContainerMeasure = function( measure, isWidth ) {
+  if ( measure === undefined ) {
+    return;
+  }
+
+  var elemSize = this.size;
+  // add padding and border width if border box
+  if ( elemSize.isBorderBox ) {
+    measure += isWidth ? elemSize.paddingLeft + elemSize.paddingRight +
+      elemSize.borderLeftWidth + elemSize.borderRightWidth :
+      elemSize.paddingBottom + elemSize.paddingTop +
+      elemSize.borderTopWidth + elemSize.borderBottomWidth;
+  }
+
+  measure = Math.max( measure, 0 );
+  this.element.style[ isWidth ? 'width' : 'height' ] = measure + 'px';
+};
+
+/**
+ * emit eventComplete on a collection of items events
+ * @param {String} eventName
+ * @param {Array} items - Outlayer.Items
+ */
+proto._emitCompleteOnItems = function( eventName, items ) {
+  var _this = this;
+  function onComplete() {
+    _this.dispatchEvent( eventName + 'Complete', null, [ items ] );
+  }
+
+  var count = items.length;
+  if ( !items || !count ) {
+    onComplete();
+    return;
+  }
+
+  var doneCount = 0;
+  function tick() {
+    doneCount++;
+    if ( doneCount == count ) {
+      onComplete();
+    }
+  }
+
+  // bind callback
+  items.forEach( function( item ) {
+    item.once( eventName, tick );
+  });
+};
+
+/**
+ * emits events via EvEmitter and jQuery events
+ * @param {String} type - name of event
+ * @param {Event} event - original event
+ * @param {Array} args - extra arguments
+ */
+proto.dispatchEvent = function( type, event, args ) {
+  // add original event to arguments
+  var emitArgs = event ? [ event ].concat( args ) : args;
+  this.emitEvent( type, emitArgs );
+
+  if ( jQuery ) {
+    // set this.$element
+    this.$element = this.$element || jQuery( this.element );
+    if ( event ) {
+      // create jQuery event
+      var $event = jQuery.Event( event );
+      $event.type = type;
+      this.$element.trigger( $event, args );
+    } else {
+      // just trigger with type if no event available
+      this.$element.trigger( type, args );
+    }
+  }
+};
+
+// -------------------------- ignore & stamps -------------------------- //
+
+
+/**
+ * keep item in collection, but do not lay it out
+ * ignored items do not get skipped in layout
+ * @param {Element} elem
+ */
+proto.ignore = function( elem ) {
+  var item = this.getItem( elem );
+  if ( item ) {
+    item.isIgnored = true;
+  }
+};
+
+/**
+ * return item to layout collection
+ * @param {Element} elem
+ */
+proto.unignore = function( elem ) {
+  var item = this.getItem( elem );
+  if ( item ) {
+    delete item.isIgnored;
+  }
+};
+
+/**
+ * adds elements to stamps
+ * @param {NodeList, Array, Element, or String} elems
+ */
+proto.stamp = function( elems ) {
+  elems = this._find( elems );
+  if ( !elems ) {
+    return;
+  }
+
+  this.stamps = this.stamps.concat( elems );
+  // ignore
+  elems.forEach( this.ignore, this );
+};
+
+/**
+ * removes elements to stamps
+ * @param {NodeList, Array, or Element} elems
+ */
+proto.unstamp = function( elems ) {
+  elems = this._find( elems );
+  if ( !elems ){
+    return;
+  }
+
+  elems.forEach( function( elem ) {
+    // filter out removed stamp elements
+    utils.removeFrom( this.stamps, elem );
+    this.unignore( elem );
+  }, this );
+};
+
+/**
+ * finds child elements
+ * @param {NodeList, Array, Element, or String} elems
+ * @returns {Array} elems
+ */
+proto._find = function( elems ) {
+  if ( !elems ) {
+    return;
+  }
+  // if string, use argument as selector string
+  if ( typeof elems == 'string' ) {
+    elems = this.element.querySelectorAll( elems );
+  }
+  elems = utils.makeArray( elems );
+  return elems;
+};
+
+proto._manageStamps = function() {
+  if ( !this.stamps || !this.stamps.length ) {
+    return;
+  }
+
+  this._getBoundingRect();
+
+  this.stamps.forEach( this._manageStamp, this );
+};
+
+// update boundingLeft / Top
+proto._getBoundingRect = function() {
+  // get bounding rect for container element
+  var boundingRect = this.element.getBoundingClientRect();
+  var size = this.size;
+  this._boundingRect = {
+    left: boundingRect.left + size.paddingLeft + size.borderLeftWidth,
+    top: boundingRect.top + size.paddingTop + size.borderTopWidth,
+    right: boundingRect.right - ( size.paddingRight + size.borderRightWidth ),
+    bottom: boundingRect.bottom - ( size.paddingBottom + size.borderBottomWidth )
+  };
+};
+
+/**
+ * @param {Element} stamp
+**/
+proto._manageStamp = noop;
+
+/**
+ * get x/y position of element relative to container element
+ * @param {Element} elem
+ * @returns {Object} offset - has left, top, right, bottom
+ */
+proto._getElementOffset = function( elem ) {
+  var boundingRect = elem.getBoundingClientRect();
+  var thisRect = this._boundingRect;
+  var size = getSize( elem );
+  var offset = {
+    left: boundingRect.left - thisRect.left - size.marginLeft,
+    top: boundingRect.top - thisRect.top - size.marginTop,
+    right: thisRect.right - boundingRect.right - size.marginRight,
+    bottom: thisRect.bottom - boundingRect.bottom - size.marginBottom
+  };
+  return offset;
+};
+
+// -------------------------- resize -------------------------- //
+
+// enable event handlers for listeners
+// i.e. resize -> onresize
+proto.handleEvent = utils.handleEvent;
+
+/**
+ * Bind layout to window resizing
+ */
+proto.bindResize = function() {
+  window.addEventListener( 'resize', this );
+  this.isResizeBound = true;
+};
+
+/**
+ * Unbind layout to window resizing
+ */
+proto.unbindResize = function() {
+  window.removeEventListener( 'resize', this );
+  this.isResizeBound = false;
+};
+
+proto.onresize = function() {
+  this.resize();
+};
+
+utils.debounceMethod( Outlayer, 'onresize', 100 );
+
+proto.resize = function() {
+  // don't trigger if size did not change
+  // or if resize was unbound. See #9
+  if ( !this.isResizeBound || !this.needsResizeLayout() ) {
+    return;
+  }
+
+  this.layout();
+};
+
+/**
+ * check if layout is needed post layout
+ * @returns Boolean
+ */
+proto.needsResizeLayout = function() {
+  var size = getSize( this.element );
+  // check that this.size and size are there
+  // IE8 triggers resize on body size change, so they might not be
+  var hasSizes = this.size && size;
+  return hasSizes && size.innerWidth !== this.size.innerWidth;
+};
+
+// -------------------------- methods -------------------------- //
+
+/**
+ * add items to Outlayer instance
+ * @param {Array or NodeList or Element} elems
+ * @returns {Array} items - Outlayer.Items
+**/
+proto.addItems = function( elems ) {
+  var items = this._itemize( elems );
+  // add items to collection
+  if ( items.length ) {
+    this.items = this.items.concat( items );
+  }
+  return items;
+};
+
+/**
+ * Layout newly-appended item elements
+ * @param {Array or NodeList or Element} elems
+ */
+proto.appended = function( elems ) {
+  var items = this.addItems( elems );
+  if ( !items.length ) {
+    return;
+  }
+  // layout and reveal just the new items
+  this.layoutItems( items, true );
+  this.reveal( items );
+};
+
+/**
+ * Layout prepended elements
+ * @param {Array or NodeList or Element} elems
+ */
+proto.prepended = function( elems ) {
+  var items = this._itemize( elems );
+  if ( !items.length ) {
+    return;
+  }
+  // add items to beginning of collection
+  var previousItems = this.items.slice(0);
+  this.items = items.concat( previousItems );
+  // start new layout
+  this._resetLayout();
+  this._manageStamps();
+  // layout new stuff without transition
+  this.layoutItems( items, true );
+  this.reveal( items );
+  // layout previous items
+  this.layoutItems( previousItems );
+};
+
+/**
+ * reveal a collection of items
+ * @param {Array of Outlayer.Items} items
+ */
+proto.reveal = function( items ) {
+  this._emitCompleteOnItems( 'reveal', items );
+  if ( !items || !items.length ) {
+    return;
+  }
+  var stagger = this.updateStagger();
+  items.forEach( function( item, i ) {
+    item.stagger( i * stagger );
+    item.reveal();
+  });
+};
+
+/**
+ * hide a collection of items
+ * @param {Array of Outlayer.Items} items
+ */
+proto.hide = function( items ) {
+  this._emitCompleteOnItems( 'hide', items );
+  if ( !items || !items.length ) {
+    return;
+  }
+  var stagger = this.updateStagger();
+  items.forEach( function( item, i ) {
+    item.stagger( i * stagger );
+    item.hide();
+  });
+};
+
+/**
+ * reveal item elements
+ * @param {Array}, {Element}, {NodeList} items
+ */
+proto.revealItemElements = function( elems ) {
+  var items = this.getItems( elems );
+  this.reveal( items );
+};
+
+/**
+ * hide item elements
+ * @param {Array}, {Element}, {NodeList} items
+ */
+proto.hideItemElements = function( elems ) {
+  var items = this.getItems( elems );
+  this.hide( items );
+};
+
+/**
+ * get Outlayer.Item, given an Element
+ * @param {Element} elem
+ * @param {Function} callback
+ * @returns {Outlayer.Item} item
+ */
+proto.getItem = function( elem ) {
+  // loop through items to get the one that matches
+  for ( var i=0; i < this.items.length; i++ ) {
+    var item = this.items[i];
+    if ( item.element == elem ) {
+      // return item
+      return item;
+    }
+  }
+};
+
+/**
+ * get collection of Outlayer.Items, given Elements
+ * @param {Array} elems
+ * @returns {Array} items - Outlayer.Items
+ */
+proto.getItems = function( elems ) {
+  elems = utils.makeArray( elems );
+  var items = [];
+  elems.forEach( function( elem ) {
+    var item = this.getItem( elem );
+    if ( item ) {
+      items.push( item );
+    }
+  }, this );
+
+  return items;
+};
+
+/**
+ * remove element(s) from instance and DOM
+ * @param {Array or NodeList or Element} elems
+ */
+proto.remove = function( elems ) {
+  var removeItems = this.getItems( elems );
+
+  this._emitCompleteOnItems( 'remove', removeItems );
+
+  // bail if no items to remove
+  if ( !removeItems || !removeItems.length ) {
+    return;
+  }
+
+  removeItems.forEach( function( item ) {
+    item.remove();
+    // remove item from collection
+    utils.removeFrom( this.items, item );
+  }, this );
+};
+
+// ----- destroy ----- //
+
+// remove and disable Outlayer instance
+proto.destroy = function() {
+  // clean up dynamic styles
+  var style = this.element.style;
+  style.height = '';
+  style.position = '';
+  style.width = '';
+  // destroy items
+  this.items.forEach( function( item ) {
+    item.destroy();
+  });
+
+  this.unbindResize();
+
+  var id = this.element.outlayerGUID;
+  delete instances[ id ]; // remove reference to instance by id
+  delete this.element.outlayerGUID;
+  // remove data for jQuery
+  if ( jQuery ) {
+    jQuery.removeData( this.element, this.constructor.namespace );
+  }
+
+};
+
+// -------------------------- data -------------------------- //
+
+/**
+ * get Outlayer instance from element
+ * @param {Element} elem
+ * @returns {Outlayer}
+ */
+Outlayer.data = function( elem ) {
+  elem = utils.getQueryElement( elem );
+  var id = elem && elem.outlayerGUID;
+  return id && instances[ id ];
+};
+
+
+// -------------------------- create Outlayer class -------------------------- //
+
+/**
+ * create a layout class
+ * @param {String} namespace
+ */
+Outlayer.create = function( namespace, options ) {
+  // sub-class Outlayer
+  var Layout = subclass( Outlayer );
+  // apply new options and compatOptions
+  Layout.defaults = utils.extend( {}, Outlayer.defaults );
+  utils.extend( Layout.defaults, options );
+  Layout.compatOptions = utils.extend( {}, Outlayer.compatOptions  );
+
+  Layout.namespace = namespace;
+
+  Layout.data = Outlayer.data;
+
+  // sub-class Item
+  Layout.Item = subclass( Item );
+
+  // -------------------------- declarative -------------------------- //
+
+  utils.htmlInit( Layout, namespace );
+
+  // -------------------------- jQuery bridge -------------------------- //
+
+  // make into jQuery plugin
+  if ( jQuery && jQuery.bridget ) {
+    jQuery.bridget( namespace, Layout );
+  }
+
+  return Layout;
+};
+
+function subclass( Parent ) {
+  function SubClass() {
+    Parent.apply( this, arguments );
+  }
+
+  SubClass.prototype = Object.create( Parent.prototype );
+  SubClass.prototype.constructor = SubClass;
+
+  return SubClass;
+}
+
+// ----- helpers ----- //
+
+// how many milliseconds are in each unit
+var msUnits = {
+  ms: 1,
+  s: 1000
+};
+
+// munge time-like parameter into millisecond number
+// '0.4s' -> 40
+function getMilliseconds( time ) {
+  if ( typeof time == 'number' ) {
+    return time;
+  }
+  var matches = time.match( /(^\d*\.?\d*)(\w*)/ );
+  var num = matches && matches[1];
+  var unit = matches && matches[2];
+  if ( !num.length ) {
+    return 0;
+  }
+  num = parseFloat( num );
+  var mult = msUnits[ unit ] || 1;
+  return num * mult;
+}
+
+// ----- fin ----- //
+
+// back in global
+Outlayer.Item = Item;
+
+return Outlayer;
+
+}));
+
+},{"./item":200,"ev-emitter":90,"fizzy-ui-utils":94,"get-size":95}],202:[function(require,module,exports){
+/**
+ * Packery Item Element
+**/
+
+( function( window, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, require */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [
+        'outlayer/outlayer',
+        './rect'
+      ],
+      factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      require('outlayer'),
+      require('./rect')
+    );
+  } else {
+    // browser global
+    window.Packery.Item = factory(
+      window.Outlayer,
+      window.Packery.Rect
+    );
+  }
+
+}( window, function factory( Outlayer, Rect ) {
+'use strict';
+
+// -------------------------- Item -------------------------- //
+
+var docElemStyle = document.documentElement.style;
+
+var transformProperty = typeof docElemStyle.transform == 'string' ?
+  'transform' : 'WebkitTransform';
+
+// sub-class Item
+var Item = function PackeryItem() {
+  Outlayer.Item.apply( this, arguments );
+};
+
+var proto = Item.prototype = Object.create( Outlayer.Item.prototype );
+
+var __create = proto._create;
+proto._create = function() {
+  // call default _create logic
+  __create.call( this );
+  this.rect = new Rect();
+};
+
+var _moveTo = proto.moveTo;
+proto.moveTo = function( x, y ) {
+  // don't shift 1px while dragging
+  var dx = Math.abs( this.position.x - x );
+  var dy = Math.abs( this.position.y - y );
+
+  var canHackGoTo = this.layout.dragItemCount && !this.isPlacing &&
+    !this.isTransitioning && dx < 1 && dy < 1;
+  if ( canHackGoTo ) {
+    this.goTo( x, y );
+    return;
+  }
+  _moveTo.apply( this, arguments );
+};
+
+// -------------------------- placing -------------------------- //
+
+proto.enablePlacing = function() {
+  this.removeTransitionStyles();
+  // remove transform property from transition
+  if ( this.isTransitioning && transformProperty ) {
+    this.element.style[ transformProperty ] = 'none';
+  }
+  this.isTransitioning = false;
+  this.getSize();
+  this.layout._setRectSize( this.element, this.rect );
+  this.isPlacing = true;
+};
+
+proto.disablePlacing = function() {
+  this.isPlacing = false;
+};
+
+// -----  ----- //
+
+// remove element from DOM
+proto.removeElem = function() {
+  var parent = this.element.parentNode;
+  if ( parent ) {
+    parent.removeChild( this.element );
+  }
+  // add space back to packer
+  this.layout.packer.addSpace( this.rect );
+  this.emitEvent( 'remove', [ this ] );
+};
+
+// ----- dropPlaceholder ----- //
+
+proto.showDropPlaceholder = function() {
+  var dropPlaceholder = this.dropPlaceholder;
+  if ( !dropPlaceholder ) {
+    // create dropPlaceholder
+    dropPlaceholder = this.dropPlaceholder = document.createElement('div');
+    dropPlaceholder.className = 'packery-drop-placeholder';
+    dropPlaceholder.style.position = 'absolute';
+  }
+
+  dropPlaceholder.style.width = this.size.width + 'px';
+  dropPlaceholder.style.height = this.size.height + 'px';
+  this.positionDropPlaceholder();
+  this.layout.element.appendChild( dropPlaceholder );
+};
+
+proto.positionDropPlaceholder = function() {
+  this.dropPlaceholder.style[ transformProperty ] = 'translate(' +
+    this.rect.x + 'px, ' + this.rect.y + 'px)';
+};
+
+proto.hideDropPlaceholder = function() {
+  // only remove once, #333
+  var parent = this.dropPlaceholder.parentNode;
+  if ( parent ) {
+    parent.removeChild( this.dropPlaceholder );
+  }
+};
+
+// -----  ----- //
+
+return Item;
+
+}));
+
+},{"./rect":205,"outlayer":201}],203:[function(require,module,exports){
+/**
+ * Packer
+ * bin-packing algorithm
+ */
+
+( function( window, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, require */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [ './rect' ], factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      require('./rect')
+    );
+  } else {
+    // browser global
+    var Packery = window.Packery = window.Packery || {};
+    Packery.Packer = factory( Packery.Rect );
+  }
+
+}( window, function factory( Rect ) {
+'use strict';
+
+// -------------------------- Packer -------------------------- //
+
+/**
+ * @param {Number} width
+ * @param {Number} height
+ * @param {String} sortDirection
+ *   topLeft for vertical, leftTop for horizontal
+ */
+function Packer( width, height, sortDirection ) {
+  this.width = width || 0;
+  this.height = height || 0;
+  this.sortDirection = sortDirection || 'downwardLeftToRight';
+
+  this.reset();
+}
+
+var proto = Packer.prototype;
+
+proto.reset = function() {
+  this.spaces = [];
+
+  var initialSpace = new Rect({
+    x: 0,
+    y: 0,
+    width: this.width,
+    height: this.height
+  });
+
+  this.spaces.push( initialSpace );
+  // set sorter
+  this.sorter = sorters[ this.sortDirection ] || sorters.downwardLeftToRight;
+};
+
+// change x and y of rect to fit with in Packer's available spaces
+proto.pack = function( rect ) {
+  for ( var i=0; i < this.spaces.length; i++ ) {
+    var space = this.spaces[i];
+    if ( space.canFit( rect ) ) {
+      this.placeInSpace( rect, space );
+      break;
+    }
+  }
+};
+
+proto.columnPack = function( rect ) {
+  for ( var i=0; i < this.spaces.length; i++ ) {
+    var space = this.spaces[i];
+    var canFitInSpaceColumn = space.x <= rect.x &&
+      space.x + space.width >= rect.x + rect.width &&
+      space.height >= rect.height - 0.01; // fudge number for rounding error
+    if ( canFitInSpaceColumn ) {
+      rect.y = space.y;
+      this.placed( rect );
+      break;
+    }
+  }
+};
+
+proto.rowPack = function( rect ) {
+  for ( var i=0; i < this.spaces.length; i++ ) {
+    var space = this.spaces[i];
+    var canFitInSpaceRow = space.y <= rect.y &&
+      space.y + space.height >= rect.y + rect.height &&
+      space.width >= rect.width - 0.01; // fudge number for rounding error
+    if ( canFitInSpaceRow ) {
+      rect.x = space.x;
+      this.placed( rect );
+      break;
+    }
+  }
+};
+
+proto.placeInSpace = function( rect, space ) {
+  // place rect in space
+  rect.x = space.x;
+  rect.y = space.y;
+
+  this.placed( rect );
+};
+
+// update spaces with placed rect
+proto.placed = function( rect ) {
+  // update spaces
+  var revisedSpaces = [];
+  for ( var i=0; i < this.spaces.length; i++ ) {
+    var space = this.spaces[i];
+    var newSpaces = space.getMaximalFreeRects( rect );
+    // add either the original space or the new spaces to the revised spaces
+    if ( newSpaces ) {
+      revisedSpaces.push.apply( revisedSpaces, newSpaces );
+    } else {
+      revisedSpaces.push( space );
+    }
+  }
+
+  this.spaces = revisedSpaces;
+
+  this.mergeSortSpaces();
+};
+
+proto.mergeSortSpaces = function() {
+  // remove redundant spaces
+  Packer.mergeRects( this.spaces );
+  this.spaces.sort( this.sorter );
+};
+
+// add a space back
+proto.addSpace = function( rect ) {
+  this.spaces.push( rect );
+  this.mergeSortSpaces();
+};
+
+// -------------------------- utility functions -------------------------- //
+
+/**
+ * Remove redundant rectangle from array of rectangles
+ * @param {Array} rects: an array of Rects
+ * @returns {Array} rects: an array of Rects
+**/
+Packer.mergeRects = function( rects ) {
+  var i = 0;
+  var rect = rects[i];
+
+  rectLoop:
+  while ( rect ) {
+    var j = 0;
+    var compareRect = rects[ i + j ];
+
+    while ( compareRect ) {
+      if  ( compareRect == rect ) {
+        j++; // next
+      } else if ( compareRect.contains( rect ) ) {
+        // remove rect
+        rects.splice( i, 1 );
+        rect = rects[i]; // set next rect
+        continue rectLoop; // bail on compareLoop
+      } else if ( rect.contains( compareRect ) ) {
+        // remove compareRect
+        rects.splice( i + j, 1 );
+      } else {
+        j++;
+      }
+      compareRect = rects[ i + j ]; // set next compareRect
+    }
+    i++;
+    rect = rects[i];
+  }
+
+  return rects;
+};
+
+
+// -------------------------- sorters -------------------------- //
+
+// functions for sorting rects in order
+var sorters = {
+  // top down, then left to right
+  downwardLeftToRight: function( a, b ) {
+    return a.y - b.y || a.x - b.x;
+  },
+  // left to right, then top down
+  rightwardTopToBottom: function( a, b ) {
+    return a.x - b.x || a.y - b.y;
+  }
+};
+
+
+// --------------------------  -------------------------- //
+
+return Packer;
+
+}));
+
+},{"./rect":205}],204:[function(require,module,exports){
+/*!
+ * Packery v2.1.2
+ * Gapless, draggable grid layouts
+ *
+ * Licensed GPLv3 for open source use
+ * or Packery Commercial License for commercial use
+ *
+ * http://packery.metafizzy.co
+ * Copyright 2013-2018 Metafizzy
+ */
+
+( function( window, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module, require */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( [
+        'get-size/get-size',
+        'outlayer/outlayer',
+        './rect',
+        './packer',
+        './item'
+      ],
+      factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory(
+      require('get-size'),
+      require('outlayer'),
+      require('./rect'),
+      require('./packer'),
+      require('./item')
+    );
+  } else {
+    // browser global
+    window.Packery = factory(
+      window.getSize,
+      window.Outlayer,
+      window.Packery.Rect,
+      window.Packery.Packer,
+      window.Packery.Item
+    );
+  }
+
+}( window, function factory( getSize, Outlayer, Rect, Packer, Item ) {
+'use strict';
+
+// ----- Rect ----- //
+
+// allow for pixel rounding errors IE8-IE11 & Firefox; #227
+Rect.prototype.canFit = function( rect ) {
+  return this.width >= rect.width - 1 && this.height >= rect.height - 1;
+};
+
+// -------------------------- Packery -------------------------- //
+
+// create an Outlayer layout class
+var Packery = Outlayer.create('packery');
+Packery.Item = Item;
+
+var proto = Packery.prototype;
+
+proto._create = function() {
+  // call super
+  Outlayer.prototype._create.call( this );
+
+  // initial properties
+  this.packer = new Packer();
+  // packer for drop targets
+  this.shiftPacker = new Packer();
+  this.isEnabled = true;
+
+  this.dragItemCount = 0;
+
+  // create drag handlers
+  var _this = this;
+  this.handleDraggabilly = {
+    dragStart: function() {
+      _this.itemDragStart( this.element );
+    },
+    dragMove: function() {
+      _this.itemDragMove( this.element, this.position.x, this.position.y );
+    },
+    dragEnd: function() {
+      _this.itemDragEnd( this.element );
+    }
+  };
+
+  this.handleUIDraggable = {
+    start: function handleUIDraggableStart( event, ui ) {
+      // HTML5 may trigger dragstart, dismiss HTML5 dragging
+      if ( !ui ) {
+        return;
+      }
+      _this.itemDragStart( event.currentTarget );
+    },
+    drag: function handleUIDraggableDrag( event, ui ) {
+      if ( !ui ) {
+        return;
+      }
+      _this.itemDragMove( event.currentTarget, ui.position.left, ui.position.top );
+    },
+    stop: function handleUIDraggableStop( event, ui ) {
+      if ( !ui ) {
+        return;
+      }
+      _this.itemDragEnd( event.currentTarget );
+    }
+  };
+
+};
+
+
+// ----- init & layout ----- //
+
+/**
+ * logic before any new layout
+ */
+proto._resetLayout = function() {
+  this.getSize();
+
+  this._getMeasurements();
+
+  // reset packer
+  var width, height, sortDirection;
+  // packer settings, if horizontal or vertical
+  if ( this._getOption('horizontal') ) {
+    width = Infinity;
+    height = this.size.innerHeight + this.gutter;
+    sortDirection = 'rightwardTopToBottom';
+  } else {
+    width = this.size.innerWidth + this.gutter;
+    height = Infinity;
+    sortDirection = 'downwardLeftToRight';
+  }
+
+  this.packer.width = this.shiftPacker.width = width;
+  this.packer.height = this.shiftPacker.height = height;
+  this.packer.sortDirection = this.shiftPacker.sortDirection = sortDirection;
+
+  this.packer.reset();
+
+  // layout
+  this.maxY = 0;
+  this.maxX = 0;
+};
+
+/**
+ * update columnWidth, rowHeight, & gutter
+ * @private
+ */
+proto._getMeasurements = function() {
+  this._getMeasurement( 'columnWidth', 'width' );
+  this._getMeasurement( 'rowHeight', 'height' );
+  this._getMeasurement( 'gutter', 'width' );
+};
+
+proto._getItemLayoutPosition = function( item ) {
+  this._setRectSize( item.element, item.rect );
+  if ( this.isShifting || this.dragItemCount > 0 ) {
+    var packMethod = this._getPackMethod();
+    this.packer[ packMethod ]( item.rect );
+  } else {
+    this.packer.pack( item.rect );
+  }
+
+  this._setMaxXY( item.rect );
+  return item.rect;
+};
+
+proto.shiftLayout = function() {
+  this.isShifting = true;
+  this.layout();
+  delete this.isShifting;
+};
+
+proto._getPackMethod = function() {
+  return this._getOption('horizontal') ? 'rowPack' : 'columnPack';
+};
+
+
+/**
+ * set max X and Y value, for size of container
+ * @param {Packery.Rect} rect
+ * @private
+ */
+proto._setMaxXY = function( rect ) {
+  this.maxX = Math.max( rect.x + rect.width, this.maxX );
+  this.maxY = Math.max( rect.y + rect.height, this.maxY );
+};
+
+/**
+ * set the width and height of a rect, applying columnWidth and rowHeight
+ * @param {Element} elem
+ * @param {Packery.Rect} rect
+ */
+proto._setRectSize = function( elem, rect ) {
+  var size = getSize( elem );
+  var w = size.outerWidth;
+  var h = size.outerHeight;
+  // size for columnWidth and rowHeight, if available
+  // only check if size is non-zero, #177
+  if ( w || h ) {
+    w = this._applyGridGutter( w, this.columnWidth );
+    h = this._applyGridGutter( h, this.rowHeight );
+  }
+  // rect must fit in packer
+  rect.width = Math.min( w, this.packer.width );
+  rect.height = Math.min( h, this.packer.height );
+};
+
+/**
+ * fits item to columnWidth/rowHeight and adds gutter
+ * @param {Number} measurement - item width or height
+ * @param {Number} gridSize - columnWidth or rowHeight
+ * @returns measurement
+ */
+proto._applyGridGutter = function( measurement, gridSize ) {
+  // just add gutter if no gridSize
+  if ( !gridSize ) {
+    return measurement + this.gutter;
+  }
+  gridSize += this.gutter;
+  // fit item to columnWidth/rowHeight
+  var remainder = measurement % gridSize;
+  var mathMethod = remainder && remainder < 1 ? 'round' : 'ceil';
+  measurement = Math[ mathMethod ]( measurement / gridSize ) * gridSize;
+  return measurement;
+};
+
+proto._getContainerSize = function() {
+  if ( this._getOption('horizontal') ) {
+    return {
+      width: this.maxX - this.gutter
+    };
+  } else {
+    return {
+      height: this.maxY - this.gutter
+    };
+  }
+};
+
+
+// -------------------------- stamp -------------------------- //
+
+/**
+ * makes space for element
+ * @param {Element} elem
+ */
+proto._manageStamp = function( elem ) {
+
+  var item = this.getItem( elem );
+  var rect;
+  if ( item && item.isPlacing ) {
+    rect = item.rect;
+  } else {
+    var offset = this._getElementOffset( elem );
+    rect = new Rect({
+      x: this._getOption('originLeft') ? offset.left : offset.right,
+      y: this._getOption('originTop') ? offset.top : offset.bottom
+    });
+  }
+
+  this._setRectSize( elem, rect );
+  // save its space in the packer
+  this.packer.placed( rect );
+  this._setMaxXY( rect );
+};
+
+// -------------------------- methods -------------------------- //
+
+function verticalSorter( a, b ) {
+  return a.position.y - b.position.y || a.position.x - b.position.x;
+}
+
+function horizontalSorter( a, b ) {
+  return a.position.x - b.position.x || a.position.y - b.position.y;
+}
+
+proto.sortItemsByPosition = function() {
+  var sorter = this._getOption('horizontal') ? horizontalSorter : verticalSorter;
+  this.items.sort( sorter );
+};
+
+/**
+ * Fit item element in its current position
+ * Packery will position elements around it
+ * useful for expanding elements
+ *
+ * @param {Element} elem
+ * @param {Number} x - horizontal destination position, optional
+ * @param {Number} y - vertical destination position, optional
+ */
+proto.fit = function( elem, x, y ) {
+  var item = this.getItem( elem );
+  if ( !item ) {
+    return;
+  }
+
+  // stamp item to get it out of layout
+  this.stamp( item.element );
+  // set placing flag
+  item.enablePlacing();
+  this.updateShiftTargets( item );
+  // fall back to current position for fitting
+  x = x === undefined ? item.rect.x: x;
+  y = y === undefined ? item.rect.y: y;
+  // position it best at its destination
+  this.shift( item, x, y );
+  this._bindFitEvents( item );
+  item.moveTo( item.rect.x, item.rect.y );
+  // layout everything else
+  this.shiftLayout();
+  // return back to regularly scheduled programming
+  this.unstamp( item.element );
+  this.sortItemsByPosition();
+  item.disablePlacing();
+};
+
+/**
+ * emit event when item is fit and other items are laid out
+ * @param {Packery.Item} item
+ * @private
+ */
+proto._bindFitEvents = function( item ) {
+  var _this = this;
+  var ticks = 0;
+  function onLayout() {
+    ticks++;
+    if ( ticks != 2 ) {
+      return;
+    }
+    _this.dispatchEvent( 'fitComplete', null, [ item ] );
+  }
+  // when item is laid out
+  item.once( 'layout', onLayout );
+  // when all items are laid out
+  this.once( 'layoutComplete', onLayout );
+};
+
+// -------------------------- resize -------------------------- //
+
+// debounced, layout on resize
+proto.resize = function() {
+  // don't trigger if size did not change
+  // or if resize was unbound. See #285, outlayer#9
+  if ( !this.isResizeBound || !this.needsResizeLayout() ) {
+    return;
+  }
+
+  if ( this.options.shiftPercentResize ) {
+    this.resizeShiftPercentLayout();
+  } else {
+    this.layout();
+  }
+};
+
+/**
+ * check if layout is needed post layout
+ * @returns Boolean
+ */
+proto.needsResizeLayout = function() {
+  var size = getSize( this.element );
+  var innerSize = this._getOption('horizontal') ? 'innerHeight' : 'innerWidth';
+  return size[ innerSize ] != this.size[ innerSize ];
+};
+
+proto.resizeShiftPercentLayout = function() {
+  var items = this._getItemsForLayout( this.items );
+
+  var isHorizontal = this._getOption('horizontal');
+  var coord = isHorizontal ? 'y' : 'x';
+  var measure = isHorizontal ? 'height' : 'width';
+  var segmentName = isHorizontal ? 'rowHeight' : 'columnWidth';
+  var innerSize = isHorizontal ? 'innerHeight' : 'innerWidth';
+
+  // proportional re-align items
+  var previousSegment = this[ segmentName ];
+  previousSegment = previousSegment && previousSegment + this.gutter;
+
+  if ( previousSegment ) {
+    this._getMeasurements();
+    var currentSegment = this[ segmentName ] + this.gutter;
+    items.forEach( function( item ) {
+      var seg = Math.round( item.rect[ coord ] / previousSegment );
+      item.rect[ coord ] = seg * currentSegment;
+    });
+  } else {
+    var currentSize = getSize( this.element )[ innerSize ] + this.gutter;
+    var previousSize = this.packer[ measure ];
+    items.forEach( function( item ) {
+      item.rect[ coord ] = ( item.rect[ coord ] / previousSize ) * currentSize;
+    });
+  }
+
+  this.shiftLayout();
+};
+
+// -------------------------- drag -------------------------- //
+
+/**
+ * handle an item drag start event
+ * @param {Element} elem
+ */
+proto.itemDragStart = function( elem ) {
+  if ( !this.isEnabled ) {
+    return;
+  }
+  this.stamp( elem );
+  // this.ignore( elem );
+  var item = this.getItem( elem );
+  if ( !item ) {
+    return;
+  }
+
+  item.enablePlacing();
+  item.showDropPlaceholder();
+  this.dragItemCount++;
+  this.updateShiftTargets( item );
+};
+
+proto.updateShiftTargets = function( dropItem ) {
+  this.shiftPacker.reset();
+
+  // pack stamps
+  this._getBoundingRect();
+  var isOriginLeft = this._getOption('originLeft');
+  var isOriginTop = this._getOption('originTop');
+  this.stamps.forEach( function( stamp ) {
+    // ignore dragged item
+    var item = this.getItem( stamp );
+    if ( item && item.isPlacing ) {
+      return;
+    }
+    var offset = this._getElementOffset( stamp );
+    var rect = new Rect({
+      x: isOriginLeft ? offset.left : offset.right,
+      y: isOriginTop ? offset.top : offset.bottom
+    });
+    this._setRectSize( stamp, rect );
+    // save its space in the packer
+    this.shiftPacker.placed( rect );
+  }, this );
+
+  // reset shiftTargets
+  var isHorizontal = this._getOption('horizontal');
+  var segmentName = isHorizontal ? 'rowHeight' : 'columnWidth';
+  var measure = isHorizontal ? 'height' : 'width';
+
+  this.shiftTargetKeys = [];
+  this.shiftTargets = [];
+  var boundsSize;
+  var segment = this[ segmentName ];
+  segment = segment && segment + this.gutter;
+
+  if ( segment ) {
+    var segmentSpan = Math.ceil( dropItem.rect[ measure ] / segment );
+    var segs = Math.floor( ( this.shiftPacker[ measure ] + this.gutter ) / segment );
+    boundsSize = ( segs - segmentSpan ) * segment;
+    // add targets on top
+    for ( var i=0; i < segs; i++ ) {
+      var initialX = isHorizontal ? 0 : i * segment;
+      var initialY = isHorizontal ? i * segment : 0;
+      this._addShiftTarget( initialX, initialY, boundsSize );
+    }
+  } else {
+    boundsSize = ( this.shiftPacker[ measure ] + this.gutter ) - dropItem.rect[ measure ];
+    this._addShiftTarget( 0, 0, boundsSize );
+  }
+
+  // pack each item to measure where shiftTargets are
+  var items = this._getItemsForLayout( this.items );
+  var packMethod = this._getPackMethod();
+  items.forEach( function( item ) {
+    var rect = item.rect;
+    this._setRectSize( item.element, rect );
+    this.shiftPacker[ packMethod ]( rect );
+
+    // add top left corner
+    this._addShiftTarget( rect.x, rect.y, boundsSize );
+    // add bottom left / top right corner
+    var cornerX = isHorizontal ? rect.x + rect.width : rect.x;
+    var cornerY = isHorizontal ? rect.y : rect.y + rect.height;
+    this._addShiftTarget( cornerX, cornerY, boundsSize );
+
+    if ( segment ) {
+      // add targets for each column on bottom / row on right
+      var segSpan = Math.round( rect[ measure ] / segment );
+      for ( var i=1; i < segSpan; i++ ) {
+        var segX = isHorizontal ? cornerX : rect.x + segment * i;
+        var segY = isHorizontal ? rect.y + segment * i : cornerY;
+        this._addShiftTarget( segX, segY, boundsSize );
+      }
+    }
+  }, this );
+
+};
+
+proto._addShiftTarget = function( x, y, boundsSize ) {
+  var checkCoord = this._getOption('horizontal') ? y : x;
+  if ( checkCoord !== 0 && checkCoord > boundsSize ) {
+    return;
+  }
+  // create string for a key, easier to keep track of what targets
+  var key = x + ',' + y;
+  var hasKey = this.shiftTargetKeys.indexOf( key ) != -1;
+  if ( hasKey ) {
+    return;
+  }
+  this.shiftTargetKeys.push( key );
+  this.shiftTargets.push({ x: x, y: y });
+};
+
+// -------------------------- drop -------------------------- //
+
+proto.shift = function( item, x, y ) {
+  var shiftPosition;
+  var minDistance = Infinity;
+  var position = { x: x, y: y };
+  this.shiftTargets.forEach( function( target ) {
+    var distance = getDistance( target, position );
+    if ( distance < minDistance ) {
+      shiftPosition = target;
+      minDistance = distance;
+    }
+  });
+  item.rect.x = shiftPosition.x;
+  item.rect.y = shiftPosition.y;
+};
+
+function getDistance( a, b ) {
+  var dx = b.x - a.x;
+  var dy = b.y - a.y;
+  return Math.sqrt( dx * dx + dy * dy );
+}
+
+// -------------------------- drag move -------------------------- //
+
+var DRAG_THROTTLE_TIME = 120;
+
+/**
+ * handle an item drag move event
+ * @param {Element} elem
+ * @param {Number} x - horizontal change in position
+ * @param {Number} y - vertical change in position
+ */
+proto.itemDragMove = function( elem, x, y ) {
+  var item = this.isEnabled && this.getItem( elem );
+  if ( !item ) {
+    return;
+  }
+
+  x -= this.size.paddingLeft;
+  y -= this.size.paddingTop;
+
+  var _this = this;
+  function onDrag() {
+    _this.shift( item, x, y );
+    item.positionDropPlaceholder();
+    _this.layout();
+  }
+
+  // throttle
+  var now = new Date();
+  var isThrottled = this._itemDragTime && now - this._itemDragTime < DRAG_THROTTLE_TIME;
+  if ( isThrottled ) {
+    clearTimeout( this.dragTimeout );
+    this.dragTimeout = setTimeout( onDrag, DRAG_THROTTLE_TIME );
+  } else {
+    onDrag();
+    this._itemDragTime = now;
+  }
+};
+
+// -------------------------- drag end -------------------------- //
+
+/**
+ * handle an item drag end event
+ * @param {Element} elem
+ */
+proto.itemDragEnd = function( elem ) {
+  var item = this.isEnabled && this.getItem( elem );
+  if ( !item ) {
+    return;
+  }
+
+  clearTimeout( this.dragTimeout );
+  item.element.classList.add('is-positioning-post-drag');
+
+  var completeCount = 0;
+  var _this = this;
+  function onDragEndLayoutComplete() {
+    completeCount++;
+    if ( completeCount != 2 ) {
+      return;
+    }
+    // reset drag item
+    item.element.classList.remove('is-positioning-post-drag');
+    item.hideDropPlaceholder();
+    _this.dispatchEvent( 'dragItemPositioned', null, [ item ] );
+  }
+
+  item.once( 'layout', onDragEndLayoutComplete );
+  this.once( 'layoutComplete', onDragEndLayoutComplete );
+  item.moveTo( item.rect.x, item.rect.y );
+  this.layout();
+  this.dragItemCount = Math.max( 0, this.dragItemCount - 1 );
+  this.sortItemsByPosition();
+  item.disablePlacing();
+  this.unstamp( item.element );
+};
+
+/**
+ * binds Draggabilly events
+ * @param {Draggabilly} draggie
+ */
+proto.bindDraggabillyEvents = function( draggie ) {
+  this._bindDraggabillyEvents( draggie, 'on' );
+};
+
+proto.unbindDraggabillyEvents = function( draggie ) {
+  this._bindDraggabillyEvents( draggie, 'off' );
+};
+
+proto._bindDraggabillyEvents = function( draggie, method ) {
+  var handlers = this.handleDraggabilly;
+  draggie[ method ]( 'dragStart', handlers.dragStart );
+  draggie[ method ]( 'dragMove', handlers.dragMove );
+  draggie[ method ]( 'dragEnd', handlers.dragEnd );
+};
+
+/**
+ * binds jQuery UI Draggable events
+ * @param {jQuery} $elems
+ */
+proto.bindUIDraggableEvents = function( $elems ) {
+  this._bindUIDraggableEvents( $elems, 'on' );
+};
+
+proto.unbindUIDraggableEvents = function( $elems ) {
+  this._bindUIDraggableEvents( $elems, 'off' );
+};
+
+proto._bindUIDraggableEvents = function( $elems, method ) {
+  var handlers = this.handleUIDraggable;
+  $elems
+    [ method ]( 'dragstart', handlers.start )
+    [ method ]( 'drag', handlers.drag )
+    [ method ]( 'dragstop', handlers.stop );
+};
+
+// ----- destroy ----- //
+
+var _destroy = proto.destroy;
+proto.destroy = function() {
+  _destroy.apply( this, arguments );
+  // disable flag; prevent drag events from triggering. #72
+  this.isEnabled = false;
+};
+
+// -----  ----- //
+
+Packery.Rect = Rect;
+Packery.Packer = Packer;
+
+return Packery;
+
+}));
+
+},{"./item":202,"./packer":203,"./rect":205,"get-size":95,"outlayer":201}],205:[function(require,module,exports){
+/**
+ * Rect
+ * low-level utility class for basic geometry
+ */
+
+( function( window, factory ) {
+  // universal module definition
+  /* jshint strict: false */ /* globals define, module */
+  if ( typeof define == 'function' && define.amd ) {
+    // AMD
+    define( factory );
+  } else if ( typeof module == 'object' && module.exports ) {
+    // CommonJS
+    module.exports = factory();
+  } else {
+    // browser global
+    window.Packery = window.Packery || {};
+    window.Packery.Rect = factory();
+  }
+
+}( window, function factory() {
+'use strict';
+
+// -------------------------- Rect -------------------------- //
+
+function Rect( props ) {
+  // extend properties from defaults
+  for ( var prop in Rect.defaults ) {
+    this[ prop ] = Rect.defaults[ prop ];
+  }
+
+  for ( prop in props ) {
+    this[ prop ] = props[ prop ];
+  }
+
+}
+
+Rect.defaults = {
+  x: 0,
+  y: 0,
+  width: 0,
+  height: 0
+};
+
+var proto = Rect.prototype;
+
+/**
+ * Determines whether or not this rectangle wholly encloses another rectangle or point.
+ * @param {Rect} rect
+ * @returns {Boolean}
+**/
+proto.contains = function( rect ) {
+  // points don't have width or height
+  var otherWidth = rect.width || 0;
+  var otherHeight = rect.height || 0;
+  return this.x <= rect.x &&
+    this.y <= rect.y &&
+    this.x + this.width >= rect.x + otherWidth &&
+    this.y + this.height >= rect.y + otherHeight;
+};
+
+/**
+ * Determines whether or not the rectangle intersects with another.
+ * @param {Rect} rect
+ * @returns {Boolean}
+**/
+proto.overlaps = function( rect ) {
+  var thisRight = this.x + this.width;
+  var thisBottom = this.y + this.height;
+  var rectRight = rect.x + rect.width;
+  var rectBottom = rect.y + rect.height;
+
+  // http://stackoverflow.com/a/306332
+  return this.x < rectRight &&
+    thisRight > rect.x &&
+    this.y < rectBottom &&
+    thisBottom > rect.y;
+};
+
+/**
+ * @param {Rect} rect - the overlapping rect
+ * @returns {Array} freeRects - rects representing the area around the rect
+**/
+proto.getMaximalFreeRects = function( rect ) {
+
+  // if no intersection, return false
+  if ( !this.overlaps( rect ) ) {
+    return false;
+  }
+
+  var freeRects = [];
+  var freeRect;
+
+  var thisRight = this.x + this.width;
+  var thisBottom = this.y + this.height;
+  var rectRight = rect.x + rect.width;
+  var rectBottom = rect.y + rect.height;
+
+  // top
+  if ( this.y < rect.y ) {
+    freeRect = new Rect({
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: rect.y - this.y
+    });
+    freeRects.push( freeRect );
+  }
+
+  // right
+  if ( thisRight > rectRight ) {
+    freeRect = new Rect({
+      x: rectRight,
+      y: this.y,
+      width: thisRight - rectRight,
+      height: this.height
+    });
+    freeRects.push( freeRect );
+  }
+
+  // bottom
+  if ( thisBottom > rectBottom ) {
+    freeRect = new Rect({
+      x: this.x,
+      y: rectBottom,
+      width: this.width,
+      height: thisBottom - rectBottom
+    });
+    freeRects.push( freeRect );
+  }
+
+  // left
+  if ( this.x < rect.x ) {
+    freeRect = new Rect({
+      x: this.x,
+      y: this.y,
+      width: rect.x - this.x,
+      height: this.height
+    });
+    freeRects.push( freeRect );
+  }
+
+  return freeRects;
+};
+
+proto.canFit = function( rect ) {
+  return this.width >= rect.width && this.height >= rect.height;
+};
+
+return Rect;
+
+}));
+
+},{}],206:[function(require,module,exports){
 module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
@@ -59469,7 +62745,7 @@ module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.43": "aes-256-ofb",
 "2.16.840.1.101.3.4.1.44": "aes-256-cfb"
 }
-},{}],197:[function(require,module,exports){
+},{}],207:[function(require,module,exports){
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
 'use strict'
@@ -59593,7 +62869,7 @@ exports.signature = asn1.define('signature', function () {
   )
 })
 
-},{"./certificate":198,"asn1.js":7}],198:[function(require,module,exports){
+},{"./certificate":208,"asn1.js":7}],208:[function(require,module,exports){
 // from https://github.com/Rantanen/node-dtls/blob/25a7dc861bda38cfeac93a723500eea4f0ac2e86/Certificate.js
 // thanks to @Rantanen
 
@@ -59684,7 +62960,7 @@ var X509Certificate = asn.define('X509Certificate', function () {
 
 module.exports = X509Certificate
 
-},{"asn1.js":7}],199:[function(require,module,exports){
+},{"asn1.js":7}],209:[function(require,module,exports){
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED[\n\r]+DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)[\n\r]+([0-9A-z\n\r\+\/\=]+)[\n\r]+/m
 var startRegex = /^-----BEGIN ((?:.*? KEY)|CERTIFICATE)-----/m
@@ -59717,7 +62993,7 @@ module.exports = function (okey, password) {
   }
 }
 
-},{"browserify-aes":27,"evp_bytestokey":90,"safe-buffer":234}],200:[function(require,module,exports){
+},{"browserify-aes":27,"evp_bytestokey":92,"safe-buffer":244}],210:[function(require,module,exports){
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
 var fixProc = require('./fixProc')
@@ -59826,7 +63102,7 @@ function decrypt (data, password) {
   return Buffer.concat(out)
 }
 
-},{"./aesid.json":196,"./asn1":197,"./fixProc":199,"browserify-aes":27,"pbkdf2":202,"safe-buffer":234}],201:[function(require,module,exports){
+},{"./aesid.json":206,"./asn1":207,"./fixProc":209,"browserify-aes":27,"pbkdf2":212,"safe-buffer":244}],211:[function(require,module,exports){
 (function (process){
 // .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
 // backported and transplited with Babel, with backwards-compat fixes
@@ -60132,11 +63408,11 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":208}],202:[function(require,module,exports){
+},{"_process":218}],212:[function(require,module,exports){
 exports.pbkdf2 = require('./lib/async')
 exports.pbkdf2Sync = require('./lib/sync')
 
-},{"./lib/async":203,"./lib/sync":206}],203:[function(require,module,exports){
+},{"./lib/async":213,"./lib/sync":216}],213:[function(require,module,exports){
 (function (process,global){
 var checkParameters = require('./precondition')
 var defaultEncoding = require('./default-encoding')
@@ -60240,7 +63516,7 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./default-encoding":204,"./precondition":205,"./sync":206,"_process":208,"safe-buffer":234}],204:[function(require,module,exports){
+},{"./default-encoding":214,"./precondition":215,"./sync":216,"_process":218,"safe-buffer":244}],214:[function(require,module,exports){
 (function (process){
 var defaultEncoding
 /* istanbul ignore next */
@@ -60254,7 +63530,7 @@ if (process.browser) {
 module.exports = defaultEncoding
 
 }).call(this,require('_process'))
-},{"_process":208}],205:[function(require,module,exports){
+},{"_process":218}],215:[function(require,module,exports){
 (function (Buffer){
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
 
@@ -60286,7 +63562,7 @@ module.exports = function (password, salt, iterations, keylen) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":108}],206:[function(require,module,exports){
+},{"../../is-buffer/index.js":112}],216:[function(require,module,exports){
 var md5 = require('create-hash/md5')
 var RIPEMD160 = require('ripemd160')
 var sha = require('sha.js')
@@ -60392,7 +63668,7 @@ function pbkdf2 (password, salt, iterations, keylen, digest) {
 
 module.exports = pbkdf2
 
-},{"./default-encoding":204,"./precondition":205,"create-hash/md5":59,"ripemd160":233,"safe-buffer":234,"sha.js":247}],207:[function(require,module,exports){
+},{"./default-encoding":214,"./precondition":215,"create-hash/md5":59,"ripemd160":243,"safe-buffer":244,"sha.js":257}],217:[function(require,module,exports){
 /* -*- js-indent-level: 4; -*- */
 
 "use strict";
@@ -60458,7 +63734,7 @@ function well1024a (entropy_) {
              getUInt32: getUInt32 };
 }
 
-},{}],208:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -60644,7 +63920,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],209:[function(require,module,exports){
+},{}],219:[function(require,module,exports){
 exports.publicEncrypt = require('./publicEncrypt')
 exports.privateDecrypt = require('./privateDecrypt')
 
@@ -60656,7 +63932,7 @@ exports.publicDecrypt = function publicDecrypt (key, buf) {
   return exports.privateDecrypt(key, buf, true)
 }
 
-},{"./privateDecrypt":211,"./publicEncrypt":212}],210:[function(require,module,exports){
+},{"./privateDecrypt":221,"./publicEncrypt":222}],220:[function(require,module,exports){
 var createHash = require('create-hash')
 var Buffer = require('safe-buffer').Buffer
 
@@ -60677,7 +63953,7 @@ function i2ops (c) {
   return out
 }
 
-},{"create-hash":58,"safe-buffer":234}],211:[function(require,module,exports){
+},{"create-hash":58,"safe-buffer":244}],221:[function(require,module,exports){
 var parseKeys = require('parse-asn1')
 var mgf = require('./mgf')
 var xor = require('./xor')
@@ -60784,7 +64060,7 @@ function compare (a, b) {
   return dif
 }
 
-},{"./mgf":210,"./withPublic":213,"./xor":214,"bn.js":22,"browserify-rsa":45,"create-hash":58,"parse-asn1":200,"safe-buffer":234}],212:[function(require,module,exports){
+},{"./mgf":220,"./withPublic":223,"./xor":224,"bn.js":22,"browserify-rsa":45,"create-hash":58,"parse-asn1":210,"safe-buffer":244}],222:[function(require,module,exports){
 var parseKeys = require('parse-asn1')
 var randomBytes = require('randombytes')
 var createHash = require('create-hash')
@@ -60874,7 +64150,7 @@ function nonZero (len) {
   return out
 }
 
-},{"./mgf":210,"./withPublic":213,"./xor":214,"bn.js":22,"browserify-rsa":45,"create-hash":58,"parse-asn1":200,"randombytes":215,"safe-buffer":234}],213:[function(require,module,exports){
+},{"./mgf":220,"./withPublic":223,"./xor":224,"bn.js":22,"browserify-rsa":45,"create-hash":58,"parse-asn1":210,"randombytes":225,"safe-buffer":244}],223:[function(require,module,exports){
 var BN = require('bn.js')
 var Buffer = require('safe-buffer').Buffer
 
@@ -60888,7 +64164,7 @@ function withPublic (paddedMsg, key) {
 
 module.exports = withPublic
 
-},{"bn.js":22,"safe-buffer":234}],214:[function(require,module,exports){
+},{"bn.js":22,"safe-buffer":244}],224:[function(require,module,exports){
 module.exports = function xor (a, b) {
   var len = a.length
   var i = -1
@@ -60898,7 +64174,7 @@ module.exports = function xor (a, b) {
   return a
 }
 
-},{}],215:[function(require,module,exports){
+},{}],225:[function(require,module,exports){
 (function (process,global){
 'use strict'
 
@@ -60952,7 +64228,7 @@ function randomBytes (size, cb) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":208,"safe-buffer":234}],216:[function(require,module,exports){
+},{"_process":218,"safe-buffer":244}],226:[function(require,module,exports){
 (function (process,global){
 'use strict'
 
@@ -61064,9 +64340,9 @@ function randomFillSync (buf, offset, size) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":208,"randombytes":215,"safe-buffer":234}],217:[function(require,module,exports){
+},{"_process":218,"randombytes":225,"safe-buffer":244}],227:[function(require,module,exports){
 module.exports = require("./lib/randy.js");
-},{"./lib/randy.js":218}],218:[function(require,module,exports){
+},{"./lib/randy.js":228}],228:[function(require,module,exports){
 (function (process){
 /* -*- js-indent-level: 4; -*- */
 
@@ -61354,10 +64630,10 @@ var randy = (function () {
 })();
 
 }).call(this,require('_process'))
-},{"_process":208,"crypto":62,"os":195,"prng-well1024a":207}],219:[function(require,module,exports){
+},{"_process":218,"crypto":62,"os":199,"prng-well1024a":217}],229:[function(require,module,exports){
 module.exports = require('./lib/_stream_duplex.js');
 
-},{"./lib/_stream_duplex.js":220}],220:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":230}],230:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -61489,7 +64765,7 @@ Duplex.prototype._destroy = function (err, cb) {
 
   pna.nextTick(cb, err);
 };
-},{"./_stream_readable":222,"./_stream_writable":224,"core-util-is":56,"inherits":107,"process-nextick-args":228}],221:[function(require,module,exports){
+},{"./_stream_readable":232,"./_stream_writable":234,"core-util-is":56,"inherits":111,"process-nextick-args":238}],231:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -61537,7 +64813,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":223,"core-util-is":56,"inherits":107}],222:[function(require,module,exports){
+},{"./_stream_transform":233,"core-util-is":56,"inherits":111}],232:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -62559,7 +65835,7 @@ function indexOf(xs, x) {
   return -1;
 }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./_stream_duplex":220,"./internal/streams/BufferList":225,"./internal/streams/destroy":226,"./internal/streams/stream":227,"_process":208,"core-util-is":56,"events":89,"inherits":107,"isarray":109,"process-nextick-args":228,"safe-buffer":234,"string_decoder/":255,"util":24}],223:[function(require,module,exports){
+},{"./_stream_duplex":230,"./internal/streams/BufferList":235,"./internal/streams/destroy":236,"./internal/streams/stream":237,"_process":218,"core-util-is":56,"events":91,"inherits":111,"isarray":113,"process-nextick-args":238,"safe-buffer":244,"string_decoder/":265,"util":24}],233:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -62774,7 +66050,7 @@ function done(stream, er, data) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":220,"core-util-is":56,"inherits":107}],224:[function(require,module,exports){
+},{"./_stream_duplex":230,"core-util-is":56,"inherits":111}],234:[function(require,module,exports){
 (function (process,global,setImmediate){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -63464,7 +66740,7 @@ Writable.prototype._destroy = function (err, cb) {
   cb(err);
 };
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("timers").setImmediate)
-},{"./_stream_duplex":220,"./internal/streams/destroy":226,"./internal/streams/stream":227,"_process":208,"core-util-is":56,"inherits":107,"process-nextick-args":228,"safe-buffer":234,"timers":263,"util-deprecate":265}],225:[function(require,module,exports){
+},{"./_stream_duplex":230,"./internal/streams/destroy":236,"./internal/streams/stream":237,"_process":218,"core-util-is":56,"inherits":111,"process-nextick-args":238,"safe-buffer":244,"timers":273,"util-deprecate":275}],235:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -63544,7 +66820,7 @@ if (util && util.inspect && util.inspect.custom) {
     return this.constructor.name + ' ' + obj;
   };
 }
-},{"safe-buffer":234,"util":24}],226:[function(require,module,exports){
+},{"safe-buffer":244,"util":24}],236:[function(require,module,exports){
 'use strict';
 
 /*<replacement>*/
@@ -63619,10 +66895,10 @@ module.exports = {
   destroy: destroy,
   undestroy: undestroy
 };
-},{"process-nextick-args":228}],227:[function(require,module,exports){
+},{"process-nextick-args":238}],237:[function(require,module,exports){
 module.exports = require('events').EventEmitter;
 
-},{"events":89}],228:[function(require,module,exports){
+},{"events":91}],238:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -63670,10 +66946,10 @@ function nextTick(fn, arg1, arg2, arg3) {
 
 
 }).call(this,require('_process'))
-},{"_process":208}],229:[function(require,module,exports){
+},{"_process":218}],239:[function(require,module,exports){
 module.exports = require('./readable').PassThrough
 
-},{"./readable":230}],230:[function(require,module,exports){
+},{"./readable":240}],240:[function(require,module,exports){
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = exports;
 exports.Readable = exports;
@@ -63682,13 +66958,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":220,"./lib/_stream_passthrough.js":221,"./lib/_stream_readable.js":222,"./lib/_stream_transform.js":223,"./lib/_stream_writable.js":224}],231:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":230,"./lib/_stream_passthrough.js":231,"./lib/_stream_readable.js":232,"./lib/_stream_transform.js":233,"./lib/_stream_writable.js":234}],241:[function(require,module,exports){
 module.exports = require('./readable').Transform
 
-},{"./readable":230}],232:[function(require,module,exports){
+},{"./readable":240}],242:[function(require,module,exports){
 module.exports = require('./lib/_stream_writable.js');
 
-},{"./lib/_stream_writable.js":224}],233:[function(require,module,exports){
+},{"./lib/_stream_writable.js":234}],243:[function(require,module,exports){
 'use strict'
 var Buffer = require('buffer').Buffer
 var inherits = require('inherits')
@@ -63853,7 +67129,7 @@ function fn5 (a, b, c, d, e, m, k, s) {
 
 module.exports = RIPEMD160
 
-},{"buffer":54,"hash-base":92,"inherits":107}],234:[function(require,module,exports){
+},{"buffer":54,"hash-base":96,"inherits":111}],244:[function(require,module,exports){
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
 var Buffer = buffer.Buffer
@@ -63917,7 +67193,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
   return buffer.SlowBuffer(size)
 }
 
-},{"buffer":54}],235:[function(require,module,exports){
+},{"buffer":54}],245:[function(require,module,exports){
 // A library of seedable RNGs implemented in Javascript.
 //
 // Usage:
@@ -63979,7 +67255,7 @@ sr.tychei = tychei;
 
 module.exports = sr;
 
-},{"./lib/alea":236,"./lib/tychei":237,"./lib/xor128":238,"./lib/xor4096":239,"./lib/xorshift7":240,"./lib/xorwow":241,"./seedrandom":242}],236:[function(require,module,exports){
+},{"./lib/alea":246,"./lib/tychei":247,"./lib/xor128":248,"./lib/xor4096":249,"./lib/xorshift7":250,"./lib/xorwow":251,"./seedrandom":252}],246:[function(require,module,exports){
 // A port of an algorithm by Johannes Baagøe <baagoe@baagoe.com>, 2010
 // http://baagoe.com/en/RandomMusings/javascript/
 // https://github.com/nquinlan/better-random-numbers-for-javascript-mirror
@@ -64095,7 +67371,7 @@ if (module && module.exports) {
 
 
 
-},{}],237:[function(require,module,exports){
+},{}],247:[function(require,module,exports){
 // A Javascript implementaion of the "Tyche-i" prng algorithm by
 // Samuel Neves and Filipe Araujo.
 // See https://eden.dei.uc.pt/~sneves/pubs/2011-snfa2.pdf
@@ -64200,7 +67476,7 @@ if (module && module.exports) {
 
 
 
-},{}],238:[function(require,module,exports){
+},{}],248:[function(require,module,exports){
 // A Javascript implementaion of the "xor128" prng algorithm by
 // George Marsaglia.  See http://www.jstatsoft.org/v08/i14/paper
 
@@ -64283,7 +67559,7 @@ if (module && module.exports) {
 
 
 
-},{}],239:[function(require,module,exports){
+},{}],249:[function(require,module,exports){
 // A Javascript implementaion of Richard Brent's Xorgens xor4096 algorithm.
 //
 // This fast non-cryptographic random number generator is designed for
@@ -64431,7 +67707,7 @@ if (module && module.exports) {
   (typeof define) == 'function' && define   // present with an AMD loader
 );
 
-},{}],240:[function(require,module,exports){
+},{}],250:[function(require,module,exports){
 // A Javascript implementaion of the "xorshift7" algorithm by
 // François Panneton and Pierre L'ecuyer:
 // "On the Xorgshift Random Number Generators"
@@ -64530,7 +67806,7 @@ if (module && module.exports) {
 );
 
 
-},{}],241:[function(require,module,exports){
+},{}],251:[function(require,module,exports){
 // A Javascript implementaion of the "xorwow" prng algorithm by
 // George Marsaglia.  See http://www.jstatsoft.org/v08/i14/paper
 
@@ -64618,7 +67894,7 @@ if (module && module.exports) {
 
 
 
-},{}],242:[function(require,module,exports){
+},{}],252:[function(require,module,exports){
 /*
 Copyright 2014 David Bau.
 
@@ -64873,7 +68149,7 @@ if ((typeof module) == 'object' && module.exports) {
   Math    // math: package containing random, pow, and seedrandom
 );
 
-},{"crypto":24}],243:[function(require,module,exports){
+},{"crypto":24}],253:[function(require,module,exports){
 var natural = require('natural');
 var nounInflector = new natural.NounInflector();
 var articles = require('articles/lib/Articles.js');
@@ -64962,7 +68238,7 @@ Sentencer.prototype.make = function(template) {
 var instance = new Sentencer();
 module.exports = instance;
 
-},{"./words/adjectives.js":244,"./words/nouns.js":245,"articles/lib/Articles.js":6,"lodash":110,"natural":122,"randy":217}],244:[function(require,module,exports){
+},{"./words/adjectives.js":254,"./words/nouns.js":255,"articles/lib/Articles.js":6,"lodash":114,"natural":126,"randy":227}],254:[function(require,module,exports){
 // yes, we're going to be crude and load all the words into memory... it's really not so bad.
 // the list comes from this gem:
 // http://www.ashley-bovan.co.uk/words/partsofspeech.html
@@ -70143,7 +73419,7 @@ module.exports = ["abased",
 "zippy",
 "zonate",
 "zoning"];
-},{}],245:[function(require,module,exports){
+},{}],255:[function(require,module,exports){
 // yes, we're going to be crude and load all the words into memory... it's really not so bad.
 // the list comes from this gem:
 // http://www.ashley-bovan.co.uk/words/partsofspeech.html
@@ -72421,7 +75697,7 @@ module.exports = ["aardvark",
 "zone",
 "zoo",
 "zoology"];
-},{}],246:[function(require,module,exports){
+},{}],256:[function(require,module,exports){
 var Buffer = require('safe-buffer').Buffer
 
 // prototype class for hash functions
@@ -72504,7 +75780,7 @@ Hash.prototype._update = function () {
 
 module.exports = Hash
 
-},{"safe-buffer":234}],247:[function(require,module,exports){
+},{"safe-buffer":244}],257:[function(require,module,exports){
 var exports = module.exports = function SHA (algorithm) {
   algorithm = algorithm.toLowerCase()
 
@@ -72521,7 +75797,7 @@ exports.sha256 = require('./sha256')
 exports.sha384 = require('./sha384')
 exports.sha512 = require('./sha512')
 
-},{"./sha":248,"./sha1":249,"./sha224":250,"./sha256":251,"./sha384":252,"./sha512":253}],248:[function(require,module,exports){
+},{"./sha":258,"./sha1":259,"./sha224":260,"./sha256":261,"./sha384":262,"./sha512":263}],258:[function(require,module,exports){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-0, as defined
  * in FIPS PUB 180-1
@@ -72617,7 +75893,7 @@ Sha.prototype._hash = function () {
 
 module.exports = Sha
 
-},{"./hash":246,"inherits":107,"safe-buffer":234}],249:[function(require,module,exports){
+},{"./hash":256,"inherits":111,"safe-buffer":244}],259:[function(require,module,exports){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
  * in FIPS PUB 180-1
@@ -72718,7 +75994,7 @@ Sha1.prototype._hash = function () {
 
 module.exports = Sha1
 
-},{"./hash":246,"inherits":107,"safe-buffer":234}],250:[function(require,module,exports){
+},{"./hash":256,"inherits":111,"safe-buffer":244}],260:[function(require,module,exports){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
  * in FIPS 180-2
@@ -72773,7 +76049,7 @@ Sha224.prototype._hash = function () {
 
 module.exports = Sha224
 
-},{"./hash":246,"./sha256":251,"inherits":107,"safe-buffer":234}],251:[function(require,module,exports){
+},{"./hash":256,"./sha256":261,"inherits":111,"safe-buffer":244}],261:[function(require,module,exports){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
  * in FIPS 180-2
@@ -72910,7 +76186,7 @@ Sha256.prototype._hash = function () {
 
 module.exports = Sha256
 
-},{"./hash":246,"inherits":107,"safe-buffer":234}],252:[function(require,module,exports){
+},{"./hash":256,"inherits":111,"safe-buffer":244}],262:[function(require,module,exports){
 var inherits = require('inherits')
 var SHA512 = require('./sha512')
 var Hash = require('./hash')
@@ -72969,7 +76245,7 @@ Sha384.prototype._hash = function () {
 
 module.exports = Sha384
 
-},{"./hash":246,"./sha512":253,"inherits":107,"safe-buffer":234}],253:[function(require,module,exports){
+},{"./hash":256,"./sha512":263,"inherits":111,"safe-buffer":244}],263:[function(require,module,exports){
 var inherits = require('inherits')
 var Hash = require('./hash')
 var Buffer = require('safe-buffer').Buffer
@@ -73231,7 +76507,7 @@ Sha512.prototype._hash = function () {
 
 module.exports = Sha512
 
-},{"./hash":246,"inherits":107,"safe-buffer":234}],254:[function(require,module,exports){
+},{"./hash":256,"inherits":111,"safe-buffer":244}],264:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -73360,7 +76636,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":89,"inherits":107,"readable-stream/duplex.js":219,"readable-stream/passthrough.js":229,"readable-stream/readable.js":230,"readable-stream/transform.js":231,"readable-stream/writable.js":232}],255:[function(require,module,exports){
+},{"events":91,"inherits":111,"readable-stream/duplex.js":229,"readable-stream/passthrough.js":239,"readable-stream/readable.js":240,"readable-stream/transform.js":241,"readable-stream/writable.js":242}],265:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -73657,7 +76933,7 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
-},{"safe-buffer":234}],256:[function(require,module,exports){
+},{"safe-buffer":244}],266:[function(require,module,exports){
 (function (global){
 // Copyright (c) 2011, Chris Umbel
 
@@ -73673,7 +76949,7 @@ exports.Line.Segment = require('./line.segment');
 exports.Sylvester = require('./sylvester');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./line":257,"./line.segment":258,"./matrix":259,"./plane":260,"./sylvester":261,"./vector":262}],257:[function(require,module,exports){
+},{"./line":267,"./line.segment":268,"./matrix":269,"./plane":270,"./sylvester":271,"./vector":272}],267:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 var Vector = require('./vector');
 var Matrix = require('./matrix');
@@ -73906,7 +77182,7 @@ Line.Z = Line.create(Vector.Zero(3), Vector.k);
 
 module.exports = Line;
 
-},{"./matrix":259,"./plane":260,"./sylvester":261,"./vector":262}],258:[function(require,module,exports){
+},{"./matrix":269,"./plane":270,"./sylvester":271,"./vector":272}],268:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 // Line.Segment class - depends on Line and its dependencies.
 
@@ -74034,7 +77310,7 @@ Line.Segment.create = function(v1, v2) {
 
 module.exports = Line.Segment;
 
-},{"./line":257,"./vector":262}],259:[function(require,module,exports){
+},{"./line":267,"./vector":272}],269:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 // Matrix class - depends on Vector.
 
@@ -75072,7 +78348,7 @@ Matrix.Ones = function(n, m) {
 
 module.exports = Matrix;
 
-},{"./sylvester":261,"./vector":262,"fs":52,"lapack":undefined}],260:[function(require,module,exports){
+},{"./sylvester":271,"./vector":272,"fs":52,"lapack":undefined}],270:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 // Plane class - depends on Vector. Some methods require Matrix and Line.
 var Vector = require('./vector');
@@ -75348,7 +78624,7 @@ Plane.fromPoints = function(points) {
 
 module.exports = Plane;
 
-},{"./line":257,"./matrix":259,"./sylvester":261,"./vector":262}],261:[function(require,module,exports){
+},{"./line":267,"./matrix":269,"./sylvester":271,"./vector":272}],271:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 // This file is required in order for any other classes to work. Some Vector methods work with the
 // other Sylvester classes and are useless unless they are included. Other classes such as Line and
@@ -75365,7 +78641,7 @@ var Sylvester = {
 
 module.exports = Sylvester;
 
-},{}],262:[function(require,module,exports){
+},{}],272:[function(require,module,exports){
 // Copyright (c) 2011, Chris Umbel, James Coglan
 // This file is required in order for any other classes to work. Some Vector methods work with the
 // other Sylvester classes and are useless unless they are included. Other classes such as Line and
@@ -75805,7 +79081,7 @@ Vector.log = function(v) {
 
 module.exports = Vector;
 
-},{"./matrix":259,"./sylvester":261}],263:[function(require,module,exports){
+},{"./matrix":269,"./sylvester":271}],273:[function(require,module,exports){
 (function (setImmediate,clearImmediate){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -75884,7 +79160,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":208,"timers":263}],264:[function(require,module,exports){
+},{"process/browser.js":218,"timers":273}],274:[function(require,module,exports){
 (function (global){
 //     Underscore.js 1.9.1
 //     http://underscorejs.org
@@ -77580,7 +80856,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
 }());
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],265:[function(require,module,exports){
+},{}],275:[function(require,module,exports){
 (function (global){
 
 /**
@@ -77651,14 +80927,14 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],266:[function(require,module,exports){
+},{}],276:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],267:[function(require,module,exports){
+},{}],277:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -78248,7 +81524,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":266,"_process":208,"inherits":107}],268:[function(require,module,exports){
+},{"./support/isBuffer":276,"_process":218,"inherits":111}],278:[function(require,module,exports){
 var indexOf = function (xs, item) {
     if (xs.indexOf) return xs.indexOf(item);
     else for (var i = 0; i < xs.length; i++) {
@@ -78399,7 +81675,7 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{}],269:[function(require,module,exports){
+},{}],279:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -78554,7 +81830,7 @@ function () {
         var thisPainting = this.paintings[paintingCount];
         var paintingContainer = document.createElement("div");
         var infoCard = this.getInfoCard(thisPainting);
-        paintingContainer.classList.add('container');
+        paintingContainer.classList.add('painting');
         paintingContainer.appendChild(thisPainting.canvas);
         paintingContainer.appendChild(infoCard);
         container.appendChild(paintingContainer);
@@ -78609,7 +81885,7 @@ function () {
 
 module.exports = Artist;
 
-},{"./painting.js":272,"fakerator/dist/locales/en-CA":91,"sentencer":243}],270:[function(require,module,exports){
+},{"./painting.js":282,"fakerator/dist/locales/en-CA":93,"sentencer":253}],280:[function(require,module,exports){
 "use strict";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -78676,6 +81952,38 @@ function () {
   }
 
   _createClass(Canvas, [{
+    key: "getColourSchemes",
+    value: function getColourSchemes() {
+      var colourSchemes = ['mono', 'triad'];
+      return colourSchemes;
+    }
+  }, {
+    key: "getTimes",
+    value: function getTimes() {
+      var times = ['mono', 'triad'];
+      return times;
+    }
+  }, {
+    key: "getRatios",
+    value: function getRatios() {
+      var ratios = [0.66, 0.61803398875, 0.41666666666, 0.38196601125, 0.33, 0.25, 0.2360679775, 0.2, 0.08333333333];
+      return ratios;
+    }
+  }, {
+    key: "getAspectRatios",
+    value: function getAspectRatios() {
+      var aspectRatios = [1.2,
+      /* Purdy - 6/5 */
+      1.33333333333,
+      /* Old School TV - 4/3 */
+      1.4,
+      /* Photo - 7/5 */
+      1.77777777778
+      /* 16/9 */
+      ];
+      return aspectRatios;
+    }
+  }, {
     key: "rotateHue",
     value: function rotateHue(hue, rotation) {
       var rotatedHue;
@@ -78865,19 +82173,32 @@ function () {
 
 module.exports = Canvas;
 
-},{}],271:[function(require,module,exports){
+},{}],281:[function(require,module,exports){
 "use strict";
+
+var Packery = require('packery');
 
 var Artist = require('./artist.js');
 
 var painter = new Artist();
-var container = document.querySelector('.wrapper');
-painter.paint(10).display(container);
+var gallery = document.querySelector('.wrapper');
+painter.paint(15).display(gallery);
+var pckry = new Packery(gallery, {
+  itemSelector: '.painting'
+});
 
-},{"./artist.js":269}],272:[function(require,module,exports){
+},{"./artist.js":279,"packery":204}],282:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -78989,14 +82310,15 @@ function (_Canvas) {
     value: function generateCanvas() {
       var width = window.innerWidth;
       var height = window.innerHeight;
+      var windowUnit = (width + height) / 2;
       var canvas = document.createElement('canvas');
       var windowAspectRatio = width / height;
 
       if (windowAspectRatio > this.aspectRatio) {
-        canvas.height = height * .75;
+        canvas.height = windowUnit;
         canvas.width = canvas.height * this.aspectRatio;
       } else {
-        canvas.width = width * .88;
+        canvas.width = windowUnit;
         canvas.height = canvas.width / this.aspectRatio;
       }
 
@@ -79004,38 +82326,17 @@ function (_Canvas) {
       return canvas;
     }
   }, {
-    key: "times",
-    value: function times() {
-      return ['night', 'twilight', 'day'];
-    }
-  }, {
-    key: "aspectRatios",
-    value: function aspectRatios() {
-      return [1.2,
-      /* Purdy - 6/5 */
-      1.33333333333,
-      /* Old School TV - 4/3 */
-      1.4,
-      /* Photo - 7/5 */
-      1.77777777778
-      /* 16/9 */
-      ];
-    }
-  }, {
-    key: "colourSchemes",
-    value: function colourSchemes() {
-      return ['mono', 'triad'];
-    }
-  }, {
     key: "getTime",
     value: function getTime() {
-      var times = this.times();
+      var times = _get(_getPrototypeOf(Painting.prototype), "getTimes", this).call(this);
+
       return times[Math.floor(this.rnd() * times.length)];
     }
   }, {
     key: "getAspectRatio",
     value: function getAspectRatio() {
-      var aspectRatios = this.aspectRatios();
+      var aspectRatios = _get(_getPrototypeOf(Painting.prototype), "getAspectRatios", this).call(this);
+
       var aspectRatio;
 
       if (_get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this, 30)) {
@@ -79050,28 +82351,19 @@ function (_Canvas) {
   }, {
     key: "getRatio",
     value: function getRatio() {
-      var ratio = 1;
-      var goldenRatio = 1.6180339887498948482045868;
+      var ratios = _get(_getPrototypeOf(Painting.prototype), "getRatios", this).call(this);
 
-      var exponent = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 1, 4, 2);
-
-      var inverse = _get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this, 70);
-
-      for (var i = 0; i < exponent; i++) {
-        ratio = ratio / goldenRatio;
-      }
-
-      if (inverse) {
-        ratio = 1 - ratio;
-      }
-
-      ratio = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, ratio / 2, ratio * 1.5, ratio, 'easeInQuint');
+      var minRatio = Math.min.apply(Math, _toConsumableArray(ratios));
+      var ratioBias = ratios[Math.floor(this.rnd() * ratios.length)];
+      ratioBias = this.randBool() ? 1 - ratioBias : ratioBias;
+      var ratio = this.randBias(minRatio, 1 - minRatio, ratioBias, 'easeInQuint');
       return ratio;
     }
   }, {
     key: "getColourScheme",
     value: function getColourScheme() {
-      var colourSchemes = this.colourSchemes();
+      var colourSchemes = _get(_getPrototypeOf(Painting.prototype), "getColourSchemes", this).call(this);
+
       return colourSchemes[Math.floor(this.rnd() * colourSchemes.length)];
     }
   }, {
@@ -79142,13 +82434,16 @@ function (_Canvas) {
       featureS = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyS - 30, 0), skyS + 10, skyS - 15);
       featureL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, Math.max(skyL - 20, 0), skyL + 15, skyL - 10);
       colour.feature = [featureH, featureS, featureL];
-      /* Feature Horizon */
+      /* Feature Mid */
 
-      var featureHorizonH, featureHorizonS, featureHorizonL;
-      featureHorizonH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, featureH, _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
-      featureHorizonS = featureS * .6;
-      featureHorizonL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, featureL - 5, featureL + 20, featureL + 6, 'easeInQuint');
-      colour.featureHorizonColour = [featureHorizonH, featureHorizonS, featureHorizonL];
+      var featureMidH, featureMidS, featureMidL;
+      featureMidH = _get(_getPrototypeOf(Painting.prototype), "rotateHue", this).call(this, featureH, _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 0, 30));
+      featureMidS = featureS * .6;
+      featureMidL = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, featureL - 5, featureL + 20, featureL + 6, 'easeInQuint');
+
+      var featureMid = _get(_getPrototypeOf(Painting.prototype), "mixHsl", this).call(this, [featureMidH, featureMidS, featureMidL], colour.feature, 1 - this.fog, this.fog);
+
+      colour.featureMid = featureMid;
       /* Fog */
 
       var fogH, fogS, fogL;
@@ -79181,7 +82476,7 @@ function (_Canvas) {
       var sky;
       sky = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
       sky.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.sky));
-      sky.addColorStop(this.horizon > 1 ? 1 : this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.horizon));
+      sky.addColorStop(this.horizon, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.horizon));
       fill.sky = sky;
       /* Land */
 
@@ -79196,7 +82491,7 @@ function (_Canvas) {
       var feature;
       feature = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
       feature.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.horizon, 0));
-      feature.addColorStop(this.horizonBlur * _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 1, 10, 4), _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.featureHorizonColour, 0.8));
+      feature.addColorStop(this.horizonBlur + 0.5 * this.fog, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.featureMid, 0.8));
       feature.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.feature));
       fill.feature = feature;
       /* Fog */
@@ -79245,9 +82540,9 @@ function (_Canvas) {
 
       var number = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 0, 500, 20, 'easeOutQuad');
 
-      var heightBias = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.unit / 10, this.unit * 2, this.unit / 1.6);
+      var heightBias = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.unit / 10, this.unit * 2, this.unit / 2);
 
-      var widthBias = this.unit / 40;
+      var widthBias = this.unit / 30;
 
       for (var i = 0; i < number; i++) {
         var tree = this.getTree(heightBias, widthBias);
@@ -79289,14 +82584,17 @@ function (_Canvas) {
     key: "getTreeFill",
     value: function getTreeFill(tree) {
       var treeFill, groundColour, colourRGB, colourHSL, sampleX, sampleY;
-      sampleX = tree.x < 1 ? 1 : tree.x > this.canvas.width ? this.canvas.width - 1 : tree.x;
+      var treeR = tree.width / 2;
+      sampleX = tree.x < 0 ? 0 + treeR : tree.x > this.canvas.width ? this.canvas.width - treeR : tree.x;
       sampleY = tree.y > this.canvas.height ? this.canvas.height - 1 : tree.y;
       colourRGB = this.ctx.getImageData(sampleX, sampleY, 1, 1).data;
       colourHSL = _get(_getPrototypeOf(Painting.prototype), "rgbToHsl", this).call(this, colourRGB);
-      groundColour = _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colourHSL);
+      tree.groundColourMod = this.ease.easeInQuad(tree.sizeMod);
+      groundColour = _get(_getPrototypeOf(Painting.prototype), "mixHsl", this).call(this, colourHSL, this.colour.tree, 1 - tree.groundColourMod, tree.groundColourMod);
+      tree.topColourMod = (1 - this.fog) * this.ease.easeOutQuint(tree.sizeMod);
       treeFill = this.ctx.createLinearGradient(0, tree.y - tree.height, 0, tree.y);
-      treeFill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, _get(_getPrototypeOf(Painting.prototype), "mixHsl", this).call(this, this.colour.horizon, this.colour.tree, tree.sizeMod, 1 - tree.sizeMod)));
-      treeFill.addColorStop(1, groundColour);
+      treeFill.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, _get(_getPrototypeOf(Painting.prototype), "mixHsl", this).call(this, this.colour.fog, this.colour.tree, 1 - tree.topColourMod, tree.topColourMod)));
+      treeFill.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, groundColour));
       return treeFill;
     }
   }, {
@@ -79323,4 +82621,4 @@ function (_Canvas) {
 
 module.exports = Painting;
 
-},{"./canvas.js":270,"seedrandom":235}]},{},[271]);
+},{"./canvas.js":280,"seedrandom":245}]},{},[281]);

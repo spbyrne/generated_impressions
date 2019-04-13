@@ -76,51 +76,28 @@ class Painting extends Canvas {
   generateCanvas() {
     let width = window.innerWidth;
     let height = window.innerHeight;
+    let windowUnit = (width + height) / 2;
     let canvas = document.createElement('canvas');
     let windowAspectRatio = width / height;
     
     if (windowAspectRatio > this.aspectRatio) {
-      canvas.height = height * .75;
+      canvas.height = windowUnit;
       canvas.width = canvas.height * this.aspectRatio;
     } else {
-      canvas.width = width * .88;
+      canvas.width = windowUnit;
       canvas.height = canvas.width / this.aspectRatio;
     };
 
     return canvas;
   }
 
-  times() {
-    return [
-      'night',
-      'twilight',
-      'day'
-    ];
-  }
-  
-  aspectRatios() {
-    return [
-      1.2, /* Purdy - 6/5 */
-      1.33333333333, /* Old School TV - 4/3 */
-      1.4, /* Photo - 7/5 */
-      1.77777777778 /* 16/9 */
-    ];
-  }
-
-  colourSchemes() {
-    return [
-      'mono',
-      'triad'
-    ];
-  }
-
   getTime() {
-    let times = this.times();
+    let times = super.getTimes();
     return times[Math.floor(this.rnd() * times.length)];
   }
 
   getAspectRatio() {
-    let aspectRatios = this.aspectRatios();
+    let aspectRatios = super.getAspectRatios();
     let aspectRatio;
     if (super.randBool(30)) {
       aspectRatio = aspectRatios[Math.floor(this.rnd() * (aspectRatios.length - 1))];
@@ -132,22 +109,16 @@ class Painting extends Canvas {
   }
 
   getRatio() {
-    let ratio = 1;
-    let goldenRatio = 1.6180339887498948482045868;
-    let exponent = super.randBias(1,4,2);
-    let inverse = super.randBool(70);
-    for (let i = 0; i < exponent; i++) {
-      ratio = ratio / goldenRatio;
-    }
-    if (inverse) {
-      ratio = 1 - ratio;
-    }
-    ratio = super.randBias(ratio / 2, ratio * 1.5, ratio, 'easeInQuint');
+    const ratios = super.getRatios();
+    let minRatio = Math.min(...ratios);
+    let ratioBias = ratios[Math.floor(this.rnd() * ratios.length)];
+    ratioBias = (this.randBool()) ? 1 - ratioBias : ratioBias;
+    let ratio = this.randBias(minRatio,1-minRatio,ratioBias,'easeInQuint');
     return ratio;
   }
 
   getColourScheme() {
-    let colourSchemes = this.colourSchemes();
+    const colourSchemes = super.getColourSchemes();
     return colourSchemes[Math.floor(this.rnd() * colourSchemes.length)];
   }
 
@@ -209,12 +180,13 @@ class Painting extends Canvas {
     featureL = super.randBias(Math.max(skyL  - 20,0), skyL + 15, skyL - 10);
     colour.feature = [featureH,featureS,featureL];
 
-    /* Feature Horizon */
-    let featureHorizonH, featureHorizonS, featureHorizonL;
-    featureHorizonH = super.rotateHue(featureH, super.randInt(0,30));
-    featureHorizonS = featureS * .6;
-    featureHorizonL = super.randBias(featureL - 5,featureL + 20, featureL + 6, 'easeInQuint');
-    colour.featureHorizonColour = [featureHorizonH,featureHorizonS,featureHorizonL];
+    /* Feature Mid */
+    let featureMidH, featureMidS, featureMidL;
+    featureMidH = super.rotateHue(featureH, super.randInt(0,30));
+    featureMidS = featureS * .6;
+    featureMidL = super.randBias(featureL - 5,featureL + 20, featureL + 6, 'easeInQuint');
+    let featureMid = super.mixHsl([featureMidH,featureMidS,featureMidL],colour.feature,1-this.fog,this.fog);
+    colour.featureMid = featureMid;
 
     /* Fog */
     let fogH, fogS, fogL;
@@ -245,7 +217,7 @@ class Painting extends Canvas {
     let sky;
     sky = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
     sky.addColorStop(0, super.hsl(colour.sky));
-    sky.addColorStop((this.horizon > 1) ? 1 : this.horizon, super.hsl(colour.horizon));
+    sky.addColorStop(this.horizon, super.hsl(colour.horizon));
     fill.sky = sky;
     
     /* Land */
@@ -260,7 +232,7 @@ class Painting extends Canvas {
     let feature;
     feature = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
     feature.addColorStop(0, super.hsla(colour.horizon,0));
-    feature.addColorStop(this.horizonBlur * super.randInt(1,10,4), super.hsla(colour.featureHorizonColour,0.8));
+    feature.addColorStop(this.horizonBlur + 0.5 * this.fog, super.hsla(colour.featureMid,0.8));
     feature.addColorStop(1, super.hsl(colour.feature));
     fill.feature = feature;
 
@@ -305,8 +277,8 @@ class Painting extends Canvas {
   getTrees() {
     let trees = [];
     let number = super.randBias(0,500,20,'easeOutQuad');
-    let heightBias = super.randBias(this.unit / 10, this.unit * 2, this.unit / 1.6);
-    let widthBias = this.unit / 40;
+    let heightBias = super.randBias(this.unit / 10, this.unit * 2, this.unit / 2);
+    let widthBias = this.unit / 30;
     for (let i = 0; i < number; i++) {
       let tree = this.getTree(heightBias,widthBias);
       trees.push(tree);
@@ -345,16 +317,17 @@ class Painting extends Canvas {
 
   getTreeFill(tree) {
     let treeFill, groundColour, colourRGB, colourHSL, sampleX, sampleY;
-
-    sampleX = (tree.x < 1) ? 1 : (tree.x > this.canvas.width) ? this.canvas.width - 1 : tree.x;
+    let treeR = tree.width / 2;
+    sampleX = (tree.x < 0) ? 0 + treeR : (tree.x > this.canvas.width) ? this.canvas.width - treeR : tree.x;
     sampleY = (tree.y > this.canvas.height) ? this.canvas.height - 1  : tree.y;
     colourRGB = this.ctx.getImageData(sampleX, sampleY, 1, 1).data;
     colourHSL = super.rgbToHsl(colourRGB);
-    groundColour = super.hsl(colourHSL);
-
+    tree.groundColourMod = this.ease.easeInQuad(tree.sizeMod);
+    groundColour = super.mixHsl(colourHSL,this.colour.tree,1 - tree.groundColourMod, tree.groundColourMod);
+    tree.topColourMod = (1 - this.fog) * this.ease.easeOutQuint(tree.sizeMod);
     treeFill = this.ctx.createLinearGradient(0, tree.y - tree.height, 0, tree.y);
-    treeFill.addColorStop(0, super.hsl(super.mixHsl(this.colour.horizon,this.colour.tree,tree.sizeMod, 1 - tree.sizeMod)));
-    treeFill.addColorStop(1, groundColour);
+    treeFill.addColorStop(0, super.hsl(super.mixHsl(this.colour.fog,this.colour.tree,1 - tree.topColourMod, tree.topColourMod)));
+    treeFill.addColorStop(1, super.hsl(groundColour));
 
     return treeFill;
   }

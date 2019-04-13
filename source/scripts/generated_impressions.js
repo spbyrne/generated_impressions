@@ -1,5 +1,10 @@
+const Packery = require('packery');
 const Artist = require('./artist.js');
 const painter = new Artist();
-const container = document.querySelector('.wrapper');
+const gallery = document.querySelector('.wrapper');
 
-painter.paint(10).display(container);
+painter.paint(15).display(gallery);
+
+let pckry = new Packery( gallery, {
+  itemSelector: '.painting'
+});

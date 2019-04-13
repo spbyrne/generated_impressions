@@ -121,7 +121,7 @@ class Artist {
       let thisPainting = this.paintings[paintingCount];
       let paintingContainer = document.createElement("div"); 
       let infoCard = this.getInfoCard(thisPainting);
-      paintingContainer.classList.add('container');
+      paintingContainer.classList.add('painting');
       paintingContainer.appendChild(thisPainting.canvas);
       paintingContainer.appendChild(infoCard);
       container.appendChild(paintingContainer);

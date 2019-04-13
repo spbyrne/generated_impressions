@@ -17,6 +17,47 @@ class Canvas {
     }
   }
 
+  getColourSchemes() {
+    const colourSchemes = [
+      'mono',
+      'triad'
+    ];
+    return colourSchemes;
+  }
+
+  getTimes() {
+    const times = [
+      'mono',
+      'triad'
+    ];
+    return times;
+  }
+
+  getRatios() {
+    const ratios = [
+      0.66,
+      0.61803398875,
+      0.41666666666,
+      0.38196601125,
+      0.33,
+      0.25,
+      0.2360679775,
+      0.2,
+      0.08333333333
+    ];
+    return ratios; 
+  }
+
+  getAspectRatios() {
+    const aspectRatios = [
+      1.2, /* Purdy - 6/5 */
+      1.33333333333, /* Old School TV - 4/3 */
+      1.4, /* Photo - 7/5 */
+      1.77777777778 /* 16/9 */
+    ];
+    return aspectRatios;
+  }
+
   rotateHue(hue,rotation) {
     let rotatedHue;
     rotatedHue = hue - rotation;

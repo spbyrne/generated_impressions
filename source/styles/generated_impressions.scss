@@ -1,5 +1,10 @@
 html {
   height: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 body {
@@ -11,24 +16,35 @@ body {
 }
 
 canvas {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   display: block;
+  width: 100%;
+  height: auto;
   box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.1), 3px 7px 5px 0 rgba(0,0,0,0.1);
   border-radius: 2px;
   border: 0.5rem solid white;
 }
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  position: relative;
+  margin: 1.5rem 1rem 0 1rem;
 }
 
-.container {
-  display: inline-block;
-  position: relative;
-  padding: 1.5rem 0;
+.painting {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0 1rem 2rem 1rem;
+  @media screen and (min-width: 800px) {
+    width: 50%;
+  };
+  @media screen and (min-width: 1200px) {
+    width: 33.33%;
+  };
+  @media screen and (min-width: 1800px) {
+    width: 25%;
+  };
 }
 
 .info-card {
@@ -37,7 +53,6 @@ canvas {
   transition: all 75ms ease-out;
   cursor: pointer;
   color: #f8f8f8;
-  margin-bottom: 1.5rem;
   &:hover {
     //transform: scale(1.05,1.05);
   }
