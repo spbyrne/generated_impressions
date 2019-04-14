@@ -19,6 +19,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.2",
+    "imagesloaded": "^4.1.4",
     "infinite-scroll": "^3.0.5",
     "packery": "^2.1.2",
     "pica": "^5.0.0",

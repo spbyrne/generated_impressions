@@ -103,29 +103,33 @@ class Artist {
   constructor() {
     this.name = fakerator.names.firstName() + ' ' + fakerator.names.lastName();
     this.paintings = [];
+    this.newPaintings = [];
     this.sentencer = Sentencer;
   }
 
   paint(number = 1) {
+    this.paintings.push(...this.newPaintings);
+    this.newPaintings = [];
     for (let i = 0; i < number; i++) {
       let title = this.createTitle();
       let painting = new Painting(title);
-      painting.paint();
-      this.paintings.push(painting);
+      this.newPaintings.push(painting);
     }
     return this;
   }
 
   display(container) {
-    for (let paintingCount = 0; paintingCount < this.paintings.length; paintingCount++) {
-      let thisPainting = this.paintings[paintingCount];
+    for (let paintingCount = 0; paintingCount < this.newPaintings.length; paintingCount++) {
+      let thisPainting = this.newPaintings[paintingCount];
       let paintingContainer = document.createElement("div"); 
       let infoCard = this.getInfoCard(thisPainting);
+      thisPainting.paint();
       paintingContainer.classList.add('painting');
       paintingContainer.appendChild(thisPainting.canvas);
       paintingContainer.appendChild(infoCard);
       container.appendChild(paintingContainer);
     }
+    return this;
   }
 
   createTitle() {

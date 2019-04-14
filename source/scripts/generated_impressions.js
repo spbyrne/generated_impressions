@@ -1,10 +1,36 @@
 const Packery = require('packery');
+const imagesLoaded = require
 const Artist = require('./artist.js');
 const painter = new Artist();
-const gallery = document.querySelector('.wrapper');
+const galleryElem = document.querySelector('.wrapper');
 
-painter.paint(15).display(gallery);
+let gallery;
+let loop = 0;
 
-let pckry = new Packery( gallery, {
-  itemSelector: '.painting'
+function fillViewport() {
+  loop++;
+  let viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  var galleryRect = galleryElem.getBoundingClientRect();
+  var spaceBelow = (window.innerHeight - galleryRect.bottom) * -1;
+  if (spaceBelow < viewportHeight * 2) {
+    painter.paint(4).display(galleryElem);
+    if(loop == 1) {
+      gallery = new Packery( galleryElem, {
+        itemSelector: '.painting',
+        transitionDuration: 0
+      });
+    } else {
+      gallery.reloadItems();
+      gallery.layout();
+    }
+    setTimeout(function() {
+      fillViewport();
+    }, 50);
+  };
+};
+
+fillViewport();
+
+window.addEventListener('scroll', function() {
+  fillViewport();
 });

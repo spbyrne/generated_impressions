@@ -81678,6 +81678,14 @@ exports.createContext = Script.createContext = function (context) {
 },{}],279:[function(require,module,exports){
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -81806,19 +81814,25 @@ function () {
 
     this.name = fakerator.names.firstName() + ' ' + fakerator.names.lastName();
     this.paintings = [];
+    this.newPaintings = [];
     this.sentencer = Sentencer;
   }
 
   _createClass(Artist, [{
     key: "paint",
     value: function paint() {
+      var _this$paintings;
+
       var number = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      (_this$paintings = this.paintings).push.apply(_this$paintings, _toConsumableArray(this.newPaintings));
+
+      this.newPaintings = [];
 
       for (var i = 0; i < number; i++) {
         var title = this.createTitle();
         var painting = new Painting(title);
-        painting.paint();
-        this.paintings.push(painting);
+        this.newPaintings.push(painting);
       }
 
       return this;
@@ -81826,15 +81840,18 @@ function () {
   }, {
     key: "display",
     value: function display(container) {
-      for (var paintingCount = 0; paintingCount < this.paintings.length; paintingCount++) {
-        var thisPainting = this.paintings[paintingCount];
+      for (var paintingCount = 0; paintingCount < this.newPaintings.length; paintingCount++) {
+        var thisPainting = this.newPaintings[paintingCount];
         var paintingContainer = document.createElement("div");
         var infoCard = this.getInfoCard(thisPainting);
+        thisPainting.paint();
         paintingContainer.classList.add('painting');
         paintingContainer.appendChild(thisPainting.canvas);
         paintingContainer.appendChild(infoCard);
         container.appendChild(paintingContainer);
       }
+
+      return this;
     }
   }, {
     key: "createTitle",
@@ -82196,13 +82213,46 @@ module.exports = Canvas;
 
 var Packery = require('packery');
 
+var imagesLoaded = require;
+
 var Artist = require('./artist.js');
 
 var painter = new Artist();
-var gallery = document.querySelector('.wrapper');
-painter.paint(15).display(gallery);
-var pckry = new Packery(gallery, {
-  itemSelector: '.painting'
+var galleryElem = document.querySelector('.wrapper');
+var gallery;
+var loop = 0;
+
+function fillViewport() {
+  loop++;
+  var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  var galleryRect = galleryElem.getBoundingClientRect();
+  var spaceBelow = (window.innerHeight - galleryRect.bottom) * -1;
+
+  if (spaceBelow < viewportHeight * 2) {
+    painter.paint(4).display(galleryElem);
+
+    if (loop == 1) {
+      gallery = new Packery(galleryElem, {
+        itemSelector: '.painting',
+        transitionDuration: 0
+      });
+    } else {
+      gallery.reloadItems();
+      gallery.layout();
+    }
+
+    setTimeout(function () {
+      fillViewport();
+    }, 50);
+  }
+
+  ;
+}
+
+;
+fillViewport();
+window.addEventListener('scroll', function () {
+  fillViewport();
 });
 
 },{"./artist.js":279,"packery":204}],282:[function(require,module,exports){
