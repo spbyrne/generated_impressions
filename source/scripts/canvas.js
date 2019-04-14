@@ -13,14 +13,31 @@ class Canvas {
       easeInOutQuart: function (t) { return t<.5 ? 8*t*t*t*t : 1-8*(--t)*t*t*t },
       easeInQuint: function (t) { return t*t*t*t*t },
       easeOutQuint: function (t) { return 1+(--t)*t*t*t*t },
-      easeInOutQuint: function (t) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t }
+      easeInOutQuint: function (t) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t },
+      easeInExpo: function (t) {
+        return t*t*t*t*t*t*t*t*t*t*t*t*t*t*t*t*t;
+      }
     }
+  }
+
+  getHslFromPoint(x,y) {
+    let colourRGB = this.ctx.getImageData(x, y, 1, 1).data;
+    let colourHSL = this.rgbToHsl(colourRGB);
+    return colourHSL;
   }
 
   getColourSchemes() {
     const colourSchemes = [
       'mono',
-      'triad'
+      'analogous',
+      'triad',
+      'triad',
+      'triad',
+      'comp',
+      'comp'
+      //'square',
+      //'tetrad',
+      //'split'
     ];
     return colourSchemes;
   }
@@ -94,6 +111,10 @@ class Canvas {
     l = (mix1 / totalMix) * l1 + (mix2 / totalMix) * l2; 
     if (h > 1) { h -= 1; } 
     return [h, s, l];
+  }
+
+  darkenHsl(hslArray,amount) {
+    return [hslArray[0],hslArray[1],hslArray[2] - amount];
   }
 
   rgbToHsl(array) {
