@@ -13,7 +13,7 @@ var inject = require('gulp-inject-string');
 
 var exec = require('child_process').exec;
 var seedSetter = callHashFile();
-var seed;
+var seed = '2266f9d';
 var ready = false;
 
 function setSeed(hash) {
@@ -27,14 +27,13 @@ function callHashFile() {
 
 seedSetter.stdout.on('data', function (data) {
   setSeed(data);
-  console.log(seed);
 });
 
 gulp.task('hash', function() {
   return gulp.src('source/index.html')
-      .pipe(inject.replace('{{ hash }}', seed))
-      .pipe(rename('index.html'))
-      .pipe(gulp.dest('public'));
+    .pipe(inject.replace('{{ hash }}', seed))
+    .pipe(rename('index.html'))
+    .pipe(gulp.dest('public'));
 });
 
 gulp.task('styles', function () {
