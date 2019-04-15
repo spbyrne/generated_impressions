@@ -9,32 +9,6 @@ var babelify = require('babelify');
 var source = require("vinyl-source-stream");
 var uglify = require('gulp-uglify');
 var buffer = require('vinyl-buffer');
-var inject = require('gulp-inject-string');
-
-var exec = require('child_process').exec;
-var seedSetter = callHashFile();
-var seed = '2266f9d';
-var ready = false;
-
-function setSeed(hash) {
-  seed = hash.slice(0, 7);
-  ready = true;
-}
-
-function callHashFile() {
-  return exec('git rev-parse HEAD');
-}
-
-seedSetter.stdout.on('data', function (data) {
-  setSeed(data);
-});
-
-gulp.task('hash', function() {
-  return gulp.src('source/index.html')
-    .pipe(inject.replace('{{ hash }}', seed))
-    .pipe(rename('index.html'))
-    .pipe(gulp.dest('public'));
-});
 
 gulp.task('styles', function () {
   var sassOptions = {
@@ -84,10 +58,10 @@ gulp.task('watch', function () {
 
 gulp.task(
   'default',
-  gulp.series('styles', 'scripts', 'hash', 'watch')
+  gulp.series('styles', 'scripts', 'watch')
 );
 
 gulp.task(
   'build',
-  gulp.series('styles', 'scripts-prod', 'hash')
+  gulp.series('styles', 'scripts-prod')
 );
