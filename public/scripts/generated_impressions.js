@@ -81990,7 +81990,7 @@ function () {
   }, {
     key: "getTimes",
     value: function getTimes() {
-      var times = ['mono', 'triad'];
+      var times = ['night', 'twilight', 'day'];
       return times;
     }
   }, {
@@ -82328,6 +82328,8 @@ function (_Canvas) {
 
     _this.colour = _this.getColour();
     _this.fill = _this.getFill();
+    _this.moon = _this.getMoon();
+    _this.stars = _this.getStars();
     return _this;
   }
 
@@ -82336,14 +82338,28 @@ function (_Canvas) {
     value: function paint() {
       /* Paint Sky */
       this.ctx.fillStyle = this.fill.sky;
+      this.ctx.beginPath();
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      for (var i = 0; i < this.stars.length; i++) {
+        var star = this.stars[i];
+        this.ctx.beginPath();
+        this.ctx.arc(star.x, star.y, star.radius, 0, 360);
+        this.ctx.fillStyle = "hsla(" + star.hue + ", " + star.sat + "%, 88%, " + star.alpha + ")";
+        this.ctx.fill();
+      }
+
+      ;
+      this.moon.draw(this);
       /* Paint Land */
 
       this.ctx.fillStyle = this.fill.land;
-      this.ctx.fillRect(0, this.landY, this.canvas.width, this.landHeight);
+      this.ctx.beginPath();
+      this.ctx.fillRect(0, this.landY - this.landHeight * this.horizonBlur, this.canvas.width, this.landHeight + this.landHeight * this.horizonBlur);
       /* Paint Feature */
 
       this.ctx.fillStyle = this.fill.feature;
+      this.ctx.beginPath();
       this.ctx.moveTo(this.feature.x1, this.feature.y1);
       this.ctx.lineTo(this.feature.x2, this.feature.y2);
       this.ctx.lineTo(this.feature.x3, this.feature.y3);
@@ -82351,15 +82367,16 @@ function (_Canvas) {
       /* Paint Fog */
 
       this.ctx.fillStyle = this.fill.fog;
+      this.ctx.beginPath();
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       /* Paint Tree Shadows */
 
       this.ctx.fillStyle = this.fill.shadow;
       this.ctx.beginPath();
 
-      for (var i = 0; i < this.trees.length; i++) {
-        var tree = this.trees[i];
-        this.paintTreeShadow(tree, i);
+      for (var _i = 0; _i < this.trees.length; _i++) {
+        var tree = this.trees[_i];
+        this.paintTreeShadow(tree, _i);
       }
 
       this.ctx.closePath();
@@ -82368,9 +82385,10 @@ function (_Canvas) {
       this.ctx.globalCompositeOperation = 'source-over';
       /* Paint Trees */
 
-      for (var _i = 0; _i < this.trees.length; _i++) {
-        var _tree = this.trees[_i];
-        this.paintTree(_tree, _i);
+      for (var _i2 = 0; _i2 < this.trees.length; _i2++) {
+        var _tree = this.trees[_i2];
+        this.ctx.beginPath();
+        this.paintTree(_tree, _i2);
       }
 
       return this;
@@ -82612,9 +82630,9 @@ function (_Canvas) {
       /* Land */
 
       var land;
-      land = this.ctx.createLinearGradient(0, this.landY - this.landY * this.horizonBlur, 0, this.landY + this.landHeight);
+      land = this.ctx.createLinearGradient(0, this.landY - this.landHeight * this.horizonBlur, 0, this.landY + this.landHeight);
       land.addColorStop(0, _get(_getPrototypeOf(Painting.prototype), "hsla", this).call(this, colour.horizon, 0));
-      land.addColorStop(this.horizonBlur * 2, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, _get(_getPrototypeOf(Painting.prototype), "mixHsl", this).call(this, colour.landHorizon, colour.horizon, 0.5, 0.5)));
+      land.addColorStop(this.horizonBlur * 3, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, _get(_getPrototypeOf(Painting.prototype), "mixHsl", this).call(this, colour.landHorizon, colour.horizon, 0.5, 0.5)));
       land.addColorStop(0.5, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.landHorizon));
       land.addColorStop(1, _get(_getPrototypeOf(Painting.prototype), "hsl", this).call(this, colour.land));
       fill.land = land;
@@ -82673,6 +82691,69 @@ function (_Canvas) {
       return treeFill;
     }
   }, {
+    key: "getMoon",
+    value: function getMoon() {
+      var moon = {};
+      moon.radius = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.unit / 40, this.unit / 10, this.unit / 25);
+      moon.x = this.canvas.width * this.getRatio();
+      var minY = 0 - moon.radius;
+      var maxY = this.canvas.height - this.landHeight + moon.radius * 2;
+      moon.y = minY + maxY * this.getRatio();
+      moon.partial = _get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this);
+      moon.opacity = this.time == 'night' ? 0.4 : this.time == 'twilight' ? 0.3 : 0.1;
+      moon.opacity = (1 - this.fog) * moon.opacity;
+      moon.fillStyle = 'hsla(0,0%,100%,' + moon.opacity + ')';
+
+      moon.draw = function (painting) {
+        var ctx = painting.ctx;
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.beginPath();
+        ctx.arc(moon.x, moon.y, moon.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = painting.fill.sky;
+        ctx.fill();
+        ctx.fillStyle = moon.fillStyle;
+        ctx.fill();
+        ctx.closePath();
+
+        if (moon.partial) {
+          ctx.fillStyle = painting.fill.sky;
+          ctx.beginPath();
+          ctx.arc(moon.x + moon.radius * 0.5, moon.y, moon.radius * 1.125, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.closePath();
+        }
+      };
+
+      return moon;
+    }
+  }, {
+    key: "getStars",
+    value: function getStars() {
+      var stars = [];
+      var starCount = 0;
+
+      if (this.time == 'night') {
+        starCount = _get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this, 10) ? _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 350, 1500, 800) : 0;
+      } else if (this.time == 'twilight') {
+        starCount = _get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this, 5) ? _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, 350, 1500, 800) : 0;
+      }
+
+      for (var i = 0; i < starCount; i++) {
+        var star = {};
+        star.x = this.rnd() * this.canvas.width;
+        star.y = this.rnd() * (this.canvas.height - this.landHeight);
+        var mod = this.rnd();
+        star.radius = mod * (this.unit / 500);
+        var proximity = (this.landY - star.y) / this.landY;
+        star.alpha = Math.min(this.ease.easeOutQuad(proximity) * this.ease.easeOutQuad(1 * mod), 0.8);
+        star.hue = 220;
+        star.sat = _get(_getPrototypeOf(Painting.prototype), "randInt", this).call(this, 50, 100);
+        stars.push(star);
+      }
+
+      return stars;
+    }
+  }, {
     key: "getFeature",
     value: function getFeature() {
       var feature = {};
@@ -82684,7 +82765,7 @@ function (_Canvas) {
       }
 
       feature.x1 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, minUnit, this.canvas.width - minUnit, bias, 'easeOutQuad');
-      feature.y1 = this.landY + this.landHeight * this.horizonBlur * 0.5;
+      feature.y1 = this.landY + this.landHeight * this.horizonBlur;
       feature.x2bias = feature.x1 < this.canvas.width / 2 ? this.canvas.width * .33 : this.canvas.width * .66;
       feature.width = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.canvas.width / 10, this.canvas.width, this.canvas.width / 1.6, 'easeOutQuad');
       feature.x2 = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, -this.canvas.width * 1.5, this.canvas.width * 2.5, feature.x2bias, 'easeOutQuad') - feature.width / 2;

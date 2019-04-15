@@ -30,19 +30,34 @@ class Painting extends Canvas {
     /* Generate World Colours */
     this.colour = this.getColour();
     this.fill = this.getFill();
+    this.moon = this.getMoon();
+    this.stars = this.getStars();
   }
 
   paint() {
     /* Paint Sky */
     this.ctx.fillStyle = this.fill.sky;
+    this.ctx.beginPath();
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    for (let i = 0; i < this.stars.length; i++) {
+      let star = this.stars[i];
+      this.ctx.beginPath();
+      this.ctx.arc(star.x, star.y, star.radius, 0, 360);
+      this.ctx.fillStyle = "hsla(" + star.hue + ", " + star.sat + "%, 88%, " + star.alpha + ")";
+      this.ctx.fill();
+    };
+
+    this.moon.draw(this);
 
     /* Paint Land */
     this.ctx.fillStyle = this.fill.land;
-    this.ctx.fillRect(0, this.landY, this.canvas.width, this.landHeight);
+    this.ctx.beginPath();
+    this.ctx.fillRect(0, this.landY - this.landHeight * this.horizonBlur, this.canvas.width, this.landHeight + this.landHeight * this.horizonBlur);
 
     /* Paint Feature */
     this.ctx.fillStyle = this.fill.feature;
+    this.ctx.beginPath();
     this.ctx.moveTo(this.feature.x1,this.feature.y1);
     this.ctx.lineTo(this.feature.x2,this.feature.y2);
     this.ctx.lineTo(this.feature.x3,this.feature.y3);
@@ -51,6 +66,7 @@ class Painting extends Canvas {
 
     /* Paint Fog */
     this.ctx.fillStyle = this.fill.fog;
+    this.ctx.beginPath();
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     /* Paint Tree Shadows */
@@ -68,6 +84,7 @@ class Painting extends Canvas {
     /* Paint Trees */
     for (let i = 0; i < this.trees.length; i++) {
       let tree = this.trees[i];
+      this.ctx.beginPath();
       this.paintTree(tree,i);
     }
 
@@ -285,9 +302,9 @@ class Painting extends Canvas {
     
     /* Land */
     let land;
-    land = this.ctx.createLinearGradient(0, this.landY - (this.landY * this.horizonBlur), 0, this.landY + this.landHeight);
+    land = this.ctx.createLinearGradient(0, this.landY - this.landHeight * this.horizonBlur, 0, this.landY + this.landHeight);
     land.addColorStop(0, super.hsla(colour.horizon,0));
-    land.addColorStop(this.horizonBlur * 2, super.hsl(super.mixHsl(colour.landHorizon,colour.horizon,0.5,0.5)));
+    land.addColorStop(this.horizonBlur * 3, super.hsl(super.mixHsl(colour.landHorizon,colour.horizon,0.5,0.5)));
     land.addColorStop(0.5, super.hsl(colour.landHorizon));
     land.addColorStop(1, super.hsl(colour.land));
     fill.land = land;
@@ -347,6 +364,62 @@ class Painting extends Canvas {
     return treeFill;
   }
 
+  getMoon() {
+    let moon = {};
+    moon.radius = super.randBias(this.unit / 40,this.unit / 10,this.unit / 25);
+    moon.x = this.canvas.width * this.getRatio();
+    let minY = 0 - moon.radius;
+    let maxY = this.canvas.height - this.landHeight + (moon.radius * 2);
+    moon.y = minY + maxY * this.getRatio();
+    moon.partial = super.randBool();
+    moon.opacity = (this.time == 'night') ? 0.4 : (this.time == 'twilight') ? 0.3 : 0.1;
+    moon.opacity = (1 - this.fog) * moon.opacity;
+    moon.fillStyle = 'hsla(0,0%,100%,' + moon.opacity + ')';
+
+    moon.draw = function(painting) {
+      let ctx = painting.ctx;
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.beginPath();
+      ctx.arc(moon.x, moon.y, moon.radius, 0, 2 * Math.PI);
+      ctx.fillStyle = painting.fill.sky;
+      ctx.fill();
+      ctx.fillStyle = moon.fillStyle;
+      ctx.fill();
+      ctx.closePath();
+      if (moon.partial) {
+        ctx.fillStyle = painting.fill.sky;
+        ctx.beginPath();
+        ctx.arc(moon.x + (moon.radius * 0.5), moon.y, moon.radius * 1.125, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+      }
+    };
+    return moon;
+  }
+
+  getStars() {
+    let stars = [];
+    let starCount = 0;
+    if (this.time == 'night') {
+      starCount = (super.randBool(10)) ? super.randBias(350,1500,800) : 0;
+    } else if (this.time == 'twilight') {
+      starCount = (super.randBool(5)) ? super.randBias(350,1500,800) : 0;
+    }
+    for (let i = 0; i < starCount; i++) {
+      let star = {};
+      star.x = this.rnd() * this.canvas.width;
+      star.y = this.rnd() * (this.canvas.height - this.landHeight);
+      let mod = this.rnd();
+      star.radius = mod * (this.unit / 500);
+      let proximity = (this.landY - star.y) / this.landY;
+      star.alpha = Math.min(this.ease.easeOutQuad(proximity) * this.ease.easeOutQuad(1 * mod), 0.8);
+      star.hue = 220;
+      star.sat = super.randInt(50,100);
+      stars.push(star);
+    }
+    return stars;
+  }
+
   getFeature() {
     let feature = {};
     let minUnit = this.unit / 20;
@@ -356,7 +429,7 @@ class Painting extends Canvas {
     }
 
     feature.x1 = super.randBias(minUnit,this.canvas.width - minUnit,bias,'easeOutQuad');
-    feature.y1 = this.landY + this.landHeight * this.horizonBlur * 0.5;
+    feature.y1 = this.landY + this.landHeight * this.horizonBlur;
     feature.x2bias = (feature.x1 < this.canvas.width / 2) ? this.canvas.width * .33 : this.canvas.width * .66;
     feature.width = super.randBias(this.canvas.width / 10,this.canvas.width,this.canvas.width/1.6,'easeOutQuad');
     feature.x2 = super.randBias(-this.canvas.width*1.5,this.canvas.width*2.5,feature.x2bias,'easeOutQuad') - (feature.width / 2);

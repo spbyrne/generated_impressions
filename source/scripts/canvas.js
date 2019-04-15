@@ -44,8 +44,9 @@ class Canvas {
 
   getTimes() {
     const times = [
-      'mono',
-      'triad'
+      'night',
+      'twilight',
+      'day'
     ];
     return times;
   }
