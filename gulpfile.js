@@ -88,6 +88,7 @@ gulp.task(
   gulp.series('styles', 'scripts', 'hash', 'watch')
 );
 
-gulp.task('build', function() {
-  gulp.series('styles', 'scripts-prod', 'hash');
-});
+gulp.task(
+  'build',
+  gulp.series('styles', 'scripts-prod', 'hash')
+);
