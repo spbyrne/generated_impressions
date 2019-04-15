@@ -46,6 +46,9 @@ class Canvas {
     const times = [
       'night',
       'twilight',
+      'twilight',
+      'day',
+      'day',
       'day'
     ];
     return times;
