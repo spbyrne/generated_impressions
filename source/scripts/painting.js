@@ -28,6 +28,7 @@ class Painting extends Canvas {
     this.trees = this.getTrees();
 
     /* Generate World Colours */
+    this.landSamples = {};
     this.colour = this.getColour();
     this.fill = this.getFill();
     this.moon = this.getMoon();
@@ -63,7 +64,6 @@ class Painting extends Canvas {
     this.ctx.lineTo(this.feature.x3,this.feature.y3);
     this.ctx.fill(); 
 
-
     /* Paint Fog */
     this.ctx.fillStyle = this.fill.fog;
     this.ctx.beginPath();
@@ -74,6 +74,7 @@ class Painting extends Canvas {
     this.ctx.beginPath();
     for (let i = 0; i < this.trees.length; i++) {
       let tree = this.trees[i];
+      this.fill.tree[i] = this.getTreeFill(tree);
       this.paintTreeShadow(tree,i);
     }
     this.ctx.closePath();
@@ -94,7 +95,6 @@ class Painting extends Canvas {
   paintTreeShadow(tree, i) {
     let tipX = tree.x + (tree.width / 2);
     let tipY = tree.y + (tree.height / 4);
-    this.fill.tree[i] = this.getTreeFill(tree);
     this.ctx.moveTo(tree.x, tree.y);
     this.ctx.bezierCurveTo(tipX,tipY,tipX,tipY,tree.x + tree.width, tree.y);
   }
@@ -345,17 +345,25 @@ class Painting extends Canvas {
     return fill;
   }
 
+  getLocalGroundColour(y) {
+    let sampleY, sampleX;
+    sampleY = (y < this.landY) ? landY + 1 : (y >= this.canvas.height) ? this.canvas.height - 1 : y;
+    sampleX = (this.feature.x2 < 3) ? this.canvas.width - 1 : 1;
+    if (this.landSamples.sampleY == undefined) {
+      this.landSamples.sampleY = super.getHslFromPoint(sampleX,sampleY);
+    }
+    return this.landSamples.sampleY;
+  }
+
   getTreeFill(tree) {
-    let treeFill, sampleColour, sampleX, sampleY;
-    sampleX = (tree.x < 0) ? 0 + tree.width / 2 : (tree.x > this.canvas.width) ? this.canvas.width - tree.width / 2 : tree.x;
-    sampleY = (tree.y > this.canvas.height) ? this.canvas.height - 1  : tree.y;
-    sampleColour = super.getHslFromPoint(sampleX,sampleY,);
+    let treeFill, groundColour;
+    groundColour = this.getLocalGroundColour(tree.y);
 
     tree.colour = {};
     tree.colour.topMod = (1 - this.fog) * this.ease.easeOutQuint(tree.sizeMod);
     tree.colour.bottomMod = (1 - this.fog) * this.ease.easeOutQuad(tree.sizeMod);
     tree.colour.top = super.mixHsl(this.colour.fog,this.colour.tree,1 - tree.colour.topMod, tree.colour.topMod);
-    tree.colour.bottom = super.mixHsl(sampleColour,this.colour.tree,1 - tree.colour.bottomMod, tree.colour.bottomMod);
+    tree.colour.bottom = super.mixHsl(groundColour,this.colour.tree,1 - tree.colour.bottomMod, tree.colour.bottomMod);
 
     treeFill = this.ctx.createLinearGradient(0, tree.y - tree.height, 0, tree.y);
     treeFill.addColorStop(0, super.hsl(tree.colour.top));

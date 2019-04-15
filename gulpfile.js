@@ -33,7 +33,6 @@ gulp.task('scripts', function () {
   .bundle()
   .pipe(source('bundle.js'))
   .pipe(buffer()) 
-  //.pipe(uglify())
   .pipe(rename("generated_impressions.js"))
   .pipe(gulp.dest('./public/scripts/'));
 });

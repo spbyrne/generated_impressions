@@ -5,9 +5,12 @@
     "url": "git+ssh://git@bitbucket.org/scottbyrne/generated_impressions.git"
   },
   "scripts": {
-    "script:hash": "node hash.js",
-    "script:gulp": "gulp build",
-    "start": "npm-run-all --parallel script:*"
+    "live:hash": "node hash.js",
+    "live:gulp": "gulp build",
+    "dev:hash": "node hash.js",
+    "dev:gulp": "gulp",
+    "start": "npm-run-all --parallel live:*",
+    "dev": "npm-run-all --parallel dev:*"
   },
   "dependencies": {
     "@babel/core": "^7.4.0",
