@@ -12,6 +12,7 @@ var buffer = require('vinyl-buffer');
 var inject = require('gulp-inject-string');
 
 var exec = require('child_process').exec;
+var seedSetter = callHashFile();
 var seed;
 var ready = false;
 
@@ -24,9 +25,9 @@ function callHashFile() {
   return exec('git rev-parse HEAD');
 }
 
-var hashSetter = callHashFile()
-hashSetter.stdout.on('data', function (data) {
+seedSetter.stdout.on('data', function (data) {
   setSeed(data);
+  console.log(seed);
 });
 
 gulp.task('hash', function() {
@@ -87,7 +88,6 @@ gulp.task(
   gulp.series('styles', 'scripts', 'hash', 'watch')
 );
 
-gulp.task(
-  'build',
-  gulp.series('styles', 'scripts-prod', 'hash')
-);
+gulp.task('build', function() {
+  gulp.series('styles', 'scripts-prod', 'hash');
+});
