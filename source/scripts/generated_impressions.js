@@ -1,7 +1,6 @@
 const Packery = require('packery');
-const imagesLoaded = require
 const Artist = require('./artist.js');
-const painter = new Artist();
+const painter = new Artist(hash);
 const galleryElem = document.querySelector('.wrapper');
 
 let gallery;

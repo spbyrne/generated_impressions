@@ -100,7 +100,8 @@ function randBool(odds) {
 }
 
 class Artist {
-  constructor() {
+  constructor(hash) {
+    this.hash = hash;
     this.name = fakerator.names.firstName() + ' ' + fakerator.names.lastName();
     this.paintings = [];
     this.newPaintings = [];
@@ -181,7 +182,7 @@ class Artist {
     let infoCard = document.createElement("div");
     infoCard.setAttribute('class', 'info-card');
     infoCard.innerHTML = "<h3 class='info-card__title'>" + painting.title + "</h3>";
-    infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__artist'>" + this.name + "</span>, 2019</p>";
+    infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__artist'>" + this.hash + "</span>, 2019</p>";
     infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__medium'>Javascript & HTML Canvas</span></p>";
     return infoCard;
   }

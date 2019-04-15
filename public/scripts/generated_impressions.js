@@ -81809,9 +81809,10 @@ function randBool(odds) {
 var Artist =
 /*#__PURE__*/
 function () {
-  function Artist() {
+  function Artist(hash) {
     _classCallCheck(this, Artist);
 
+    this.hash = hash;
     this.name = fakerator.names.firstName() + ' ' + fakerator.names.lastName();
     this.paintings = [];
     this.newPaintings = [];
@@ -81891,7 +81892,7 @@ function () {
       var infoCard = document.createElement("div");
       infoCard.setAttribute('class', 'info-card');
       infoCard.innerHTML = "<h3 class='info-card__title'>" + painting.title + "</h3>";
-      infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__artist'>" + this.name + "</span>, 2019</p>";
+      infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__artist'>" + this.hash + "</span>, 2019</p>";
       infoCard.innerHTML += "<p class='info-card__meta'><span class='info-card__medium'>Javascript & HTML Canvas</span></p>";
       return infoCard;
     }
@@ -81990,7 +81991,7 @@ function () {
   }, {
     key: "getTimes",
     value: function getTimes() {
-      var times = ['night', 'twilight', 'day'];
+      var times = ['night', 'twilight', 'twilight', 'day', 'day', 'day'];
       return times;
     }
   }, {
@@ -82213,11 +82214,9 @@ module.exports = Canvas;
 
 var Packery = require('packery');
 
-var imagesLoaded = require;
-
 var Artist = require('./artist.js');
 
-var painter = new Artist();
+var painter = new Artist(hash);
 var galleryElem = document.querySelector('.wrapper');
 var gallery;
 var loop = 0;
