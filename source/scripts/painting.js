@@ -368,9 +368,9 @@ class Painting extends Canvas {
     let moon = {};
     moon.radius = super.randBias(this.unit / 40,this.unit / 10,this.unit / 25);
     moon.x = this.canvas.width * this.getRatio();
-    let minY = 0 - moon.radius;
-    let maxY = this.canvas.height - this.landHeight + (moon.radius * 2);
-    moon.y = minY + maxY * this.getRatio();
+    let minY = moon.radius * 2;
+    let maxY = this.landY + moon.radius;
+    moon.y = minY + maxY * this.rnd();
     moon.partial = super.randBool();
     moon.opacity = (this.time == 'night') ? 0.4 : (this.time == 'twilight') ? 0.3 : 0.1;
     moon.opacity = (1 - this.fog) * moon.opacity;

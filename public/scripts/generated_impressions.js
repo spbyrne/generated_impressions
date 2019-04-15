@@ -82696,9 +82696,9 @@ function (_Canvas) {
       var moon = {};
       moon.radius = _get(_getPrototypeOf(Painting.prototype), "randBias", this).call(this, this.unit / 40, this.unit / 10, this.unit / 25);
       moon.x = this.canvas.width * this.getRatio();
-      var minY = 0 - moon.radius;
-      var maxY = this.canvas.height - this.landHeight + moon.radius * 2;
-      moon.y = minY + maxY * this.getRatio();
+      var minY = moon.radius * 2;
+      var maxY = this.landY + moon.radius;
+      moon.y = minY + maxY * this.rnd();
       moon.partial = _get(_getPrototypeOf(Painting.prototype), "randBool", this).call(this);
       moon.opacity = this.time == 'night' ? 0.4 : this.time == 'twilight' ? 0.3 : 0.1;
       moon.opacity = (1 - this.fog) * moon.opacity;
