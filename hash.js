@@ -1,9 +1,13 @@
-var exec = require('child_process').exec;
-var seedSetter = callHashFile();
-var fs = require('fs');
-
-const indexPath = './public/index.html'
-const fd = fs.openSync(indexPath, 'w')
+let exec = require('child_process').exec;
+let seedSetter;
+let fs = require('fs');
+let indexPath = './public/index.html'
+let fd = fs.open(indexPath, 'w',function() {
+  seedSetter = callHashFile();
+  seedSetter.stdout.on('data', function (data) {
+    setSeed(data);
+  });
+});
 
 function setSeed(hash) {
   let seed = hash.slice(0, 7);
@@ -22,7 +26,3 @@ function setSeed(hash) {
 function callHashFile() {
   return exec('git rev-parse HEAD');
 }
-
-seedSetter.stdout.on('data', function (data) {
-  setSeed(data);
-});
