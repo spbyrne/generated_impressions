@@ -345,19 +345,21 @@ class Painting extends Canvas {
     return fill;
   }
 
-  getLocalGroundColour(y) {
-    let sampleY, sampleX;
-    sampleY = (y < this.landY) ? landY + 1 : (y >= this.canvas.height) ? this.canvas.height - 1 : y;
-    sampleX = (this.feature.x2 < 3) ? this.canvas.width - 1 : 1;
-    if (this.landSamples.sampleY == undefined) {
-      this.landSamples.sampleY = super.getHslFromPoint(sampleX,sampleY);
-    }
-    return this.landSamples.sampleY;
+  sampleColour(sampleY,sampleX) {
+    let sampleColour = super.getHslFromPoint(sampleX,sampleY);
+    return sampleColour;
   }
 
   getTreeFill(tree) {
     let treeFill, groundColour;
-    groundColour = this.getLocalGroundColour(tree.y);
+    let sampleY, sampleX;
+    sampleY = (tree.y < this.landY) ? landY + 1 : (tree.y >= this.canvas.height) ? this.canvas.height - 1 : Math.round(tree.y);
+    sampleX = (this.feature.x2 < 4) ? this.canvas.width - 2 : 2;
+    groundColour = (typeof this.landSamples.sampleY === 'undefined') ? this.sampleColour(sampleY,sampleX) : this.landSamples.sampleY;
+    if (typeof this.landSamples.sampleY === 'undefined') {
+      this.landSamples.sampleY = this.sampleColour(sampleY,sampleX);
+    }
+    groundColour = this.landSamples.sampleY;
 
     tree.colour = {};
     tree.colour.topMod = (1 - this.fog) * this.ease.easeOutQuint(tree.sizeMod);

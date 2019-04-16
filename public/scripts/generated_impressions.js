@@ -82673,23 +82673,26 @@ function (_Canvas) {
       return fill;
     }
   }, {
-    key: "getLocalGroundColour",
-    value: function getLocalGroundColour(y) {
-      var sampleY, sampleX;
-      sampleY = y < this.landY ? landY + 1 : y >= this.canvas.height ? this.canvas.height - 1 : y;
-      sampleX = this.feature.x2 < 3 ? this.canvas.width - 1 : 1;
+    key: "sampleColour",
+    value: function sampleColour(sampleY, sampleX) {
+      var sampleColour = _get(_getPrototypeOf(Painting.prototype), "getHslFromPoint", this).call(this, sampleX, sampleY);
 
-      if (this.landSamples.sampleY == undefined) {
-        this.landSamples.sampleY = _get(_getPrototypeOf(Painting.prototype), "getHslFromPoint", this).call(this, sampleX, sampleY);
-      }
-
-      return this.landSamples.sampleY;
+      return sampleColour;
     }
   }, {
     key: "getTreeFill",
     value: function getTreeFill(tree) {
       var treeFill, groundColour;
-      groundColour = this.getLocalGroundColour(tree.y);
+      var sampleY, sampleX;
+      sampleY = tree.y < this.landY ? landY + 1 : tree.y >= this.canvas.height ? this.canvas.height - 1 : Math.round(tree.y);
+      sampleX = this.feature.x2 < 4 ? this.canvas.width - 2 : 2;
+      groundColour = typeof this.landSamples.sampleY === 'undefined' ? this.sampleColour(sampleY, sampleX) : this.landSamples.sampleY;
+
+      if (typeof this.landSamples.sampleY === 'undefined') {
+        this.landSamples.sampleY = this.sampleColour(sampleY, sampleX);
+      }
+
+      groundColour = this.landSamples.sampleY;
       tree.colour = {};
       tree.colour.topMod = (1 - this.fog) * this.ease.easeOutQuint(tree.sizeMod);
       tree.colour.bottomMod = (1 - this.fog) * this.ease.easeOutQuad(tree.sizeMod);
