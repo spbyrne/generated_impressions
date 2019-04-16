@@ -99,8 +99,14 @@ class Painting extends Canvas {
   }
 
   paintTreeShadow(tree, i) {
-    let tipX = tree.x + (tree.width / 2);
+    let centerX = tree.x + (tree.width / 2);
+    let centerY = tree.y;
+    let sunX = this.moon.x;
+    let sunY = this.moon.y;
     let tipY = tree.y + (tree.height / 4);
+    let m = (centerY - sunY) / (centerX - sunX);
+    let b = sunY - m * sunX;
+    let tipX = (tipY - b) / m;
     this.ctx.moveTo(tree.x, tree.y);
     this.ctx.bezierCurveTo(tipX,tipY,tipX,tipY,tree.x + tree.width, tree.y);
   }
