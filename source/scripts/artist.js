@@ -122,13 +122,19 @@ class Artist {
   display(container) {
     for (let paintingCount = 0; paintingCount < this.newPaintings.length; paintingCount++) {
       let thisPainting = this.newPaintings[paintingCount];
-      let paintingContainer = document.createElement("div"); 
+      let paintingContainer = document.createElement("a"); 
       let infoCard = this.getInfoCard(thisPainting);
       thisPainting.paint();
+      paintingContainer.href = '#';
+      paintingContainer.download = thisPainting.title + ' - ' + this.hash;
       paintingContainer.classList.add('painting');
       paintingContainer.appendChild(thisPainting.canvas);
       paintingContainer.appendChild(infoCard);
       container.appendChild(paintingContainer);
+      paintingContainer.addEventListener('click', function() {
+        this.href = this.querySelector('canvas').toDataURL();
+      });
+      
     }
     return this;
   }
