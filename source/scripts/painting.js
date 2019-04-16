@@ -41,13 +41,15 @@ class Painting extends Canvas {
     this.ctx.beginPath();
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
+    this.ctx.globalCompositeOperation = 'soft-light';
     for (let i = 0; i < this.stars.length; i++) {
       let star = this.stars[i];
       this.ctx.beginPath();
       this.ctx.arc(star.x, star.y, star.radius, 0, 360);
       this.ctx.fillStyle = "hsla(" + star.hue + ", " + star.sat + "%, 88%, " + star.alpha + ")";
-      this.ctx.fill();
+      this.ctx.fill(); 
     };
+    this.ctx.globalCompositeOperation = 'source-over';
 
     this.moon.draw(this);
 
@@ -68,6 +70,10 @@ class Painting extends Canvas {
     this.ctx.fillStyle = this.fill.fog;
     this.ctx.beginPath();
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    let distantX;
+    distantX = (this.feature.x1 > 4) ? 2 : this.canvas.width - 4;
+    this.distantColour = this.sampleColour(distantX,this.feature.y1);
 
     /* Paint Tree Shadows */
     this.ctx.fillStyle = this.fill.shadow;
@@ -312,12 +318,12 @@ class Painting extends Canvas {
     /* Shadow */
     let shadow, shadowAlpha, horizonL, shadowAlphaMod;
     horizonL = this.colour.horizon[2];
-    shadowAlphaMod = horizonL / 95; 
-    shadowAlpha = (1 - this.fog) * shadowAlphaMod * 0.5;
+    shadowAlphaMod = (this.time == 'night') ? 0.1 : (this.time == 'twilight') ? 0.2 : 0.3; 
+    shadowAlpha = (1 - this.fog) * shadowAlphaMod;
     shadow = this.ctx.createLinearGradient(0, this.landY - (this.landY * this.horizonBlur), 0, this.landY + this.landHeight);
     shadow.addColorStop(0, super.hsla(colour.horizon,0));
     shadow.addColorStop(this.horizonBlur * 2, super.hsla(super.darkenHsl(super.mixHsl(colour.landHorizon,colour.horizon,0.5,0.5),shadowAlpha),0));
-    shadow.addColorStop(0.5, super.hsla(super.darkenHsl(colour.landHorizon,0),shadowAlpha));
+    shadow.addColorStop(0.5, super.hsla(super.darkenHsl(colour.landHorizon,0),shadowAlpha * 0.5));
     shadow.addColorStop(1, super.hsla(super.darkenHsl(colour.land,0),shadowAlpha));
     fill.shadow = shadow;
 
@@ -352,11 +358,10 @@ class Painting extends Canvas {
 
   getTreeFill(tree) {
     let treeFill, groundColour;
-    let sampleY, sampleX, trueY;
-    trueY = tree.y + tree.height;
-    sampleY = (trueY < this.landY) ? landY + 1 : (trueY >= this.canvas.height) ? this.canvas.height - 1 : Math.round(trueY);
+    let sampleY, sampleX;
+    sampleY = (tree.y < this.landY) ? landY + 1 : (tree.y > this.canvas.height - 2) ? this.canvas.height - 2 : tree.y;
+    sampleY = Math.round(sampleY);
     sampleX = (this.feature.x2 < 4) ? this.canvas.width - 2 : 2;
-    groundColour = (typeof this.landSamples[sampleY] === 'undefined') ? this.sampleColour(sampleX,sampleY) : this.landSamples[sampleY];
     if (typeof this.landSamples[sampleY] === 'undefined') {
       this.landSamples[sampleY] = this.sampleColour(sampleX,sampleY);
     }
@@ -364,7 +369,7 @@ class Painting extends Canvas {
 
     tree.colour = {};
     tree.colour.topMod = (1 - this.fog) * this.ease.easeOutQuint(tree.sizeMod);
-    tree.colour.bottomMod = 0// (1 - this.fog) * this.ease.easeOutQuad(tree.sizeMod);
+    tree.colour.bottomMod = (1 - this.fog) * this.ease.easeOutQuad(tree.sizeMod);
     tree.colour.top = super.mixHsl(this.colour.fog,this.colour.tree,1 - tree.colour.topMod, tree.colour.topMod);
     tree.colour.bottom = super.mixHsl(groundColour,this.colour.tree,1 - tree.colour.bottomMod, tree.colour.bottomMod);
 
@@ -412,18 +417,18 @@ class Painting extends Canvas {
     let stars = [];
     let starCount = 0;
     if (this.time == 'night') {
-      starCount = (super.randBool(10)) ? super.randBias(350,1500,800) : 0;
+      starCount = (super.randBool(50)) ? super.randBias(350,2000,1500) : 0;
     } else if (this.time == 'twilight') {
-      starCount = (super.randBool(5)) ? super.randBias(350,1500,800) : 0;
+      starCount = (super.randBool(25)) ? super.randBias(350,2000,1500) : 0;
     }
     for (let i = 0; i < starCount; i++) {
       let star = {};
       star.x = this.rnd() * this.canvas.width;
       star.y = this.rnd() * (this.canvas.height - this.landHeight);
-      let mod = this.rnd();
-      star.radius = mod * (this.unit / 500);
+      let mod = super.randBias(1,100,1,'easeInQuad')  / 100;
+      star.radius = mod * (this.unit / 400);
       let proximity = (this.landY - star.y) / this.landY;
-      star.alpha = Math.min(this.ease.easeOutQuad(proximity) * this.ease.easeOutQuad(1 * mod), 0.8);
+      star.alpha = this.ease.easeOutQuad(proximity) * this.ease.easeOutQuad(1 * mod)
       star.hue = 220;
       star.sat = super.randInt(50,100);
       stars.push(star);
