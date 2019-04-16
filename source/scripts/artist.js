@@ -132,9 +132,10 @@ class Artist {
       paintingContainer.appendChild(infoCard);
       container.appendChild(paintingContainer);
       paintingContainer.addEventListener('click', function() {
-        this.href = this.querySelector('canvas').toDataURL();
+        let hdPainting = new Painting(thisPainting.title,true);
+        hdPainting.paint();
+        this.href = hdPainting.canvas.toDataURL();
       });
-      
     }
     return this;
   }

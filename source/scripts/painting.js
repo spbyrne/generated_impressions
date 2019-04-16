@@ -3,9 +3,10 @@ const Canvas = require('./canvas.js');
 
 class Painting extends Canvas {
 
-  constructor(title) {
+  constructor(title,hd = false) {
     super(title);
     this.title = title;
+    this.hd = hd;
     this.rnd = seedrandom(this.title);
 
     /* Generate World Constants */
@@ -130,10 +131,10 @@ class Painting extends Canvas {
     let windowAspectRatio = width / height;
     
     if (windowAspectRatio > this.aspectRatio) {
-      canvas.height = windowUnit;
+      canvas.height = (this.hd) ? windowUnit * 2 : windowUnit;
       canvas.width = canvas.height * this.aspectRatio;
     } else {
-      canvas.width = windowUnit;
+      canvas.width = (this.hd) ? windowUnit * 2 : windowUnit;
       canvas.height = canvas.width / this.aspectRatio;
     };
 
