@@ -345,25 +345,26 @@ class Painting extends Canvas {
     return fill;
   }
 
-  sampleColour(sampleY,sampleX) {
+  sampleColour(sampleX,sampleY) {
     let sampleColour = super.getHslFromPoint(sampleX,sampleY);
     return sampleColour;
   }
 
   getTreeFill(tree) {
     let treeFill, groundColour;
-    let sampleY, sampleX;
-    sampleY = (tree.y < this.landY) ? landY + 1 : (tree.y >= this.canvas.height) ? this.canvas.height - 1 : Math.round(tree.y);
+    let sampleY, sampleX, trueY;
+    trueY = tree.y + tree.height;
+    sampleY = (trueY < this.landY) ? landY + 1 : (trueY >= this.canvas.height) ? this.canvas.height - 1 : Math.round(trueY);
     sampleX = (this.feature.x2 < 4) ? this.canvas.width - 2 : 2;
-    groundColour = (typeof this.landSamples.sampleY === 'undefined') ? this.sampleColour(sampleY,sampleX) : this.landSamples.sampleY;
-    if (typeof this.landSamples.sampleY === 'undefined') {
-      this.landSamples.sampleY = this.sampleColour(sampleY,sampleX);
+    groundColour = (typeof this.landSamples[sampleY] === 'undefined') ? this.sampleColour(sampleX,sampleY) : this.landSamples[sampleY];
+    if (typeof this.landSamples[sampleY] === 'undefined') {
+      this.landSamples[sampleY] = this.sampleColour(sampleX,sampleY);
     }
-    groundColour = this.landSamples.sampleY;
+    groundColour = this.landSamples[sampleY];
 
     tree.colour = {};
     tree.colour.topMod = (1 - this.fog) * this.ease.easeOutQuint(tree.sizeMod);
-    tree.colour.bottomMod = (1 - this.fog) * this.ease.easeOutQuad(tree.sizeMod);
+    tree.colour.bottomMod = 0// (1 - this.fog) * this.ease.easeOutQuad(tree.sizeMod);
     tree.colour.top = super.mixHsl(this.colour.fog,this.colour.tree,1 - tree.colour.topMod, tree.colour.topMod);
     tree.colour.bottom = super.mixHsl(groundColour,this.colour.tree,1 - tree.colour.bottomMod, tree.colour.bottomMod);
 

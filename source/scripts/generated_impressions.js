@@ -5,14 +5,17 @@ const galleryElem = document.querySelector('.wrapper');
 
 let gallery;
 let loop = 0;
+let fillViewportHandler = throttled(50,fillViewport);
+
+window.addEventListener('scroll', fillViewportHandler);
 
 function fillViewport() {
   loop++;
   let viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-  var galleryRect = galleryElem.getBoundingClientRect();
-  var spaceBelow = (window.innerHeight - galleryRect.bottom) * -1;
+  let galleryRect = galleryElem.getBoundingClientRect();
+  let spaceBelow = (window.innerHeight - galleryRect.bottom) * -1;
   if (spaceBelow < viewportHeight * 2) {
-    painter.paint(4).display(galleryElem);
+    painter.paint(5).display(galleryElem);
     if(loop == 1) {
       gallery = new Packery( galleryElem, {
         itemSelector: '.painting',
@@ -22,14 +25,20 @@ function fillViewport() {
       gallery.reloadItems();
       gallery.layout();
     }
-    setTimeout(function() {
-      fillViewport();
-    }, 50);
+    fillViewport();
   };
-};
+}
+
+function throttled(delay, fn) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = (new Date).getTime();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    return fn(...args);
+  }
+}
 
 fillViewport();
-
-window.addEventListener('scroll', function() {
-  fillViewport();
-});
