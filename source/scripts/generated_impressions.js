@@ -43,4 +43,15 @@ function throttled(delay, fn) {
   }
 }
 
+function paintThis(title = window.prompt("Enter a title","")) {
+  painter.paint(1,title).display(galleryElem);
+}
+
+window.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    paintThis();
+  }
+});
+
 fillViewport();

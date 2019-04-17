@@ -104,24 +104,21 @@ class Artist {
     this.hash = hash;
     this.name = fakerator.names.firstName() + ' ' + fakerator.names.lastName();
     this.paintings = [];
-    this.newPaintings = [];
     this.sentencer = Sentencer;
   }
 
-  paint(number = 1) {
-    this.paintings.push(...this.newPaintings);
-    this.newPaintings = [];
+  paint(number = 1,title) {
     for (let i = 0; i < number; i++) {
-      let title = this.createTitle();
-      let painting = new Painting(title);
-      this.newPaintings.push(painting);
+      let paintingTitle = (title) ? title : this.createTitle();
+      let painting = new Painting(paintingTitle);
+      this.paintings.push(painting);
     }
     return this;
   }
 
   display(container) {
-    for (let paintingCount = 0; paintingCount < this.newPaintings.length; paintingCount++) {
-      let thisPainting = this.newPaintings[paintingCount];
+    for (let paintingCount = 0; paintingCount < this.paintings.length; paintingCount++) {
+      let thisPainting = this.paintings[paintingCount];
       let paintingContainer = document.createElement("a"); 
       let infoCard = this.getInfoCard(thisPainting);
       thisPainting.paint();
@@ -137,6 +134,7 @@ class Artist {
         this.href = downloadPainting.canvas.toDataURL();
       });
     }
+    this.paintings = [];
     return this;
   }
 

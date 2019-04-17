@@ -1,13 +1,10 @@
-const seedrandom = require('seedrandom');
 const Canvas = require('./canvas.js');
 
 class Painting extends Canvas {
 
   constructor(title,hd = false) {
     super(title);
-    this.title = title;
     this.hd = hd;
-    this.rnd = seedrandom(this.title);
 
     /* Generate World Constants */
     this.maxResolution = 2000;
@@ -51,7 +48,13 @@ class Painting extends Canvas {
       this.ctx.beginPath();
       this.ctx.arc(star.x, star.y, star.radius, 0, 360);
       this.ctx.fillStyle = "hsla(" + star.hue + ", " + star.sat + "%, 88%, " + star.alpha + ")";
+      if (super.randBool(1)) {
+        this.ctx.globalCompositeOperation = 'hard-light';
+      }
       this.ctx.fill(); 
+      if (this.ctx.globalCompositeOperation == 'hard-light') {
+        this.ctx.globalCompositeOperation = 'soft-light';
+      }
     };
     this.ctx.globalCompositeOperation = 'source-over';
     this.moon.draw(this);
@@ -61,9 +64,9 @@ class Painting extends Canvas {
       this.ctx.beginPath();
       this.ctx.moveTo(cloud.x - cloud.width / 2,cloud.y);
       this.ctx.bezierCurveTo(cloud.x - cloud.width / 3, cloud.y - cloud.height, cloud.x + cloud.width / 3, cloud.y - cloud.height, cloud.x + cloud.width / 2, cloud.y);
-      this.ctx.fillStyle = cloud.fill;
+      this.ctx.fillStyle = this.fill.cloud;
       this.ctx.fill();
-      this.ctx.fillStyle = this.fill.fog;
+      this.ctx.fillStyle = cloud.fill;
       this.ctx.fill();
     };
 
@@ -117,21 +120,29 @@ class Painting extends Canvas {
     let centerY = tree.y;
     let sunX = this.moon.x;
     let sunY = this.moon.y;
-    let tipY = tree.y + (tree.height / 4);
-    let m = (centerY - sunY) / (centerX - sunX);
-    let b = sunY - m * sunX;
-    let tipX = (tipY - b) / m;
+    let tipY, tipX;
+    if (sunY > this.landY || !sunY) {
+      tipY = tree.y + tree.height / 2;
+      tipX = tree.x + tree.width / 2;
+    } else {
+      tipY = tree.y + (tree.height / 4);
+      let m = (centerY - sunY) / (centerX - sunX);
+      let b = sunY - m * sunX;
+      tipX = (tipY - b) / m;
+    }
     this.ctx.moveTo(tree.x, tree.y);
     this.ctx.bezierCurveTo(tipX,tipY,tipX,tipY,tree.x + tree.width, tree.y);
+    return;
   }
 
   paintTree(tree,i) {
-    let tipX = tree.x + (tree.width / 2);
+    let tipX1 = tree.x + (tree.width / 2) * (1-tree.pointWidth);
+    let tipX2 = tree.x + tree.width - (tipX1-tree.x);
     let tipY = tree.y - tree.height;
     this.ctx.fillStyle = this.fill.tree[i];
     this.ctx.beginPath();
     this.ctx.moveTo(tree.x, tree.y);
-    this.ctx.bezierCurveTo(tipX,tipY,tipX,tipY,tree.x + tree.width, tree.y);
+    this.ctx.bezierCurveTo(tipX1,tipY,tipX2,tipY,tree.x + tree.width, tree.y);
     this.ctx.closePath();
     this.ctx.fill(); 
   }
@@ -285,7 +296,7 @@ class Painting extends Canvas {
     colour.fog = [fogH,fogS,fogL];
 
     /* Land Horizon */
-    colour.landHorizon = super.mixHsl(colour.fog,colour.land,this.fog,1-this.fog);
+    colour.landHorizon = super.mixHsl(super.mixHsl(colour.fog,colour.horizon,this.fog,1-this.fog),colour.land,1,1);
 
     /* Feature Mid */
     let featureMidH, featureMidS, featureMidL;
@@ -325,12 +336,19 @@ class Painting extends Canvas {
     sky.addColorStop(0, super.hsl(colour.sky));
     sky.addColorStop(this.horizon + this.horizonBlur, super.hsl(colour.horizon));
     fill.sky = sky;
+
+    /* Cloud */
+    let cloud;
+    cloud = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
+    cloud.addColorStop(0, super.hsla(colour.sky,0.8));
+    cloud.addColorStop(this.horizon + this.horizonBlur, super.hsla(colour.horizon,0.5));
+    fill.cloud = cloud;
     
     /* Land */
     let land;
     land = this.ctx.createLinearGradient(0, this.landY - this.landHeight * this.horizonBlur, 0, this.landY + this.landHeight);
     land.addColorStop(0, super.hsla(colour.horizon,0));
-    land.addColorStop(this.horizonBlur * 3, super.hsl(super.mixHsl(colour.landHorizon,colour.horizon,0.5,0.5)));
+    land.addColorStop(this.horizonBlur * 3, super.hsl(super.mixHsl(colour.landHorizon,colour.horizon,1,2)));
     land.addColorStop(0.5, super.hsl(colour.landHorizon));
     land.addColorStop(1, super.hsl(colour.land));
     fill.land = land;
@@ -343,16 +361,17 @@ class Painting extends Canvas {
     shadow = this.ctx.createLinearGradient(0, this.landY - (this.landY * this.horizonBlur), 0, this.landY + this.landHeight);
     shadow.addColorStop(0, super.hsla(colour.horizon,0));
     shadow.addColorStop(this.horizonBlur * 2, super.hsla(super.darkenHsl(super.mixHsl(colour.landHorizon,colour.horizon,0.5,0.5),shadowAlpha),0));
-    shadow.addColorStop(0.5, super.hsla(super.darkenHsl(colour.landHorizon,0),shadowAlpha * 0.5));
-    shadow.addColorStop(1, super.hsla(super.darkenHsl(colour.land,0),shadowAlpha));
+    shadow.addColorStop(0.5, super.hsla(colour.landHorizon,shadowAlpha * 0.5));
+    shadow.addColorStop(1, super.hsla(colour.land,shadowAlpha));
     fill.shadow = shadow;
 
     /* Feature */
     let feature;
+    let featureAlpha = this.rnd() * 0.5 + 0.5;
     feature = this.ctx.createLinearGradient(0, this.landY, 0, this.landY + this.landHeight);
     feature.addColorStop(0, super.hsla(colour.horizon,0));
     feature.addColorStop(this.horizonBlur, super.hsla(super.mixHsl(colour.horizon,colour.featureMid,1-this.fog,this.fog),1 - this.fog));
-    feature.addColorStop(this.horizonBlur + 0.5 * this.fog, super.hsla(colour.featureMid,0.8));
+    feature.addColorStop(this.horizonBlur + 0.5 * this.fog, super.hsla(colour.featureMid,featureAlpha));
     feature.addColorStop(1, super.hsl(colour.feature));
     fill.feature = feature;
 
@@ -392,7 +411,17 @@ class Painting extends Canvas {
     tree.colour.bottomMod = (1 - this.fog) * this.ease.easeOutQuad(tree.sizeMod);
     tree.colour.top = super.mixHsl(this.colour.fog,this.colour.tree,1 - tree.colour.topMod, tree.colour.topMod);
     tree.colour.bottom = super.mixHsl(groundColour,this.colour.tree,1 - tree.colour.bottomMod, tree.colour.bottomMod);
-
+    
+    let groundColourMix = 1 - tree.sizeMod;
+    let treeColourMix = tree.sizeMod;
+    let totalMix = groundColourMix + treeColourMix;
+    tree.colour.bottom[2] = (treeColourMix / totalMix) * tree.colour.bottom[2] + (groundColourMix / totalMix) * groundColour[2];
+    tree.colour.bottom[1] = (treeColourMix / totalMix) * tree.colour.bottom[1] + (groundColourMix / totalMix) * groundColour[1]; 
+    
+    tree.colour.top[1] = (this.ease.easeInOutQuad(treeColourMix) / totalMix) * tree.colour.top[1] + (this.ease.easeInOutQuad(groundColourMix) / totalMix) * groundColour[1];
+    tree.colour.top[2] = (this.ease.easeInOutQuad(treeColourMix) / totalMix) * tree.colour.top[2] + (this.ease.easeInOutQuad(groundColourMix) / totalMix) * groundColour[2];
+    tree.colour.top[0] = (this.ease.easeInOutQuad(treeColourMix) / totalMix) * tree.colour.top[0] + (this.ease.easeInOutQuad(groundColourMix) / totalMix) * groundColour[0]; 
+    
     treeFill = this.ctx.createLinearGradient(0, tree.y - tree.height, 0, tree.y);
     treeFill.addColorStop(0, super.hsl(tree.colour.top));
     treeFill.addColorStop(1, super.hsl(tree.colour.bottom));
@@ -402,15 +431,21 @@ class Painting extends Canvas {
 
   getMoon() {
     let moon = {};
-    moon.radius = super.randBias(this.unit / 40,this.unit / 10,this.unit / 25);
+    moon.radius = super.randBias(this.unit / 40,this.unit / 10,this.unit / 22);
     moon.x = this.canvas.width * this.getRatio();
     let minY = moon.radius * 2;
-    let maxY = this.landY + moon.radius;
+    let maxY = this.landY + moon.radius * 0.66;
     moon.y = minY + maxY * this.rnd();
-    moon.partial = super.randBool();
-    moon.opacity = (this.time == 'night') ? 0.4 : (this.time == 'twilight') ? 0.3 : 0.1;
-    moon.opacity = (1 - this.fog) * moon.opacity;
-    moon.fillStyle = 'hsla(0,0%,100%,' + moon.opacity + ')';
+    moon.opacity = (this.time == 'night') ? 0.40 : (this.time == 'twilight') ? 0.7 : 0.8;
+    let moonH = super.randFromSet([this.colour.sky[0],this.colour.horizon[0],this.colour.fog[0],this.colour.land[0]]);
+    let moonS = super.randBias(30,80,70);
+    let moonL = (this.time == 'night') ? super.randInt(45,55) : (this.time == 'twilight') ? super.randInt(60,70) : super.randInt(70,85);
+    moon.colour = [moonH,moonS,moonL];
+    moon.fillStyle = this.ctx.createRadialGradient(moon.x, moon.y, 1, moon.x, moon.y, moon.radius * 10);
+    moon.fillStyle.addColorStop(0, super.hsla([moonH,moonS,moonL*1.05],moon.opacity));
+    moon.fillStyle.addColorStop(0.1, super.hsla(moon.colour,moon.opacity * 0.9));
+    moon.fillStyle.addColorStop(0.1+(this.fog * 0.035), super.hsla(moon.colour,moon.opacity * 0.4));
+    moon.fillStyle.addColorStop(1, super.hsla(this.colour.horizon,0));
 
     moon.draw = function(painting) {
       let ctx = painting.ctx;
@@ -419,16 +454,11 @@ class Painting extends Canvas {
       ctx.arc(moon.x, moon.y, moon.radius, 0, 2 * Math.PI);
       ctx.fillStyle = painting.fill.sky;
       ctx.fill();
+      ctx.beginPath();
+      ctx.arc(moon.x, moon.y, moon.radius * 10, 0, 2 * Math.PI);
       ctx.fillStyle = moon.fillStyle;
       ctx.fill();
       ctx.closePath();
-      if (moon.partial) {
-        ctx.fillStyle = painting.fill.sky;
-        ctx.beginPath();
-        ctx.arc(moon.x + (moon.radius * 0.5), moon.y, moon.radius * 1.125, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-      }
     };
     return moon;
   }
@@ -437,9 +467,9 @@ class Painting extends Canvas {
     let stars = [];
     let starCount = 0;
     if (this.time == 'night') {
-      starCount = (super.randBool(50)) ? super.randBias(500,1800,1300) : 0;
+      starCount = (super.randBool(75)) ? super.randBias(500,1800,1300) : 0;
     } else if (this.time == 'twilight') {
-      starCount = (super.randBool(25)) ? super.randBias(500,1800,1300) : 0;
+      starCount = (super.randBool(35)) ? super.randBias(500,1500,1100) : 0;
     }
     for (let i = 0; i < starCount; i++) {
       let star = {};
@@ -482,7 +512,7 @@ class Painting extends Canvas {
   getClouds() {
     let clouds = [];
     let props = {};
-    let maxClouds = ((this.canvas.height - this.landHeight) / this.canvas.height) * 50;
+    let maxClouds = ((this.canvas.height - this.landHeight) / this.canvas.height) * 100;
 
     props.localUnit = (this.unit / 3);
     props.minY = -1 * props.localUnit;
@@ -491,7 +521,7 @@ class Painting extends Canvas {
     props.maxWidth = this.unit * 3.5
     props.minHeight = this.unit/4;
     props.maxHeight = this.unit * 2
-    props.number = Math.max(super.randBias(0,maxClouds,0,'easeOutQuad') - 10,0);
+    props.number = Math.max(super.randBias(0,maxClouds,0,'easeInQuad') - 10,0);
     props.heightBias = super.randBias(props.minHeight,props.maxHeight,this.unit / 2);
     props.widthBias = super.randBias(props.minWidth,props.maxWidth,this.unit / 1.3);
 
@@ -527,11 +557,11 @@ class Painting extends Canvas {
     outerRadius = Math.max(cloud.width / 2, cloud.height);
     innerRadius = outerRadius / 2;
     
-    outerColour = [this.colour.horizon[0],Math.round(this.colour.horizon[1]*0.6),Math.max(Math.round(this.colour.horizon[2]*1.2),80)];
-    innerColour = super.mixHsl([this.colour.horizon[0],Math.round(this.colour.horizon[1]*0.9),this.colour.horizon[2]],outerColour,0.5,0.5);
+    outerColour = (this.time != 'night') ? [this.colour.horizon[0],Math.round(this.colour.horizon[1]*0.6),Math.max(Math.round(this.colour.horizon[2]*1.2),80)] : [this.colour.horizon[0],Math.round(this.colour.horizon[1]*0.6),Math.round(this.colour.horizon[2]*0.75)];
+    innerColour = super.mixHsl([this.colour.horizon[0],Math.round(this.colour.horizon[1]*0.9),this.colour.horizon[2]],outerColour,1,1);
     fill = this.ctx.createRadialGradient(cloud.x, cloud.y + innerRadius, innerRadius, cloud.x, cloud.y, outerRadius);
-    fill.addColorStop(0, super.hsla(innerColour,0.9));
-    fill.addColorStop(1, super.hsla(outerColour,0.7));
+    fill.addColorStop(0, super.hsla(innerColour,Math.min(1.4*(1-this.fog),1)));
+    fill.addColorStop(1, super.hsla(outerColour,0));
     return fill;
   };
 
@@ -541,8 +571,9 @@ class Painting extends Canvas {
     let number = dense ? super.randBias(100,1000,200,'easeOutQuad') : super.randBias(0,100,0,'easeInQuad');
     let heightBias = super.randBias(this.unit / 10, this.unit * 2, this.unit / 2);
     let widthBias = heightBias / 2.5;
+    let pointWidth = this.rnd();
     for (let i = 0; i < number; i++) {
-      let tree = this.getTree(heightBias,widthBias,dense);
+      let tree = this.getTree(heightBias,widthBias,dense,pointWidth);
       trees.push(tree);
     }
     trees.sort(function(a, b){
@@ -551,7 +582,7 @@ class Painting extends Canvas {
     return trees;
   }
 
-  getTree(heightBias,widthBias,dense) {
+  getTree(heightBias,widthBias,dense,pointWidth) {
     let tree = {};
     tree.height = super.randBias(this.unit / 10, this.unit * 2, heightBias, 'easeInQuint');
     tree.width = super.randBias(this.unit / 60, tree.height / 2, widthBias, 'easeInQuint');
@@ -559,6 +590,7 @@ class Painting extends Canvas {
     tree.minY = this.landY;
     tree.maxY = this.canvas.height + this.unit / 6;
     tree.yBias = tree.minY;
+    tree.pointWidth = pointWidth;
 
     do {
       tree.x = -tree.localUnit + super.randInt(0,this.canvas.width + (tree.localUnit * 2));
