@@ -4,7 +4,7 @@ const painter = new Artist(hash);
 const galleryElem = document.querySelector('.wrapper');
 
 let viewWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-let paintAtTime = Math.max(Math.round(viewWidth / 600),1);
+let paintAtTime = Math.max(Math.round(viewWidth / 800),1);
 let gallery;
 let loop = 0;
 let fillViewportHandler = throttled(50,fillViewport);

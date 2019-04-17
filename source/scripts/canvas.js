@@ -35,9 +35,6 @@ class Canvas {
       'triad',
       'comp',
       'comp'
-      //'square',
-      //'tetrad',
-      //'split'
     ];
     return colourSchemes;
   }

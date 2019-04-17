@@ -61,6 +61,13 @@ canvas {
   };
 }
 
+.ruler {
+  display: block;
+  height: 1rem;
+  background: black;
+  margin: 0;
+}
+
 .info-card {
   display: inline-block;
   color: #35344f;

@@ -10,12 +10,14 @@ class Painting extends Canvas {
     this.rnd = seedrandom(this.title);
 
     /* Generate World Constants */
+    this.maxResolution = 2000;
+    this.resolution = (this.hd) ? this.maxResolution : this.getResolution();
     this.time = this.getTime();
     this.aspectRatio = this.getAspectRatio();
 
     /* Set Up Environment */
     this.canvas = this.generateCanvas();
-    this.ctx = this.canvas.getContext("2d");
+    this.ctx = this.canvas.getContext('2d', { alpha: false });
 
     /* Set Up Scene Objects */
     this.unit = (this.canvas.height + this.canvas.width) / 2;
@@ -32,6 +34,7 @@ class Painting extends Canvas {
     this.landSamples = {};
     this.colour = this.getColour();
     this.fill = this.getFill();
+    this.clouds = this.getClouds();
     this.moon = this.getMoon();
     this.stars = this.getStars();
   }
@@ -51,8 +54,18 @@ class Painting extends Canvas {
       this.ctx.fill(); 
     };
     this.ctx.globalCompositeOperation = 'source-over';
-
     this.moon.draw(this);
+
+    for (let c = 0; c < this.clouds.length; c++) {
+      let cloud = this.clouds[c];
+      this.ctx.beginPath();
+      this.ctx.moveTo(cloud.x - cloud.width / 2,cloud.y);
+      this.ctx.bezierCurveTo(cloud.x - cloud.width / 3, cloud.y - cloud.height, cloud.x + cloud.width / 3, cloud.y - cloud.height, cloud.x + cloud.width / 2, cloud.y);
+      this.ctx.fillStyle = cloud.fill;
+      this.ctx.fill();
+      this.ctx.fillStyle = this.fill.fog;
+      this.ctx.fill();
+    };
 
     /* Paint Land */
     this.ctx.fillStyle = this.fill.land;
@@ -123,21 +136,21 @@ class Painting extends Canvas {
     this.ctx.fill(); 
   }
 
-  generateCanvas() {
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    let windowUnit = (width + height) / 2;
-    let canvas = document.createElement('canvas');
-    let windowAspectRatio = width / height;
-    
-    if (windowAspectRatio > this.aspectRatio) {
-      canvas.height = (this.hd) ? windowUnit * 2 : windowUnit;
-      canvas.width = canvas.height * this.aspectRatio;
+  getResolution() {
+    let resolution;
+    let ruler = document.querySelector('.painting canvas');
+    if (ruler) {
+      resolution = Math.min(ruler.clientWidth,this.maxResolution);
     } else {
-      canvas.width = (this.hd) ? windowUnit * 2 : windowUnit;
-      canvas.height = canvas.width / this.aspectRatio;
-    };
+      resolution = 800;
+    }
+    return resolution;
+  }
 
+  generateCanvas() {
+    let canvas = document.createElement('canvas');
+    canvas.width = this.resolution;
+    canvas.height = canvas.width / this.aspectRatio;
     return canvas;
   }
 
@@ -268,7 +281,7 @@ class Painting extends Canvas {
     fogMaxL = 80;
     fogH = fogSourceH;
     fogS = super.randBias(fogMinS,fogMaxS,fogSourceS);
-    fogL =super.randBias(fogMinL,fogMaxL,fogSourceL);
+    fogL = super.randBias(fogMinL,fogMaxL,fogSourceL);
     colour.fog = [fogH,fogS,fogL];
 
     /* Land Horizon */
@@ -424,20 +437,20 @@ class Painting extends Canvas {
     let stars = [];
     let starCount = 0;
     if (this.time == 'night') {
-      starCount = (super.randBool(50)) ? super.randBias(350,2000,1500) : 0;
+      starCount = (super.randBool(50)) ? super.randBias(500,1800,1300) : 0;
     } else if (this.time == 'twilight') {
-      starCount = (super.randBool(25)) ? super.randBias(350,2000,1500) : 0;
+      starCount = (super.randBool(25)) ? super.randBias(500,1800,1300) : 0;
     }
     for (let i = 0; i < starCount; i++) {
       let star = {};
       star.x = this.rnd() * this.canvas.width;
-      star.y = this.rnd() * (this.canvas.height - this.landHeight);
-      let mod = super.randBias(1,100,1,'easeInQuad')  / 100;
-      star.radius = mod * (this.unit / 400);
+      star.y = this.rnd() * (this.canvas.height - (this.landHeight - this.landHeight * this.horizonBlur));
+      let mod = super.randBias(1,100,50,'easeInOutQuad')  / 100;
       let proximity = (this.landY - star.y) / this.landY;
-      star.alpha = this.ease.easeOutQuad(proximity) * this.ease.easeOutQuad(1 * mod)
-      star.hue = 220;
-      star.sat = super.randInt(50,100);
+      star.radius = Math.max(mod * (this.unit / 350), 0.5);
+      star.alpha = this.ease.easeOutQuint(proximity) * this.ease.easeOutQuad(1 * mod)
+      star.hue = Math.round(180 + this.rnd() * 60);
+      star.sat = super.randBias(0,100,50);
       stars.push(star);
     }
     return stars;
@@ -465,6 +478,62 @@ class Painting extends Canvas {
 
     return feature;
   }
+
+  getClouds() {
+    let clouds = [];
+    let props = {};
+    let maxClouds = ((this.canvas.height - this.landHeight) / this.canvas.height) * 50;
+
+    props.localUnit = (this.unit / 3);
+    props.minY = -1 * props.localUnit;
+    props.maxY = this.landY;
+    props.minWidth = this.unit/4;
+    props.maxWidth = this.unit * 3.5
+    props.minHeight = this.unit/4;
+    props.maxHeight = this.unit * 2
+    props.number = Math.max(super.randBias(0,maxClouds,0,'easeOutQuad') - 10,0);
+    props.heightBias = super.randBias(props.minHeight,props.maxHeight,this.unit / 2);
+    props.widthBias = super.randBias(props.minWidth,props.maxWidth,this.unit / 1.3);
+
+    for (let i = 0; i < props.number; i++) {
+      let cloud = this.getCloud(props);
+      clouds.push(cloud);
+    }
+
+    clouds.sort(function(a, b){
+      return b.y-a.y
+    });
+
+    return clouds;
+  }
+
+  getCloud(props) {
+    let cloud = {};
+    let baseWidth = super.randBias(props.minWidth,props.maxWidth,props.widthBias,'easeInOutQuint');
+    let baseHeight = super.randBias(props.minHeight,props.maxHeight,props.heightBias,'easeInOutQuint');
+    
+    cloud.y = super.randBias(props.minY,props.maxY,props.maxY,'linear');
+    cloud.sizeMod = this.ease.easeInQuad(1 - (cloud.y / (props.maxY - props.minY)));
+    cloud.width = baseWidth * cloud.sizeMod;
+    cloud.height =  baseHeight * this.ease.easeInQuad(cloud.sizeMod);
+    cloud.x = -0.5 * cloud.width + super.randInt(0,this.canvas.width + cloud.width);
+    cloud.fill = this.getCloudFill(cloud);
+
+    return cloud;
+  }
+
+  getCloudFill(cloud) {
+    let fill, innerRadius, outerRadius, innerColour, outerColour;
+    outerRadius = Math.max(cloud.width / 2, cloud.height);
+    innerRadius = outerRadius / 2;
+    
+    outerColour = [this.colour.horizon[0],Math.round(this.colour.horizon[1]*0.6),Math.max(Math.round(this.colour.horizon[2]*1.2),80)];
+    innerColour = super.mixHsl([this.colour.horizon[0],Math.round(this.colour.horizon[1]*0.9),this.colour.horizon[2]],outerColour,0.5,0.5);
+    fill = this.ctx.createRadialGradient(cloud.x, cloud.y + innerRadius, innerRadius, cloud.x, cloud.y, outerRadius);
+    fill.addColorStop(0, super.hsla(innerColour,0.9));
+    fill.addColorStop(1, super.hsla(outerColour,0.7));
+    return fill;
+  };
 
   getTrees() {
     let trees = [];
