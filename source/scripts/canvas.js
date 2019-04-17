@@ -1,5 +1,6 @@
+const seedrandom = require('seedrandom');
 class Canvas {
-  constructor() {
+  constructor(title) {
     this.ease = {
       linear: function (t) { return t },
       easeInQuad: function (t) { return t*t },
@@ -18,6 +19,8 @@ class Canvas {
         return t*t*t*t*t*t*t*t*t*t*t*t*t*t*t*t*t;
       }
     }
+    this.title = title;
+    this.rnd = seedrandom(this.title);
   }
 
   getHslFromPoint(x,y) {
@@ -35,15 +38,13 @@ class Canvas {
       'triad',
       'comp',
       'comp'
-      //'square',
-      //'tetrad',
-      //'split'
     ];
     return colourSchemes;
   }
 
   getTimes() {
     const times = [
+      'night',
       'night',
       'twilight',
       'twilight',
@@ -110,7 +111,7 @@ class Canvas {
     let [h2, s2, l2] = hslArrayTwo;
     let h, s, l;
     if (Math.abs(h1 - h2) > 0.5) { h1 += 1; } // > 179.5 is shorter part from wheel to 359
-    h = (mix1 / totalMix) * h1 + (mix2 / totalMix) * h2;  
+    h = (this.ease.easeInOutQuad(mix1) / totalMix) * h1 + (this.ease.easeInOutQuad(mix2) / totalMix) * h2;  
     s = (mix1 / totalMix) * s1 + (mix2 / totalMix) * s2; 
     l = (mix1 / totalMix) * l1 + (mix2 / totalMix) * l2; 
     if (h > 1) { h -= 1; } 
@@ -184,6 +185,10 @@ class Canvas {
       odds = this.ease[easingOption](odds);
     }
     return random;
+  }
+
+  randFromSet(array) {
+    return array[Math.floor(this.rnd() * array.length)];
   }
   
   randInt(min, max) {
